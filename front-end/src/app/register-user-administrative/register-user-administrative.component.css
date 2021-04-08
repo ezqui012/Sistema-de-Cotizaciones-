@@ -1,0 +1,15 @@
+.containRegister{
+  text-align: center;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 10%;
+  border-top-color: blue;
+  border-right-width: 1em;
+  border-bottom-width: thick;
+  border-left-width: thin;
+  border-top-style: dashed;
+  border-right-style: solid;
+  border-bottom-style: dotted;
+  border-left-style: double;
+
+}
