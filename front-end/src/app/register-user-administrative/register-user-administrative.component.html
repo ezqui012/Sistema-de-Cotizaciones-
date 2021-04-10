@@ -1,39 +1,34 @@
 
-<div class="containRegister">
-    <h1>Registrar</h1>
+<div class="containReg">
+<div class="containRegister" style='height:380px'>
+    <h1 style='color:#f1f1f1'>Registro personal</h1>
     <div>
-        <input type="t" name="Ingrese nombre de usuario">
+        <input class="fieldRegister" type="text" placeholder="Ingrese nombre de usuario" >
     </div>
     <div>
-        <input type="text" name="Ingrese nombre completo">
+        <input class="fieldRegister" type="text" placeholder="Ingrese nombre completo">
     </div>
     <div>
-        <select name="SelectRol"  id="rol">
+        <select class="fieldRegister" name="SelectRol"  id="rol">
         <option value = "Seleccione Facultad"> Seleccione Rol</option>
         <option value="tecnologia"> jefe</option>
         <option value="economia">Secretaria</option>
         </select>
     </div>
     <div>
-        <input type="text" name="Ingrese numero de telefono">
+        <input class="fieldRegister" type="text" placeholder="Ingrese numero de telefono">
     </div>
     <div>
-        <input type="text" name="Ingrese CI">
+        <input class="fieldRegister" type="number" placeholder="Ingrese CI">
     </div>
     <div>
-        <input type="text" name="Ingrese Dirección">
-    </div>
-
-    <div>
-      <button class="btn btn-primary" (click)="sayHello()">
-              Registrar
-      </button>
+        <input class="fieldRegister" type="text" placeholder="Ingrese Dirección">
     </div>
     <div>
-    <button class="btn btn-primary">
-              Cancelar
-      </button>
+        <input class="fieldRegister" type="text" placeholder="Ingrese email">
     </div>
-
+    </div>
+    <app-button-register-user-admin></app-button-register-user-admin>
 </div>
+
 

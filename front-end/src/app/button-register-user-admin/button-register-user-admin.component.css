@@ -1,0 +1,17 @@
+.registerContainer{
+
+  margin-bottom: 2%;
+}
+.cancelContainer{
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+.containerButton{
+
+  margin-left: 30%;
+  margin-right: 30%;
+  height: 200px;
+  text-align: center;
+  background-color: #003b72;
+}
+
