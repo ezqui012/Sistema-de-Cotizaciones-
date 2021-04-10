@@ -1,0 +1,27 @@
+.containerBody{
+  padding: 20px;
+}
+
+.containertop{
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.btn{
+  background-color:#003b72;
+}
+.btn:hover{
+  background-color:#1e5e9b;
+  border-color:#4bb2ee ;
+}
+.btnCreate{
+  padding-left: 20px;
+}
+.headTable{
+  background-color: #003b72;
+  color: white;
+}
+.containerTable{
+  color:#0000 ;
+}
