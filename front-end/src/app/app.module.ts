@@ -3,10 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RolesListComponent } from './roles-list/roles-list.component';
+import { CreateRolComponent } from './create-rol/create-rol.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RolesListComponent,
+    CreateRolComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
