@@ -1,9 +1,60 @@
+<!--Modal Roles-->
 
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <br>
+    <h4 class="modal-title">Crear Rol</h4>
+    <button class="close" arial-label="close" type="button" (click)="modal.dismiss()">
+      <span arial-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="form-group">
+      <input class="form-control" id="nameRol" placeholder="Ingrese nombre del rol">
+      <br>
+      <textarea class="form-control" id="descripRol" placeholder="Ingrese descripción del rol" rows="6"></textarea>
+
+    </div>
+    <div class="form-check">
+      <h5>Permisos</h5>
+      <input type="checkbox" class="form-check-input" id="permiso1">
+      <label class="form-check-label" for="permiso1">Crear cotización</label>
+      <br>
+      <input type="checkbox" class="form-check-input" id="permiso2">
+      <label class="form-check-label" for="permiso2">Editar cotizacion</label>
+      <br>
+      <input type="checkbox" class="form-check-input" id="permiso3">
+      <label class="form-check-label" for="permiso3">Aprobar solicitudes</label>
+      <br>
+      <input type="checkbox" class="form-check-input" id="permiso4">
+      <label class="form-check-label" for="permiso4">Crear solicitudes</label>
+      <br>
+      <input type="checkbox" class="form-check-input" id="permiso5">
+      <label class="form-check-label" for="permiso5">Editar solicitudes</label>
+      <br>
+      <input type="checkbox" class="form-check-input" id="permiso6">
+      <label class="form-check-label" for="permiso6">Ver lista de solicitud</label>
+      <br>
+      <input type="checkbox" class="form-check-input" id="permiso7">
+      <label class="form-check-label" for="permiso7">Registrar item de gasto</label>
+      <br>
+      <input type="checkbox" class="form-check-input" id="permiso8">
+      <label class="form-check-label" for="permiso8">Registrar empresa</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button id="btnCrear" type="button" class="btn btn-primary" (click)="confirmar()">Crear</button>
+    <button id="btnCancelar" type="button" class="btn btn-danger" (click)="modal.close()">Cancelar</button>
+  </div>
+</ng-template>
+
+<!--header-->
 <div class="containerBody">
   <div class="containertop">
     <h3>Roles Administrativos</h3>
     <div class="btnCreate">
-      <button type="button" class="btn btn-primary">Crear nuevo rol</button>
+      <button type="button" class="btn btn-primary" (click)="openModal(content)">Crear nuevo rol</button>
 
     </div>
   </div>

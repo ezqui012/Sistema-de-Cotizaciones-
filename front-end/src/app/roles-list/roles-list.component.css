@@ -25,3 +25,40 @@
 .containerTable{
   color:#0000 ;
 }
+/*estilos Modal*/
+.azul{
+
+ background-color: #003b72;
+}
+.oscuro .modal-content{
+  color: white;
+  background-color: #003b72;
+}
+.close{
+  color: white;
+}
+.close:hover{
+  color: rgb(230, 227, 227);
+}
+
+#btnCrear{
+  background-color: #3b9ed8;
+  /*color: black;*/
+}
+#btnCrear:hover{
+  background-color: #4bb2ee;
+  /*color: black;*/
+}
+
+#btnCancelar{
+  background-color: #ca270a;
+
+}
+#btnCancelar:hover{
+  background-color: #d8482e;
+
+}
+.modal-footer{
+  justify-content: center;
+
+}
