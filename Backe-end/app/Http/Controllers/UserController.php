@@ -26,4 +26,15 @@ class UserController extends Controller
             ], 204);
         }
     }
+
+    public function logout(){
+        $user = auth()->user();
+        $user->tokens->each(function($token, $key){
+            $token->delete();
+        });
+        return response()->json([
+            'res' => true,
+            'message' => 'Goodbye'
+        ], 200);
+    }
 }
