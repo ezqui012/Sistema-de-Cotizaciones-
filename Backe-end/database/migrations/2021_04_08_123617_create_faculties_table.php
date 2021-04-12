@@ -15,8 +15,8 @@ class CreateFacultiesTable extends Migration
     {
         Schema::create('faculties', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id('idfaculty');
-            $table->string('namefaculty', 100)->unique();
+            $table->id('id_faculty');
+            $table->string('name_faculty', 100)->unique();
         });
     }
 

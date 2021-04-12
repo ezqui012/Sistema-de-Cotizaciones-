@@ -14,7 +14,19 @@ class FacultiesSeeder extends Seeder
     {
         DB::table('faculties')->insert([
             [
-                'namefaculty' => 'Ciencias y tecnologia'
+                'name_faculty' => 'Ciencias y tecnologia'
+            ],
+            [
+                'name_faculty' => 'Ciencias económicas'
+            ],
+            [
+                'name_faculty' => 'Humanidades y ciencias de educación'
+            ],
+            [
+                'name_faculty' => 'Arquitectura y ciencias del habitat'
+            ],
+            [
+                'name_faculty' => 'Ciencias juridicas y politicas'
             ]
         ]);
     }

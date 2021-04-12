@@ -17,9 +17,9 @@ class Assigned_PermissionsSeeder extends Seeder
 
         DB::table('assigned_permissions')->insert([
             [
-                'idpermission' => 9,
-                'idrole' => 1,
-                'assigneddate' => $now->format('Y-m-d')
+                'id_permission' => 9,
+                'id_role' => 1,
+                'assigned_date' => $now->format('Y-m-d')
             ]
         ]);
     }

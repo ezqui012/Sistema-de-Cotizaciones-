@@ -15,11 +15,11 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id('idUser');
-            $table->bigInteger('idrole')->unsigned();
-            $table->foreign('idrole')->references('idrole')->on('roles');
-            $table->bigInteger('idunit')->unsigned();
-            $table->foreign('idunit')->references('idunit')->on('units');
+            $table->id();
+            $table->bigInteger('id_role')->unsigned();
+            $table->foreign('id_role')->references('id_role')->on('roles');
+            $table->bigInteger('id_unit')->unsigned();
+            $table->foreign('id_unit')->references('id_unit')->on('units');
             $table->string('name', 100);
             $table->string('username', 50)->unique();
             $table->string('phone', 8);

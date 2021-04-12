@@ -15,11 +15,11 @@ class CreateAssignedPermissionsTable extends Migration
     {
         Schema::create('assigned_permissions', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->bigInteger('idpermission')->unsigned();
-            $table->foreign('idpermission')->references('idpermission')->on('permissions');
-            $table->bigInteger('idrole')->unsigned();
-            $table->foreign('idrole')->references('idrole')->on('roles');
-            $table->date('assigneddate');
+            $table->bigInteger('id_permission')->unsigned();
+            $table->foreign('id_permission')->references('id_permission')->on('permissions');
+            $table->bigInteger('id_role')->unsigned();
+            $table->foreign('id_role')->references('id_role')->on('roles');
+            $table->date('assigned_date');
         });
     }
 
