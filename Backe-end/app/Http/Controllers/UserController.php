@@ -11,8 +11,12 @@ class UserController extends Controller
     public function login(Request $request){
         $user = User::where('username', '=', $request->username)->first();
         if(!is_null($user) && Hash::check($request->password, $user->password)){
+
+            $token = $user->createToken('Cotizacion')->accessToken;
+
             return response()->json([
                 'res' => true,
+                'token' => $token,
                 'message' => 'Welcome to system',
             ], 200);
         }else{
