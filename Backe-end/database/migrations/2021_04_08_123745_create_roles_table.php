@@ -15,9 +15,9 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id('idrole');
-            $table->string('namerole', 75)->unique();
-            $table->text('descriptionrole', 250);
+            $table->id('id_role');
+            $table->string('name_role', 75)->unique();
+            $table->text('description_role', 250);
         });
     }
 

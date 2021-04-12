@@ -17,10 +17,10 @@ class UnitsSeeder extends Seeder
 
         DB::table('units')->insert([
             [
-                'idfaculty' => 1,
-                'nameunit' => 'Administrador de sistema',
+                'id_faculty' => 1,
+                'name_unit' => 'Administrador de sistema',
                 'type' => 'Administrativa',
-                'creationdate' => $now->format('Y-m-d')
+                'creation_date' => $now->format('Y-m-d')
             ]
         ]);
     }

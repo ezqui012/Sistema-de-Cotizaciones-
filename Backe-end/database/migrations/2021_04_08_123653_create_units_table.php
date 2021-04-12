@@ -15,12 +15,12 @@ class CreateUnitsTable extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id('idunit');
-            $table->bigInteger('idfaculty')->unsigned();
-            $table->foreign('idfaculty')->references('idfaculty')->on('faculties');
-            $table->string('nameunit', 100)->unique();
+            $table->id('id_unit');
+            $table->bigInteger('id_faculty')->unsigned();
+            $table->foreign('id_faculty')->references('id_faculty')->on('faculties');
+            $table->string('name_unit', 100)->unique();
             $table->string('type', 14);
-            $table->date('creationdate');
+            $table->date('creation_date');
             $table->decimal('amount', 10,2)->nullable();
         });
     }

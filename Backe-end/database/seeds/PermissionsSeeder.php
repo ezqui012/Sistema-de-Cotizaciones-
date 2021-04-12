@@ -14,31 +14,31 @@ class PermissionsSeeder extends Seeder
     {
         DB::table('permissions')->insert([
             [
-                'namepermission' => 'Crear cotizacion'
+                'name_permission' => 'Crear cotizacion'
             ],
             [
-                'namepermission' => 'Editar cotizacion'
+                'name_permission' => 'Editar cotizacion'
             ],
             [
-                'namepermission' => 'Aprobar solicitudes'
+                'name_permission' => 'Aprobar solicitudes'
             ],
             [
-                'namepermission' => 'Crear solicitudes'
+                'name_permission' => 'Crear solicitudes'
             ],
             [
-                'namepermission' => 'Editar solicitudes'
+                'name_permission' => 'Editar solicitudes'
             ],
             [
-                'namepermission' => 'Ver lista de solicitudes'
+                'name_permission' => 'Ver lista de solicitudes'
             ],
             [
-                'namepermission' => 'Registrar item de gasto'
+                'name_permission' => 'Registrar item de gasto'
             ],
             [
-                'namepermission' => 'Registrar empresas'
+                'name_permission' => 'Registrar empresas'
             ],
             [
-                'namepermission' => 'Super usuario'
+                'name_permission' => 'Super usuario'
             ]
         ]);
     }

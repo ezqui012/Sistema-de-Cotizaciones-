@@ -14,8 +14,8 @@ class RolesSeeder extends Seeder
     {
         DB::table('roles')->insert([
             [
-                'namerole' => 'Admin',
-                'descriptionrole' => 'Encargado de administrar los permisos y personal'
+                'name_role' => 'Admin',
+                'description_role' => 'Encargado de administrar los permisos y personal'
             ]
         ]);
     }
