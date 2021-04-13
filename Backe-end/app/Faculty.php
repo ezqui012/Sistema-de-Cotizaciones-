@@ -11,4 +11,9 @@ class Faculty extends Model
     protected $fillable = [
         'name_faculty'
     ];
+
+    protected $hidden = [
+        'updated_at',
+        'created_at'
+    ];
 }
