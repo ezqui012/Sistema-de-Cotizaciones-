@@ -15,10 +15,11 @@ export class RolesListComponent implements OnInit {
   }
 
   openModal(content: any){
-    this.modal.open(content,{size:'sm', windowClass:"oscuro"});
+    this.modal.open(content,{ windowClass:"oscuro"});
   }
-  confirmar(){
+  confir(){
     alert("Seguro que quiere crear el Rol?");
   }
+
 
 }
