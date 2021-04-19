@@ -17,13 +17,12 @@ class UsersSeeder extends Seeder
             [
                 'id_role' => 1,
                 'id_unit' => 1,
-                'name' => 'Rylmar Quispe',
-                'username' => 'admin',
+                'name' => 'Rylmar Freddy Quispe Ticona',
+                'email' => 'adminumss@gmail.com',
                 'phone' => '4215569',
                 'ci' => '5541874',
                 'address' => 'Av. Circunvalacion',
                 'password' => Hash::make('admin1234'),
-                'email' => 'adminumss@gmail.com'
             ]
         ]);
     }

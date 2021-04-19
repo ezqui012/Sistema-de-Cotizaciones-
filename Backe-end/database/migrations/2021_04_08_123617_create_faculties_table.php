@@ -17,6 +17,10 @@ class CreateFacultiesTable extends Migration
             $table->engine = 'InnoDB';
             $table->id('id_faculty');
             $table->string('name_faculty', 100)->unique();
+            $table->string('phone_faculty', 8);
+            $table->string('email_faculty', 100);
+            $table->string('address_faculty', 100);
+            $table->string('dean_faculty', 100);
         });
     }
 
