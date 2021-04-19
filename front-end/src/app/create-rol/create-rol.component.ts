@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {MatInputModule} from '@angular/material/input';
 import {FormControl, Validators} from '@angular/forms';
+import {Router} from '@angular/router'
 
 
 @Component({
@@ -12,9 +11,13 @@ import {FormControl, Validators} from '@angular/forms';
 })
 export class CreateRolComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
+  }
+  //navigate
+  navigateTo(path: String){
+    this.router.navigate([path]);
   }
 
   //Angular material

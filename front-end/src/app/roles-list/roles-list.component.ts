@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -9,11 +10,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class RolesListComponent implements OnInit {
 
-  constructor(private modal: NgbModal) { }
+  constructor(
+    private modal: NgbModal,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
   }
-
+  navigateTo(path: String){
+    this.router.navigate([path]);
+  }
   openModal(content: any){
     this.modal.open(content,{ windowClass:"oscuro"});
   }

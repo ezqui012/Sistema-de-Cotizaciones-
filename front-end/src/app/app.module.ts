@@ -9,13 +9,15 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
+import { EditRolComponent } from './edit-rol/edit-rol.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RolesListComponent,
     CreateRolComponent,
-    NavbarComponent
+    NavbarComponent,
+    EditRolComponent
   ],
   imports: [
     BrowserModule,

@@ -14,7 +14,7 @@ body{
   font-weight: bolder;
 }
 .btn:hover{
-background-color: #2226fa;
+background-color: #595bf7;
 }
 .btn-one,
 .btn-one:hover,
@@ -22,7 +22,7 @@ background-color: #2226fa;
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
-  width: 250px;
+  width: 200px;
   margin-left: 10px;
 }
 .btn-ver,

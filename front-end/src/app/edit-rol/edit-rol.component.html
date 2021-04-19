@@ -5,7 +5,7 @@
     <h1><b>Registro de Roles</b></h1>
     <div class="btnCreate">
       <button type="button" class="btn btn-one" (click)="navigateTo('/roles-list')">Ver Lista</button>
-
+      <button type="button" class="btn btn-two" (click)="navigateTo('/roles-create')">Registrar Rol</button>
     </div>
   </div>
 
@@ -92,7 +92,7 @@
       <div class="containerBtn">
         <div>
           <button class="btn btn-cancel" (click)="navigateTo('/roles-list')">Cancelar</button>
-          <button class="btn btn-register">Registrar</button>
+          <button class="btn btn-register"(click)="navigateTo('/roles-list')">Registrar</button>
         </div>
 
       </div>
