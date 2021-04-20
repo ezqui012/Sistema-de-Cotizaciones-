@@ -8,11 +8,17 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class UnitsRegisterComponent implements OnInit {
 
+  showAmount:boolean=false;
+
   constructor() {
 
   }
 
   ngOnInit(): void {
+  }
+
+  showInputAmout(show:boolean){
+    this.showAmount =show;
   }
 
 }

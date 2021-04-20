@@ -34,14 +34,14 @@
 
       <mat-radio-group aria-label="Select an option">
         <mat-label class="label-select"><b>Tipo de unidad</b></mat-label>
-        <mat-radio-button value="Administrativa" checked>Unidad Administrativa</mat-radio-button>
-        <mat-radio-button value="Gasto">Unidad de Gasto</mat-radio-button>
+        <mat-radio-button value="Administrativa" (click)="showInputAmout(false)" checked>Unidad Administrativa</mat-radio-button>
+        <mat-radio-button value="Gasto" (click)="showInputAmout(true)">Unidad de Gasto</mat-radio-button>
       </mat-radio-group>
 
       <br>
       <br>
 
-      <mat-form-field class="mount-full-width">
+      <mat-form-field class="mount-full-width" *ngIf="showAmount">
         <mat-label>Monto</mat-label>
         <input matInput placeholder="Ingrese monto">
       </mat-form-field>
