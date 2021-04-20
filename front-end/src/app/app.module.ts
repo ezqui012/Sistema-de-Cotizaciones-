@@ -9,7 +9,7 @@ import { RegisterUserAdministrativeComponent } from './register-user-administrat
 import { ButtonRegisterUserAdminComponent } from './button-register-user-admin/button-register-user-admin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-const appRoutes: Routes =[
+const appRoutes: Routes = [
   {path: '', component: RegisterUserAdministrativeComponent }
 ];
 

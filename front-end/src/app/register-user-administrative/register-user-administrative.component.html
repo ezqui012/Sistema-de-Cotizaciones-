@@ -3,64 +3,71 @@
   <form [formGroup]="registerForm" (ngSubmit)="insertData()" >
 
     <div>
-      <input class="fieldRegister" formControlName="completeName" type="text" placeholder="Ingrese nombre completo"
-      maxlength="50" [(ngModel)]="RegisterUser.completeName" (input)="inputValidator($event)" minlength="15">
-      <div class="alert-danger" *ngIf="f.completeName.invalid && (f.completeName.dirty || f.completeName.touched)">
-        <div class="container-error-message" *ngIf="f.completeName.errors?.required">
+      <select class="fieldRegister" name="SelectRol" id="rol">
+        <option value="Seleccione rol"> Seleccione Rol</option>
+        <option value="tecnologia"> jefe</option>
+        <option value="economia">Secretaria</option>
+      </select>
+    </div>
+    <div>
+      <select class="fieldRegister" name="SelectRol" id="unity">
+        <option value="Seleccione Facultad"> Seleccione Unidad</option>
+        <option value="tecnologia"> Unidad de gasto</option>
+        <option value="economia">Unidad Administrativa</option>
+      </select>
+    </div>
+
+    <div>
+      <input class="fieldRegister" formControlName="name" type="text" placeholder="Ingrese nombre completo"
+      maxlength="50" [(ngModel)]="RegisterUser.name" (input)="inputValidator($event)" minlength="15">
+      <div class="alert-danger" *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)">
+        <div class="container-error-message" *ngIf="f.name.errors?.required">
           Este campo es obligatorio
 
         </div>
-        <div class="container-error-message" *ngIf="f.completeName.errors?.maxlength">
+        <div class="container-error-message" *ngIf="f.name.errors?.maxlength">
           El maximo es de 50 caracteres
         </div>
-        <div class="container-error-message" *ngIf="f.completeName.errors?.minlength">
+        <div class="container-error-message" *ngIf="f.name.errors?.minlength">
           El minimo es de 15 caracteres
         </div>
       </div>
     </div>
     <div>
-      <select class="fieldRegister" name="SelectRol" id="rol">
-        <option value="Seleccione Facultad"> Seleccione Rol</option>
-        <option value="tecnologia"> jefe</option>
-        <option value="economia">Secretaria</option>
-      </select>
-    </div>
-
-    <div>
-      <input class="fieldRegister" formControlName="phoneNumber" type="Text" placeholder="Ingrese numero de telefono"
-       maxlength="8" minlength="7" [(ngModel)]="RegisterUser.phoneNumber">
-       <div class="alert-danger" *ngIf="f.phoneNumber.invalid && (f.phoneNumber.dirty || f.phoneNumber.touched)">
-        <div class="container-error-message" *ngIf="f.phoneNumber.errors?.required">
+      <input class="fieldRegister" formControlName="phone" type="Text" placeholder="Ingrese numero de telefono"
+       maxlength="8" minlength="7" [(ngModel)]="RegisterUser.phone" (keypress)="onKeyPress($event)">
+       <div class="alert-danger" *ngIf="f.phone.invalid && (f.phone.dirty || f.phone.touched)">
+        <div class="container-error-message" *ngIf="f.phone.errors?.required">
           Este campo es obligatorio
 
         </div>
-        <div class="container-error-message" *ngIf="f.phoneNumber.errors?.maxlength" >
+        <div class="container-error-message" *ngIf="f.phone.errors?.maxlength" >
           El maximo es de 8 dígitos
         </div>
-        <div class="container-error-message" *ngIf="f.phoneNumber.errors?.minlength">
+        <div class="container-error-message" *ngIf="f.phone.errors?.minlength">
           El minimo es de 7 dígitos
         </div>
     </div>
 
     </div>
     <div>
-      <input class="fieldRegister" formControlName="ciNumber" type="text" placeholder="Ingrese CI"
-        maxlength="9" minlength="7" [(ngModel)]="RegisterUser.CI">
-        <div class="alert-danger" *ngIf="f.ciNumber.invalid && (f.ciNumber.dirty || f.ciNumber.touched)">
-          <div class="container-error-message" *ngIf="f.ciNumber.errors?.required">
+      <input class="fieldRegister" formControlName="ci" type="text" placeholder="Ingrese CI"
+        maxlength="9" minlength="7" [(ngModel)]="RegisterUser.ci" (keypress)="onKeyPress($event)">
+        <div class="alert-danger" *ngIf="f.ci.invalid && (f.ci.dirty || f.ci.touched)">
+          <div class="container-error-message" *ngIf="f.ci.errors?.required">
             El CI de usuario es obligatorio
           </div>
-          <div class="container-error-message" *ngIf="f.ciNumber.errors?.maxlength">
+          <div class="container-error-message" *ngIf="f.ci.errors?.maxlength">
             El maximo es de 9 dígitos
           </div>
-          <div class="container-error-message" *ngIf="f.ciNumber.errors?.minlength">
+          <div class="container-error-message" *ngIf="f.ci.errors?.minlength">
             El minimo es de 7 dígitos
           </div>
       </div>
     </div>
     <div>
       <input class="fieldRegister" formControlName="address" type="text" placeholder="Ingrese Dirección"
-      maxlength="100" minlength="10" [(ngModel)]="RegisterUser.address">
+      maxlength="100" minlength="30" [(ngModel)]="RegisterUser.address">
         <div class="alert-danger" *ngIf="f.address.invalid && (f.address.dirty || f.address.touched)">
           <div class="container-error-message" *ngIf="f.address.errors?.required">
             Este campo es obligatorio
@@ -70,27 +77,43 @@
             El maximo es de 100 caracteres
           </div>
           <div class="container-error-message" *ngIf="f.address.errors?.minlength">
-            El minimo es de 10 caracteres
+            El minimo es de 30 caracteres
           </div>
       </div>
     </div>
     <div>
-      <input class="fieldRegister" formControlName="userEmail" type="email" placeholder="Ingrese email"
+      <input class="fieldRegister" formControlName="email" type="email" placeholder="Ingrese email"
       [(ngModel)]="RegisterUser.email">
-        <div class="alert-danger" *ngIf="f.userEmail.invalid && (f.userEmail.dirty || f.userEmail.touched)">
-          <div class="container-error-message" *ngIf="f.userEmail.errors?.required">
+        <div class="alert-danger" *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
+          <div class="container-error-message" *ngIf="f.email.errors?.required">
             Este campo es obligatorio
 
           </div>
-          <div class="container-error-message" *ngIf="f.userEmail.errors?.maxlength">
+          <div class="container-error-message" *ngIf="f.email.errors?.maxlength">
             El maximo es de 50 caracteres
           </div>
-          <div class="container-error-message" *ngIf="f.userEmail.errors?.minlength">
+          <div class="container-error-message" *ngIf="f.email.errors?.minlength">
             El minimo es de 15 caracteres
           </div>
-          <div class="container-error-message" *ngIf="(f.userEmail.dirty || f.userEmail.touched) && f.userEmail.invalid && f.userEmail.errors?.pattern">
+          <div class="container-error-message" *ngIf="(f.email.dirty || f.email.touched) && f.email.invalid && f.email.errors?.pattern">
             El formato no es valido
           </div>
+      </div>
+    </div>
+    <div>
+      <input class="fieldRegister" formControlName="password" type="password" placeholder="Ingrese contraseña"
+      maxlength="32" [(ngModel)]="RegisterUser.password" (input)="inputValidator($event)" minlength="8">
+      <div class="alert-danger" *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
+        <div class="container-error-message" *ngIf="f.password.errors?.required">
+          Este campo es obligatorio
+
+        </div>
+        <div class="container-error-message" *ngIf="f.password.errors?.maxlength">
+          El maximo es de 32 caracteres
+        </div>
+        <div class="container-error-message" *ngIf="f.password.errors?.minlength">
+          El minimo es de 8 caracteres
+        </div>
       </div>
     </div>
     <div class="registerContainer">

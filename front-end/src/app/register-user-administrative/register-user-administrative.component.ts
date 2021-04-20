@@ -15,19 +15,23 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   submitted = false;
   constructor(private formBuilder: FormBuilder, private RegisteruserService: RegisteruserService) {
     this.registerForm = this.formBuilder.group({
-      completeName: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(15),
-                      ]],
       selectRol: ['', Validators.required],
-      phoneNumber: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(7)], Validators.min(7)],
-      ciNumber: ['', Validators.required, Validators.maxLength(7), Validators.minLength(9)],
-      address: ['', Validators.required, Validators.maxLength(100), Validators.minLength(30)],
-      userEmail: ['', [Validators.required, Validators.pattern(this.isValidEmail) ]]
+      selectUnity: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(15),
+      ]],
+      phone: ['', [Validators.required, Validators.maxLength(7), Validators.minLength(6)]],
+      ci: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(7)]],
+      address: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(30)]],
+      email: ['', [ Validators.required, Validators.pattern(this.isValidEmail) ]],
+      password: ['', [ Validators.required, Validators.maxLength(31), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]]
     });
   }
 
   insertData(){
-    this.RegisteruserService.insertData().subscribe(res => {
+    console.log(this.RegisterUser);
+    this.RegisteruserService.insertData(this.RegisterUser).subscribe(res => {
       console.log(res);
+      this.OnResetForm();
     });
   }
 
@@ -58,25 +62,20 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     const pattern = /^[a-zA-Z ]*$/;
     // let inputChar = String.fromCharCode(event.charCode)
     if (!pattern.test(event.target.value)) {
-      event.target.value = event.target.value.replace(/[^a-zA-Z ]/g, "");
+      event.target.value = event.target.value.replace(/[^a-zA-Z ]/g, '');
       // invalid character, prevent input
 
     }
 
 
   }
-
-  // tslint:disable-next-line: typedef
-  public inputValidatorNumber(event: any) {
-    const patternNumbers = /^[0-9]*$/;
-    if (!patternNumbers.test(event.target.value)){
-      event.target.value = event.target.value.replace(/[0-9]/g);
+  //Validar campos solo numeros
+  onKeyPress(event: any) {
+    const regexpNumber = /[0-9\+\-\ ]/;
+    let inputCharacter = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !regexpNumber.test(inputCharacter)) {
+      event.preventDefault();
     }
-  }
-  registerUser():void{
-    let userName = this.userName.value;
-
-
   }
 
 
