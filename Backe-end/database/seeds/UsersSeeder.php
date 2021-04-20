@@ -22,7 +22,7 @@ class UsersSeeder extends Seeder
                 'phone' => '4215569',
                 'ci' => '5541874',
                 'address' => 'Av. Circunvalacion',
-                'password' => Hash::make('admin1234'),
+                'password' => Hash::make('Admin-1234'),
             ]
         ]);
     }
