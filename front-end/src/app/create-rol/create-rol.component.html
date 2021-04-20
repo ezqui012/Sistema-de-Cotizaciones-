@@ -1,0 +1,111 @@
+<app-navbar></app-navbar>
+<!--header-->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Registro de Roles</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/roles-list')">Ver Lista</button>
+
+    </div>
+  </div>
+
+
+  <div>
+
+    <form class="form-newRol">
+      <mat-form-field class="nameRol-full-width">
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Ingrese el nombre del rol">
+      </mat-form-field>
+      <mat-form-field class="desRol-full-width">
+        <mat-label>Descripción</mat-label>
+        <input matInput placeholder="Ingrese descricioón del rol">
+      </mat-form-field>
+
+      <div class="containerPermiso">
+        <h2>Permisos</h2>
+        <div class="row row-cols-4">
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Crear Solicitud
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Aprobar solicitudes
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Editar solicitudes
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Registrar Items de gasto
+            </label>
+          </div>
+
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Editar cotización
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Crear solicitudes
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Ver lista de solicirudes
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Registrar empresa
+            </label>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <div class="containerBtn">
+        <div>
+          <button class="btn btn-cancel" (click)="navigateTo('/roles-list')">Cancelar</button>
+          <button class="btn btn-register">Registrar</button>
+        </div>
+
+      </div>
+
+
+
+
+
+    </form>
+
+  </div>
+
+
+
+
+</div>
