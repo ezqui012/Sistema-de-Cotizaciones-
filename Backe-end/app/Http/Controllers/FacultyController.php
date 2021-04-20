@@ -4,14 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Faculty;
 use Illuminate\Http\Request;
+use Exception;
 
 class FacultyController extends Controller
 {
 
     public function index()
     {
-        $res = Faculty::all();
-        return $res;
+        try{
+            $res = Faculty::all();
+            return $res;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'error' => $ex,
+                'message' => 'There is been a problem'
+            ], 404);
+        }
     }
 
 

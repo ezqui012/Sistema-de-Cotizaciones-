@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Unit;
 use App\Http\Requests\CreateUnitRequest;
 use Illuminate\Http\Request;
+use Exception;
 
 class UnitController extends Controller
 {
@@ -17,13 +18,20 @@ class UnitController extends Controller
 
     public function store(CreateUnitRequest $request)
     {
-        $input = $request->all();
-        Unit::create($input);
-        return response()->json([
-            'res' => true,
-            'message' => 'Registered unit'
-        ], 200);
-
+        try{
+            $input = $request->all();
+            Unit::create($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'Registered unit'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'error' => $ex,
+                'message' => 'There is been a problem'
+            ], 404);
+        }
     }
 
 
