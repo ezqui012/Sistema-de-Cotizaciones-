@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { EditRolComponent } from './edit-rol/edit-rol.component';
 import { UnitsRegisterComponent } from './units-register/units-register.component';
+import { MatSelectModule } from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { UnitsRegisterComponent } from './units-register/units-register.componen
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

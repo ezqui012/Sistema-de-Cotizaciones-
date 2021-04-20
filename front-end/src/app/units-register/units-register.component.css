@@ -1,0 +1,89 @@
+body{
+  background-color: #F0F0F8;
+}
+
+h1{
+  font-size: 4em !important;
+  color: #1C2331 !important;
+}
+
+
+#select-faculty{
+  margin-left: 5% !important;
+}
+
+.containerBody{
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 20px;
+}
+
+.containertop{
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  font-weight: bolder;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 2%;
+}
+
+.label-select{
+  margin-right: 2%;
+  color: #1C2331;
+}
+
+.form-newRol{
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.nameUnit-full-width, .selectFaculty-full-width, .mount-full-width{
+  width: 40%;
+}
+
+.containerBtn{
+  text-align: center;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle , .mat-radio-outer-circle {
+  border-color: #1C2331 !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle{
+  background-color: #1C2331 !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  opacity: 0 !important;
+}
+
+.btn-one{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 200px;
+  margin-left: 20px;
+}
+
+.btn-cancel, .btn-register{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  width: 120px;
+}
+
+.btn-cancel{
+  background-color: #1C2331;
+  margin-right: 20px;
+}
+
+.btn-register{
+  background-color:#003b72;
+}
+
+.btn:hover{
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid #000000;
+}

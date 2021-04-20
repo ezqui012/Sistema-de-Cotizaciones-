@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-units-register',
   templateUrl: './units-register.component.html',
-  styleUrls: ['./units-register.component.css']
+  styleUrls: ['./units-register.component.css'],
+  encapsulation:ViewEncapsulation.None
 })
 export class UnitsRegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit(): void {
   }
