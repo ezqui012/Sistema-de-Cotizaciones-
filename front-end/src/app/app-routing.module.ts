@@ -5,6 +5,7 @@ import { EditRolComponent } from './edit-rol/edit-rol.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RolesListComponent } from './roles-list/roles-list.component';
 import { LoginComponent } from './login/login.component';
+import { UnitsRegisterComponent } from './units-register/units-register.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path:'login',
     component: LoginComponent
+  },
+  {
+    path: 'units-register',
+    component: UnitsRegisterComponent
   }
 ];
 

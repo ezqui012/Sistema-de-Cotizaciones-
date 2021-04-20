@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { EditRolComponent } from './edit-rol/edit-rol.component';
+import { UnitsRegisterComponent } from './units-register/units-register.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EditRolComponent } from './edit-rol/edit-rol.component';
     RolesListComponent,
     CreateRolComponent,
     NavbarComponent,
-    EditRolComponent
+    EditRolComponent,
+    UnitsRegisterComponent
   ],
   imports: [
     BrowserModule,
