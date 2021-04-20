@@ -46,37 +46,44 @@
         <tr>
           <th scope="col">Nº</th>
           <th scope="col">Nombre</th>
-          <th scope="col">Descripción</th>
-          <th scope="col">Opciones</th>
+          <th scope="col"></th>
+          <th scope="col justify-content-end" style="padding-right: 10%;">Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <th scope="row">1</th>
           <td>Cotizador</td>
-          <td>Encargado de realizar las cotizaciones</td>
+          <td></td>
           <td>
-            <button type="button" class="btn btn-edit" (click)="navigateTo('/roles-edit')">Editar</button>
-            <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content)">Ver</button>
+            <div class="row justify-content-end" style="padding-right: 10%;">
+              <button type="button" class="btn btn-edit" (click)="navigateTo('/roles-edit')">Editar</button>
+              <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content)">Ver</button>
+            </div>
           </td>
 
         </tr>
         <tr>
           <th scope="row">2</th>
           <td>Gefe de unidad administrativa</td>
-          <td>Encargado de aceptar o rechazar solicitud</td>
+          <td></td>
           <td>
-            <button type="button" class="btn btn-edit" (click)="navigateTo('/roles-edit')">Editar</button>
-            <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content)">Ver</button>
+            <div class="row justify-content-end" style="padding-right: 10%;">
+              <button type="button" class="btn btn-edit" (click)="navigateTo('/roles-edit')">Editar</button>
+              <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content)">Ver</button>
+            </div>
+
           </td>
         </tr>
         <tr>
           <th scope="row">3</th>
           <td>Gefe de unidad de gasto</td>
-          <td>Genera un solicitud de compra</td>
+          <td></td>
           <td>
-            <button type="button" class="btn btn-edit"(click)="navigateTo('/roles-edit')">Editar</button>
-            <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content)">Ver</button>
+            <div class="row justify-content-end" style="padding-right: 10%;">
+              <button type="button" class="btn btn-edit" (click)="navigateTo('/roles-edit')">Editar</button>
+              <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content)">Ver</button>
+            </div>
           </td>
         </tr>
       </tbody>
