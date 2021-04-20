@@ -5,13 +5,18 @@
 }
 
 body{
-  background-color: #F6F3F5 !important;
+  background-color: #f0f0f8 !important;
   align-items: center;
 }
 
+#menu-options{
+  /* padding-left: 50%; */
+  text-align: center !important;
+}
+
 .navbar{
-  background-color: #F6F3F5 !important;
-  padding: 0 !important;
+  background-color: #f0f0f8 !important;
+  font-size: 1.2rem !important;
 }
 
 .row{

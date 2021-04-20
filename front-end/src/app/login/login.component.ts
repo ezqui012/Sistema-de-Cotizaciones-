@@ -8,6 +8,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  public isMenuCollapsed = true;
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,8 +1,29 @@
-<div class="main-container">
-  <div class="navbar navbar-light bg-light">
-    <img src="../../assets/img-login/logo-nav.png" width="130" height="60" class="d-inline-block align-top"
-      alt="logo umss">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+  <img src="../../assets/img/navbar/Frame.svg" height="60" alt="logo-app-quot-umss" class="logo-app">
+
+  <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+    &#9776;
+  </button>
+
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="menu-options">
+    <ul class="navbar-nav">
+      <li class="nav-item ">
+        <a class="nav-link"  (click)="isMenuCollapsed = true"><b>Iniciar sesión</b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="isMenuCollapsed = true">Acerca del sitio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"  (click)="isMenuCollapsed = true">Contactos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="isMenuCollapsed = true">Soporte</a>
+      </li>
+    </ul>
   </div>
+</nav>
+
+<div class="main-container">
   <div class="body">
     <section class="Form my-1 mx-1">
       <div class="container">
