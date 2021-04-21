@@ -5,7 +5,7 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use App\Http\Requests\CreateUserRequest;
 class UserController extends Controller
 {
     public function login(Request $request){
@@ -38,7 +38,7 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function addData(Request $request){
+    public function addData(CreateUserRequest $request){
 
         DB::table('users')->insert([
             [
