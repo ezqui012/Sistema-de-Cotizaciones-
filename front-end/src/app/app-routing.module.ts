@@ -8,11 +8,12 @@ import { LoginComponent } from './login/login.component';
 import { InfoSiteComponent } from './info-site/info-site.component';
 import { ContactComponent } from './contact/contact.component';
 import { SupportComponent } from './support/support.component';
+import { HomeAdminComponent } from './home-admin/home-admin.component';
 
 const routes: Routes = [
   {
     path:'',
-    component: NavbarComponent
+    component: HomeAdminComponent
   },
   {
     path:'roles-list',

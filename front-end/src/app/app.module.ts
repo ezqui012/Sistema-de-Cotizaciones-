@@ -16,6 +16,7 @@ import { NavbarOutsideComponent } from './navbar-outside/navbar-outside.componen
 import { InfoSiteComponent } from './info-site/info-site.component';
 import { ContactComponent } from './contact/contact.component';
 import { SupportComponent } from './support/support.component';
+import { HomeAdminComponent } from './home-admin/home-admin.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SupportComponent } from './support/support.component';
     NavbarOutsideComponent,
     InfoSiteComponent,
     ContactComponent,
-    SupportComponent
+    SupportComponent,
+    HomeAdminComponent
   ],
   imports: [
     BrowserModule,
