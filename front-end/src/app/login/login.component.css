@@ -9,16 +9,6 @@ body{
   align-items: center;
 }
 
-#menu-options{
-  /* padding-left: 50%; */
-  text-align: center !important;
-}
-
-.navbar{
-  background-color: #f0f0f8 !important;
-  font-size: 1.2rem !important;
-}
-
 .row{
   background: white;
   border-radius: 30px;
