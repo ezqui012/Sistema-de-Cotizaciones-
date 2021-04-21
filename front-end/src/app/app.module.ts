@@ -9,17 +9,28 @@ import { RegisterUserAdministrativeComponent } from './register-user-administrat
 import { ButtonRegisterUserAdminComponent } from './button-register-user-admin/button-register-user-admin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+
+
+
+import { LoginComponent } from './login/login.component';
+import { RolesListComponent } from './roles-list/roles-list.component';
+import { CreateRolComponent } from './create-rol/create-rol.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { EditRolComponent } from './edit-rol/edit-rol.component';
 const appRoutes: Routes = [
   {path: '', component: RegisterUserAdministrativeComponent }
 ];
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
     RegisterUserAdministrativeComponent,
-    ButtonRegisterUserAdminComponent
+    LoginComponent,
+    RolesListComponent,
+    CreateRolComponent,
+    NavbarComponent,
+    EditRolComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +39,9 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     NgbModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

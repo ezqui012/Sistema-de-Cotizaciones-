@@ -1,0 +1,76 @@
+.containerBody{
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 20px;
+}
+body{
+  background-color: #F0F0F8;
+}
+.containertop{
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  color: #003b72;
+  font-weight: bolder;
+}
+.btn:hover{
+background-color:#2f82ff !important;
+}
+.btn-one,
+.btn-one:hover,
+.btn-one:active {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 200px;
+  margin-left: 10px;
+}
+.btn-ver,
+.btn-ver:hover,
+.btn-ver:active {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color: #1C2331;
+  margin-left: 10px;
+  width: 80px;
+}
+.btn-edit,
+.btn-edit:hover,
+.btn-edit:active{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+
+  width: 80px;
+}
+
+.headTable{
+  background-color: #003b72;
+  color: white;
+}
+.containerTable{
+  color:#0000 ;
+  background-color: #fafafa;
+}
+/*estilos Modal*/
+
+.oscuro .modal-content{
+  color: #003b72;
+  background-color: #F0F0F8;
+}
+.close{
+  color: rgb(7, 7, 7);
+}
+.close:hover{
+  color: #003b72;
+}
+.dateInfo{
+  font-weight: bold;
+  display: flex;
+}
+.dateInfoValue{
+  font-weight: normal;
+  color: #1C2331;
+  margin-left: 10px;
+}
+

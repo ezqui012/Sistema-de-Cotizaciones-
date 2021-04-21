@@ -1,0 +1,48 @@
+<!--Barra de navegacion-->
+<div>
+  <div class="navbar">
+
+    <div class="contenNavbar">
+      <div>
+        <img src="../../assets/img/navbar/Frame.svg" height="60" alt="">
+      </div>
+      <div class="contentLink">
+        <div class="link">
+          <b>Inicio</b>
+        </div>
+        <div class="link">
+          <b>Personal</b>
+        </div>
+        <div class="link">
+          <b>Roles</b>
+        </div>
+        <div class="link">
+          <b>Unidades</b>
+        </div>
+        <div class="link">
+          <b>Facultades</b>
+        </div>
+        <div class="link">
+          <b>Salir</b>
+        </div>
+      </div>
+      <div class="imgmenu" (click)="show=!show">
+        <img src="../../assets/img/navbar/IcoMenu.svg" width="40" height="40" alt="">
+      </div>
+    </div>
+
+  </div>
+  <!--Medal menu-->
+  <div class="menuContent" *ngIf="show">
+
+    <div class="menuOption">
+
+      <li class="option">Inicio</li>
+      <li class="option">Administrar Personal</li>
+      <li class="option">Administrar Roles</li>
+      <li class="option">Administrar Unidades</li>
+      <li class="option">Administrar Facultades</li>
+      <li class="option">Salir</li>
+    </div>
+  </div>
+</div>
