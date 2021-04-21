@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'app-navbar-outside',
   encapsulation: ViewEncapsulation.None,
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  templateUrl: './navbar-outside.component.html',
+  styleUrls: ['./navbar-outside.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarOutsideComponent implements OnInit {
 
   constructor(private router:Router) { }
   navigateTo(path: String){
@@ -17,7 +17,5 @@ export class NavbarComponent implements OnInit {
   show: boolean = false;
   ngOnInit(): void {
   }
-
-
 
 }

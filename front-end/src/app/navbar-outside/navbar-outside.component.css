@@ -14,13 +14,14 @@ body{
   margin-left: 10px;
   display: flex;
   margin-left: auto;
+
+
 }
 .link{
   width: 120px;
   padding-top: 22px;
   text-align: center;
   color: #1C2331;
-  font-size: 1rem;
 
 
 }

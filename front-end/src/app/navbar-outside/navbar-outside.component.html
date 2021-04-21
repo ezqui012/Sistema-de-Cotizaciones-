@@ -1,0 +1,40 @@
+<!--Barra de navegacion-->
+<div>
+  <div class="navbar">
+
+    <div class="contenNavbar">
+      <div>
+        <img src="../../assets/img/navbar/Frame.svg" height="60" alt="">
+      </div>
+      <div class="contentLink">
+        <div class="link">
+          <b>Iniciar Sesión</b>
+        </div>
+        <div class="link" (click)="navigateTo('/info-site')">
+          <b>Acerca del sitio</b>
+        </div>
+        <div class="link" (click)="navigateTo('/contact')">
+          <b>Cotectos</b>
+        </div>
+        <div class="link" (click)="navigateTo('/support')">
+          <b>Soporte</b>
+        </div>
+      </div>
+      <div class="imgmenu" (click)="show=!show">
+        <img src="../../assets/img/navbar/IcoMenu.svg" width="40" height="40" alt="">
+      </div>
+    </div>
+
+  </div>
+  <!--Medal menu-->
+  <div class="menuContent" *ngIf="show">
+
+    <div class="menuOption">
+
+      <li class="option">Iniciar Sesión</li>
+      <li class="option" (click)="navigateTo('/info-site')">Acerca del sitio</li>
+      <li class="option" (click)="navigateTo('/contact')">Contactos</li>
+      <li class="option" (click)="navigateTo('/support')">Soporte</li>
+    </div>
+  </div>
+</div>

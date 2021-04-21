@@ -19,6 +19,14 @@ import { EditRolComponent } from './edit-rol/edit-rol.component';
 import { UnitsRegisterComponent } from './units-register/units-register.component';
 import { MatSelectModule } from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
+import { NavbarOutsideComponent } from './navbar-outside/navbar-outside.component';
+import { InfoSiteComponent } from './info-site/info-site.component';
+import { ContactComponent } from './contact/contact.component';
+import { SupportComponent } from './support/support.component';
+import { HomeAdminComponent } from './home-admin/home-admin.component';
+import { SchoolListComponent } from './school-list/school-list.component';
+import { SchoolCreateComponent } from './school-create/school-create.component';
+import { SchoolEditComponent } from './school-edit/school-edit.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +37,15 @@ import {MatRadioModule} from '@angular/material/radio';
     CreateRolComponent,
     NavbarComponent,
     EditRolComponent,
-    UnitsRegisterComponent
+    UnitsRegisterComponent,
+    NavbarOutsideComponent,
+    InfoSiteComponent,
+    ContactComponent,
+    SupportComponent,
+    HomeAdminComponent,
+    SchoolListComponent,
+    SchoolCreateComponent,
+    SchoolEditComponent
   ],
   imports: [
     BrowserModule,
