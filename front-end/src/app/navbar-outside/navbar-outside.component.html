@@ -10,13 +10,13 @@
         <div class="link">
           <b>Iniciar Sesión</b>
         </div>
-        <div class="link">
+        <div class="link" (click)="navigateTo('/info-site')">
           <b>Acerca del sitio</b>
         </div>
-        <div class="link">
+        <div class="link" (click)="navigateTo('/contact')">
           <b>Cotectos</b>
         </div>
-        <div class="link">
+        <div class="link" (click)="navigateTo('/support')">
           <b>Soporte</b>
         </div>
       </div>
@@ -32,9 +32,9 @@
     <div class="menuOption">
 
       <li class="option">Iniciar Sesión</li>
-      <li class="option">Acerca del sitio</li>
-      <li class="option">Contactos</li>
-      <li class="option">Soporte</li>
+      <li class="option" (click)="navigateTo('/info-site')">Acerca del sitio</li>
+      <li class="option" (click)="navigateTo('/contact')">Contactos</li>
+      <li class="option" (click)="navigateTo('/support')">Soporte</li>
     </div>
   </div>
 </div>
