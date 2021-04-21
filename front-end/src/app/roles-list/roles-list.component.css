@@ -14,7 +14,7 @@ body{
   font-weight: bolder;
 }
 .btn:hover{
-background-color: #595bf7;
+background-color:#2f82ff !important;
 }
 .btn-one,
 .btn-one:hover,
