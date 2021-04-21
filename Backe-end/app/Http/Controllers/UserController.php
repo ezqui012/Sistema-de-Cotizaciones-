@@ -39,7 +39,7 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function addData(CreateUserRequest $request){
+    public function addData(Request $request){
 
         DB::table('users')->insert([
             [
