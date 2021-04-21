@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use App\Http\Requests\CreateUserRequest;
 class UserController extends Controller
 {
     public function login(Request $request){
@@ -37,5 +37,26 @@ class UserController extends Controller
             'res' => true,
             'message' => 'Goodbye'
         ], 200);
+    }
+
+    public function addData(CreateUserRequest $request){
+
+        DB::table('users')->insert([
+            [
+                'id_role' => 1,
+                'id_unit' => 1,
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'ci' => $request->ci,
+                'address' => $request->address,
+                'password' => Hash::make($request->password),
+            ]
+        ]);
+        return response()->json([
+            'res' => true,
+            'message' => 'Inserted data succesfull',
+        ], 200);
+
     }
 }

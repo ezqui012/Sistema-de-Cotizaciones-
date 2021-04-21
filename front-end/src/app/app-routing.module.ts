@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { RegisterUserAdministrativeComponent } from './register-user-administrative/register-user-administrative.component';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateRolComponent } from './create-rol/create-rol.component';
 import { EditRolComponent } from './edit-rol/edit-rol.component';
@@ -9,28 +10,33 @@ import { UnitsRegisterComponent } from './units-register/units-register.componen
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     component: NavbarComponent
   },
   {
-    path:'roles-list',
+    path: 'roles-list',
     component: RolesListComponent
   },
   {
-    path:'roles-create',
+    path: 'roles-create',
     component: CreateRolComponent
   },
   {
-    path:'roles-edit',
+    path: 'roles-edit',
     component: EditRolComponent
   },
   {
-    path:'login',
+    path: 'login',
     component: LoginComponent
   },
   {
     path: 'units-register',
     component: UnitsRegisterComponent
+  },
+  {
+    path: 'register-user',
+    component: RegisterUserAdministrativeComponent
+
   }
 ];
 
