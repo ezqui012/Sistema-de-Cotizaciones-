@@ -17,6 +17,9 @@ import { InfoSiteComponent } from './info-site/info-site.component';
 import { ContactComponent } from './contact/contact.component';
 import { SupportComponent } from './support/support.component';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
+import { SchoolListComponent } from './school-list/school-list.component';
+import { SchoolCreateComponent } from './school-create/school-create.component';
+import { SchoolEditComponent } from './school-edit/school-edit.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { HomeAdminComponent } from './home-admin/home-admin.component';
     InfoSiteComponent,
     ContactComponent,
     SupportComponent,
-    HomeAdminComponent
+    HomeAdminComponent,
+    SchoolListComponent,
+    SchoolCreateComponent,
+    SchoolEditComponent
   ],
   imports: [
     BrowserModule,

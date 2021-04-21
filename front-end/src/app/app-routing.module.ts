@@ -9,6 +9,9 @@ import { InfoSiteComponent } from './info-site/info-site.component';
 import { ContactComponent } from './contact/contact.component';
 import { SupportComponent } from './support/support.component';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
+import { SchoolListComponent } from './school-list/school-list.component';
+import { SchoolCreateComponent } from './school-create/school-create.component';
+import { SchoolEditComponent } from './school-edit/school-edit.component';
 
 const routes: Routes = [
   {
@@ -42,7 +45,20 @@ const routes: Routes = [
   {
     path:'support',
     component: SupportComponent
+  },
+  {
+    path:'school-list',
+    component: SchoolListComponent
+  },
+  {
+    path:'school-create',
+    component: SchoolCreateComponent
+  },
+  {
+    path:'school-edit',
+    component: SchoolEditComponent
   }
+
 ];
 
 @NgModule({

@@ -1,0 +1,94 @@
+<!--Navbar-->
+<app-navbar></app-navbar>
+<!--Modal Roles-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="dateInfo"><h3><b>Facultad:</b></h3>
+      <div class="dateInfoValue"><h3>Ciencia y tecnologia</h3></div>
+    </div>
+    <div class="dateInfo"><h3><b>Decano:</b></h3>
+      <div class="dateInfoValue"><h3>Mauricio Medina Perez</h3></div>
+    </div>
+    <div class="dateInfo"><h3><b>Email:</b></h3>
+      <div class="dateInfoValue"><h3>mauricio@gmail.com</h3></div>
+    </div>
+    <div class="dateInfo"><h3><b>Teléfono:</b></h3>
+      <div class="dateInfoValue"><h3>77809018</h3></div>
+    </div>
+    <div class="dateInfo"><h3><b>Direción:</b></h3>
+      <div class="dateInfoValue"><h3>Calle sucre frente al parque La torre</h3></div>
+    </div>
+
+  </div>
+
+</ng-template>
+
+
+<!--header-->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Administrar Facultades</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/school-create')">Registrar Facultad</button>
+
+    </div>
+  </div>
+
+  <!--Tabla-->
+  <div class="containerTable">
+    <table class="table table-striped">
+      <thead class="headTable">
+        <tr>
+          <th scope="col">Nº</th>
+          <th scope="col">Nombre</th>
+          <th scope="col"></th>
+          <th scope="col" style="padding-right: 12%; text-align: right;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Ciencia y Tecnologia</td>
+          <td></td>
+          <td>
+            <div class="row justify-content-end" style="padding-right: 20%;">
+              <button type="button" class="btn btn-edit" (click)="navigateTo('/school-edit')">Editar</button>
+              <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content)">Ver</button>
+            </div>
+          </td>
+
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Ciencia Economicas</td>
+          <td></td>
+          <td>
+            <div class="row justify-content-end" style="padding-right: 20%;">
+              <button type="button" class="btn btn-edit" (click)="navigateTo('/school-edit')">Editar</button>
+              <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content)">Ver</button>
+            </div>
+
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Medicina</td>
+          <td></td>
+          <td>
+            <div class="row justify-content-end" style="padding-right: 20%;">
+              <button type="button" class="btn btn-edit" (click)="navigateTo('/school-edit')">Editar</button>
+              <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content)">Ver</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
