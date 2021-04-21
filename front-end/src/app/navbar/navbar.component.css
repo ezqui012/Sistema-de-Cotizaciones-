@@ -13,7 +13,7 @@ body{
 .contentLink{
   margin-left: 10px;
   display: flex;
-  text-align: center;
+  margin-left: auto;
 
 }
 .link{
