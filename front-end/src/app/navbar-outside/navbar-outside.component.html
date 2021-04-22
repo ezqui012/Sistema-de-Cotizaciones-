@@ -6,7 +6,7 @@
       <div>
         <img src="../../assets/img/navbar/Frame.svg" height="60" alt="">
       </div>
-      <div class="contentLink">
+      <div class="contentLink" (click)="navigateTo('/login')">
         <div class="link">
           <b>Iniciar Sesión</b>
         </div>
@@ -31,7 +31,7 @@
 
     <div class="menuOption">
 
-      <li class="option">Iniciar Sesión</li>
+      <li class="option" (click)="navigateTo('/login')">Iniciar Sesión</li>
       <li class="option" (click)="navigateTo('/info-site')">Acerca del sitio</li>
       <li class="option" (click)="navigateTo('/contact')">Contactos</li>
       <li class="option" (click)="navigateTo('/support')">Soporte</li>
