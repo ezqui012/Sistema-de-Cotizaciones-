@@ -11,16 +11,22 @@
 
           <h1 class="title-login"><b>Iniciar Sesión</b></h1>
           <br>
-          <form class="form-container">
+          <form class="form-container" [formGroup]="loginForm">
             <mat-form-field class="full-width-input separator">
               <mat-label>Correo</mat-label>
-              <input matInput placeholder="Ingrese su correo" type="email" required>
+              <input matInput placeholder="Ingrese su correo" type="email" formControlName="email" required>
+              <mat-error *ngIf="isValid('email')">
+                {{ getErrorMessage('email') }}
+              </mat-error>
             </mat-form-field>
             <br>
             <br>
             <mat-form-field class="full-width-input separator">
               <mat-label>Contraseña</mat-label>
-              <input matInput placeholder="Ingrese su contraseña" type="password" required>
+              <input matInput placeholder="Ingrese su contraseña" type="password" formControlName="password" required>
+              <mat-error *ngIf="isValid('password')">
+                {{ getErrorMessage('password') }}
+              </mat-error>
             </mat-form-field>
             <br>
             <br>
