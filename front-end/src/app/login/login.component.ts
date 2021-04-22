@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.get(field)?.errors?.required){
       message = `El campo ${fieldSpanish} es obligatorio`;
     }else if(this.loginForm.get(field)?.hasError('pattern')){
-      message = "Fomrato de correo no valido";
+      message = "Fomrato de correo no es valido";
     } else if(this.loginForm.get(field)?.hasError('minlength')){
       message = "Ingrese minimo 8 caracteres";
     }
@@ -45,6 +45,13 @@ export class LoginComponent implements OnInit {
 
   getTraduction(field: string){
     return field === 'password' ? 'contraseña' : 'correo';
+  }
+
+  onLogin(){
+    if(this.loginForm.invalid){
+      return;
+    }
+    // login service
   }
 
 }
