@@ -61,6 +61,7 @@ body{
   background-color: #003b72;
   border-radius: 10px;
   color: #ffffff;
+  border: 0;
 }
 
 .btn-form:hover{
@@ -108,6 +109,7 @@ body{
 @media(max-width:475px){
   .copyright{
     font-size: small;
+    margin-top: 2px;
   }
 }
 
