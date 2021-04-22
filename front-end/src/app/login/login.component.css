@@ -1,75 +1,76 @@
-*{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
 body{
   background-color: #f0f0f8 !important;
-  align-items: center;
+  padding: 0;
 }
 
-.row{
-  background: white;
-  border-radius: 30px;
-  box-shadow: 10px 10px 25px rgba(128, 128, 128, 0.877);
+.main-container{
+  display: block;
 }
 
-.img-fluid{
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
-  height: fit-content !important;
-  width: fit-content !important;
+.login-container{
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 3%;
 }
 
-label, h1{
-  color: #003b72;
-  font-weight: bold;
+.img-login{
+  width: 50%;
+  text-align: center;
+  padding-left: 6%;
+  padding-right: 6%;
 }
 
-label{
-  margin-bottom: 0px !important;
-  font-size: 1.25rem;
-}
-
-.btn1{
-  border: none;
-  outline: none;
-  height: 50px;
+.img-work{
   width: 100%;
-  background-color: #003b72;
+}
+
+.footer-container{
+  display: block;
+  position: fixed;
+  width: 100%;
+  height: 10%;
+  bottom: 0;
+  background-color: #1C2331;
   color: #ffffff;
-  border-radius: 4px;
-  font-weight: bold;
-}
-
-.mt-0{
-  margin-top: 0px !important;
-}
-
-.form-control{
-  outline: 0 !important;
-  border-width: 0 0 3px !important;
-  border-color: #003b72 !important;
-}
-
-input:focus, input.form-control:focus{
-  outline: none !important;
-  outline-width: 0 !important;
-  box-shadow: none;
-  -moz-box-shadown: none;
-  -webkit-box-shadow: none;
-  border-width: 0 0 5px !important;
-}
-
-.info-umss{
-  text-align: center;
-  font-size: 0.05rem;
-  margin-top: 1rem;
-  margin-bottom: 0;
-}
-
-.social-media{
-  margin-top: 0;
   text-align: center;
 }
+
+.card-login{
+  width: 400px;
+  margin: 2rem auto;
+  text-align: center;
+  height: 400px;
+}
+
+.full-width-input{
+  width: 100%;
+}
+
+.btn-form, .full-width-input{
+  font-size: 1rem;
+}
+
+.btn-form{
+  width: 80%;
+  background-color: #1C2331;
+  color: #ffffff;
+}
+
+@media(max-width:970px){
+  .img-login{
+    display: none;
+  }
+
+  .login-container{
+    justify-content:space-around ;
+    padding-top: 3%;
+  }
+
+  .card-login{
+    width: 350px;
+    margin: 0;
+    height: 400px;
+  }
+}
+
+

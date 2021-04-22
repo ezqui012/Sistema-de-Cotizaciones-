@@ -1,59 +1,43 @@
 <app-navbar-outside></app-navbar-outside>
 
 <div class="main-container">
-  <div class="body">
-    <section class="Form my-1 mx-1">
-      <div class="container">
-        <div class="row no-gutters">
-          <div class="col-lg-5">
-            <img src="../../assets/img-login/login-imageUmss.png" class="img-fluid" alt="logo umss login">
-          </div>
-          <div id="container-form" class="col-lg-7 px-5 pt-5">
-            <h1 id="title" class="font-weight-bold py-3">Inicio de sesión</h1>
-            <form>
-              <div class="form-row">
-                <div class="col-lg-7">
-                  <label for="username-field" class="form-label">Usuario</label>
-                  <input id="username-field" type="text" placeholder="Ingrese usuario"
-                    class="form-control my-3 mt-0 mb-4 p-3">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col-lg-7">
-                  <label for="password-field" class="form-label">Contraseña</label>
-                  <input id="password-field" type="password" placeholder="**********"
-                    class="form-control my-3 mt-0 mb-4 p-3">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col-lg-7">
-                  <button type="button" class="btn1 mt-3 mb-5">Iniciar sesión</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <div class="fooder">
-    <div class="info-umss">
-      <h6>Contacto: +591 4 4251515- informaciones@umss.edu.bo</h6>
-      <h6>Derechos Reservados © 2021 · Universidad Mayor de San Simón</h6>
+  <div class="login-container">
+    <div class="img-login">
+      <img src="../../assets/img-login/image-login.svg" alt="Work image" class="img-work">
     </div>
+    <div class="login-form">
+      <mat-card class="card-login">
+        <mat-card-content>
+
+          <h1>Iniciar Sesión</h1>
+          <form>
+            <mat-form-field class="full-width-input separator">
+              <mat-label>Correo</mat-label>
+              <input matInput placeholder="Ingrese su correo" type="email" required>
+            </mat-form-field>
+            <br>
+            <br>
+            <mat-form-field class="full-width-input separator">
+              <mat-label>Contraseña</mat-label>
+              <input matInput placeholder="Ingrese su contraseña" type="password" required>
+            </mat-form-field>
+            <br>
+            <br>
+            <button type="button" class="btn-form">Ingresar</button>
+          </form>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="footer-container">
     <div class="social-media">
-      <a class="navbar-brand" href="https://www.facebook.com/UmssBolOficial/">
-        <img src="../../assets/img-login/Logo-Face.png" width="25" height="25" alt="link-facebook">
-      </a>
-      <a class="navbar-brand" href="https://www.twitter.com/UmssBolOficial/">
-        <img src="../../assets/img-login/Logo-Twitter.png" width="25" height="25" alt="link-twitter">
-      </a>
-      <a class="navbar-brand" href="https://www.instagram.com/umssboloficial">
-        <img src="../../assets/img-login/Logo-Instagram.png" width="25" height="25" alt="link-instagram">
-      </a>
-      <a class="navbar-brand" href="https://www.youtube.com/universidadmayordesansimon">
-        <img src="../../assets/img-login/Logo-Youtube.png" width="25" height="25" alt="link-youtube">
-      </a>
+      <p>hola</p>
+    </div>
+    <div class="copyright">
+      <p>mundo</p>
     </div>
   </div>
+
 </div>

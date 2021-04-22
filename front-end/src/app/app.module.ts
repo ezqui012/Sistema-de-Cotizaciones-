@@ -27,6 +27,7 @@ import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { SchoolListComponent } from './school-list/school-list.component';
 import { SchoolCreateComponent } from './school-create/school-create.component';
 import { SchoolEditComponent } from './school-edit/school-edit.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { SchoolEditComponent } from './school-edit/school-edit.component';
     BrowserAnimationsModule,
     MatInputModule,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
