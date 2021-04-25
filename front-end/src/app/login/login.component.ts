@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { LoginResponse } from '../Model/login';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   private isValidEmail = /\S+@\S+\.\S+/;
-  //public isMenuCollapsed = true;
+  messageFail = true;
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
@@ -18,7 +20,8 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private service: LoginService
   ) {}
 
   ngOnInit(): void {
@@ -47,11 +50,11 @@ export class LoginComponent implements OnInit {
     return field === 'password' ? 'contraseña' : 'correo';
   }
 
-  onLogin(){
+  async onLogin(){
     if(this.loginForm.invalid){
       return;
     }
-    // login service
+    this.messageFail = await this.service.authentication(this.loginForm.value);
   }
 
 }

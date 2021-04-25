@@ -23,8 +23,10 @@ class UserController extends Controller
         }else{
             return response()->json([
                 'res' => false,
-                'message' => 'Username or password incorrect',
-            ], 401);
+                'token' => null,
+                'message' => 'email or password incorrect',
+                'role' => null
+            ], 200);
         }
     }
 

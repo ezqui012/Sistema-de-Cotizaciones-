@@ -10,11 +10,6 @@ export class LoginResponse{
   role: any;
 }
 
-export class LoginResponseFail{
-  res: any;
-  message: any;
-}
-
 export class LogoutResponse{
   res: any;
   message: any;
