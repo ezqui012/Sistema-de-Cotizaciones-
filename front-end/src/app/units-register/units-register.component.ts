@@ -14,6 +14,15 @@ export class UnitsRegisterComponent implements OnInit {
   faculties: Faculty[] | undefined;
   showAmount:boolean=false;
 
+  private patternNumber = /^[0-9]+(\.?[0-9]+)?$/;
+
+  registerForm = this.fb.group({
+    id_faculty: ['', [Validators.required]],
+    name_unit: ['', [Validators.required], Validators.maxLength(100)],
+    type: ['Administrativa', [Validators.required]],
+    amount: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(this.patternNumber)]]
+  });
+
   constructor(
     private service: FacultyService,
     private fb: FormBuilder

@@ -2,7 +2,7 @@ body{
   background-color: #F0F0F8;
 }
 
-h1{
+.title-page{
   font-size: 4em !important;
   color: #1C2331 !important;
 }
@@ -109,9 +109,16 @@ h1{
   border: 1px solid #ffffff;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+input[type=number] { -moz-appearance:textfield; }
+
 
 @media(max-width:970px){
-  h1{
+  .title-page{
     font-size: 3em !important;
   }
 

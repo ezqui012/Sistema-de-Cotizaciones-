@@ -5,7 +5,7 @@
 
 <div class="containerBody">
   <div class="containertop">
-    <h1><b>Registrar Unidad</b></h1>
+    <h1 class="title-page"><b>Registrar Unidad</b></h1>
     <div class="btnCreate">
       <button type="button" id="btn-List" class="btn btn-one">Ver Lista</button>
     </div>
@@ -15,16 +15,16 @@
   <br>
 
   <div class="container-form">
-    <form class="form-newRol">
+    <form class="form-newRol" [formGroup]="registerForm">
       <div class="inputs-f1">
         <mat-form-field class="nameUnit-full-width">
           <mat-label>Nombre de unidad</mat-label>
-          <input matInput placeholder="Ingrese el nombre de la unidad">
+          <input matInput placeholder="Ingrese el nombre de la unidad" formControlName="name_unit">
         </mat-form-field>
 
         <mat-form-field class="selectFaculty-full-width" id="select-faculty">
           <mat-label>Seleccione facultad</mat-label>
-          <mat-select>
+          <mat-select formControlName="id_faculty">
             <mat-option *ngFor="let faculty of faculties" [value]="faculty.id_faculty">
               {{faculty.name_faculty}}
             </mat-option>
@@ -34,7 +34,7 @@
       <br>
       <br>
 
-      <mat-radio-group aria-label="Tipo de unidad" class="imput-check">
+      <mat-radio-group aria-label="Tipo de unidad" class="imput-check" formControlName="type">
         <mat-label class="label-select"><b>Tipo de unidad</b></mat-label>
         <mat-radio-button value="Administrativa" (click)="showInputAmout(false)" checked>Unidad Administrativa
         </mat-radio-button>
@@ -45,7 +45,7 @@
 
       <mat-form-field class="mount-full-width" *ngIf="showAmount">
         <mat-label>Monto</mat-label>
-        <input matInput placeholder="Ingrese monto">
+        <input matInput placeholder="Ingrese monto" type="number" formControlName="amount">
       </mat-form-field>
 
       <br>
@@ -53,7 +53,7 @@
       <div class="containerBtn">
         <div>
           <button class="btn btn-cancel">Cancelar</button>
-          <button class="btn btn-register">Registrar</button>
+          <button class="btn btn-register" >Registrar</button>
         </div>
       </div>
     </form>
