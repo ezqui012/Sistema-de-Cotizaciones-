@@ -18,14 +18,15 @@ class UserController extends Controller
                 'res' => true,
                 'token' => $token,
                 'message' => 'Welcome to system',
+                'name' => $user->name,
                 'role' => $user->id_role
             ], 200);
         }else{
             return response()->json([
                 'res' => false,
-                'token' => null,
+                //'token' => null,
                 'message' => 'email or password incorrect',
-                'role' => null
+                //'role' => null
             ], 401);
         }
     }

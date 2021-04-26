@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginResponse } from '../Model/login';
 import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: LoginService
+    private service: LoginService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -73,7 +75,8 @@ export class LoginComponent implements OnInit {
       (data) => {
         res = data;
         localStorage.setItem('quot-umss-tk', res.token);
-        console.log(`Token ${res.token}`);
+        localStorage.setItem('quot-user', res.name);
+        this.router.navigate(['']);
 
       }, (error: any) => {
         console.log(error.message);
