@@ -7,38 +7,39 @@
   <div class="containertop">
     <h1><b>Registrar Unidad</b></h1>
     <div class="btnCreate">
-      <button type="button" class="btn btn-one">Ver Lista</button>
+      <button type="button" id="btn-List" class="btn btn-one">Ver Lista</button>
     </div>
   </div>
 
   <br>
   <br>
 
-  <div>
+  <div class="container-form">
     <form class="form-newRol">
-      <mat-form-field class="nameUnit-full-width">
-        <mat-label>Nombre de unidad</mat-label>
-        <input matInput placeholder="Ingrese el nombre de la unidad">
-      </mat-form-field>
+      <div class="inputs-f1">
+        <mat-form-field class="nameUnit-full-width">
+          <mat-label>Nombre de unidad</mat-label>
+          <input matInput placeholder="Ingrese el nombre de la unidad">
+        </mat-form-field>
 
-      <mat-form-field class="selectFaculty-full-width" id="select-faculty">
-        <mat-label>Seleccione facultad</mat-label>
-        <mat-select>
-          <mat-option value="option">Economia</mat-option>
-          <mat-option value="option">Medicina</mat-option>
-        </mat-select>
-      </mat-form-field>
-
+        <mat-form-field class="selectFaculty-full-width" id="select-faculty">
+          <mat-label>Seleccione facultad</mat-label>
+          <mat-select>
+            <mat-option value="option">Economia</mat-option>
+            <mat-option value="option">Medicina</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
       <br>
       <br>
 
-      <mat-radio-group aria-label="Select an option">
+      <mat-radio-group aria-label="Tipo de unidad" class="imput-check">
         <mat-label class="label-select"><b>Tipo de unidad</b></mat-label>
-        <mat-radio-button value="Administrativa" (click)="showInputAmout(false)" checked>Unidad Administrativa</mat-radio-button>
+        <mat-radio-button value="Administrativa" (click)="showInputAmout(false)" checked>Unidad Administrativa
+        </mat-radio-button>
         <mat-radio-button value="Gasto" (click)="showInputAmout(true)">Unidad de Gasto</mat-radio-button>
       </mat-radio-group>
 
-      <br>
       <br>
 
       <mat-form-field class="mount-full-width" *ngIf="showAmount">
@@ -46,8 +47,6 @@
         <input matInput placeholder="Ingrese monto">
       </mat-form-field>
 
-      <br>
-      <br>
       <br>
       <br>
       <div class="containerBtn">
