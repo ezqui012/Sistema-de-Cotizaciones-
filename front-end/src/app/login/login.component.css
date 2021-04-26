@@ -84,6 +84,14 @@ body{
   height: 20px;
 }
 
+.failed-login{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: small;
+  text-align: center;
+  color: red;
+}
+
 .copyright{
   margin-top: 10px;
   text-align: center;

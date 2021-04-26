@@ -13,10 +13,11 @@ export class LoginComponent implements OnInit {
 
   private isValidEmail = /\S+@\S+\.\S+/;
   messageFail = false;
+  messageLoginFailed = '';
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
-    password: ['', [Validators.required, Validators.minLength(8)]]
+    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]]
   });
 
   constructor(
@@ -34,9 +35,11 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.get(field)?.errors?.required){
       message = `El campo ${fieldSpanish} es obligatorio`;
     }else if(this.loginForm.get(field)?.hasError('pattern')){
-      message = "Fomrato de correo no es valido";
+      message = "El formato de correo no es valido";
     } else if(this.loginForm.get(field)?.hasError('minlength')){
       message = "Ingrese minimo 8 caracteres";
+    } else if(this.loginForm.get(field)?.hasError('maxlength')){
+      message = "Ingrese maximo 15 caracteres";
     }
 
     return message;
@@ -50,8 +53,18 @@ export class LoginComponent implements OnInit {
     return field === 'password' ? 'contraseña' : 'correo';
   }
 
+  onKeyPress(){
+    if(this.messageFail && !this.loginForm.invalid && this.messageLoginFailed == 'Existen campos incorrectos'){
+      this.messageFail = false;
+    }else if(this.messageFail){
+      this.messageFail = false;
+    }
+  }
+
   async onLogin(){
     if(this.loginForm.invalid){
+      this.messageFail = true;
+      this.messageLoginFailed = 'Existen campos incorrectos';
       return;
     }
 
@@ -61,11 +74,11 @@ export class LoginComponent implements OnInit {
         res = data;
         localStorage.setItem('quot-umss-tk', res.token);
         console.log(`Token ${res.token}`);
-        console.log(this.messageFail);
+
       }, (error: any) => {
-        console.log(`nel pastel ${error.message}`);
+        console.log(error.message);
         this.messageFail = true;
-        console.log(this.messageFail);
+        this.messageLoginFailed = 'El correo electrónico que has introducido no está conectado a una cuenta';
       }
     )
   }

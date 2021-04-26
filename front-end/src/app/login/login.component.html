@@ -14,7 +14,7 @@
           <form class="form-container" [formGroup]="loginForm">
             <mat-form-field class="full-width-input separator">
               <mat-label>Correo</mat-label>
-              <input matInput placeholder="Ingrese su correo" type="email" formControlName="email" required>
+              <input matInput placeholder="Ingrese su correo" type="email" formControlName="email" (keypress)="onKeyPress()" required>
               <mat-error *ngIf="isValid('email')">
                 {{ getErrorMessage('email') }}
               </mat-error>
@@ -23,7 +23,7 @@
             <br>
             <mat-form-field class="full-width-input separator">
               <mat-label>Contraseña</mat-label>
-              <input matInput placeholder="Ingrese su contraseña" type="password" formControlName="password" required>
+              <input matInput placeholder="Ingrese su contraseña" type="password" formControlName="password" (keypress)="onKeyPress()" required>
               <mat-error *ngIf="isValid('password')">
                 {{ getErrorMessage('password') }}
               </mat-error>
@@ -32,7 +32,10 @@
             <br>
             <button (click)="onLogin()" type="button" class="btn-form">Ingresar</button>
           </form>
-
+          <br>
+          <p *ngIf="messageFail" class="failed-login">
+            {{ this.messageLoginFailed }}
+          </p>
         </mat-card-content>
       </mat-card>
     </div>
