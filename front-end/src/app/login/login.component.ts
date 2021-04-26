@@ -12,7 +12,7 @@ import { LoginService } from '../services/login.service';
 export class LoginComponent implements OnInit {
 
   private isValidEmail = /\S+@\S+\.\S+/;
-  messageFail = true;
+  messageFail = false;
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
@@ -54,7 +54,20 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.invalid){
       return;
     }
-    this.messageFail = await this.service.authentication(this.loginForm.value);
+
+    let res: LoginResponse;
+    this.service.loginServe(this.loginForm.value).subscribe(
+      (data) => {
+        res = data;
+        localStorage.setItem('quot-umss-tk', res.token);
+        console.log(`Token ${res.token}`);
+        console.log(this.messageFail);
+      }, (error: any) => {
+        console.log(`nel pastel ${error.message}`);
+        this.messageFail = true;
+        console.log(this.messageFail);
+      }
+    )
   }
 
 }

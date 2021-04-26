@@ -26,7 +26,7 @@ class UserController extends Controller
                 'token' => null,
                 'message' => 'email or password incorrect',
                 'role' => null
-            ], 200);
+            ], 401);
         }
     }
 

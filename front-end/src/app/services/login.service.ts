@@ -12,7 +12,7 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private async loginServe(credentials: Login): Promise<Observable<LoginResponse>>{
+  loginServe(credentials: Login): Observable<LoginResponse>{
     return this.httpClient.post<LoginResponse>(`${environment.URI_API}login`, credentials);
   }
 
@@ -24,28 +24,4 @@ export class LoginService {
 
   //   }
   // }
-
-  async authentication(credentials: Login): Promise<boolean>{
-    let res:LoginResponse;
-    let logged = false;
-    (await this.loginServe(credentials)).subscribe(
-      (data) => {
-        res = data;
-        if (res.res == true) {
-          this.saveToken(res.token);
-          console.log(`token ${res.token}`);
-          logged = true;
-        }else if(res.res == false){
-          logged = false;
-          console.log('nelpastel')
-        }
-      }
-    );
-    return logged;
-  }
-
-  private async saveToken(token: string): Promise<void>{
-   localStorage.setItem('quot-umss-tk', token);
-  }
-
 }
