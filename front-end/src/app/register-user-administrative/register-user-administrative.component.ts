@@ -2,6 +2,7 @@ import { Registeruser } from './../Model/registeruser';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisteruserService } from 'src/app/services/registeruser.service';
+
 @Component({
   selector: 'app-register-user-administrative',
   templateUrl: './register-user-administrative.component.html',
@@ -9,7 +10,11 @@ import { RegisteruserService } from 'src/app/services/registeruser.service';
 })
 export class RegisterUserAdministrativeComponent implements OnInit {
   registerForm: FormGroup;
-  user:any;
+  unities = [];
+  user: any;
+
+
+
   RegisterUser =  new Registeruser();
   private isValidEmail = /\S+@\S+\.\S+/;
   submitted = false;
@@ -27,6 +32,7 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line: typedef
   insertData(){
     console.log(this.RegisterUser);
     this.RegisteruserService.insertData(this.RegisterUser).subscribe(res => {
@@ -34,6 +40,11 @@ export class RegisterUserAdministrativeComponent implements OnInit {
       this.OnResetForm();
     });
   }
+ /* getUnities(){
+    this.RegisteruserService.getUnity().subscribe((unity) => {
+      return this.unities = unity;
+    });
+  }*/
 
   get f() {
     return this.registerForm.controls;
@@ -69,7 +80,7 @@ export class RegisterUserAdministrativeComponent implements OnInit {
 
 
   }
-  //Validar campos solo numeros
+  // Validar campos solo numeros
   onKeyPress(event: any) {
     const regexpNumber = /[0-9\+\-\ ]/;
     let inputCharacter = String.fromCharCode(event.charCode);

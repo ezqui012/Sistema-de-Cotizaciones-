@@ -9,8 +9,6 @@ import { RegisterUserAdministrativeComponent } from './register-user-administrat
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
-
-
 import { LoginComponent } from './login/login.component';
 import { RolesListComponent } from './roles-list/roles-list.component';
 import { CreateRolComponent } from './create-rol/create-rol.component';
@@ -18,6 +16,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { EditRolComponent } from './edit-rol/edit-rol.component';
+import {MatSelectModule} from '@angular/material/select';
+import { UnitComponent } from './unit/unit.component';
+import { RolDropdownComponent } from './rol-dropdown/rol-dropdown.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,9 @@ import { EditRolComponent } from './edit-rol/edit-rol.component';
     RolesListComponent,
     CreateRolComponent,
     NavbarComponent,
-    EditRolComponent
+    EditRolComponent,
+    UnitComponent,
+    RolDropdownComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { EditRolComponent } from './edit-rol/edit-rol.component';
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

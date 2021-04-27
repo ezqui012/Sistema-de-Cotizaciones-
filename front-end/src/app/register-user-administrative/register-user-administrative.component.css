@@ -20,13 +20,14 @@
 
 }
 .fieldRegister{
-  margin-top: 1%;
+
   margin-bottom: 1%;
-  width: 60%;
+  width: 100%;
   border-radius: 5px ;
 
 }
 .registerContainer{
+  text-align: center;
   margin-top: 3%;
   margin-bottom: 2%;
 }
@@ -35,20 +36,107 @@
   margin-bottom: 2%;
 }
 .containerButton{
-
   margin-left: 30%;
   margin-right: 30%;
   height: 200px;
   text-align: center;
-  background-color: #003b72;
+
 }
+
 .alert-danger{
-  margin-left: 20%;
-  margin-right: 20%;
+
   font-size: small;
   color: #721c24;
   border-radius: 3px;
   background-color: #f5c6cb ;
+  width: 100%;
 }
+.containerTop{
+  margin-left: 15%;
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  color: #003b72;
+  font-weight: bolder;
+
+}
+.form-group{
+  margin-right: 10%;
+  width: 100%;
+}
+.mat-form-field{
+  width: 90%;
+  border-bottom: #003b72;
+}
+.leftCol{
+  width: 90%;
+}
+.row{
+  margin-top: 5%;
+  width: 100%
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #1C2331 !important;
+ }
+
+ ::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  border-bottom: double;
+  background-color: #1C2331 !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: #1C2331 !important;;
+}
+#rowleft{
+  width: 150%;
+
+}
+#rowright{
+  margin-left: 50%;
+  width: 100%;
+}
+#formGroupLeft{
+  margin-left: 10%;
+  width: 100%;
+}
+.matformLeft{
+  width: 100%;
+}
+.formGroupLeft{
+  margin-top: 1%;
+}
+.matformright{
+  width: 100%;
+}
+.formGroupRight{
+  margin-top: 1%;
+  width: 100%;
+}
+.btn-primary{
+  background-color: #1C2331;
+}
+.btn-danger{
+  background-color: #003b72;
+}
+
+.btn:hover{
+  background-color:#2f82ff !important;
+  }
+  .btn-one,
+  .btn-one:hover,
+  .btn-one:active {
+    color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+    background-color:#003b72;
+    width: 200px;
+    margin-left: 10px;
+  }
+
+
+
+
 
 

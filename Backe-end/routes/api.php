@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RolController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,5 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::ApiResource('unit', 'UnitController');
 });
 Route::post('registerUser', 'UserController@addData');
+Route::get('unit', 'UnitController@getUnit');
+Route::get('rol','RolController@getRol');
