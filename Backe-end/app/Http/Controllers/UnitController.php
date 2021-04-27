@@ -52,7 +52,15 @@ class UnitController extends Controller
 
     public function show($id)
     {
-        //
+        try{
+            $unit = Unit::where('id_unit', '=', $id)->first();
+            return $unit;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
 
