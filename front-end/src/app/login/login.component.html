@@ -1,61 +1,61 @@
+<app-navbar-outside></app-navbar-outside>
+
 <div class="main-container">
-  <div class="navbar navbar-light bg-light">
-    <img src="../../assets/img-login/logo-nav.png" width="130" height="60" class="d-inline-block align-top"
-      alt="logo umss">
-  </div>
-  <div class="body">
-    <section class="Form my-1 mx-1">
-      <div class="container">
-        <div class="row no-gutters">
-          <div class="col-lg-5">
-            <img src="../../assets/img-login/login-imageUmss.png" class="img-fluid" alt="logo umss login">
-          </div>
-          <div id="container-form" class="col-lg-7 px-5 pt-5">
-            <h1 id="title" class="font-weight-bold py-3">Inicio de sesión</h1>
-            <form>
-              <div class="form-row">
-                <div class="col-lg-7">
-                  <label for="username-field" class="form-label">Usuario</label>
-                  <input id="username-field" type="text" placeholder="Ingrese usuario"
-                    class="form-control my-3 mt-0 mb-4 p-3">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col-lg-7">
-                  <label for="password-field" class="form-label">Contraseña</label>
-                  <input id="password-field" type="password" placeholder="**********"
-                    class="form-control my-3 mt-0 mb-4 p-3">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col-lg-7">
-                  <button type="button" class="btn1 mt-3 mb-5">Iniciar sesión</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <div class="fooder">
-    <div class="info-umss">
-      <h6>Contacto: +591 4 4251515- informaciones@umss.edu.bo</h6>
-      <h6>Derechos Reservados © 2021 · Universidad Mayor de San Simón</h6>
+  <div class="login-container">
+    <div class="img-login">
+      <img src="../../assets/img-login/image-login.svg" alt="Work image" class="img-work">
     </div>
+    <div class="login-form">
+      <mat-card class="card-login">
+        <mat-card-content>
+
+          <h1 class="title-login"><b>Iniciar Sesión</b></h1>
+          <br>
+          <form class="form-container" [formGroup]="loginForm">
+            <mat-form-field class="full-width-input separator">
+              <mat-label>Correo</mat-label>
+              <input matInput placeholder="Ingrese su correo" type="email" formControlName="email" (keypress)="onKeyPress()" required>
+              <mat-error *ngIf="isValid('email')">
+                {{ getErrorMessage('email') }}
+              </mat-error>
+            </mat-form-field>
+            <br>
+            <br>
+            <mat-form-field class="full-width-input separator">
+              <mat-label>Contraseña</mat-label>
+              <input matInput placeholder="Ingrese su contraseña" type="password" formControlName="password" (keypress)="onKeyPress()" required>
+              <mat-error *ngIf="isValid('password')">
+                {{ getErrorMessage('password') }}
+              </mat-error>
+            </mat-form-field>
+            <br>
+            <br>
+            <button (click)="onLogin()" type="button" class="btn-form">Ingresar</button>
+          </form>
+          <br>
+          <p *ngIf="messageFail" class="failed-login">
+            {{ this.messageLoginFailed }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="footer-container">
     <div class="social-media">
       <a class="navbar-brand" href="https://www.facebook.com/UmssBolOficial/">
-        <img src="../../assets/img-login/Logo-Face.png" width="25" height="25" alt="link-facebook">
+        <img src="../../assets/img-social-media/facebook-icon-white.svg" alt="facebook icon" class="img-social-media">
       </a>
       <a class="navbar-brand" href="https://www.twitter.com/UmssBolOficial/">
-        <img src="../../assets/img-login/Logo-Twitter.png" width="25" height="25" alt="link-twitter">
+        <img src="../../assets/img-social-media/twitter-icon-white.svg" alt="twitter icon" class="img-social-media">
       </a>
       <a class="navbar-brand" href="https://www.instagram.com/umssboloficial">
-        <img src="../../assets/img-login/Logo-Instagram.png" width="25" height="25" alt="link-instagram">
-      </a>
-      <a class="navbar-brand" href="https://www.youtube.com/universidadmayordesansimon">
-        <img src="../../assets/img-login/Logo-Youtube.png" width="25" height="25" alt="link-youtube">
+        <img src="../../assets/img-social-media/instagram-icon-white.svg" alt="instagram icon" class="img-social-media">
       </a>
     </div>
+    <div class="copyright">
+      <p>Derechos Reservados ©・Universidad Mayor de San Simón・THNS</p>
+    </div>
   </div>
+
 </div>

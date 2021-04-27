@@ -9,6 +9,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class HomeAdminComponent implements OnInit {
 
+  nameUser = localStorage.getItem('quot-user') ? localStorage.getItem('quot-user') : '';
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { LogoutResponse } from '../Model/login';
+import { LoginService } from '../services/login.service';
 
 
 @Component({
@@ -10,7 +12,11 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(
+    private router:Router,
+    private service: LoginService,
+  ) { }
+
   navigateTo(path: String){
     this.router.navigate([path]);
   }
@@ -18,6 +24,19 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  logout(){
+    let res: LogoutResponse;
+    this.service.logout().subscribe(
+      (data) => {
+        res = data;
+        localStorage.removeItem('quot-umss-tk');
+        localStorage.removeItem('quot-user');
+        this.router.navigate(['/login']);
+      },
+      (error: any) => {
+        console.log(`Error: ${error.message}`);
+      }
+    );
+  }
 
 }
