@@ -10,9 +10,24 @@ use Exception;
 class UnitController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        //
+        try{
+            if($request->has('type')){
+                $unit = Unit::where('type', '=', $request->type)->get();
+                return $unit;
+            }else{
+                return response()->json([
+                    'res' => false,
+                    'message' => 'There is been a problem, inser type to search'
+                ], 404);
+            }
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
 
