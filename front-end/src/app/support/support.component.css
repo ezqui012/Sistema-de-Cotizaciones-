@@ -1,0 +1,73 @@
+body{
+  margin: 0;
+  background-color: #f0f0f8;
+}
+
+.contentBody{
+  padding-top: 50px;
+  display: flex;
+}
+.contentImg{
+  width: 50%;
+  text-align: center;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+.imgContact{
+  width: 100%;
+}
+.contentInfo{
+width: 50%;
+padding-left: 5%;
+}
+.titleInfo{
+  color: #003b72;
+  font-size: 1.5rem;
+  padding-bottom:50Px;
+}
+h2{
+  color: #003b72;
+  font-size: 1.2rem;
+}
+h1{
+  color: rgb(206, 33, 3);
+
+}
+p{
+  font-size: 1.2rem;
+}
+.imgIcon{
+padding-right: 20px;
+}
+.contactBooton{
+  display: block;
+}
+.contact{
+display: flex;
+padding-left: 5%;
+padding-right: 5%;
+}
+.logo{
+  width: 25%;
+  padding-bottom: 1%;
+}
+.imglogo{
+  width: 100%;
+}
+.contactInfo{
+  padding-left: 2%;
+  width: 80%;
+}
+@media(max-width:500px){
+.contentBody{
+  width: 100%;
+  display: block;
+  padding-left: 5%;
+  padding-right: 5%;
+
+}
+.contentImg,.contentInfo{
+  width: 100%;
+}
+
+}

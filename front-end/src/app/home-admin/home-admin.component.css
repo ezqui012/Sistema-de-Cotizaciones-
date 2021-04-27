@@ -1,0 +1,26 @@
+body{
+  margin: 0;
+  background-color: #f0f0f8;
+}
+
+.contentOption{
+
+  padding-top: 50px;
+  display: flex;
+}
+
+.username{
+  padding-top: 20px;
+  padding-left: 30px;
+  font-size: 1.5rem;
+  color: #1C2331;
+
+}
+.option{
+  margin: 2%;
+
+}
+.optBtn{
+  width: 100%;
+  transition: all 0.9s;
+}

@@ -21,12 +21,11 @@ class CreateUsersTable extends Migration
             $table->bigInteger('id_unit')->unsigned();
             $table->foreign('id_unit')->references('id_unit')->on('units');
             $table->string('name', 100);
-            $table->string('username', 50)->unique();
+            $table->string('email', 100)->unique();
             $table->string('phone', 8);
             $table->string('ci', 9)->unique();
             $table->string('address', 100);
             $table->string('password', 70);
-            $table->string('email', 100)->unique();
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
