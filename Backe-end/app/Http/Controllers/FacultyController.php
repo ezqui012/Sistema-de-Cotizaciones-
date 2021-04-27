@@ -44,7 +44,15 @@ class FacultyController extends Controller
 
     public function show($id)
     {
-        //
+        try{
+            $faculty = Faculty::where('id_faculty', '=', $id)->first();
+            return $faculty;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
 
