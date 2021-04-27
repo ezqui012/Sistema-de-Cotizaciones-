@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
       }, (error: any) => {
         console.log(error.message);
         this.messageFail = true;
-        this.messageLoginFailed = 'El correo electrónico que has introducido no está conectado a una cuenta';
+        this.messageLoginFailed = 'El correo o la contraseña son incorrectos';
       }
     )
   }
