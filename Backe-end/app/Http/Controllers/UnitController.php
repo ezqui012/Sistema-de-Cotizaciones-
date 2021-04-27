@@ -6,24 +6,48 @@ use App\Unit;
 use App\Http\Requests\CreateUnitRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Exception;
+
 class UnitController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        //
+        try{
+            if($request->has('type')){
+                $unit = Unit::where('type', '=', $request->type)->get();
+                return $unit;
+            }else{
+                return response()->json([
+                    'res' => false,
+                    'message' => 'There is been a problem, inser type to search'
+                ], 404);
+            }
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
 
     public function store(CreateUnitRequest $request)
     {
-        $input = $request->all();
-        Unit::create($input);
-        return response()->json([
-            'res' => true,
-            'message' => 'Registered unit'
-        ], 200);
-
+        try{
+            $input = $request->all();
+            Unit::create($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'Registered unit'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'error' => $ex,
+                'message' => 'There is been a problem'
+            ], 404);
+        }
     }
     public function getUnit(){
         $unities = DB::table('units')->select('id_unit','name_unit')->get();
@@ -32,7 +56,15 @@ class UnitController extends Controller
 
     public function show($id)
     {
-        //
+        try{
+            $unit = Unit::where('id_unit', '=', $id)->first();
+            return $unit;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
 

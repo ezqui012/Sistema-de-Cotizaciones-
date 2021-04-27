@@ -1,4 +1,3 @@
-import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
@@ -19,6 +18,18 @@ import { EditRolComponent } from './edit-rol/edit-rol.component';
 import {MatSelectModule} from '@angular/material/select';
 import { UnitComponent } from './unit/unit.component';
 import { RolDropdownComponent } from './rol-dropdown/rol-dropdown.component';
+import { UnitsRegisterComponent } from './units-register/units-register.component';
+import {MatRadioModule} from '@angular/material/radio';
+import { NavbarOutsideComponent } from './navbar-outside/navbar-outside.component';
+import { InfoSiteComponent } from './info-site/info-site.component';
+import { ContactComponent } from './contact/contact.component';
+import { SupportComponent } from './support/support.component';
+import { HomeAdminComponent } from './home-admin/home-admin.component';
+import { SchoolListComponent } from './school-list/school-list.component';
+import { SchoolCreateComponent } from './school-create/school-create.component';
+import { SchoolEditComponent } from './school-edit/school-edit.component';
+import { MatCardModule } from '@angular/material/card';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +40,16 @@ import { RolDropdownComponent } from './rol-dropdown/rol-dropdown.component';
     NavbarComponent,
     EditRolComponent,
     UnitComponent,
-    RolDropdownComponent
+    RolDropdownComponent,
+    UnitsRegisterComponent,
+    NavbarOutsideComponent,
+    InfoSiteComponent,
+    ContactComponent,
+    SupportComponent,
+    HomeAdminComponent,
+    SchoolListComponent,
+    SchoolCreateComponent,
+    SchoolEditComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +61,8 @@ import { RolDropdownComponent } from './rol-dropdown/rol-dropdown.component';
     BrowserAnimationsModule,
     MatInputModule,
     MatSelectModule,
+    MatRadioModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

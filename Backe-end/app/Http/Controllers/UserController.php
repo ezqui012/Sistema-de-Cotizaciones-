@@ -18,12 +18,16 @@ class UserController extends Controller
                 'res' => true,
                 'token' => $token,
                 'message' => 'Welcome to system',
+                'name' => $user->name,
+                'role' => $user->id_role
             ], 200);
         }else{
             return response()->json([
                 'res' => false,
-                'message' => 'Username or password incorrect',
-            ], 204);
+                //'token' => null,
+                'message' => 'email or password incorrect',
+                //'role' => null
+            ], 401);
         }
     }
 
@@ -38,7 +42,7 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function addData(CreateUserRequest $request){
+    public function addData(Request $request){
 
         DB::table('users')->insert([
             [

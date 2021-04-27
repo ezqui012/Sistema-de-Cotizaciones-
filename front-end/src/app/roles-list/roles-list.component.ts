@@ -21,7 +21,7 @@ export class RolesListComponent implements OnInit {
     this.router.navigate([path]);
   }
   openModal(content: any){
-    this.modal.open(content,{ windowClass:"oscuro"});
+    this.modal.open(content,{ windowClass:"colorModal"});
   }
   confir(){
     alert("Seguro que quiere crear el Rol?");
