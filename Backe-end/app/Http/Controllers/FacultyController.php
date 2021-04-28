@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Faculty;
+use App\Http\Requests\CreateFacultyRequest;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -24,7 +25,7 @@ class FacultyController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(CreateFacultyRequest $request)
     {
         try{
             $input = $request->all();
