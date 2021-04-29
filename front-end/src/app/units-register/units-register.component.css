@@ -116,6 +116,13 @@ input[type=number]::-webkit-outer-spin-button {
     }
 input[type=number] { -moz-appearance:textfield; }
 
+.failed-register{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: small;
+  text-align: center;
+  color: red;
+}
 
 @media(max-width:970px){
   .title-page{

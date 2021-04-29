@@ -13,6 +13,8 @@ export class UnitsRegisterComponent implements OnInit {
 
   faculties: Faculty[] | undefined;
   showAmount:boolean=false;
+  messageFail = false;
+  messageRegisterFailed = '';
 
   private patternNumber = /^[0-9]+(\.?[0-9]+)?$/;
   private patternName = /^[a-zA-Z-z0-9-zñÑ\u00E0-\u00FC ]*$/
@@ -89,12 +91,22 @@ export class UnitsRegisterComponent implements OnInit {
     }
   }
 
-  mostrar(){
+  registerUnit(){
     if(this.registerForm.invalid){
       console.log("campos invalidos");
+      this.messageFail = true;
+      this.messageRegisterFailed = 'Existen campos incorrectos';
       return;
     }
     console.log(this.registerForm.value);
+  }
+
+  onKeyPress(){
+    if(this.messageFail && !this.registerForm.invalid && this.messageRegisterFailed == 'Existen campos incorrectos'){
+      this.messageFail = false;
+    }else if(this.messageFail){
+      this.messageFail = false;
+    }
   }
 
   translate(field: string):string|void{
