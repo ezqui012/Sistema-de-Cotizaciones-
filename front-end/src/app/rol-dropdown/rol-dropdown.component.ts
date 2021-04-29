@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RolDropdownService } from '../services/rol-dropdown.service';
 
 @Component({
   selector: 'app-rol-dropdown',
@@ -6,16 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rol-dropdown.component.css']
 })
 export class RolDropdownComponent implements OnInit {
+
   roles: any = [];
-  constructor() { }
+  constructor(public rolService: RolDropdownService) { }
 
   ngOnInit(): void {
+    this.getRoles();
   }
- /* getRoles(){
-    this.rolService.getRoles().subscribe((Rol) => {
-      console.log(Rol);
-      return this.roles = Rol;
+  getRoles(){
+    this.rolService.getRoles().subscribe((rol) => {
+      console.log(rol);
+      return this.roles = rol;
     });
-  }*/
+
+  }
 
 }

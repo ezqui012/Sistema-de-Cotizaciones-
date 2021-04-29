@@ -8,7 +8,7 @@ class RolController extends Controller
 {
     //
     public function getRol(){
-        $unities = DB::table('roles')->select('id_role','name_role')->get();
-        return $unities;
+        $roles = DB::table('roles')->select('id_role','name_role')->get();
+        return $roles;
     }
 }

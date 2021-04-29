@@ -17,7 +17,6 @@ import { MatInputModule } from '@angular/material/input';
 import { EditRolComponent } from './edit-rol/edit-rol.component';
 import {MatSelectModule} from '@angular/material/select';
 import { UnitComponent } from './unit/unit.component';
-import { RolDropdownComponent } from './rol-dropdown/rol-dropdown.component';
 import { UnitsRegisterComponent } from './units-register/units-register.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { NavbarOutsideComponent } from './navbar-outside/navbar-outside.component';
@@ -29,6 +28,7 @@ import { SchoolListComponent } from './school-list/school-list.component';
 import { SchoolCreateComponent } from './school-create/school-create.component';
 import { SchoolEditComponent } from './school-edit/school-edit.component';
 import { MatCardModule } from '@angular/material/card';
+import { RolDropdownComponent } from './rol-dropdown/rol-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,6 @@ import { MatCardModule } from '@angular/material/card';
     NavbarComponent,
     EditRolComponent,
     UnitComponent,
-    RolDropdownComponent,
     UnitsRegisterComponent,
     NavbarOutsideComponent,
     InfoSiteComponent,
@@ -49,7 +48,8 @@ import { MatCardModule } from '@angular/material/card';
     HomeAdminComponent,
     SchoolListComponent,
     SchoolCreateComponent,
-    SchoolEditComponent
+    SchoolEditComponent,
+    RolDropdownComponent
   ],
   imports: [
     BrowserModule,
