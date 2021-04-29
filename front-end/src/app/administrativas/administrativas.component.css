@@ -1,0 +1,84 @@
+
+body{
+    background-color:#F6F3F5 ;
+    font-family: Arial, serif;
+    align-items: center;
+}
+.content{
+    background-color: #F6F3F5;
+}
+
+.main-container{
+    margin: 150px auto;
+    width: 800px;
+}
+
+.table{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+
+th, td{
+    padding: 20%;
+    
+}
+
+
+thead{
+    background-color:#003b72;
+    border-bottom: solid 5px;
+    color: white;
+    align-items: center;
+}
+
+.btn{
+    background-color: #1C2331;
+    color: white;
+
+}
+
+.btn:hover{
+    background-color: #F6F3F5;
+    color: #1C2331;
+ 
+}
+
+.btn_1{
+ color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color: #003b72;
+  margin-left: 10px;
+  width: 80px;  
+}
+
+.btn_1:hover{
+    background-color: #F6F3F5;
+    color: #1C2331;
+}
+
+.btn_2{
+    
+    color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+    background-color: #1C2331;
+    margin-left: 10px;
+    width: 80px; 
+ 
+}
+
+.btn_2:hover{
+    background-color: #F6F3F5;
+    color: #1C2331;
+}
+
+.modal-header{
+    background-color: #F6F3F5;
+    color: #1C2331;
+}
+
+.modal-body{
+    background-color: #F6F3F5;
+    color: #003b72;
+}

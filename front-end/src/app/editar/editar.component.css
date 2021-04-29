@@ -1,0 +1,71 @@
+body{
+    background-color:#F6F3F5 ;
+    font-family: Arial, serif;
+    align-items: center;
+    justify-content: center;
+}
+
+.content{
+    background-color: #F6F3F5;
+}
+
+.main-container{
+    margin: 150px auto;
+    width: 800px;
+}
+
+.btn_1{
+    color: white;
+     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+     background-color: #003b72;
+     margin-left: 10px;
+     width: 150px;  
+   }
+   
+   .btn_1:hover{
+       background-color: #F6F3F5;
+       color: #1C2331;
+   }
+   
+   .btn_2{
+       
+       color: white;
+       text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+       background-color: #1C2331;
+       margin-left: 10px;
+       width: 150px; 
+    
+   }
+   
+   .btn_2:hover{
+       background-color: #F6F3F5;
+       color: #1C2331;
+   }
+
+   .btn_3{
+    color: white;
+     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+     background-color: #1C2331;
+     margin-left: 10px;
+     width: 150px;  
+   }
+   
+   .btn_3:hover{
+       background-color: #F6F3F5;
+       color: #1C2331;
+   }
+   
+   .btn_4{
+       
+       color: white;
+       text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+       background-color: #003b72;
+       margin-left: 10px;
+       width: 150px; 
+    
+   }
+   
+   .btn_4:hover{
+       background-color: #F6F3F5;
+       color: #1C2331;
+   }

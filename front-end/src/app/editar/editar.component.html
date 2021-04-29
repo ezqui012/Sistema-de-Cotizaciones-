@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+ <meta charset="UTF--8">
+</head>
+
+<body>
+ <app-navbar></app-navbar>
+    <div class="content centered-elements">
+        <div class="main-conteiner">
+
+            Editar unidad
+            <button type="button" class="btn_1 btn-primary btn-sm">Ver Lista</button>
+            <button type="button" class="btn_2 btn-primary btn-sm">Registrar Unidad</button>
+
+            <br>
+            <br>
+
+            Tipo de Unidad
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                    value="option1" (click)="showRadio(false)">
+                <label class="form-check-label" for="inlineRadio1">Unidad Adiministrtiva</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                    value="option2" (click)="showRadio(true)">
+                <label class="form-check-label" for="inlineRadio2">Unidad de Gasto</label>
+            </div>
+            
+            <div *ngIf="show">
+                <h6>hola</h6>
+            </div>
+
+            <br>
+            <br>
+            <button type="button" class="btn_3 btn-primary btn-sm">Cancelar</button>
+            <button type="button" class="btn_4 btn-primary btn-sm">Guardar</button>
+            <br>
+            <br>
+        </div>
+
+    </div>
+</body>

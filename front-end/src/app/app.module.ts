@@ -29,6 +29,8 @@ import { SchoolCreateComponent } from './school-create/school-create.component';
 import { SchoolEditComponent } from './school-edit/school-edit.component';
 import { MatCardModule } from '@angular/material/card';
 import { RolDropdownComponent } from './rol-dropdown/rol-dropdown.component';
+import { AdministrativasComponent } from './administrativas/administrativas.component';
+import { EditarComponent } from './editar/editar.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { RolDropdownComponent } from './rol-dropdown/rol-dropdown.component';
     SchoolListComponent,
     SchoolCreateComponent,
     SchoolEditComponent,
-    RolDropdownComponent
+    RolDropdownComponent,
+    AdministrativasComponent,
+    EditarComponent
   ],
   imports: [
     BrowserModule,

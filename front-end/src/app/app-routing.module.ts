@@ -13,6 +13,8 @@ import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { SchoolListComponent } from './school-list/school-list.component';
 import { SchoolCreateComponent } from './school-create/school-create.component';
 import { SchoolEditComponent } from './school-edit/school-edit.component';
+import { AdministrativasComponent } from './administrativas/administrativas.component';
+import { EditarComponent } from './editar/editar.component';
 
 const routes: Routes = [
   {
@@ -66,6 +68,14 @@ const routes: Routes = [
   {
     path:'school-edit',
     component: SchoolEditComponent
+  },
+  {
+    path:'administrativas',
+    component: AdministrativasComponent
+  },
+  {
+    path: 'editar',
+    component: EditarComponent
   }
 
 ];
