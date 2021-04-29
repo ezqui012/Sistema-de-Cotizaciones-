@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Faculty } from '../Model/faculty';
 import { FacultyService } from '../services/faculty.service';
+import { ValidationAmount } from '../utils/validation-amount';
 
 @Component({
   selector: 'app-units-register',
@@ -18,9 +19,8 @@ export class UnitsRegisterComponent implements OnInit {
 
   registerForm = this.fb.group({
     id_faculty: ['', [Validators.required]],
-    name_unit: ['', [Validators.required], Validators.maxLength(100)],
-    type: ['Administrativa', [Validators.required]],
-    amount: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(this.patternNumber)]]
+    name_unit: ['', [Validators.required, Validators.maxLength(100)]],
+    type: ['Administrativa', [Validators.required]]
   });
 
   constructor(
@@ -46,6 +46,25 @@ export class UnitsRegisterComponent implements OnInit {
 
   showInputAmout(show:boolean){
     this.showAmount =show;
+    this.registerForm.get('amount')?.reset;
+    if(this.showAmount){
+      this.registerForm = this.fb.group({
+        id_faculty: ['', [Validators.required]],
+        name_unit: ['', [Validators.required, Validators.maxLength(100)]],
+        type: ['Gasto', [Validators.required]],
+        amount: [null, [ValidationAmount.isVisible(this.showAmount), Validators.maxLength(3), Validators.pattern(this.patternNumber)]]
+      });
+    }else{
+      this.registerForm = this.fb.group({
+        id_faculty: ['', [Validators.required]],
+        name_unit: ['', [Validators.required, Validators.maxLength(100)]],
+        type: ['Administrativa', [Validators.required]]
+      });
+    }
+  }
+
+  mostrar(){
+    console.log(this.registerForm.value);
   }
 
 }
