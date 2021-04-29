@@ -20,6 +20,9 @@
         <mat-form-field class="nameUnit-full-width">
           <mat-label>Nombre de unidad</mat-label>
           <input matInput placeholder="Ingrese el nombre de la unidad" formControlName="name_unit">
+          <mat-error *ngIf="isValid('name_unit')">
+            {{ getErrorMessage('name_unit') }}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field class="selectFaculty-full-width" id="select-faculty">
@@ -29,6 +32,9 @@
               {{faculty.name_faculty}}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="isValid('id_faculty')">
+            {{ getErrorMessage('id_faculty') }}
+          </mat-error>
         </mat-form-field>
       </div>
       <br>
@@ -46,6 +52,9 @@
       <mat-form-field class="mount-full-width" *ngIf="showAmount">
         <mat-label>Monto</mat-label>
         <input matInput placeholder="Ingrese monto" type="number" formControlName="amount">
+        <mat-error *ngIf="isValid('amount')">
+          {{ getErrorMessage('amount') }}
+        </mat-error>
       </mat-form-field>
 
       <br>
