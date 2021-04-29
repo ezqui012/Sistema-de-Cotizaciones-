@@ -1,0 +1,7 @@
+<mat-form-field class=leftCol>
+  <mat-select placeholder="Seleccione rol" >
+    <mat-option *ngFor="let rol of roles" value="id_role">
+      {{rol.name_role}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

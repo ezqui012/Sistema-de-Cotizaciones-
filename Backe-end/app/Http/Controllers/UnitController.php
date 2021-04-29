@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Unit;
 use App\Http\Requests\CreateUnitRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 class UnitController extends Controller
@@ -48,7 +49,10 @@ class UnitController extends Controller
             ], 404);
         }
     }
-
+    public function getUnit(){
+        $unities = DB::table('units')->select('id_unit','name_unit')->get();
+        return $unities;
+    }
 
     public function show($id)
     {
