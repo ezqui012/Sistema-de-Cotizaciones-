@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Faculty } from '../Model/faculty';
 import { FacultyService } from '../services/faculty.service';
+import { UnitService } from '../services/unit.service';
+import { RegisterUnitResponse } from '../Model/unit';
 
 @Component({
   selector: 'app-units-register',
@@ -27,7 +29,8 @@ export class UnitsRegisterComponent implements OnInit {
 
   constructor(
     private service: FacultyService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private serviceUnit: UnitService
     ) { }
 
   ngOnInit(): void {
@@ -38,7 +41,6 @@ export class UnitsRegisterComponent implements OnInit {
     this.service.allFaculties().subscribe(
       (data) => {
         this.faculties = data;
-        console.log(this.faculties);
       },
       (error:any) => {
         console.log(`Error: ${error}`);
@@ -93,12 +95,27 @@ export class UnitsRegisterComponent implements OnInit {
 
   registerUnit(){
     if(this.registerForm.invalid){
-      console.log("campos invalidos");
       this.messageFail = true;
       this.messageRegisterFailed = 'Existen campos incorrectos';
       return;
     }
-    console.log(this.registerForm.value);
+    let res: RegisterUnitResponse;
+    this.serviceUnit.registerUnit(this.registerForm.value).subscribe(
+      (data) => {
+        res = data;
+        if(res.res){
+          alert('Unidad registrada con exito');
+          this.clearInput();
+        }else{
+          console.log('Ocurrio un error');
+        }
+      },
+      (error) => {
+        console.log(error.message);
+        this.messageRegisterFailed = 'El nombre de la unidad ya se encuentra registrado'
+        this.messageFail = true;
+      }
+    );
   }
 
   onKeyPress(){
@@ -107,6 +124,12 @@ export class UnitsRegisterComponent implements OnInit {
     }else if(this.messageFail){
       this.messageFail = false;
     }
+  }
+
+  clearInput(){
+    this.registerForm.get('id_faculty')?.reset();
+    this.registerForm.get('name_unit')?.reset();
+    this.registerForm.get('amount')?.reset();
   }
 
   translate(field: string):string|void{
