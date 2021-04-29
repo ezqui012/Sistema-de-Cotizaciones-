@@ -27,7 +27,6 @@ class CreateUnitRequest extends FormRequest
             'id_faculty' => 'required',
             'name_unit' => 'required|min:10|max:100|unique:units,name_unit',
             'type' => 'required|min:5|max:14',
-            'creation_date' => 'required',
             'amount' => 'nullable'
         ];
     }
