@@ -15,43 +15,37 @@ body{
 }
 .btn:hover{
 background-color:#2f82ff !important;
+color: white;
 }
-.btn-one,
-.btn-one:hover,
-.btn-one:active {
+.btn-one{
+
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
   width: 200px;
   margin-left: 10px;
 }
-.btn-ver,
-.btn-ver:hover,
-.btn-ver:active {
+.btn-ver{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color: #1C2331;
   margin-left: 10px;
   width: 80px;
+  height: 30px;
+  font-size: small;
+  text-align: center;
 }
-.btn-edit,
-.btn-edit:hover,
-.btn-edit:active{
+.btn-edit{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
-
+  font-size: small;
+  text-align: center;
   width: 80px;
+  height: 30px;
 }
 
-.headTable{
-  background-color: #003b72;
-  color: white;
-}
-.containerTable{
-  color:#0000 ;
-  background-color: #fafafa;
-}
+
 /*estilos Modal*/
 
 .colorModal .modal-content{
@@ -74,3 +68,23 @@ background-color:#2f82ff !important;
   margin-left: 10px;
 }
 
+/*Estilos de la tabla*/
+.bodyTable{
+  width: 100%;
+
+}
+.headTable{
+  width: 100%;
+  background-color: #003b72;
+  color: white;
+  /*position:fixed;*/
+
+}
+.containerTable{
+  color:#0000 ;
+  background-color: #fafafa;
+  height: 460px ;
+  overflow-y: scroll;
+  padding-left: 0.2%;
+  padding-right: 0.2%;
+}

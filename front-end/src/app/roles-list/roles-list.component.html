@@ -50,21 +50,25 @@
           <th scope="col" style="padding-right: 12%; text-align: right;">Acciones</th>
         </tr>
       </thead>
-      <tbody>
-        <tr class="row-table" *ngFor="let role of roles; let i = index" >
-          <th scope="row">{{i+1}}</th>
-          <td>{{role.name_role}}</td>
-          <td></td>
-          <td>
-            <div class="row justify-content-end" style="padding-right: 20%;">
-              <button type="button" class="btn btn-edit" (click)="navigateTo('/roles-edit')">Editar</button>
-              <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content,i)">Ver</button>
-            </div>
-          </td>
 
-        </tr>
+        <tbody class="bodyTable">
+
+          <tr class="row-table" *ngFor="let role of roles; let i = index" >
+            <th scope="row">{{i+1}}</th>
+            <td>{{role.name_role}}</td>
+            <td></td>
+            <td>
+              <div class="row justify-content-end" style="padding-right: 20%;">
+                <button type="button" class="btn btn-edit" (click)="navigateTo('/roles-edit')">Editar</button>
+                <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content,i)">Ver</button>
+              </div>
+            </td>
+
+          </tr>
 
       </tbody>
+
+
     </table>
   </div>
 

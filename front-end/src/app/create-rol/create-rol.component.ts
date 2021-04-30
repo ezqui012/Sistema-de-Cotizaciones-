@@ -38,6 +38,7 @@ export class CreateRolComponent implements OnInit {
     let description_role = this.description_role.value;
     this._roleService.addRole(name_role, description_role).subscribe(data => console.log(data))
     //this.getRole();
+    alert("Se creo el rol ("+name_role+ ") con Exito!");
     this.name_role.setValue("");
     this.description_role.setValue("");
 
