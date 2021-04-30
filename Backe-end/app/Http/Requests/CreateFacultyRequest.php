@@ -24,11 +24,11 @@ class CreateFacultyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_faculty' => 'required|min:10|max:100|unique:faculties,name_faculty',
-            'phone_faculty' => 'required|min:7|max:8|min:7',
-            'email_faculty' => 'required|min:5|max:100',
-            'address_faculty' => 'required|min:1|max:100',
-            'dean_faculty' => 'required|max:50',
+            'name_faculty' => 'required|min:6|max:100|unique:faculties,name_faculty',
+            'phone_faculty' => 'required|min:7|max:8',
+            'email_faculty' => 'required|min:6|max:100',
+            'address_faculty' => 'required|min:15|max:100',
+            'dean_faculty' => 'required|max:50|min:8',
         ];
     }
 }
