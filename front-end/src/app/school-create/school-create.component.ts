@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+import { FacultyService } from '../services/faculty.service';
+import { ResponseRegister } from '../Model/faculty';
 
 @Component({
   selector: 'app-school-create',
@@ -28,7 +30,8 @@ export class SchoolCreateComponent implements OnInit {
 
   constructor(
     private router:Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private service: FacultyService
   ) { }
 
   navigateTo(path: String){
@@ -64,13 +67,28 @@ export class SchoolCreateComponent implements OnInit {
     return message;
   }
 
-  registerFaculty(){
+  register(){
     if(this.facultyRegisterForm.invalid){
       this.messageFail = true;
       this.messageRegisterFailed = 'Existen campos incorrectos';
       return;
     }
-    console.log(this.facultyRegisterForm.value);
+    let res: ResponseRegister;
+    this.service.registerFaculty(this.facultyRegisterForm.value).subscribe(
+      (data) => {
+        res = data;
+        if(res.res){
+          alert('Facultad registrada con exito');
+        }else{
+          alert('Ocurrio un error');
+        }
+      },
+      (error) => {
+        console.log(error.message);
+        this.messageRegisterFailed = 'El nombre de la facultad ya se encuentra registrado'
+        this.messageFail = true;
+      }
+    );
   }
 
   onKeyPress(){
@@ -94,5 +112,4 @@ export class SchoolCreateComponent implements OnInit {
       return 'Decano de la facultad';
     }
   }
-
 }
