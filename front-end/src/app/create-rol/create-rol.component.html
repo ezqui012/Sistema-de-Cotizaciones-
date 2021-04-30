@@ -15,11 +15,11 @@
     <form class="form-newRol">
       <mat-form-field class="nameRol-full-width">
         <mat-label>Nombre</mat-label>
-        <input matInput placeholder="Ingrese el nombre del rol">
+        <input matInput placeholder="Ingrese el nombre del rol" [formControl]='name_role'>
       </mat-form-field>
       <mat-form-field class="desRol-full-width">
         <mat-label>Descripción</mat-label>
-        <input matInput placeholder="Ingrese descricioón del rol">
+        <input matInput placeholder="Ingrese descricioón del rol" [formControl]='description_role'>
       </mat-form-field>
 
       <div class="containerPermiso">
@@ -92,7 +92,7 @@
       <div class="containerBtn">
         <div>
           <button class="btn btn-cancel" (click)="navigateTo('/roles-list')">Cancelar</button>
-          <button class="btn btn-register">Registrar</button>
+          <button class="btn btn-register" (click)="addRole()">Registrar</button>
         </div>
 
       </div>

@@ -10,10 +10,10 @@
   </div>
   <div class="modal-body">
     <div class="dateInfo"><h3><b>Nombre del rol:</b></h3>
-      <div class="dateInfoValue"><h3>Encargado de cotización</h3></div>
+      <div class="dateInfoValue"><h3>{{roles[pos].name_role}}</h3></div>
     </div>
     <div class="dateInfo"><h3><b>Descipción:</b></h3>
-      <div class="dateInfoValue"><h3>Responsable de llenar los formuarios en un tiempo establecido</h3></div>
+      <div class="dateInfoValue"><h3>{{roles[pos].description_role}}</h3></div>
     </div>
     <div class="dateInfo"><h3><b>Permisos:</b></h3>
       <div class="conentPermiso">
@@ -51,41 +51,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Cotizador</td>
+        <tr class="row-table" *ngFor="let role of roles; let i = index" >
+          <th scope="row">{{i+1}}</th>
+          <td>{{role.name_role}}</td>
           <td></td>
           <td>
             <div class="row justify-content-end" style="padding-right: 20%;">
               <button type="button" class="btn btn-edit" (click)="navigateTo('/roles-edit')">Editar</button>
-              <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content)">Ver</button>
+              <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content,i)">Ver</button>
             </div>
           </td>
 
         </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Gefe de unidad administrativa</td>
-          <td></td>
-          <td>
-            <div class="row justify-content-end" style="padding-right: 20%;">
-              <button type="button" class="btn btn-edit" (click)="navigateTo('/roles-edit')">Editar</button>
-              <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content)">Ver</button>
-            </div>
 
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Gefe de unidad de gasto</td>
-          <td></td>
-          <td>
-            <div class="row justify-content-end" style="padding-right: 20%;">
-              <button type="button" class="btn btn-edit" (click)="navigateTo('/roles-edit')">Editar</button>
-              <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content)">Ver</button>
-            </div>
-          </td>
-        </tr>
       </tbody>
     </table>
   </div>
