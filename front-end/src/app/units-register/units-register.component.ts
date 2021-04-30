@@ -132,7 +132,7 @@ export class UnitsRegisterComponent implements OnInit {
     this.registerForm.get('amount')?.reset();
   }
 
-  translate(field: string):string|void{
+  private translate(field: string):string|void{
     if(field === 'id_faculty'){
       return 'Facultad';
     } else if(field === 'name_unit'){

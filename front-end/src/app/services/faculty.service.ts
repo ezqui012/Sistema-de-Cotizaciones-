@@ -23,4 +23,6 @@ export class FacultyService {
     return failed;
   }
 
+  registerFaculty(){}
+
 }
