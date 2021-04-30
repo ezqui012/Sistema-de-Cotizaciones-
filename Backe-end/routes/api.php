@@ -28,3 +28,5 @@ Route::group(['middleware' => 'auth:api'], function(){
 Route::post('registerUser', 'UserController@addData');
 
 Route::ApiResource('roles','RolesController');
+
+Route::ApiResource('faculties', 'FacultyController');

@@ -38,6 +38,7 @@ export class RolesListComponent implements OnInit {
     this.getRole();
     this.name_role.setValue("");
     this.description_role.setValue("");
+    alert("Se creo el rol: "+name_role+ " con Exito!");
 
 
   }
