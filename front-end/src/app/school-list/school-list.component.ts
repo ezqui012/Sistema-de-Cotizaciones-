@@ -36,7 +36,7 @@ export class SchoolListComponent implements OnInit {
     this.pos = pos;
   }
   getFaculty(){
-    this._facultyService.getFaculties().subscribe((faculty)=> {
+    this._facultyService.allFaculties().subscribe((faculty)=> {
       return this.faculties = faculty
 
     })

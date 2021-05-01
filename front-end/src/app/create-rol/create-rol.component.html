@@ -12,14 +12,20 @@
 
   <div>
 
-    <form class="form-newRol">
+    <form class="form-newRol" >
       <mat-form-field class="nameRol-full-width">
         <mat-label>Nombre</mat-label>
-        <input matInput placeholder="Ingrese el nombre del rol" [formControl]='name_role'>
+        <input matInput placeholder="Ingrese el nombre del rol" [formControl]='name_role' >
+        <!--<mat-error *ngIf="isValidField('name_role')">
+        {{getErrorMessage("name_role")}}
+        </mat-error>-->
       </mat-form-field>
       <mat-form-field class="desRol-full-width">
         <mat-label>Descripción</mat-label>
         <input matInput placeholder="Ingrese descricioón del rol" [formControl]='description_role'>
+        <!--<mat-error *ngIf="isValidField('description_role')">
+        {{getErrorMessage("description_role")}}
+        </mat-error>-->
       </mat-form-field>
 
       <div class="containerPermiso">

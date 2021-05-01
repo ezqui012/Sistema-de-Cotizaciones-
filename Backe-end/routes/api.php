@@ -29,4 +29,4 @@ Route::post('registerUser', 'UserController@addData');
 
 Route::ApiResource('roles','RolesController');
 
-Route::ApiResource('faculties', 'FacultyController');
+//Route::ApiResource('faculties', 'FacultyController');

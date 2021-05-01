@@ -24,8 +24,8 @@ export class FacultyService {
   }
 
 
-  getFaculties(): Observable<Faculty[]> {
-    return this.httpClient.get<Faculty[]>(this.URL);
+  getFaculties(): Observable<Faculty> {
+    return this.httpClient.get<Faculty>(this.URL);
   }
   registerFaculty(faculty: RegisterFacultyData):Observable<ResponseRegister | any>{
     let failed: any;
