@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Unit;
 use App\Http\Requests\CreateUnitRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Exception;
 
 class UnitController extends Controller
@@ -34,7 +35,9 @@ class UnitController extends Controller
     public function store(CreateUnitRequest $request)
     {
         try{
+            $now = Carbon::now();
             $input = $request->all();
+            $input['creation_date'] = $now->format('Y-m-d');
             Unit::create($input);
             return response()->json([
                 'res' => true,
