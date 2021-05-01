@@ -21,4 +21,10 @@ export class RegisteruserService {
     return this.httpClient.post<Registeruser>('http://127.0.0.1:8000/api/registerUser', data);
 
   }
+  getEmail(data: any){
+      return this.httpClient.post<Registeruser>('http://127.0.0.1:8000/api/email', {'email':data});
+  }
+  getCi(data:any){
+    return this.httpClient.post<Registeruser>('http://127.0.0.1:8000/api/ci', {'ci':data});
+  }
 }

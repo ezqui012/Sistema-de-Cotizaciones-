@@ -46,8 +46,8 @@ class UserController extends Controller
 
         DB::table('users')->insert([
             [
-                'id_role' => 1,
-                'id_unit' => 1,
+                'id_role' => $request->id_role,
+                'id_unit' => $request->id_unit,
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
@@ -61,6 +61,16 @@ class UserController extends Controller
             'message' => 'Inserted data succesfull',
         ], 200);
 
+    }
+    public function getEmail(Request $request){
+
+        $email= User::where('email', '=', $request->email)->first();
+        return $email;
+    }
+    public function getCi(Request $request){
+        $ci = User::where('ci', '=', $request->ci)->first();
+
+        return $ci;
     }
 
 

@@ -1,37 +1,50 @@
+import { Unit } from './../Model/unit';
+import { Rol } from './../Model/rol';
 import { Registeruser } from './../Model/registeruser';
 import { UnitService } from './../services/unit.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { RegisteruserService } from 'src/app/services/registeruser.service';
-
+import { RolDropdownService } from '../services/rol-dropdown.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-register-user-administrative',
   templateUrl: './register-user-administrative.component.html',
   styleUrls: ['./register-user-administrative.component.css']
 })
 export class RegisterUserAdministrativeComponent implements OnInit {
-  registerForm: FormGroup;
   user: any;
-  units: any = [];
-
-
+  units: Unit []|undefined;
+  roles: Rol []|undefined;
+  email: any;
+  ci: any;
   RegisterUser = new Registeruser();
   private isValidEmail = /\S+@\S+\.\S+/;
   submitted = false;
-  constructor(private formBuilder: FormBuilder, private RegisteruserService: RegisteruserService) {
-    this.registerForm = this.formBuilder.group({
-      selectRol: ['', Validators.required],
-      selectUnity: ['', Validators.required],
-      name: ['', [Validators.required, Validators.maxLength(49), Validators.minLength(15),
-      ]],
-      phone: ['', [Validators.required, Validators.maxLength(7), Validators.minLength(6)]],
-      ci: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(7)]],
-      address: ['', [Validators.required, Validators.maxLength(99), Validators.minLength(29)]],
-      email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
-      password: ['', [Validators.required, Validators.maxLength(31), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]]
-    });
+  registerForm = this.formBuilder.group({
+    id_role: ['', [Validators.required]],
+    id_unit: ['', [Validators.required]],
+    name: ['', [Validators.required, Validators.maxLength(49), Validators.minLength(15),
+    ]],
+    phone: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(7)]],
+    ci: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(7)]],
+    address: ['', [Validators.required, Validators.maxLength(99), Validators.minLength(29)]],
+    email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
+    password: ['', [Validators.required, Validators.maxLength(31), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]]
+  });
+  //fb=formbuilder esta en el import
+  constructor(private formBuilder: FormBuilder, private RegisteruserService: RegisteruserService,
+     public unitService: UnitService, public rolService: RolDropdownService, public toastr: ToastrService) {
   }
-
+  showToastrErrorEmail(){
+    this.toastr.success('El email ya está en uso');
+  }
+  showToastrErrorCi(){
+    this.toastr.error('El ci ya está en uso');
+  }
+  showToastSuccess(){
+    this.toastr.success('Se registraron los datos con exito');
+  }
   getErrorMessageEmail(field: string) {
     let message;
 
@@ -58,6 +71,7 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     return message;
 
   }
+
   getErrorMessageCi(field: string) {
     let message;
     if (this.registerForm.get(field)?.errors?.required) {
@@ -111,34 +125,63 @@ export class RegisterUserAdministrativeComponent implements OnInit {
 
   // tslint:disable-next-line: typedef
   insertData() {
-    console.log(this.RegisterUser);
-    this.RegisteruserService.insertData(this.RegisterUser).subscribe(res => {
-      console.log(res);
-      this.OnResetForm();
-    });
+
+    console.log(this.registerForm.value);
+    this.getEmail();
+    this.getCi();
+    if(this.email===null){
+      if(this.ci===null){
+          this.RegisteruserService.insertData(this.registerForm.value).subscribe(res => {
+          this.showToastSuccess();
+          console.log(res);
+          this.OnResetForm();
+        });
+      }else{
+        this.showToastrErrorCi();
+        console.log('El ci ya existe');
+      }
+
+    }else{
+      this.showToastrErrorEmail();
+      console.log('El email ya existe');
+    }
+
   }
   //load Unit DropDown
- /* getUnits(){
+  getEmail(){
+    this.RegisteruserService.getEmail(this.registerForm.get('email')?.value).subscribe((res) => {
+    this.email = res;
+    })
+  }
+  getCi(){
+    this.RegisteruserService.getCi(this.registerForm.get('ci')?.value).subscribe((res) => {
+      this.ci = res;
+    })
+  }
+  getUnits(){
     this.unitService.getUnits().subscribe((unit) => {
       console.log(unit);
       return this.units = unit;
     });
-  }*/
+  }
+  getRoles(){
+    this.rolService.getRoles().subscribe((rol) => {
+      console.log(rol);
+      return this.roles = rol;
+    });
+
+  }
 
   isValid(field: string) {
     return (this.registerForm.get(field)?.touched || this.registerForm.get(field)?.dirty) && !this.registerForm.get(field)?.valid;
   }
 
-
-  get f() {
-    return this.registerForm.controls;
-
-  }
   OnResetForm() {
     this.registerForm.reset();
   }
   ngOnInit(): void {
-   // this.getUnits();
+    this.getUnits();
+    this.getRoles();
   }
 
   onSaveForm() {
@@ -162,12 +205,6 @@ export class RegisterUserAdministrativeComponent implements OnInit {
 
     }
   }
- /* public inputValidatorEmail(event:any){
-    const pattern = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
-    if(!pattern.test(event.target.value)){
-      event.targe.value = event.target.value.replace(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/)
-    }
-  }*/
   // Validar campos solo numeros
   onKeyPress(event: any) {
     const regexpNumber = /[0-9\+\-\ ]/;
