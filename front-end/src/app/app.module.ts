@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { RegisterUserAdministrativeComponent } from './register-user-administrative/register-user-administrative.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ToastrModule} from 'ngx-toastr';
 import { LoginComponent } from './login/login.component';
 import { RolesListComponent } from './roles-list/roles-list.component';
 import { CreateRolComponent } from './create-rol/create-rol.component';
@@ -15,8 +15,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { EditRolComponent } from './edit-rol/edit-rol.component';
+import {MatSelectModule} from '@angular/material/select';
 import { UnitsRegisterComponent } from './units-register/units-register.component';
-import { MatSelectModule } from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import { NavbarOutsideComponent } from './navbar-outside/navbar-outside.component';
 import { InfoSiteComponent } from './info-site/info-site.component';
@@ -45,7 +45,7 @@ import { MatCardModule } from '@angular/material/card';
     HomeAdminComponent,
     SchoolListComponent,
     SchoolCreateComponent,
-    SchoolEditComponent
+    SchoolEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +54,12 @@ import { MatCardModule } from '@angular/material/card';
     ReactiveFormsModule,
     NgbModule,
     HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      preventDuplicates: true
+    }),
     BrowserAnimationsModule,
     MatInputModule,
     MatSelectModule,
