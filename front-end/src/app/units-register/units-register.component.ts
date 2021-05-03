@@ -4,6 +4,7 @@ import { Faculty } from '../Model/faculty';
 import { FacultyService } from '../services/faculty.service';
 import { UnitService } from '../services/unit.service';
 import { RegisterUnitResponse } from '../Model/unit';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-units-register',
@@ -30,7 +31,8 @@ export class UnitsRegisterComponent implements OnInit {
   constructor(
     private service: FacultyService,
     private fb: FormBuilder,
-    private serviceUnit: UnitService
+    private serviceUnit: UnitService,
+    public toastr: ToastrService
     ) { }
 
   ngOnInit(): void {
@@ -44,6 +46,7 @@ export class UnitsRegisterComponent implements OnInit {
       },
       (error:any) => {
         console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
       }
     );
   }
@@ -104,16 +107,17 @@ export class UnitsRegisterComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
-          alert('Unidad registrada con exito');
+          this.toastr.success('Unidad registrada con exito');
           this.clearInput();
         }else{
-          console.log('Ocurrio un error');
+          this.toastr.error('Ocurrio un error intente de nuevo');
         }
       },
       (error) => {
         console.log(error.message);
-        this.messageRegisterFailed = 'El nombre de la unidad ya se encuentra registrado'
-        this.messageFail = true;
+        this.toastr.error('El nombre de la unidad ya se encuentra registrado');
+        // this.messageRegisterFailed = 'El nombre de la unidad ya se encuentra registrado'
+        // this.messageFail = true;
       }
     );
   }
