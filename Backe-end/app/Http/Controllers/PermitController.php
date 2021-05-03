@@ -41,7 +41,7 @@ class PermitController extends Controller
             Permit::create($input);
             return response()->json([
                 'res' => true,
-                'message' => 'Registered faculty'
+                'message' => 'Registered Permiso'
             ], 200);
         }catch(Exception $ex){
             return response()->json([

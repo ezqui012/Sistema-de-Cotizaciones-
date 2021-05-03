@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router'
+import { Permit } from '../Model/permit';
 import { Roles, Register_Role, RegisterRolesResponse } from '../Model/roles';
+import { PermitService } from '../services/permit.service';
 import { RolesService } from '../services/roles.service';
 
 
@@ -14,9 +16,9 @@ import { RolesService } from '../services/roles.service';
 })
 export class CreateRolComponent implements OnInit {
 
-  //roles: Roles[] | undefined;
-  //name_role:FormControl = new FormControl('')
-  //description_role:FormControl = new FormControl('')
+  permits: Array<Permit>=[];
+  //id_permission:FormControl = new FormControl('')
+  //name_permission:FormControl = new FormControl('')
 
   messageFail = false;
   messageRegisterFailed = '';
@@ -33,20 +35,22 @@ export class CreateRolComponent implements OnInit {
 
   constructor(private router: Router,
     public _roleService: RolesService,
+    public _permitService: PermitService,
     private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
+    this.getPermit();
   }
   //navigate
   navigateTo(path: String) {
     this.router.navigate([path]);
   }
-  // getRole() {
-  //   this._roleService.allRoles().subscribe((role) => {
-  //     return this.roles = role
-  //   })
-  // }
+  getPermit() {
+    this._permitService.allPermit().subscribe((permit) => {
+      return this.permits = permit
+   })
+  }
   // addRole(): void {
   //   let name_role = this.name_role.value;
   //   let description_role = this.description_role.value;

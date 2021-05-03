@@ -14,9 +14,7 @@ body{
   font-weight: bolder;
 }
 
-.btn-one,
-.btn-one:hover,
-.btn-one:active {
+.btn-one{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
@@ -37,7 +35,8 @@ body{
   width: 120px;
 }
 .btn:hover{
-  background-color: #2226fa;
+  background-color: #2f82ff !important;
+  color: white;
 }
 /*Formulario*/
 .form-newRol{
@@ -60,5 +59,8 @@ body{
 
 .containerBtn{
   text-align: center;
+}
+.form-check{
+  margin-top: 8px;
 }
 

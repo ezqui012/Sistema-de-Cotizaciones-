@@ -20,7 +20,7 @@ allPermit(): Observable<Permit | any> {
     const httpHeader = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
     });
-    return this.httpClient.get<Permit>(`${environment.URI_API}roles`, { headers: httpHeader });
+    return this.httpClient.get<Permit>(`${environment.URI_API}permit`, { headers: httpHeader });
   }
   return failed;
 }
@@ -37,5 +37,6 @@ registerPermit(permit: Register_Permit):Observable<RegisterPermitResponse | any>
   }
   return failed;
 }
+
 
 }
