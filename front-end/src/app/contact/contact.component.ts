@@ -2,7 +2,7 @@ import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-contact',
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
