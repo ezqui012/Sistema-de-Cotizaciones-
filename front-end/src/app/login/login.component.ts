@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { LoginResponse } from '../Model/login';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: LoginService,
-    private router:Router
+    private router:Router,
+    public toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -74,10 +76,13 @@ export class LoginComponent implements OnInit {
     this.service.loginServe(this.loginForm.value).subscribe(
       (data) => {
         res = data;
-        localStorage.setItem('quot-umss-tk', res.token);
-        localStorage.setItem('quot-user', res.name);
-        this.router.navigate(['']);
-
+        if(res.res && res.role === 1){
+          localStorage.setItem('quot-umss-tk', res.token);
+          localStorage.setItem('quot-user', res.name);
+          this.router.navigate(['']);
+        }else if(res.res){
+          this.toastr.info('Por el momento solo el Administrador tiene acceso al sistema intente mas tarde');
+        }
       }, (error: any) => {
         console.log(error.message);
         this.messageFail = true;
