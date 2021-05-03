@@ -41,9 +41,9 @@ export class LoginComponent implements OnInit {
     }else if(this.loginForm.get(field)?.hasError('pattern')){
       message = "El formato de correo no es valido";
     } else if(this.loginForm.get(field)?.hasError('minlength')){
-      message = "Ingrese minimo 8 caracteres";
+      message = "Ingrese mínimo 8 caracteres";
     } else if(this.loginForm.get(field)?.hasError('maxlength')){
-      message = "Ingrese maximo 15 caracteres";
+      message = "Ingrese máximo 15 caracteres";
     }
 
     return message;
