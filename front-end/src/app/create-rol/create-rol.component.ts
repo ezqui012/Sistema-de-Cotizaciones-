@@ -23,12 +23,12 @@ export class CreateRolComponent implements OnInit {
 
   //private patternNumber = /^[0-9]+(\.?[0-9]+)?$/;
   private pattern_name = /^[a-zA-Z]*$/;
-  private pattern_des = /^[a-zA-Z-ZñÑ]/;
+  private pattern_des = /^[a-zA-Z-ñÑ]*$/;
 
   registerForm = this.fb.group({
     //id_permit: ['', [Validators.required]],
     name_role: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(75), Validators.pattern(this.pattern_name)]],
-    description_role: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.pattern(this.pattern_des)]],
+    description_role: ['', [Validators.required, Validators.minLength(50), Validators.maxLength(100), Validators.pattern(this.pattern_des)]],
   });
 
   constructor(private router: Router,
@@ -96,8 +96,8 @@ export class CreateRolComponent implements OnInit {
     if (this.registerForm.get(field)?.errors?.required) {
       message = `El campo ${fieldSpanish} es obligatorio`;
     } else if (this.registerForm.get(field)?.hasError('pattern')) {
-      field === 'name_unit' ? message = `El campo ${fieldSpanish} solo acepta caracteres numericos y alfabeticos`
-        : message = `El campo ${fieldSpanish} solo acepta caracteres numericos`;
+      field === 'name_role' ? message = `El campo ${fieldSpanish} solo acepta caracteres alfabeticos`
+        : message = `El campo ${fieldSpanish} solo acepta caracteres alfabeticos`;
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       const minLength = this.registerForm.get(field)?.errors?.minlength.requiredLength;
       message = `El campo ${fieldSpanish} requiere como minimo el ingreso de ${minLength} caracteres`;
