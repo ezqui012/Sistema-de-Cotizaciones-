@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Permit;
-use App\AssignedPermit;
 use Illuminate\Http\Request;
+use App\AssignedPermit;
 use Exception;
 
-class PermitController extends Controller
+class AssignedPermitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,7 @@ class PermitController extends Controller
     public function index()
     {
         try{
-            $res = Permit::all();
+            $res = AssignedPermit::all();
             return $res;
         }catch(Exception $ex){
             return response()->json([
@@ -38,10 +37,10 @@ class PermitController extends Controller
     {
         try{
             $input = $request->all();
-            Permit::create($input);
+            AssignedPermit::create($input);
             return response()->json([
                 'res' => true,
-                'message' => 'Registered faculty'
+                'message' => 'Registered Assigned Permit'
             ], 200);
         }catch(Exception $ex){
             return response()->json([
@@ -59,16 +58,7 @@ class PermitController extends Controller
      */
     public function show($id)
     {
-        try{
-            $assignedPermit = AssignedPermit::all()->where('id_role', '=', $id);
-
-            return $assignedPermit;
-        }catch(Exception $ex){
-            return response()->json([
-                'res' => false,
-                'message' => $ex
-            ], 404);
-        }
+        //
     }
 
     /**

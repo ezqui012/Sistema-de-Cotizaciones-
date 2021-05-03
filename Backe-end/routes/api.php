@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 });
 Route::post('registerUser', 'UserController@addData');
 Route::ApiResource('permit', 'PermitController');
+Route::ApiResource('assignedPermit', 'AssignedPermitController');
 
 //Route::ApiResource('roles','RolesController');
 
