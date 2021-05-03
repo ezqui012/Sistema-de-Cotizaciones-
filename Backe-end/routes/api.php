@@ -24,9 +24,10 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('logout', 'UserController@logout');
     Route::ApiResource('faculties', 'FacultyController');
     Route::ApiResource('unit', 'UnitController');
+    Route::ApiResource('roles','RolesController');
 });
 Route::post('registerUser', 'UserController@addData');
 
-Route::ApiResource('roles','RolesController');
+//Route::ApiResource('roles','RolesController');
 
 //Route::ApiResource('faculties', 'FacultyController');

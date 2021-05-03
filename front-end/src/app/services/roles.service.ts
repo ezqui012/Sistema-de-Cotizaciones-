@@ -1,25 +1,51 @@
-import { HttpClient } from '@angular/common/http';
+
 import { compilePipeFromMetadata } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Roles } from '../Model/roles';
+import { Roles, Register_Role, RegisterRolesResponse } from '../Model/roles';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class RolesService {
-  URL = "http://127.0.0.1:8000/api/roles";
+  //URL = "http://127.0.0.1:8000/api/roles";
 
-  constructor(private _http: HttpClient) { }
-getRole(): Observable<Roles[]>{
- return this._http.get<Roles[]>(this.URL);
+  constructor(private httpClient: HttpClient) { }
+// getRole(): Observable<Roles[]>{
+//  return this._http.get<Roles[]>(this.URL);
+// }
+
+allRoles(): Observable<Roles | any> {
+  let failed: any;
+  if (localStorage.getItem('quot-umss-tk')) {
+    const httpHeader = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    });
+    return this.httpClient.get<Roles>(`${environment.URI_API}roles`, { headers: httpHeader });
+  }
+  return failed;
 }
+// addRole(name_role: string, description_role:string): Observable<any>{
+//   const obj = new FormData();
+//   obj.append("name_role", name_role);
+//   obj.append("description_role", description_role);
+//   return this._http.post(this.URL,obj)
+// }
+registerRoles(role: Register_Role):Observable<RegisterRolesResponse | any>{
+  let failed: any;
 
-addRole(name_role: string, description_role:string): Observable<any>{
-  const obj = new FormData();
-  obj.append("name_role", name_role);
-  obj.append("description_role", description_role);
-  return this._http.post(this.URL,obj)
+  if(localStorage.getItem('quot-umss-tk')){
+    const httpHeader = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    });
+
+    return this.httpClient.post<RegisterRolesResponse>(`${environment.URI_API}roles`, role, {headers: httpHeader});
+  }
+  return failed;
 }
 
 }
