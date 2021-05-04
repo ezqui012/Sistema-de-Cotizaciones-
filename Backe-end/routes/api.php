@@ -24,14 +24,17 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('logout', 'UserController@logout');
     Route::ApiResource('faculties', 'FacultyController');
     Route::ApiResource('unit', 'UnitController');
-    Route::ApiResource('roles','RolesController');
+    //Route::ApiResource('roles','RolesController');
     //Route::ApiResource('permit', 'PermitController');
+    Route::ApiResource('personal','PersonalController');
 
 });
 Route::post('registerUser', 'UserController@addData');
 //Route::ApiResource('permit', 'PermitController');
 Route::ApiResource('permit', 'PermitController');
 Route::ApiResource('assignedPermit', 'AssignedPermitController');
-//Route::ApiResource('roles','RolesController');
+Route::ApiResource('roles','RolesController');
+
+//Route::ApiResource('personal','PersonalController');
 
 //Route::ApiResource('faculties', 'FacultyController');

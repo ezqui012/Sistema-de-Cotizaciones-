@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Roles;
+//use App\Permit;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
-class RolesController extends Controller
+class PersonalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,14 +17,18 @@ class RolesController extends Controller
      */
     public function index()
     {
+
         try{
-            $res = Roles::all();
-            return $res;
+            $personals = DB::select('SELECT us.name, r.name_role, un.name_unit, us.phone, us.ci, us.email, us.address
+            FROM roles r, units un, users us
+            WHERE us.id_role = r.id_role
+            AND us.id_unit = un.id_unit');
+
+            return $personals;
         }catch(Exception $ex){
             return response()->json([
                 'res' => false,
-                'error' => $ex,
-                'message' => 'There is been a problem'
+                'message' => $ex
             ], 404);
         }
     }
@@ -37,14 +43,10 @@ class RolesController extends Controller
     {
         try{
             $input = $request->all();
-
-           $data = Roles::create($input);
-            //$id = $input['id_role'];
-            //$id=Roles::lastest('id_role')->first();
+            User::create($input);
             return response()->json([
                 'res' => true,
-                'message' => 'Registered new rol',
-                'id' => $data->id
+                'message' => 'Registered Personal'
             ], 200);
         }catch(Exception $ex){
             return response()->json([

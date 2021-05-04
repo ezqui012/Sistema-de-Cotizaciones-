@@ -12,6 +12,7 @@ class Roles extends Model
     public $created_at = null;
 
     protected $fillable = [
+        //'id_role',
         'name_role',
         'description_role'
     ];
