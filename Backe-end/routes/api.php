@@ -29,3 +29,5 @@ Route::group(['middleware' => 'auth:api'], function(){
 Route::post('registerUser', 'UserController@addData');
 Route::get('unit', 'UnitController@getUnit');
 Route::get('rol','RolController@getRol');
+Route::get('list','UnitController@getUnit');
+
