@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AssignedPermit, RegisterAssignedPermitResponse} from '../Model/assignedPermit';
+import { AssignedPermit, PermitOfRole, RegisterAssignedPermitResponse} from '../Model/assignedPermit';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
@@ -25,6 +25,20 @@ allAssignedPermit(): Observable<AssignedPermit | any> {
   }
   return failed;
 }
+
+  allPermitOfRole(idRole:any): Observable< PermitOfRole| any> {
+  let failed: any;
+  if (localStorage.getItem('quot-umss-tk')) {
+    const httpHeader = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    });
+    return this.httpClient.get<PermitOfRole>(`${environment.URI_API}assignedPermit/${idRole}`, { headers: httpHeader });
+  }
+  return failed;
+}
+
+
+
 // assignedPermitToRol(id_role:any): Observable<AssignedPermit | any> {
 //   let failed: any;
 //   permitToRol Array<AssignedPermit> =[];
