@@ -15,6 +15,7 @@ import { SchoolCreateComponent } from './school-create/school-create.component';
 import { SchoolEditComponent } from './school-edit/school-edit.component';
 
 import { AuthAdminGuard } from './guards/auth-admin.guard';
+import { AuthLoginGuard } from './guards/auth-login.guard';
 
 const routes: Routes = [
   {
@@ -35,7 +36,8 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AuthLoginGuard]
   },
   {
     path: 'units-register',
@@ -48,15 +50,18 @@ const routes: Routes = [
   },
   {
     path:'info-site',
-    component: InfoSiteComponent
+    component: InfoSiteComponent,
+    canActivate: [AuthLoginGuard]
   },
   {
     path:'contact',
-    component: ContactComponent
+    component: ContactComponent,
+    canActivate: [AuthLoginGuard]
   },
   {
     path:'support',
-    component: SupportComponent
+    component: SupportComponent,
+    canActivate: [AuthLoginGuard]
   },
   {
     path:'school-list',
