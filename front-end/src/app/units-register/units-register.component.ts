@@ -110,7 +110,7 @@ export class UnitsRegisterComponent implements OnInit {
           this.toastr.success('Unidad registrada con exito');
           this.clearInput();
         }else{
-          this.toastr.error('Ocurrio un error intente de nuevo');
+          this.toastr.warning('Ocurrio un error intente de nuevo');
         }
       },
       (error) => {

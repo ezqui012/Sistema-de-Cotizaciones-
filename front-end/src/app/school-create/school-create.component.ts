@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FacultyService } from '../services/faculty.service';
 import { ResponseRegister } from '../Model/faculty';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-school-create',
@@ -31,7 +32,8 @@ export class SchoolCreateComponent implements OnInit {
   constructor(
     private router:Router,
     private fb: FormBuilder,
-    private service: FacultyService
+    private service: FacultyService,
+    public toastr: ToastrService
   ) { }
 
   navigateTo(path: String){
@@ -78,15 +80,17 @@ export class SchoolCreateComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
-          alert('Facultad registrada con exito');
+          this.toastr.success('Facultad registrada con exito');
+          this.facultyRegisterForm.reset();
         }else{
-          alert('Ocurrio un error');
+          this.toastr.warning('Ocurrio un error intente de nuevo');
         }
       },
       (error) => {
         console.log(error.message);
-        this.messageRegisterFailed = 'El nombre de la facultad ya se encuentra registrado'
-        this.messageFail = true;
+        this.toastr.error('El nombre de la facultad ya se encuentra registrado');
+        // this.messageRegisterFailed = 'El nombre de la facultad ya se encuentra registrado'
+        // this.messageFail = true;
       }
     );
   }
