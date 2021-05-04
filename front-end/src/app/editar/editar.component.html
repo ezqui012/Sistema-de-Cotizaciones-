@@ -1,43 +1,62 @@
-<!DOCTYPE html>
-<head>
- <meta charset="UTF--8">
-</head>
+<app-navbar></app-navbar>
 
-<body>
- <app-navbar></app-navbar>
-    <div class="content centered-elements">
-        <div class="main-conteiner">
+<br>
+<br>
 
-            Editar unidad
-            <button type="button" class="btn_1 btn-primary btn-sm">Ver Lista</button>
-            <button type="button" class="btn_2 btn-primary btn-sm">Registrar Unidad</button>
-
-            <br>
-            <br>
-
-            Tipo de Unidad
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                    value="option1" (click)="showRadio(false)">
-                <label class="form-check-label" for="inlineRadio1">Unidad Adiministrtiva</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                    value="option2" (click)="showRadio(true)">
-                <label class="form-check-label" for="inlineRadio2">Unidad de Gasto</label>
-            </div>
-            
-            <div *ngIf="show">
-                <h6>hola</h6>
-            </div>
-
-            <br>
-            <br>
-            <button type="button" class="btn_3 btn-primary btn-sm">Cancelar</button>
-            <button type="button" class="btn_4 btn-primary btn-sm">Guardar</button>
-            <br>
-            <br>
-        </div>
-
+<div class="containerBody">
+  <div class="containertop">
+    <h1 class="title-page"><b>Editar unidad</b></h1>
+    <div class="btnCreate">
+      <button type="button" id="btn-List" class="btn btn-one">Ver Lista</button>
+      <button type="button" id="btn-unidad" class="btn btn-two">Registrar Unidad</button>
     </div>
-</body>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="container-form">
+    <form class="form-newRol" [formGroup]="registerForm">
+      <div class="inputs-f1">
+        <mat-form-field class="nameUnit-full-width">
+          <mat-label>Nombre de unidad</mat-label>
+          <input matInput placeholder="Ingrese el nombre de la unidad" formControlName="name_unit">
+        </mat-form-field>
+
+        <mat-form-field class="selectFaculty-full-width" id="select-faculty">
+          <mat-label>Seleccione facultad</mat-label>
+          <mat-select formControlName="id_faculty">
+            <mat-option *ngFor="let faculty of faculties" [value]="faculty.id_faculty">
+              {{faculty.name_faculty}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <br>
+      <br>
+
+      <mat-radio-group aria-label="Tipo de unidad" class="imput-check" formControlName="type">
+        <mat-label class="label-select"><b>Tipo de unidad</b></mat-label>
+        <mat-radio-button value="Administrativa" (click)="showInputAmout(false)" checked>Unidad Administrativa
+        </mat-radio-button>
+        <mat-radio-button value="Gasto" (click)="showInputAmout(true)">Unidad de Gasto</mat-radio-button>
+      </mat-radio-group>
+
+      <br>
+
+      <mat-form-field class="mount-full-width" *ngIf="showAmount">
+        <mat-label>Monto</mat-label>
+        <input matInput placeholder="Ingrese monto" type="number" formControlName="amount">
+      </mat-form-field>
+
+      <br>
+      <br>
+      <div class="containerBtn">
+        <div>
+          <button class="btn btn-cancel">Cancelar</button>
+          <button class="btn btn-register" >Registrar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

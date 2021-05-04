@@ -1,199 +1,142 @@
 <body>
-    <app-navbar></app-navbar>  
-
-    <div class="content centered-elements">
-
-        <div class="main-container">
-            <h1>Admnistar unidades
-                
-                <button type="button" class="btn btn-primary btn-sm" >Crear nueva unidad</button>
-                
-            </h1>
+    <app-navbar></app-navbar>
 
 
-            <ng-template #contenido let-modal>
-                <div class="modal-header">
-                    <div class="modal-title">Informacion</div>
-                    <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <ng-template #contenido let-modal>
+        <div class="modal-header">
+            <div class="modal-title">Informacion</div>
+            <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-bojdy">
+            <div class="dateInfo">
+                <h3><b>Nombre de unidad:</b></h3>
+                <div class="dateInfoValue">
+                    <h3></h3>
                 </div>
-                <div class="modal-body">
-                    <div class="dateInfo"><h3><b>Nombre de unidad:</b></h3>
-                        <div class="dateInfoValue"><h3></h3></div>
-                      </div>
-                      <div class="dateInfo"><h3><b>Facultad</b></h3>
-                        <div class="dateInfoValue"><h3></h3></div>
-                      </div>
-                      <div class="dateInfo"><h3><b>Tipo</b></h3>
-                        <div class="conentPermiso">
-                          <div class="dateInfoValue"><h3></h3></div>
-                        
-                        </div>
-                      </div> 
+            </div>
+            <div class="dateInfo">
+                <h3><b>Facultad</b></h3>
+                <div class="dateInfoValue">
+                    <h3></h3>
                 </div>
-                
-
-            </ng-template>
-
-            <br>
-
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
-                    (click)="showtable(false)">
-                <label class="form-check-label" for="inlineRadio1">Lista Unidades Administrativas</label>
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                    value="option2 " (click)="showtable(true)">
-                <label class="form-check-label" for="inlineRadio2">Lista Unidades de Gasto</label>
+            <div class="dateInfo">
+                <h3><b>Tipo</b></h3>
+                <div class="conentPermiso">
+                    <div class="dateInfoValue">
+                        <h3></h3>
+                    </div>
+
+                </div>
             </div>
+        </div>
 
 
-            <div *ngIf="show">
+    </ng-template>
+
+    <br>
+
+    <div class="containerBody">
+        <div class="containertop">
+            <h1><b>Administrar unidades</b></h1>
+            <div class="btnUnidad">
+                <button type="button" class="btn btn-one">Crear nueva unidad</button>
+
+            </div>
+        </div>
+        <br>
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
+                (click)="showtable(false)">
+            <label class="form-check-label" for="inlineRadio1">Lista Unidades Administrativas</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2 "
+                (click)="showtable(true)">
+            <label class="form-check-label" for="inlineRadio2">Lista Unidades de Gasto</label>
+        </div>
+
+
+        <div *ngIf="show">
+            <div class="conteinerTable">
                 <table class="table table-hover table-striped">
-                    <thead>
+                    <thead class="headTable">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Monto</th>
-                            <th scope="col">Acciones</th>
+                            <th scope="col" style="padding-right: 12%; text-align: right;">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td></td>
-                            <td></td>
+                        <tr *ngFor="let list of lists">
+                            <th scope="row">{{list.id}}</th>
+                            <td>{{list.name}}</td>
+                            <td>{{list.amount}}</td>
                             <td><a href="http://localhost:4200/editar">
-                                <button type="button" class="btn_1 btn-primary btn-sm" >Editar</button>
+                                    <button type="button" class="btn btn-editar">Editar</button>
                                 </a>
-                                <button type="button" class="btn_2" (click)="openSM(contenido)">Ver</button>
+                                <button type="button" class="btn btn-ver" (click)="openSM(contenido)">Ver</button>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let list of lists">
+                            <th scope="row">{{list.id}}</th>
+                            <td>{{list.name}}</td>
+                            <td>{{list.amount}}</td>
+                            <td><a href="http://localhost:4200/editar">
+                                    <button type="button" class="btn btn-editar">Editar</button>
+                                </a>
+                                <button type="button" class="btn btn-ver" (click)="openSM(contenido)">Ver</button>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row">2</th>
-                            <td></td>
-                            <td></td>
+                            <tr *ngFor="let list of lists">
+                                <th scope="row">{{list.id}}</th>
+                                <td>{{list.name}}</td>
+                                <td>{{list.amount}}</td>
                             <td><a href="http://localhost:4200/editar">
-                                <button type="button" class="btn_1 btn-primary btn-sm" >Editar</button>
+                                    <button type="button" class="btn btn-editar">Editar</button>
                                 </a>
-                                <button type="button" class="btn_2" (click)="openSM(contenido)">Ver</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td></td>
-                            <td></td>
-                            <td><a href="http://localhost:4200/editar">
-                                <button type="button" class="btn_1 btn-primary btn-sm" >Editar</button>
-                                </a>
-                                <button type="button" class="btn_2" (click)="openSM(contenido)">Ver</button>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td></td>
-                            <td></td>
-                            <td><a href="http://localhost:4200/editar">
-                                <button type="button" class="btn_1 btn-primary btn-sm" >Editar</button>
-                                </a>
-                                <button type="button" class="btn_2" (click)="openSM(contenido)">Ver</button>
+                                <button type="button" class="btn btn-ver" (click)="openSM(contenido)">Ver</button>
                             </td>
 
                         </tr>
                         <tr>
-                            <th scope="row">5</th>
-                            <td></td>
-                            <td></td>
+                            <tr *ngFor="let list of lists">
+                                <th scope="row">{{list.id}}</th>
+                                <td>{{list.name}}</td>
+                                <td>{{list.amount}}</td>
                             <td><a href="http://localhost:4200/editar">
-                                <button type="button" class="btn_1 btn-primary btn-sm" >Editar</button>
+                                    <button type="button" class="btn btn-editar">Editar</button>
                                 </a>
-                                <button type="button" class="btn_2" (click)="openSM(contenido)">Ver</button>
+                                <button type="button" class="btn btn-ver" (click)="openSM(contenido)">Ver</button>
                             </td>
 
                         </tr>
                         <tr>
-                            <th scope="row">6</th>
-                            <td></td>
-                            <td></td>
+                            <tr *ngFor="let list of lists">
+                                <th scope="row">{{list.id}}</th>
+                                <td>{{list.name}}</td>
+                                <td>{{list.amount}}</td>
                             <td><a href="http://localhost:4200/editar">
-                                <button type="button" class="btn_1 btn-primary btn-sm" >Editar</button>
+                                    <button type="button" class="btn btn-editar">Editar</button>
                                 </a>
-                                <button type="button" class="btn_2" (click)="openSM(contenido)">Ver</button>
-                            </td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div *ngIf="!show">
-                <table class="table table-hover table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td></td>
-                            <td><a href="http://localhost:4200/editar">
-                                <button type="button" class="btn_1 btn-primary btn-sm" >Editar</button>
-                                </a>
-                                <button type="button" class="btn_2" (click)="openSM(contenido)">Ver</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td></td>
-                            <td><a href="http://localhost:4200/editar">
-                                <button type="button" class="btn_1 btn-primary btn-sm" >Editar</button>
-                                </a>
-                                <button type="button" class="btn_2" (click)="openSM(contenido)">Ver</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td></td>
-                            <td><a href="http://localhost:4200/editar">
-                                <button type="button" class="btn_1 btn-primary btn-sm" >Editar</button>
-                                </a>
-                                <button type="button" class="btn_2" (click)="openSM(contenido)">Ver</button>
+                                <button type="button" class="btn btn-ver" (click)="openSM(contenido)">Ver</button>
                             </td>
 
                         </tr>
                         <tr>
-                            <th scope="row">4</th>
-                            <td></td>
+                            <tr *ngFor="let list of lists">
+                                <th scope="row">{{list.id}}</th>
+                                <td>{{list.name}}</td>
+                                <td>{{list.amount}}</td>
                             <td><a href="http://localhost:4200/editar">
-                                <button type="button" class="btn_1 btn-primary btn-sm" >Editar</button>
+                                    <button type="button" class="btn btn-editar">Editar</button>
                                 </a>
-                                <button type="button" class="btn_2" (click)="openSM(contenido)">Ver</button>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td></td>
-                            <td><a href="http://localhost:4200/editar">
-                                <button type="button" class="btn_1 btn-primary btn-sm" >Editar</button>
-                                </a>
-                                <button type="button" class="btn_2" (click)="openSM(contenido)">Ver</button>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">6</th>
-                            <td></td>
-                            <td><a href="http://localhost:4200/editar">
-                                <button type="button" class="btn_1 btn-primary btn-sm" >Editar</button>
-                                </a>
-                                <button type="button" class="btn_2" (click)="openSM(contenido)">Ver</button>
+                                <button type="button" class="btn btn-ver" (click)="openSM(contenido)">Ver</button>
                             </td>
 
                         </tr>
@@ -202,5 +145,80 @@
             </div>
         </div>
 
+        <div *ngIf="!show">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <tr *ngFor="let list of lists!">
+                            <th scope="row">{{list.id}}</th>
+                            <td>{{list.name}}</td>
+                        <td><a href="http://localhost:4200/editar">
+                                <button type="button" class="btn btn-editar">Editar</button>
+                            </a>
+                            <button type="button" class="btn btn-ver" (click)="openSM(contenido)">Ver</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <tr *ngFor="let list of lists!">
+                            <th scope="row">{{list.id}}</th>
+                            <td>{{list.name}}</td>
+                        <td><a href="http://localhost:4200/editar">
+                                <button type="button" class="btn btn-editar">Editar</button>
+                            </a>
+                            <button type="button" class="btn btn-ver" (click)="openSM(contenido)">Ver</button>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let list of lists!">
+                        <th scope="row">{{list.id}}</th>
+                        <td>{{list.name}}</td>
+                        <td><a href="http://localhost:4200/editar">
+                                <button type="button" class="btn btn-editar">Editar</button>
+                            </a>
+                            <button type="button" class="btn btn-ver" (click)="openSM(contenido)">Ver</button>
+                        </td>
+
+                    </tr>
+                    <tr *ngFor="let list of lists!">
+                        <th scope="row">{{list.id}}</th>
+                        <td>{{list.name}}</td>
+                        <td><a href="http://localhost:4200/editar">
+                                <button type="button" class="btn btn-editar">Editar</button>
+                            </a>
+                            <button type="button" class="btn btn-ver" (click)="openSM(contenido)">Ver</button>
+                        </td>
+
+                    </tr>
+                    <tr *ngFor="let list of lists!">
+                        <th scope="row">{{list.id}}</th>
+                        <td>{{list.name}}</td>
+                        <td><a href="http://localhost:4200/editar">
+                                <button type="button" class="btn btn-editar">Editar</button>
+                            </a>
+                            <button type="button" class="btn btn-ver" (click)="openSM(contenido)">Ver</button>
+                        </td>
+
+                    </tr>
+                    <tr *ngFor="let list of lists!">
+                        <th scope="row">{{list.id}}</th>
+                        <td>{{list.name}}</td>
+                        <td><a href="http://localhost:4200/editar">
+                                <button type="button" class="btn btn-editar">Editar</button>
+                            </a>
+                            <button type="button" class="btn btn-ver" (click)="openSM(contenido)">Ver</button>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+
 </body>
