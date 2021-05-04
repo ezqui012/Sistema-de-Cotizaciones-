@@ -51,6 +51,7 @@ export class CreateRolComponent implements OnInit {
       return this.permits = permit
    })
   }
+
   // addRole(): void {
   //   let name_role = this.name_role.value;
   //   let description_role = this.description_role.value;

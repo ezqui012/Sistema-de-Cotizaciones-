@@ -60,7 +60,7 @@ class PermitController extends Controller
     public function show($id)
     {
         try{
-            $assignedPermit = AssignedPermit::all()->where('id_role', '=', $id);
+            $assignedPermit = AssignedPermit::where('id_role', '=', $id)->get();
 
             return $assignedPermit;
         }catch(Exception $ex){

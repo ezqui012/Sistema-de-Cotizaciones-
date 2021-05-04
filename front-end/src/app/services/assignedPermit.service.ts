@@ -15,7 +15,7 @@ export class AssignedPermitService {
 
   constructor(private httpClient: HttpClient) { }
 
-allPermit(): Observable<AssignedPermit | any> {
+allAssignedPermit(): Observable<AssignedPermit | any> {
   let failed: any;
   if (localStorage.getItem('quot-umss-tk')) {
     const httpHeader = new HttpHeaders({
@@ -38,7 +38,7 @@ allPermit(): Observable<AssignedPermit | any> {
 //   return failed;
 // }
 
-registerPermit(assignedPermit: AssignedPermit):Observable<RegisterAssignedPermitResponse | any>{
+registerAssignedPermit(assignedPermit: AssignedPermit):Observable<RegisterAssignedPermitResponse | any>{
   let failed: any;
 
   if(localStorage.getItem('quot-umss-tk')){

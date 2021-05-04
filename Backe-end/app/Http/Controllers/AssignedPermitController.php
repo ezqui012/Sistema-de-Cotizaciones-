@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\AssignedPermit;
 use Exception;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AssignedPermitController extends Controller
 {
@@ -36,7 +38,9 @@ class AssignedPermitController extends Controller
     public function store(Request $request)
     {
         try{
+            $now = Carbon::now();
             $input = $request->all();
+            $input['assigned_date'] = $now->format('Y-m-d');
             AssignedPermit::create($input);
             return response()->json([
                 'res' => true,
@@ -58,7 +62,16 @@ class AssignedPermitController extends Controller
      */
     public function show($id)
     {
-        //
+        try{
+            $assignedPermit = DB::select('SELECT p.name_permission FROM permissions p, assigned_permissions ap WHERE p.id_permission = ap.id_permission AND ap.id_role = ?', [$id]);
+
+            return $assignedPermit;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     /**
