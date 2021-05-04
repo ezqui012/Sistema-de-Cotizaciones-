@@ -31,6 +31,7 @@ export class NavbarComponent implements OnInit {
         res = data;
         localStorage.removeItem('quot-umss-tk');
         localStorage.removeItem('quot-user');
+        localStorage.removeItem('quot-umss-p');
         this.router.navigate(['/login']);
       },
       (error: any) => {

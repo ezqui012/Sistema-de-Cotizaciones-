@@ -79,6 +79,7 @@ export class LoginComponent implements OnInit {
         if(res.res && res.role === 1){
           localStorage.setItem('quot-umss-tk', res.token);
           localStorage.setItem('quot-user', res.name);
+          localStorage.setItem('quot-umss-p', res.role);
           this.router.navigate(['']);
         }else if(res.res){
           this.toastr.info('Por el momento solo el Administrador tiene acceso al sistema intente mas tarde');
