@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class PermitService {
+export class PersonalUserService {
 
 
   constructor(private httpClient: HttpClient) { }

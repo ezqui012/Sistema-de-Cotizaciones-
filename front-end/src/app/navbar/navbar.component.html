@@ -7,10 +7,10 @@
         <img src="../../assets/img/navbar/Frame.svg" height="60" alt="">
       </div>
       <div class="contentLink">
-        <div class="link">
+        <div class="link" (click)="navigateTo('')">
           <b>Inicio</b>
         </div>
-        <div class="link">
+        <div class="link" (click)="navigateTo('/user-list')">
           <b>Personal</b>
         </div>
         <div class="link" (click)="navigateTo('/roles-list')">
