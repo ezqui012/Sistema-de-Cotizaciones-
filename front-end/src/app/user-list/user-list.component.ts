@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PersonalUserService } from '../services/PersonalUser.service';
+import { PersonalUserService } from '../services/personalUser.service';
 import { FormControl } from '@angular/forms';
 import {PersonalUser} from '../Model/personalUser'
 
