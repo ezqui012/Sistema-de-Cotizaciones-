@@ -7,7 +7,7 @@ import {Faculty} from '../Model/faculty'
 
 @Component({
   selector: 'app-school-list',
-  encapsulation:ViewEncapsulation.None,
+  encapsulation:ViewEncapsulation.Emulated,
 
   templateUrl: './school-list.component.html',
   styleUrls: ['./school-list.component.css']

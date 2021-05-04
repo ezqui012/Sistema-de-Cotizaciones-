@@ -48,7 +48,9 @@ color: white;
 
 
 /*estilos Modal*/
-
+.modal-title{
+  color: #003b72 !important;
+ }
 .colorModal .modal-content{
   color: #003b72;
   background-color: #F0F0F8;
@@ -62,6 +64,7 @@ color: white;
 .dateInfo{
   font-weight: bold;
   display: flex;
+  color: #003b72 !important;
 }
 .dateInfoValue{
   font-weight: normal;

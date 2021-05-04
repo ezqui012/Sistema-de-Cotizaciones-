@@ -12,7 +12,7 @@ import { PermitService } from '../services/permit.service';
 
 @Component({
   selector: 'app-roles-list',
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
   templateUrl: './roles-list.component.html',
   styleUrls: ['./roles-list.component.css']
 })
