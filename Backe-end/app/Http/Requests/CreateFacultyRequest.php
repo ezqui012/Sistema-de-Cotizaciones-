@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUnitRequest extends FormRequest
+class CreateFacultyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,11 @@ class CreateUnitRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_faculty' => 'required',
-            'name_unit' => 'required|min:10|max:100|unique:units,name_unit',
-            'type' => 'required|min:5|max:14',
-            'amount' => 'nullable'
+            'name_faculty' => 'required|min:6|max:100|unique:faculties,name_faculty',
+            'phone_faculty' => 'required|min:7|max:8',
+            'email_faculty' => 'required|min:6|max:100',
+            'address_faculty' => 'required|min:15|max:100',
+            'dean_faculty' => 'required|max:50|min:8',
         ];
     }
 }

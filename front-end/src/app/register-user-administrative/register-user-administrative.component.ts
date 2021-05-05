@@ -20,18 +20,17 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   email: any;
   ci: any;
   RegisterUser = new Registeruser();
-  private isValidEmail = /\S+@\S+\.\S+/;
   submitted = false;
   registerForm = this.formBuilder.group({
     id_role: ['', [Validators.required]],
     id_unit: ['', [Validators.required]],
-    name: ['', [Validators.required, Validators.maxLength(49), Validators.minLength(15),
+    name: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(15),
     ]],
-    phone: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(7)]],
-    ci: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(7)]],
-    address: ['', [Validators.required, Validators.maxLength(99), Validators.minLength(29)]],
-    email: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(8), Validators.pattern("^[a-z0-9]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-    password: ['', [Validators.required, Validators.maxLength(31), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]]
+    phone: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(7),Validators.pattern('^-?[0-9 ]\\d*(\\.\\d{1,2})?$')]],
+    ci: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(7), Validators.pattern('^-?[0-9 ]\\d*(\\.\\d{1,2})?$')]],
+    address: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(30)]],
+    email: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(8), Validators.pattern("^[a-z0-9]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(32), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]]
   });
   navigateTo(path: String){
     this.router.navigate([path]);
@@ -39,12 +38,9 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   //fb=formbuilder esta en el import
   constructor(private formBuilder: FormBuilder, private RegisteruserService: RegisteruserService,
      public unitService: UnitService, public rolService: RolDropdownService, public toastr: ToastrService,private router:Router) {
-  }
+    }
   showToastrErrorEmail(){
-    this.toastr.error('El email ya está en uso','Campo Inválido',{
-      timeOut: 3000,
-      progressBar: true
-    });
+    this.toastr.error('El email ya está en uso','Campo Inválido');
   }
   showToastrErrorCi(){
     this.toastr.error('El ci ya está en uso');
@@ -60,7 +56,7 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       message = "Ingrese minimo 8 caracteres";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
-      message = "Ingrese maximo 15 caracteres";
+      message = "Ingrese maximo 100 caracteres";
     }  else if (this.registerForm.get(field)?.hasError('pattern')) {
       message = "Ingrese un email valido, ejemplo: Carlos@gmail.com";
     }
@@ -73,7 +69,7 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 15 caracteres";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
-      message = "Máximo de 50 caracteres";
+      message = "Máximo de 100 caracteres";
     }
     return message;
 
@@ -87,6 +83,8 @@ export class RegisterUserAdministrativeComponent implements OnInit {
       message = "Mínimo 7 dígitos";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
       message = "Máximo de 9 dígitos";
+    } else if(this.registerForm.get(field)?.hasError('pattern')){
+      message = "El campo solo admite dígitos"
     }
     return message;
 
@@ -111,6 +109,8 @@ export class RegisterUserAdministrativeComponent implements OnInit {
       message = "Mínimo 7 dígitos";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
       message = "Máximo de 8 dígitos";
+    } else if(this.registerForm.get(field)?.hasError('pattern')){
+      message = "El campo solo admite dígitos"
     }
     return message;
   }
@@ -125,7 +125,7 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 8 caracteres";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
-      message = "Máximo de 15 caracteres";
+      message = "Máximo de 32 caracteres";
     } else if( this.registerForm.get(field)?.hasError('pattern')){
       message = "La contraseña debe tener al menos una letra minúscula, al menos una letra mayúscula y al menos un dígito";
 
@@ -133,14 +133,16 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     return message;
 
   }
-
-  // tslint:disable-next-line: typedef
   insertData() {
-
-    console.log(this.registerForm.value);
     this.getEmail();
-    this.getCi();
+    console.log( this.registerForm.value);
+
+
+    console.log(this.email);
+
     if(this.email===null){
+      this.getCi();
+      console.log(this.ci+'ci');
       if(this.ci===null){
           this.RegisteruserService.insertData(this.registerForm.value).subscribe(res => {
           this.showToastSuccess();

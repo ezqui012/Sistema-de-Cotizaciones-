@@ -4,7 +4,7 @@
     <div class="containerTop">
       <h1><b> Registrar Personal</b></h1>
       <div class="btnCreate">
-        <button type="button" class="btn btn-one"> Ver Lista</button>
+        <button type="button" class="btn btn-one" (click)="navigateTo('/user-list')"> Ver Lista</button>
       </div>
     </div>
   </div>
@@ -78,7 +78,7 @@
       </mat-form-field>
     </div>
     <div class="containerButton">
-      <button class="btn btn-danger" (click)="navigateTo('/login')">
+      <button class="btn btn-danger" (click)="navigateTo('/user-list')">
         Cancelar
       </button>
       <button class="btn btn-primary">
