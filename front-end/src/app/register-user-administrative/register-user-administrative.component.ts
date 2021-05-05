@@ -7,6 +7,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { RegisteruserService } from 'src/app/services/registeruser.service';
 import { RolDropdownService } from '../services/rol-dropdown.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register-user-administrative',
   templateUrl: './register-user-administrative.component.html',
@@ -29,15 +30,21 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     phone: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(7)]],
     ci: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(7)]],
     address: ['', [Validators.required, Validators.maxLength(99), Validators.minLength(29)]],
-    email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
+    email: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(8), Validators.pattern("^[a-z0-9]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
     password: ['', [Validators.required, Validators.maxLength(31), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]]
   });
+  navigateTo(path: String){
+    this.router.navigate([path]);
+  }
   //fb=formbuilder esta en el import
   constructor(private formBuilder: FormBuilder, private RegisteruserService: RegisteruserService,
-     public unitService: UnitService, public rolService: RolDropdownService, public toastr: ToastrService) {
+     public unitService: UnitService, public rolService: RolDropdownService, public toastr: ToastrService,private router:Router) {
   }
   showToastrErrorEmail(){
-    this.toastr.success('El email ya está en uso');
+    this.toastr.error('El email ya está en uso','Campo Inválido',{
+      timeOut: 3000,
+      progressBar: true
+    });
   }
   showToastrErrorCi(){
     this.toastr.error('El ci ya está en uso');
@@ -50,12 +57,12 @@ export class RegisterUserAdministrativeComponent implements OnInit {
 
     if (this.registerForm.get(field)?.errors?.required) {
       message = `El campo ${field} es obligatorio`;
-    } else if (this.registerForm.get(field)?.hasError('pattern')) {
-      message = "El formato de correo no es valido";
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       message = "Ingrese minimo 8 caracteres";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
       message = "Ingrese maximo 15 caracteres";
+    }  else if (this.registerForm.get(field)?.hasError('pattern')) {
+      message = "Ingrese un email valido, ejemplo: Carlos@gmail.com";
     }
     return message;
   }
@@ -112,12 +119,16 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   }
   getErrorMessagePassword(field: string) {
     let message;
+
     if (this.registerForm.get(field)?.errors?.required) {
       message = `El campo ${field} es obligatorio`;
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 8 caracteres";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
       message = "Máximo de 15 caracteres";
+    } else if( this.registerForm.get(field)?.hasError('pattern')){
+      message = "La contraseña debe tener al menos una letra minúscula, al menos una letra mayúscula y al menos un dígito";
+
     }
     return message;
 
@@ -133,17 +144,14 @@ export class RegisterUserAdministrativeComponent implements OnInit {
       if(this.ci===null){
           this.RegisteruserService.insertData(this.registerForm.value).subscribe(res => {
           this.showToastSuccess();
-          console.log(res);
-          this.OnResetForm();
+          this.registerForm.reset();
         });
       }else{
         this.showToastrErrorCi();
-        console.log('El ci ya existe');
       }
 
     }else{
       this.showToastrErrorEmail();
-      console.log('El email ya existe');
     }
 
   }
@@ -160,13 +168,12 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   }
   getUnits(){
     this.unitService.getUnits().subscribe((unit) => {
-      console.log(unit);
+
       return this.units = unit;
     });
   }
   getRoles(){
     this.rolService.getRoles().subscribe((rol) => {
-      console.log(rol);
       return this.roles = rol;
     });
 
@@ -206,13 +213,13 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     }
   }
   // Validar campos solo numeros
-  onKeyPress(event: any) {
-    const regexpNumber = /[0-9\+\-\ ]/;
-    let inputCharacter = String.fromCharCode(event.charCode);
-    if (event.keyCode != 8 && !regexpNumber.test(inputCharacter)) {
-      event.preventDefault();
-    }
-  }
+  // onKeyPress(event: any) {
+  //   const regexpNumber = /[0-9\+\-\ ]/;
+  //   let inputCharacter = String.fromCharCode(event.charCode);
+  //   if (event.keyCode != 8 && !regexpNumber.test(inputCharacter)) {
+  //     event.preventDefault();
+  //   }
+  // }
 
 
 }
