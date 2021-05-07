@@ -2,7 +2,7 @@ import { Unit } from './../Model/unit';
 import { Rol } from './../Model/rol';
 import { Registeruser } from './../Model/registeruser';
 import { UnitService } from './../services/unit.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { RegisteruserService } from 'src/app/services/registeruser.service';
 import { RolDropdownService } from '../services/rol-dropdown.service';
@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register-user-administrative',
   templateUrl: './register-user-administrative.component.html',
-  styleUrls: ['./register-user-administrative.component.css']
+  styleUrls: ['./register-user-administrative.component.css'],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class RegisterUserAdministrativeComponent implements OnInit {
   user: any;

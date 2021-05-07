@@ -3,12 +3,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { LoginResponse } from '../Model/login';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class LoginComponent implements OnInit {
 
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: LoginService,
-    private router:Router
+    private router:Router,
+    public toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -39,9 +41,9 @@ export class LoginComponent implements OnInit {
     }else if(this.loginForm.get(field)?.hasError('pattern')){
       message = "El formato de correo no es valido";
     } else if(this.loginForm.get(field)?.hasError('minlength')){
-      message = "Ingrese minimo 8 caracteres";
+      message = "Ingrese mínimo 8 caracteres";
     } else if(this.loginForm.get(field)?.hasError('maxlength')){
-      message = "Ingrese maximo 15 caracteres";
+      message = "Ingrese máximo 15 caracteres";
     }
 
     return message;
@@ -74,10 +76,14 @@ export class LoginComponent implements OnInit {
     this.service.loginServe(this.loginForm.value).subscribe(
       (data) => {
         res = data;
-        localStorage.setItem('quot-umss-tk', res.token);
-        localStorage.setItem('quot-user', res.name);
-        this.router.navigate(['']);
-
+        if(res.res && res.role === 1){
+          localStorage.setItem('quot-umss-tk', res.token);
+          localStorage.setItem('quot-user', res.name);
+          localStorage.setItem('quot-umss-p', res.role);
+          this.router.navigate(['']);
+        }else if(res.res){
+          this.toastr.info('Por el momento solo el Administrador tiene acceso al sistema intente mas tarde');
+        }
       }, (error: any) => {
         console.log(error.message);
         this.messageFail = true;

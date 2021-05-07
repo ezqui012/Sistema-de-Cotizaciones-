@@ -3,8 +3,8 @@ body{
 }
 
 .title-page{
-  font-size: 4em !important;
-  color: #1C2331 !important;
+  /* font-size: 4em !important; */
+  color: #003b72 !important;
 }
 
 #select-faculty{

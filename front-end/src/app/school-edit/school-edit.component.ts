@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-school-edit',
-  encapsulation:ViewEncapsulation.None,
+  encapsulation:ViewEncapsulation.Emulated,
   templateUrl: './school-edit.component.html',
   styleUrls: ['./school-edit.component.css']
 })

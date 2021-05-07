@@ -1,9 +1,9 @@
-
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Unit, SpendingUnit, RegisterUnitResponse } from '../Model/unit';
+import { UnitA, SpendingUnit, RegisterUnitResponse } from '../Model/unit';
+import { Unit } from '../Model/unit';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +20,10 @@ export class UnitService {
       return this.httpClient.get<Unit[]>(`${environment.URI_API}unitDropdown`, {headers: httpHeader});
     }
     return failed;
-    //return this.httpClient.get<Unit[]>('http://127.0.0.1:8000/api/unitDropdown');
   }
 
 
-  registerUnit(unit: Unit|SpendingUnit):Observable<RegisterUnitResponse | any>{
+  registerUnit(unit: UnitA|SpendingUnit):Observable<RegisterUnitResponse | any>{
     let failed: any;
     if(localStorage.getItem('quot-umss-tk')){
       const httpHeader = new HttpHeaders({

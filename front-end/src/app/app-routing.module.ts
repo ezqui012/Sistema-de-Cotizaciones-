@@ -16,62 +16,79 @@ import { SchoolEditComponent } from './school-edit/school-edit.component';
 import { PersonalUser } from './Model/personalUser';
 import { UserListComponent } from './user-list/user-list.component';
 
+import { AuthAdminGuard } from './guards/auth-admin.guard';
+import { AuthLoginGuard } from './guards/auth-login.guard';
+
 const routes: Routes = [
   {
     path:'',
-    component: HomeAdminComponent
+    component: HomeAdminComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'roles-list',
-    component: RolesListComponent
+    component: RolesListComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'roles-create',
-    component: CreateRolComponent
+    component: CreateRolComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'roles-edit',
-    component: EditRolComponent
+    component: EditRolComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AuthLoginGuard]
   },
   {
     path: 'units-register',
-    component: UnitsRegisterComponent
+    component: UnitsRegisterComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'register-user',
-    component: RegisterUserAdministrativeComponent
+    component: RegisterUserAdministrativeComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path:'info-site',
-    component: InfoSiteComponent
+    component: InfoSiteComponent,
+    canActivate: [AuthLoginGuard]
   },
   {
     path:'contact',
-    component: ContactComponent
+    component: ContactComponent,
+    canActivate: [AuthLoginGuard]
   },
   {
     path:'support',
-    component: SupportComponent
+    component: SupportComponent,
+    canActivate: [AuthLoginGuard]
   },
   {
     path:'school-list',
-    component: SchoolListComponent
+    component: SchoolListComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path:'school-create',
-    component: SchoolCreateComponent
+    component: SchoolCreateComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path:'school-edit',
-    component: SchoolEditComponent
+    component: SchoolEditComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path:'user-list',
-    component: UserListComponent
+    component: UserListComponent,
+    canActivate: [AuthAdminGuard]
   }
 
 ];
