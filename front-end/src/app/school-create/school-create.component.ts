@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FacultyService } from '../services/faculty.service';
 import { ResponseRegister } from '../Model/faculty';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-school-create',
-  encapsulation:ViewEncapsulation.None,
+  encapsulation:ViewEncapsulation.Emulated,
   templateUrl: './school-create.component.html',
   styleUrls: ['./school-create.component.css']
 })
@@ -31,7 +32,8 @@ export class SchoolCreateComponent implements OnInit {
   constructor(
     private router:Router,
     private fb: FormBuilder,
-    private service: FacultyService
+    private service: FacultyService,
+    public toastr: ToastrService
   ) { }
 
   navigateTo(path: String){
@@ -52,16 +54,16 @@ export class SchoolCreateComponent implements OnInit {
     if(this.facultyRegisterForm.get(field)?.errors?.required){
       message = `El campo ${fieldSpanish} es obligatorio`;
     }else if(this.facultyRegisterForm.get(field)?.hasError('pattern')){
-      (field === 'name_faculty' || field === 'address_faculty') ? message = `El campo ${fieldSpanish} solo acepta caracteres numericos y alfabeticos`
-      : field === 'phone_faculty' ? message = `El campo ${fieldSpanish} solo acepta caracteres numericos` :
+      (field === 'name_faculty' || field === 'address_faculty') ? message = `El campo ${fieldSpanish} solo acepta caracteres numéricos y alfabéticos`
+      : field === 'phone_faculty' ? message = `El campo ${fieldSpanish} solo acepta caracteres numéricos` :
       field === 'email_faculty' ? message = `El campo ${fieldSpanish} solo acepta correos electronicos` :
-      message = `El campo ${fieldSpanish} solo acpeta caracteres alfabeticos`;
+      message = `El campo ${fieldSpanish} solo acpeta caracteres alfabéticos`;
     } else if(this.facultyRegisterForm.get(field)?.hasError('minlength')){
       const minLength = this.facultyRegisterForm.get(field)?.errors?.minlength.requiredLength;
-      message = `El campo ${fieldSpanish} requiere como minimo el ingreso de ${minLength} caracteres`;
+      message = `El campo ${fieldSpanish} requiere como mínimo el ingreso de ${minLength} caracteres`;
     } else if(this.facultyRegisterForm.get(field)?.hasError('maxlength')){
       const maxLength = this.facultyRegisterForm.get(field)?.errors?.maxlength.requiredLength;
-      message = `El campo ${fieldSpanish} permite el ingreso de ${maxLength} caracteres como maximo`;
+      message = `El campo ${fieldSpanish} permite el ingreso de ${maxLength} caracteres como máximo`;
     }
 
     return message;
@@ -78,15 +80,15 @@ export class SchoolCreateComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
-          alert('Facultad registrada con exito');
+          this.toastr.success('Facultad registrada con éxito');
+          this.facultyRegisterForm.reset();
         }else{
-          alert('Ocurrio un error');
+          this.toastr.warning('Ocurrio un error intente de nuevo');
         }
       },
       (error) => {
         console.log(error.message);
-        this.messageRegisterFailed = 'El nombre de la facultad ya se encuentra registrado'
-        this.messageFail = true;
+        this.toastr.error('El nombre de la facultad ya se encuentra registrado');
       }
     );
   }

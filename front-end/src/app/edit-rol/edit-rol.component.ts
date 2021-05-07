@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-rol',
-  encapsulation:ViewEncapsulation.None,
+  encapsulation:ViewEncapsulation.Emulated,
 
   templateUrl: './edit-rol.component.html',
   styleUrls: ['./edit-rol.component.css']

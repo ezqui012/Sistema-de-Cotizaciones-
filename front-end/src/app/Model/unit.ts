@@ -4,7 +4,7 @@ export interface Unit{
   name_unit: any;
 }
 //Administrative unit
-export class Unit {
+export class UnitA {
   id_faculty: any;
   name_unit: any;
   type: any;

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Unit;
 use App\Http\Requests\CreateUnitRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 class UnitController extends Controller
