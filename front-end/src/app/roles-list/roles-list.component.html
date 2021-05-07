@@ -2,38 +2,36 @@
 <app-navbar></app-navbar>
 <!--Modal Roles-->
 <ng-template #content let-modal>
-  <div class="modal-header">
-    <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
-    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="dateInfo">
-      <h3><b>Nombre del rol:</b></h3>
-      <div class="dateInfoValue">
-        <h3>{{roles[pos].name_role}}</h3>
-      </div>
+  <div class="contentModal">
+    <div class="modal-header">
+      <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
+      <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-    <div class="dateInfo">
-      <h3><b>Descipción:</b></h3>
-      <div class="dateInfoValue">
-        <h3>{{roles[pos].description_role}}</h3>
-      </div>
-    </div>
-    <div class="dateInfo">
-      <h3><b>Permisos:</b></h3>
-      <div class="conentPermiso">
-        <div class="dateInfoValue" *ngFor="let permit of permits">
-          <h3>{{permit.name_permission}}</h3>
+    <div class="modal-body">
+      <div class="dateInfo">
+        <h3><b>Nombre del rol:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{roles[pos].name_role}}</h3>
         </div>
-
       </div>
-
+      <div class="dateInfo">
+        <h3><b>Descipción:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{roles[pos].description_role}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>Permisos:</b></h3>
+        <div class="conentPermiso">
+          <div class="dateInfoValue" *ngFor="let permit of permits">
+            <h3>{{permit.name_permission}}</h3>
+          </div>
+        </div>
+      </div>
     </div>
-
   </div>
-
 </ng-template>
 
 
@@ -73,7 +71,8 @@
             <td>
               <div class="row justify-content-end" style="padding-right: 20%;">
                 <button type="button" class="btn btn-edit" (click)="navigateTo('/roles-edit')">Editar</button>
-                <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content,i, role.id_role)">Ver</button>
+                <button id="verRol" type="button" class="btn btn-ver"
+                  (click)="openModal(content,i, role.id_role)">Ver</button>
               </div>
             </td>
 

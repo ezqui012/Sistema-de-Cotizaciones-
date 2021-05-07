@@ -41,6 +41,9 @@ color: white;
 
 
 /*estilos Modal*/
+.contentModal{
+  background-color: #F0F0F8 !important;
+}
 .modal-title{
   color: #003b72 !important;
  }

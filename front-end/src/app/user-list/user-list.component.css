@@ -49,6 +49,9 @@ color: white;
   background-color: #fafafa;
 }
 /*estilos Modal*/
+.contentModal{
+  background-color: #F0F0F8 !important;
+}
 
 .colorModal .modal-content{
   color: #003b72 !important;

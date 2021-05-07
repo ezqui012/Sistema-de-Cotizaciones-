@@ -48,13 +48,17 @@ color: white;
   background-color: #fafafa;
 }
 /*estilos Modal*/
+.contentModal{
+  background-color: #F0F0F8 !important;
+}
 .modal-title{
   color: #003b72 !important;
  }
 .colorModal .modal-content{
   color: #003b72;
-  background-color: #F0F0F8;
+  background-color: #F0F0F8 !important;
 }
+
 .close{
   color: rgb(7, 7, 7);
 }
