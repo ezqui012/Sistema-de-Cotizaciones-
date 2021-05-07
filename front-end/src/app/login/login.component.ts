@@ -4,6 +4,7 @@ import { LoginResponse } from '../Model/login';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -26,8 +27,11 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private service: LoginService,
     private router:Router,
-    public toastr: ToastrService
-  ) {}
+    public toastr: ToastrService,
+    private titlePage: Title
+  ) {
+    this.titlePage.setTitle('Inicio de sesión - QUOT-UMSS');
+  }
 
   ngOnInit(): void {
   }
