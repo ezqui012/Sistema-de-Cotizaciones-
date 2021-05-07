@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router'
-import { Permit } from '../Model/permit';
+import { getValueInRange } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { Permit, Id_Permit } from '../Model/permit';
 import { Roles, Register_Role, RegisterRolesResponse } from '../Model/roles';
+import { AssignedPermit, RegisterAssignedPermitResponse } from '../Model/assignedPermit';
 import { PermitService } from '../services/permit.service';
 import { RolesService } from '../services/roles.service';
+import { AssignedPermitService } from '../services/assignedPermit.service';
 
 
 
@@ -16,26 +19,39 @@ import { RolesService } from '../services/roles.service';
 })
 export class CreateRolComponent implements OnInit {
 
-  permits: Array<Permit>=[];
+  permits: Array<Permit> = [];
+  permitAssigned: AssignedPermit = new AssignedPermit;
+  permit_id = new Array();
   //id_permission:FormControl = new FormControl('')
   //name_permission:FormControl = new FormControl('')
 
   messageFail = false;
   messageRegisterFailed = '';
+  idRole:any;
 
   //private patternNumber = /^[0-9]+(\.?[0-9]+)?$/;
   private pattern_name = /^[a-zA-Z]*$/;
-  private pattern_des = /^[a-zA-Z-ñÑ]*$/;
+  private pattern_des = /^[a-zA-Z-z0-9-zñÑ\u00E0-\u00FC ]*$/
 
   registerForm = this.fb.group({
     //id_permit: ['', [Validators.required]],
-    name_role: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(75), Validators.pattern(this.pattern_name)]],
-    description_role: ['', [Validators.required, Validators.minLength(50), Validators.maxLength(100), Validators.pattern(this.pattern_des)]],
+    name_role: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(75), Validators.pattern(this.pattern_name)]],
+    description_role: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(100), Validators.pattern(this.pattern_des)]],
+    checkAproveSol: [false],
+    checkCreateCot: [false],
+    checkCreateSol: [false],
+    checkEditCot: [false],
+    checkEditSol: [false],
+    checkRegisterEmp: [false],
+    checkItemGasto: [false],
+    checkListSol: [false]
+
   });
 
   constructor(private router: Router,
     public _roleService: RolesService,
     public _permitService: PermitService,
+    public _assignedPermit: AssignedPermitService,
     private fb: FormBuilder
   ) { }
 
@@ -49,27 +65,15 @@ export class CreateRolComponent implements OnInit {
   getPermit() {
     this._permitService.allPermit().subscribe((permit) => {
       return this.permits = permit
-   })
+    })
   }
 
-  // addRole(): void {
-  //   let name_role = this.name_role.value;
-  //   let description_role = this.description_role.value;
-  //   this._roleService.addRole(name_role, description_role).subscribe(data => console.log(data))
-  //   //this.getRole();
-  //   alert("Se creo el rol ("+name_role+ ") con Exito!");
-  //   this.name_role.setValue("");
-  //   this.description_role.setValue("");
-
-
-  // }
-
-  //Angular material validaciones
   isValidField(field: string) {
     return (this.registerForm.get(field)?.touched || this.registerForm.get(field)?.dirty) && !this.registerForm.get(field)?.valid;
   }
 
   registerRole() {
+
     if (this.registerForm.invalid) {
       this.messageFail = true;
       this.messageRegisterFailed = 'Existen campos incorrectos';
@@ -80,10 +84,18 @@ export class CreateRolComponent implements OnInit {
       (data) => {
         res = data;
         if (res.res) {
+          //this.idRole=
+          //localStorage.setItem('id-role', res.id);
+          this.addAssignedPermission(res.id);
+
+          console.log("registro el Id: " + res.id)
           alert('Rol registrada con exito');
           this.clearInput();
+
+
         } else {
           console.log('Ocurrio un error');
+
         }
       },
       (error) => {
@@ -92,6 +104,7 @@ export class CreateRolComponent implements OnInit {
         this.messageFail = true;
       }
     );
+
   }
 
   getErrorMessage(field: string) {
@@ -139,6 +152,82 @@ export class CreateRolComponent implements OnInit {
       return 'Descripción de Rol'
     }
   }
+  validCeckbox() {
+    return (this.registerForm.get('checkAproveSol')?.value ||
+      this.registerForm.get('checkCreateCot')?.value ||
+      this.registerForm.get('checkCreateSol')?.value ||
+      this.registerForm.get('checkEditSol')?.value ||
+      this.registerForm.get('checkEditCot')?.value ||
+      this.registerForm.get('checkRegisterEmp')?.value ||
+      this.registerForm.get('checkItemGasto')?.value ||
+      this.registerForm.get('checkListSol')?.value);
+  }
+  addAssignedPermission(idRol:number) {
+    console.log("hhhhID: " +idRol);
+    if (idRol !== 0) {
 
+      var permitArray = new Array();
+      permitArray = this.permit_id;
+      //console.log("en el IF id YA ESTA del Rol registrado: " + permitArray.length);
+      for (let i = 0; i < permitArray.length; i++) {
+        this.permitAssigned.id_permission = permitArray[i];
+        this.permitAssigned.id_role = idRol;
+        //console.log("El ide YA ESTA del Rol registrado: " + idRol);
+        let res: RegisterAssignedPermitResponse;
+        this._assignedPermit.registerAssignedPermit(this.permitAssigned).subscribe(
+          (data) => {
+            res = data;
+            if (res.res) {
+
+            } else {
+              console.log('Ocurrio un error');
+            }
+          },
+          (error) => {
+            console.log(error.message);
+            this.messageRegisterFailed = 'El nombre de la unidad ya se encuentra registrado'
+            this.messageFail = true;
+          }
+        );
+      }
+
+      this.permit_id = [];
+
+    }
+
+  }
+  statusCheckbox() {
+
+    if (this.registerForm.get('checkAproveSol')?.value == true) {
+      this.permit_id.push(3);
+    } if (this.registerForm.get('checkCreateCot')?.value == true) {
+      this.permit_id.push(1);
+    } if (this.registerForm.get('checkCreateSol')?.value == true) {
+      this.permit_id.push(4);
+    } if (this.registerForm.get('checkEditCot')?.value == true) {
+      this.permit_id.push(2);
+    } if (this.registerForm.get('checkEditSol')?.value == true) {
+      this.permit_id.push(5);
+    } if (this.registerForm.get('checkRegisterEmp')?.value == true) {
+      this.permit_id.push(8);
+    } if (this.registerForm.get('checkItemGasto')?.value == true) {
+      this.permit_id.push(7);
+    } if (this.registerForm.get('checkListSol')?.value == true) {
+      this.permit_id.push(6);
+    }
+
+    this.registerRole();
+
+  }
+
+  registerPermitAndRole() {
+
+    if (this.validCeckbox()) {
+      this.statusCheckbox();
+
+    } else {
+      alert("Debe asignar al Rol al menos un permiso");
+    }
+  }
 
 }

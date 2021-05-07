@@ -27,11 +27,13 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::ApiResource('roles','RolesController');
     Route::ApiResource('permit', 'PermitController');
     Route::ApiResource('personal','PersonalController');
-    Route::ApiResource('assignedPermit', 'AssignedPermitController');
+    //Route::ApiResource('assignedPermit', 'AssignedPermitController');
 
 
 });
 Route::post('registerUser', 'UserController@addData');
+Route::ApiResource('assignedPermit', 'AssignedPermitController');
+
 //Route::ApiResource('permit', 'PermitController');
 //Route::ApiResource('permit', 'PermitController');
 //Route::ApiResource('roles','RolesController');
