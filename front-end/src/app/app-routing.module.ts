@@ -22,19 +22,23 @@ import { AuthLoginGuard } from './guards/auth-login.guard';
 const routes: Routes = [
   {
     path:'',
-    component: HomeAdminComponent
+    component: HomeAdminComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'roles-list',
-    component: RolesListComponent
+    component: RolesListComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'roles-create',
-    component: CreateRolComponent
+    component: CreateRolComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'roles-edit',
-    component: EditRolComponent
+    component: EditRolComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'login',
@@ -48,7 +52,8 @@ const routes: Routes = [
   },
   {
     path: 'register-user',
-    component: RegisterUserAdministrativeComponent
+    component: RegisterUserAdministrativeComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path:'info-site',
@@ -67,19 +72,23 @@ const routes: Routes = [
   },
   {
     path:'school-list',
-    component: SchoolListComponent
+    component: SchoolListComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path:'school-create',
-    component: SchoolCreateComponent
+    component: SchoolCreateComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path:'school-edit',
-    component: SchoolEditComponent
+    component: SchoolEditComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path:'user-list',
-    component: UserListComponent
+    component: UserListComponent,
+    canActivate: [AuthAdminGuard]
   }
 
 ];
