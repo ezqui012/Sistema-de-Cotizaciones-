@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-school-create',
-  encapsulation:ViewEncapsulation.None,
+  encapsulation:ViewEncapsulation.Emulated,
   templateUrl: './school-create.component.html',
   styleUrls: ['./school-create.component.css']
 })

@@ -6,7 +6,7 @@ import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-navbar',
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })

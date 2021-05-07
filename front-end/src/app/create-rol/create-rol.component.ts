@@ -13,7 +13,7 @@ import { AssignedPermitService } from '../services/assignedPermit.service';
 
 @Component({
   selector: 'app-create-rol',
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
   templateUrl: './create-rol.component.html',
   styleUrls: ['./create-rol.component.css']
 })

@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'app-units-register',
   templateUrl: './units-register.component.html',
   styleUrls: ['./units-register.component.css'],
-  encapsulation:ViewEncapsulation.None
+  encapsulation:ViewEncapsulation.Emulated
 })
 export class UnitsRegisterComponent implements OnInit {
 
