@@ -93,11 +93,11 @@ const routes: Routes = [
     canActivate: [AuthAdminGuard]
   },
   {
-    path:'administrativas',
+    path:'unit-list',
     component: AdministrativasComponent
   },
   {
-    path: 'editar',
+    path: 'unit-edit',
     component: EditarComponent
   }
 

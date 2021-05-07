@@ -11,7 +11,7 @@ export class ListService{
   URL = "http://127.0.0.1:8000/api/unit";
   constructor(private httpClient: HttpClient) { }
 
-  gatoUnit(): Observable<ListUnit | any> {
+  gastoUnit(): Observable<ListUnit | any> {
     let failed: any;
     if (localStorage.getItem('quot-umss-tk')) {
       const httpHeader = new HttpHeaders({
@@ -20,9 +20,9 @@ export class ListService{
       return this.httpClient.get<ListUnit>(`${environment.URI_API}list?type=Gasto`, { headers: httpHeader });
     }
     return failed;
-    
+
   }
-  administrativoUnit(): Observable<ListUnit | any> {
+  adminUnit(): Observable<ListUnit | any> {
     let failed: any;
     if (localStorage.getItem('quot-umss-tk')) {
       const httpHeader = new HttpHeaders({
@@ -31,7 +31,7 @@ export class ListService{
       return this.httpClient.get<ListUnit>(`${environment.URI_API}list?type=Administrativa`, { headers: httpHeader });
     }
     return failed;
-    
+
   }
 
   getUnit(): Observable<ListUnit> {
@@ -49,6 +49,6 @@ export class ListService{
     }
     return failed;
   }
-  
+
 }
 

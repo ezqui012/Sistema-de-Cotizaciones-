@@ -5,6 +5,8 @@ import { FacultyService } from '../services/faculty.service';
 import { UnitService } from '../services/unit.service';
 import { RegisterUnitResponse } from '../Model/unit';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-units-register',
@@ -32,7 +34,8 @@ export class UnitsRegisterComponent implements OnInit {
     private service: FacultyService,
     private fb: FormBuilder,
     private serviceUnit: UnitService,
-    public toastr: ToastrService
+    public toastr: ToastrService,
+    private router:Router
     ) { }
 
   ngOnInit(): void {
@@ -145,5 +148,7 @@ export class UnitsRegisterComponent implements OnInit {
       return 'Monto';
     }
   }
-
+  navigateTo(path: String){
+    this.router.navigate([path]);
+  }
 }

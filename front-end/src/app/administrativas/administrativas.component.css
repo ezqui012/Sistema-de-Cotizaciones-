@@ -11,6 +11,7 @@ body{
 
   .btn:hover{
     background-color:#2f82ff !important;
+    color: #ffff;
     }
 
 .containertop{
@@ -22,9 +23,7 @@ body{
 }
 
 
-.btn-one,
-.btn-one:hover,
-.btn-one:active {
+.btn-one{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
@@ -32,18 +31,14 @@ body{
   margin-left: 10px;
 }
 
-.btn-ver,
-.btn-ver:hover,
-.btn-ver:active {
+.btn-ver{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color: #1C2331;
   margin-left: 10px;
   width: 80px;
 }
-.btn-editar,
-.btn-editar:hover,
-.btn-editar:active{
+.btn-editar{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
@@ -59,7 +54,7 @@ body{
 }
 
 .table{
-    
+
     text-align: center;
     border-collapse: collapse;
 }
@@ -71,12 +66,11 @@ thead{
     align-items: center;
 }
 
-.modal-content{
+
+.colorModal, .modal-content{
   color: #003b72;
   background-color: #F0F0F8;
-  width: 140%;
 }
-
 
 .close:hover{
   color: #003b72;
