@@ -12,16 +12,17 @@ export class UnitService {
 
   constructor(private httpClient: HttpClient) { }
   getUnits(): Observable<Unit[]>{
-    return this.httpClient.get<Unit[]>('http://127.0.0.1:8000/api/unit');
+    let failed: any;
+    if(localStorage.getItem('quot-umss-tk')){
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<Unit[]>(`${environment.URI_API}unitDropdown`, {headers: httpHeader});
+    }
+    return failed;
+    //return this.httpClient.get<Unit[]>('http://127.0.0.1:8000/api/unitDropdown');
   }
-  // let failed: any;
-  //   if(localStorage.getItem('quot-umss-tk')){
-  //     const httpHeader = new HttpHeaders({
-  //       'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
-  //     });
-  //     return this.httpClient.get<Unit[]>(`${environment.URI_API}unit`, {headers: httpHeader});
-  //   }
-  //   return failed;
+
 
   registerUnit(unit: Unit|SpendingUnit):Observable<RegisterUnitResponse | any>{
     let failed: any;

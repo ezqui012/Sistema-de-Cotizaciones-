@@ -29,7 +29,7 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     phone: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(7),Validators.pattern('^-?[0-9 ]\\d*(\\.\\d{1,2})?$')]],
     ci: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(7), Validators.pattern('^-?[0-9 ]\\d*(\\.\\d{1,2})?$')]],
     address: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(30)]],
-    email: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(8), Validators.pattern("^[a-z0-9]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+    email: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(8), Validators.pattern(/\S+@\S+\.\S+/)]],
     password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(32), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]]
   });
   navigateTo(path: String){
@@ -135,13 +135,24 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   }
   insertData() {
     this.getEmail();
-    console.log( this.registerForm.value);
+  }
+  //load Unit DropDown
+  getEmail(){
+    this.RegisteruserService.getEmail(this.registerForm.get('email')?.value).subscribe((res: any) => {
+    this.email = res;
+    this.getCi();
+  })
 
+  }
+  getCi(){
+    this.RegisteruserService.getCi(this.registerForm.get('ci')?.value).subscribe((res: any) => {
+      this.ci = res;
+      this.compare();
+    })
 
-    console.log(this.email);
-
+  }
+  compare(){
     if(this.email===null){
-      this.getCi();
       console.log(this.ci+'ci');
       if(this.ci===null){
           this.RegisteruserService.insertData(this.registerForm.value).subscribe(res => {
@@ -156,17 +167,6 @@ export class RegisterUserAdministrativeComponent implements OnInit {
       this.showToastrErrorEmail();
     }
 
-  }
-  //load Unit DropDown
-  getEmail(){
-    this.RegisteruserService.getEmail(this.registerForm.get('email')?.value).subscribe((res) => {
-    this.email = res;
-    })
-  }
-  getCi(){
-    this.RegisteruserService.getCi(this.registerForm.get('ci')?.value).subscribe((res) => {
-      this.ci = res;
-    })
   }
   getUnits(){
     this.unitService.getUnits().subscribe((unit) => {

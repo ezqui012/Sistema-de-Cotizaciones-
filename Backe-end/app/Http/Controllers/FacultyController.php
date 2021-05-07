@@ -13,7 +13,7 @@ class FacultyController extends Controller
     public function index()
     {
         try{
-            $res = Faculty::all();
+            $res = Faculty::orderBy('name_faculty')->get();
             return $res;
         }catch(Exception $ex){
             return response()->json([
