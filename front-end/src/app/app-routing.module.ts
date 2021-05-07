@@ -13,6 +13,8 @@ import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { SchoolListComponent } from './school-list/school-list.component';
 import { SchoolCreateComponent } from './school-create/school-create.component';
 import { SchoolEditComponent } from './school-edit/school-edit.component';
+import { PersonalUser } from './Model/personalUser';
+import { UserListComponent } from './user-list/user-list.component';
 
 import { AuthAdminGuard } from './guards/auth-admin.guard';
 import { AuthLoginGuard } from './guards/auth-login.guard';
@@ -74,6 +76,10 @@ const routes: Routes = [
   {
     path:'school-edit',
     component: SchoolEditComponent
+  },
+  {
+    path:'user-list',
+    component: UserListComponent
   }
 
 ];

@@ -7,7 +7,7 @@ body{
   padding-top: 50px;
   display: flex;
 }
-.contentImg{
+.contentImgSupport{
   width: 50%;
   text-align: center;
   padding-left: 10%;
@@ -25,15 +25,15 @@ padding-left: 5%;
   font-size: 1.5rem;
   padding-bottom:50Px;
 }
-h2{
+.titelTwo{
   color: #003b72;
   font-size: 1.2rem;
 }
-h1{
+.titleOne{
   color: rgb(206, 33, 3);
 
 }
-p{
+.textP{
   font-size: 1.2rem;
 }
 .imgIcon{

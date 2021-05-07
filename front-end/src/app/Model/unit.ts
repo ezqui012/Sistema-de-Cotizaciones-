@@ -1,3 +1,8 @@
+export interface Unit{
+  id_unit: any;
+  id_faculty: any;
+  name_unit: any;
+}
 //Administrative unit
 export class UnitA {
   id_faculty: any;
@@ -15,10 +20,4 @@ export class SpendingUnit{
 export class RegisterUnitResponse{
   res: any;
   message: any;
-}
-
-export interface Unit{
-  id_unit: any;
-  id_faculty: any;
-  name_unit: any;
 }

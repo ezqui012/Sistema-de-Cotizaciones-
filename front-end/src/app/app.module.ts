@@ -27,6 +27,7 @@ import { SchoolListComponent } from './school-list/school-list.component';
 import { SchoolCreateComponent } from './school-create/school-create.component';
 import { SchoolEditComponent } from './school-edit/school-edit.component';
 import { MatCardModule } from '@angular/material/card';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MatCardModule } from '@angular/material/card';
     SchoolListComponent,
     SchoolCreateComponent,
     SchoolEditComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,7 @@ import { MatCardModule } from '@angular/material/card';
       timeOut: 2000,
       progressBar: true,
       progressAnimation: 'increasing',
-      preventDuplicates: true
+      preventDuplicates: false
     }),
     BrowserAnimationsModule,
     MatInputModule,

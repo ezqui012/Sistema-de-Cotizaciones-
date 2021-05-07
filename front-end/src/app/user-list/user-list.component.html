@@ -10,33 +10,45 @@
   </div>
   <div class="modal-body">
     <div class="dateInfo">
-      <h3><b>Facultad:</b></h3>
+      <h3><b>Nombre:</b></h3>
       <div class="dateInfoValue">
-        <h3>{{faculties[pos].name_faculty}}</h3>
+        <h3>{{personalUser[pos].name}}</h3>
       </div>
     </div>
     <div class="dateInfo">
-      <h3><b>Decano:</b></h3>
+      <h3><b>Rol:</b></h3>
       <div class="dateInfoValue">
-        <h3>{{faculties[pos].dean_faculty}}</h3>
+        <h3>{{personalUser[pos].name_role}}</h3>
       </div>
     </div>
     <div class="dateInfo">
-      <h3><b>Email:</b></h3>
+      <h3><b>Unidad:</b></h3>
       <div class="dateInfoValue">
-        <h3>{{faculties[pos].email_faculty}}</h3>
+        <h3>{{personalUser[pos].name_unit}}</h3>
       </div>
     </div>
     <div class="dateInfo">
       <h3><b>Teléfono:</b></h3>
       <div class="dateInfoValue">
-        <h3>{{faculties[pos].phone_faculty}}</h3>
+        <h3>{{personalUser[pos].phone}}</h3>
       </div>
     </div>
     <div class="dateInfo">
-      <h3><b>Direción:</b></h3>
+      <h3><b>CI:</b></h3>
       <div class="dateInfoValue">
-        <h3>{{faculties[pos].address_faculty}}</h3>
+        <h3>{{personalUser[pos].ci}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Email:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].email}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Dirección:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].address}}</h3>
       </div>
     </div>
 
@@ -48,9 +60,9 @@
 <!--header-->
 <div class="containerBody">
   <div class="containertop">
-    <h1><b>Administrar Facultades</b></h1>
+    <h1><b>Administrar Personal</b></h1>
     <div class="btnCreate">
-      <button type="button" class="btn btn-one" (click)="navigateTo('/school-create')">Registrar Facultad</button>
+      <button type="button" class="btn btn-one" (click)="navigateTo('/register-user')">Registrar Personal</button>
 
     </div>
   </div>
@@ -72,12 +84,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="row-faculty" *ngFor="let faculty of faculties; let i = index">
+          <tr class="row-faculty" *ngFor="let user of personalUser; let i = index">
             <th scope="row">{{i+1}}</th>
-            <td>{{faculty.name_faculty}}</td>
+            <td>{{user.name}}</td>
             <td>
               <div class="row justify-content-end" style="padding-right: 20%;">
-                <button type="button" class="btn btn-edit" (click)="navigateTo('/school-edit')">Editar</button>
+                <button type="button" class="btn btn-edit" (click)="navigateTo('/edit')">Editar</button>
                 <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content, i)">Ver</button>
               </div>
             </td>
@@ -91,3 +103,4 @@
   </div>
 
 </div>
+

@@ -14,34 +14,29 @@ body{
   font-weight: bolder;
 }
 
-.btn-one,
-.btn-one:hover,
-.btn-one:active {
+.btn-one{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
   width: 200px;
   margin-left: 20px;
 }
-.btn-cancel,
-.btn-cancel:hover,
-.btn-cancel:active {
+.btn-cancel{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color: #1C2331;
   margin-right: 20px;
   width: 120px;
 }
-.btn-register,
-.btn-register:hover,
-.btn-register:active{
+.btn-register{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
   width: 120px;
 }
 .btn:hover{
-  background-color: #2226fa;
+  background-color: #2f82ff !important;
+  color: white;
 }
 /*Formulario*/
 .form-newRol{
@@ -50,9 +45,11 @@ body{
 }
 .nameRol-full-width{
   width: 40%;
+  font-size: 1rem;
 }
 .desRol-full-width{
   width: 100%;
+  font-size: 1rem;
 }
 /*Permisos*/
 .containerPermiso{
@@ -62,5 +59,8 @@ body{
 
 .containerBtn{
   text-align: center;
+}
+.form-check{
+  margin-top: 8px;
 }
 
