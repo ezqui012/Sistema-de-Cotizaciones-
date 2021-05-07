@@ -62,14 +62,14 @@ export class UnitsRegisterComponent implements OnInit {
     if(this.registerForm.get(field)?.errors?.required){
       message = `El campo ${fieldSpanish} es obligatorio`;
     }else if(this.registerForm.get(field)?.hasError('pattern')){
-      field === 'name_unit' ? message = `El campo ${fieldSpanish} solo acepta caracteres numericos y alfabeticos`
-      : message = `El campo ${fieldSpanish} solo acepta caracteres numericos`;
+      field === 'name_unit' ? message = `El campo ${fieldSpanish} solo acepta caracteres numéricos y alfabéticos`
+      : message = `El campo ${fieldSpanish} solo acepta caracteres numéricos`;
     } else if(this.registerForm.get(field)?.hasError('minlength')){
       const minLength = this.registerForm.get(field)?.errors?.minlength.requiredLength;
-      message = `El campo ${fieldSpanish} requiere como minimo el ingreso de ${minLength} caracteres`;
+      message = `El campo ${fieldSpanish} requiere como mínimo el ingreso de ${minLength} caracteres`;
     } else if(this.registerForm.get(field)?.hasError('maxlength')){
       const maxLength = this.registerForm.get(field)?.errors?.maxlength.requiredLength;
-      message = `El campo ${fieldSpanish} permite el ingreso de ${maxLength} caracteres como maximo`;
+      message = `El campo ${fieldSpanish} permite el ingreso de ${maxLength} caracteres como máximo`;
     } else if(this.registerForm.get(field)?.hasError('max')){
       message = `El campo ${fieldSpanish} permite el ingreso maximo de 10 digitos`;
     }
@@ -107,7 +107,7 @@ export class UnitsRegisterComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
-          this.toastr.success('Unidad registrada con exito');
+          this.toastr.success('Unidad registrada con éxito');
           this.clearInput();
         }else{
           this.toastr.warning('Ocurrio un error intente de nuevo');
@@ -116,8 +116,6 @@ export class UnitsRegisterComponent implements OnInit {
       (error) => {
         console.log(error.message);
         this.toastr.error('El nombre de la unidad ya se encuentra registrado');
-        // this.messageRegisterFailed = 'El nombre de la unidad ya se encuentra registrado'
-        // this.messageFail = true;
       }
     );
   }
