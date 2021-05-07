@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router'
-import { getValueInRange } from '@ng-bootstrap/ng-bootstrap/util/util';
-import { Permit, Id_Permit } from '../Model/permit';
-import { Roles, Register_Role, RegisterRolesResponse } from '../Model/roles';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router} from '@angular/router'
+import {  } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { Permit } from '../Model/permit';
+import { RegisterRolesResponse } from '../Model/roles';
 import { AssignedPermit, RegisterAssignedPermitResponse } from '../Model/assignedPermit';
 import { PermitService } from '../services/permit.service';
 import { RolesService } from '../services/roles.service';
 import { AssignedPermitService } from '../services/assignedPermit.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -52,7 +53,8 @@ export class CreateRolComponent implements OnInit {
     public _roleService: RolesService,
     public _permitService: PermitService,
     public _assignedPermit: AssignedPermitService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -70,6 +72,15 @@ export class CreateRolComponent implements OnInit {
 
   isValidField(field: string) {
     return (this.registerForm.get(field)?.touched || this.registerForm.get(field)?.dirty) && !this.registerForm.get(field)?.valid;
+  }
+  showToastSuccess(){
+    this.toastr.success('Rol registrado con exito');
+  }
+  showToastError(){
+    this.toastr.error('El nombre del Rol ya se encuentra registrado');
+  }
+  showToastWarning(){
+    this.toastr.warning('Debe asignar al Rol al menos un permiso');
   }
 
   registerRole() {
@@ -89,7 +100,7 @@ export class CreateRolComponent implements OnInit {
           this.addAssignedPermission(res.id);
 
           console.log("registro el Id: " + res.id)
-          alert('Rol registrada con exito');
+          this.showToastSuccess();
           this.clearInput();
 
 
@@ -100,8 +111,7 @@ export class CreateRolComponent implements OnInit {
       },
       (error) => {
         console.log(error.message);
-        this.messageRegisterFailed = 'El nombre de la unidad ya se encuentra registrado'
-        this.messageFail = true;
+        this.showToastError();
       }
     );
 
@@ -185,8 +195,6 @@ export class CreateRolComponent implements OnInit {
           },
           (error) => {
             console.log(error.message);
-            this.messageRegisterFailed = 'El nombre de la unidad ya se encuentra registrado'
-            this.messageFail = true;
           }
         );
       }
@@ -226,7 +234,7 @@ export class CreateRolComponent implements OnInit {
       this.statusCheckbox();
 
     } else {
-      alert("Debe asignar al Rol al menos un permiso");
+      this.showToastWarning();
     }
   }
 
