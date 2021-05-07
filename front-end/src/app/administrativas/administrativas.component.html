@@ -1,102 +1,104 @@
-<body>
-  <app-navbar></app-navbar>
+<!--Barra de navegacion-->
+<app-navbar></app-navbar>
 
-
-  <ng-template #contenido let-modal>
-    <div class="modal-header">
-      <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
-      <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
-        <span aria-hidden="true">&times;</span>
-      </button>
+<!--Modal-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
+    <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <!--Datos de unidad Gasto-->
+  <div class="modal-body" *ngIf="show">
+    <div class="dateInfo">
+      <h3><b>Nombre de unidad:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{gastoUnit[pos].name_unit}}</h3>
+      </div>
     </div>
-    <!--Datos de unidad Gasto-->
-    <div class="modal-body" *ngIf="show">
-      <div class="dateInfo">
-        <h3><b>Nombre de unidad:</b></h3>
+    <div class="dateInfo">
+      <h3><b>Facultad:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{administrativoUnit[pos].name_faculty}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Tipo:</b></h3>
+      <div class="conentPermiso">
         <div class="dateInfoValue">
-          <h3>{{gastoUnit[pos].name_unit}}</h3>
+          <h3>{{gastoUnit[pos].type}}</h3>
         </div>
       </div>
-      <div class="dateInfo">
-        <h3><b>Facultad:</b></h3>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Tipo:</b></h3>
+      <div class="conentPermiso">
         <div class="dateInfoValue">
-          <h3>{{administrativoUnit[pos].name_faculty}}</h3>
+          <h3>{{gastoUnit[pos].amount}}</h3>
         </div>
-      </div>
-      <div class="dateInfo">
-        <h3><b>Tipo:</b></h3>
-        <div class="conentPermiso">
-          <div class="dateInfoValue">
-            <h3>{{gastoUnit[pos].type}}</h3>
-          </div>
 
-        </div>
-      </div>
-      <div class="dateInfo">
-        <h3><b>Tipo:</b></h3>
-        <div class="conentPermiso">
-          <div class="dateInfoValue">
-            <h3>{{gastoUnit[pos].amount}}</h3>
-          </div>
-
-        </div>
       </div>
     </div>
-    <!--Datos de unidad Administrativa-->
-    <div class="modal-body" *ngIf="!show">
-      <div class="dateInfo">
-        <h3><b>Nombre de unidad:</b></h3>
+  </div>
+  <!--Datos de unidad Administrativa-->
+  <div class="modal-body" *ngIf="!show">
+    <div class="dateInfo">
+      <h3><b>Nombre de unidad:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{administrativoUnit[pos].name_unit}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Facultad:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{administrativoUnit[pos].name_faculty}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Tipo:</b></h3>
+      <div class="conentPermiso">
         <div class="dateInfoValue">
-          <h3>{{administrativoUnit[pos].name_unit}}</h3>
+          <h3>{{administrativoUnit[pos].type}}</h3>
         </div>
       </div>
-      <div class="dateInfo">
-        <h3><b>Facultad:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{administrativoUnit[pos].name_faculty}}</h3>
-        </div>
-      </div>
-      <div class="dateInfo">
-        <h3><b>Tipo:</b></h3>
-        <div class="conentPermiso">
-          <div class="dateInfoValue">
-            <h3>{{administrativoUnit[pos].type}}</h3>
-          </div>
-
-        </div>
-      </div>
-
-      </div>
-
-
-  </ng-template>
-
-  <br>
-
-  <div class="containerBody">
-    <div class="containertop">
-      <h1><b>Administrar unidades</b></h1>
-      <div class="btnUnidad">
-        <button type="button" class="btn btn-one" (click)="navigateTo('/units-register')">Crear nueva unidad</button>
-
-      </div>
     </div>
-    <br>
+  </div>
+</ng-template>
 
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
-        (click)="showtable(false)" checked>
-      <label class="form-check-label" for="inlineRadio1">Lista Unidades Administrativas</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2 "
-        (click)="showtable(true)">
-      <label class="form-check-label" for="inlineRadio2">Lista Unidades de Gasto</label>
-    </div>
+<!--header-->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Administrar unidades</b></h1>
+    <div class="btnUnidad">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/units-register')">Crear nueva unidad</button>
 
-<!--Tabla de unidades de Gasto-->
-    <div *ngIf="show">
-      <div class="conteinerTable">
+    </div>
+  </div>
+
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
+      (click)="showtable(false)" checked>
+    <label class="form-check-label" for="inlineRadio1">Lista Unidades Administrativas</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2 "
+      (click)="showtable(true)">
+    <label class="form-check-label" for="inlineRadio2">Lista Unidades de Gasto</label>
+  </div>
+
+  <!--Tabla de unidades de Gasto-->
+
+
+    <div class="conteinerTable" *ngIf="show">
+
+      <div class="newHeadTable">
+        <div class="numHeadG"><b>Nº</b></div>
+        <div class="nomHeadG"><b>Nombre</b></div>
+        <div class="monHeadG"><b>Monto</b></div>
+        <div class="accHead"><b>Acciones</b></div>
+      </div>
+      <div class="newBodyTable">
         <table class="table table-hover table-striped">
           <thead class="headTable">
             <tr>
@@ -112,42 +114,55 @@
               <td>{{list.name_unit}}</td>
               <td>{{list.amount}}</td>
               <td>
-                  <button type="button" class="btn btn-editar">Editar</button>
-
-                <button type="button" class="btn btn-ver" (click)="openModal(contenido, i)">Ver</button>
+                <div class="row justify-content-end" style="padding-right: 20%;">
+                  <button type="button" class="btn btn-edit" >Editar</button>
+                  <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content, i)">Ver</button>
+                </div>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+
     </div>
 
-<!--Tabla de unidades de Administrativas-->
 
-    <div *ngIf="!show">
-      <table class="table table-hover table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-          <tr class="row-list" *ngFor="let list of administrativoUnit; let i = index">
-            <th scope="row">{{i+1}}</th>
-            <td>{{list.name_unit}}</td>
-            <td>
-                <button type="button" class="btn btn-editar">Editar</button>
+  <!--Tabla de unidades de Administrativas-->
 
-              <button type="button" class="btn btn-ver" (click)="openModal(contenido, i)">Ver</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+    <div class="conteinerTable" *ngIf="!show">
+
+      <div class="newHeadTable">
+        <div class="numHead"><b>Nº</b></div>
+        <div class="nomHead"><b>Nombre</b></div>
+        <div class="accHead"><b>Acciones</b></div>
+      </div>
+
+      <div class="newBodyTable">
+        <table class="table table-hover table-striped">
+          <thead class="headTable">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+            <tr class="row-list" *ngFor="let list of administrativoUnit; let i = index">
+              <th scope="row">{{i+1}}</th>
+              <td>{{list.name_unit}}</td>
+              <td>
+                <div class="row justify-content-end" style="padding-right: 20%;">
+                  <button type="button" class="btn btn-edit" >Editar</button>
+                  <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content, i)">Ver</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
 
-
-</body>

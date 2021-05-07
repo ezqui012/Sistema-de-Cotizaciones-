@@ -1,36 +1,30 @@
-
 .containerBody{
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 20px;
-  }
-
-body{
-    background-color: #F0F0F8;
-  }
-
-  .btn:hover{
-    background-color:#2f82ff !important;
-    color: #ffff;
-    }
-
-.containertop{
-    display: flex;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    color: #003b72;
-    font-weight: bolder
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 20px;
 }
-
-
+body{
+  background-color: #F0F0F8;
+}
+.containertop{
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  color: #003b72;
+  font-weight: bolder;
+}
+.btn:hover{
+background-color:#2f82ff !important;
+color: white;
+}
 .btn-one{
+
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
   width: 200px;
   margin-left: 10px;
 }
-
 .btn-ver{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
@@ -38,49 +32,76 @@ body{
   margin-left: 10px;
   width: 80px;
 }
-.btn-editar{
+.btn-edit{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
-
   width: 80px;
 }
 
-.conteinerTable{
 
-  color:#0000 ;
-  background-color: #fafafa;
-
-}
-
-.table{
-
-    text-align: center;
-    border-collapse: collapse;
-}
-
-thead{
-    background-color:#003b72;
-    border-bottom: solid 5px;
-    color: white;
-    align-items: center;
-}
-
+/*estilos Modal*/
+.modal-title{
+  color: #003b72 !important;
+ }
 
 .colorModal, .modal-content{
   color: #003b72;
   background-color: #F0F0F8;
 }
-
+.close{
+  color: rgb(7, 7, 7);
+}
 .close:hover{
   color: #003b72;
 }
 .dateInfo{
   font-weight: bold;
   display: flex;
+  color: #003b72 !important;
 }
 .dateInfoValue{
   font-weight: normal;
   color: #1C2331;
   margin-left: 10px;
 }
+
+.headTable{
+  background-color: #003b72;
+  color: white;
+  display: none;
+}
+
+.newBodyTable{
+  color:#0000 ;
+  background-color: #fafafa;
+  overflow-y: auto;
+  padding-left: 0.2%;
+  padding-right: 0.2%;
+  height: 420px;
+}
+.newHeadTable{
+  background-color: #003b72;
+  color: white;
+  font-size: 1rem;
+  display: flex;
+  padding: 12px;
+  width: 100%;
+}
+.numHead{
+  width: 8%;
+}
+.nomHead{
+  width: 72%;
+}
+
+.numHeadG{
+  width: 6%;
+}
+.nomHeadG{
+  width: 49%;
+}
+.monHeadG{
+  width: 28%;
+}
+
