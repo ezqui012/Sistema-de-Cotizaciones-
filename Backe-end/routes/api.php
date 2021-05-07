@@ -36,3 +36,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('ci', 'UserController@getCi');
     Route::ApiResource('assignedPermit', 'AssignedPermitController');
 });
+
+
+
+Route::get('list','UnitController@index');
+

@@ -51,7 +51,8 @@ color: white;
 .modal-title{
   color: #003b72 !important;
  }
-.colorModal .modal-content{
+
+.colorModal, .modal-content{
   color: #003b72;
   background-color: #F0F0F8;
 }
