@@ -1,48 +1,64 @@
+import { Unit } from './../Model/unit';
+import { Rol } from './../Model/rol';
 import { Registeruser } from './../Model/registeruser';
 import { UnitService } from './../services/unit.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { RegisteruserService } from 'src/app/services/registeruser.service';
-
+import { RolDropdownService } from '../services/rol-dropdown.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register-user-administrative',
   templateUrl: './register-user-administrative.component.html',
   styleUrls: ['./register-user-administrative.component.css']
 })
 export class RegisterUserAdministrativeComponent implements OnInit {
-  registerForm: FormGroup;
   user: any;
-  units: any = [];
-
-
+  units: Unit []|undefined;
+  roles: Rol []|undefined;
+  email: any;
+  ci: any;
   RegisterUser = new Registeruser();
-  private isValidEmail = /\S+@\S+\.\S+/;
   submitted = false;
-  constructor(private formBuilder: FormBuilder, private RegisteruserService: RegisteruserService) {
-    this.registerForm = this.formBuilder.group({
-      selectRol: ['', Validators.required],
-      selectUnity: ['', Validators.required],
-      name: ['', [Validators.required, Validators.maxLength(49), Validators.minLength(15),
-      ]],
-      phone: ['', [Validators.required, Validators.maxLength(7), Validators.minLength(6)]],
-      ci: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(7)]],
-      address: ['', [Validators.required, Validators.maxLength(99), Validators.minLength(29)]],
-      email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
-      password: ['', [Validators.required, Validators.maxLength(31), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]]
-    });
+  registerForm = this.formBuilder.group({
+    id_role: ['', [Validators.required]],
+    id_unit: ['', [Validators.required]],
+    name: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(15),
+    ]],
+    phone: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(7),Validators.pattern('^-?[0-9 ]\\d*(\\.\\d{1,2})?$')]],
+    ci: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(7), Validators.pattern('^-?[0-9 ]\\d*(\\.\\d{1,2})?$')]],
+    address: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(30)]],
+    email: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(8), Validators.pattern(/\S+@\S+\.\S+/)]],
+    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(32), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]]
+  });
+  navigateTo(path: String){
+    this.router.navigate([path]);
   }
-
+  //fb=formbuilder esta en el import
+  constructor(private formBuilder: FormBuilder, private RegisteruserService: RegisteruserService,
+     public unitService: UnitService, public rolService: RolDropdownService, public toastr: ToastrService,private router:Router) {
+    }
+  showToastrErrorEmail(){
+    this.toastr.error('El email ya está en uso','Campo Inválido');
+  }
+  showToastrErrorCi(){
+    this.toastr.error('El ci ya está en uso');
+  }
+  showToastSuccess(){
+    this.toastr.success('Se registraron los datos con exito');
+  }
   getErrorMessageEmail(field: string) {
     let message;
 
     if (this.registerForm.get(field)?.errors?.required) {
       message = `El campo ${field} es obligatorio`;
-    } else if (this.registerForm.get(field)?.hasError('pattern')) {
-      message = "El formato de correo no es valido";
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       message = "Ingrese minimo 8 caracteres";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
-      message = "Ingrese maximo 15 caracteres";
+      message = "Ingrese maximo 100 caracteres";
+    }  else if (this.registerForm.get(field)?.hasError('pattern')) {
+      message = "Ingrese un email valido, ejemplo: Carlos@gmail.com";
     }
     return message;
   }
@@ -53,11 +69,12 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 15 caracteres";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
-      message = "Máximo de 50 caracteres";
+      message = "Máximo de 100 caracteres";
     }
     return message;
 
   }
+
   getErrorMessageCi(field: string) {
     let message;
     if (this.registerForm.get(field)?.errors?.required) {
@@ -66,6 +83,8 @@ export class RegisterUserAdministrativeComponent implements OnInit {
       message = "Mínimo 7 dígitos";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
       message = "Máximo de 9 dígitos";
+    } else if(this.registerForm.get(field)?.hasError('pattern')){
+      message = "El campo solo admite dígitos"
     }
     return message;
 
@@ -90,6 +109,8 @@ export class RegisterUserAdministrativeComponent implements OnInit {
       message = "Mínimo 7 dígitos";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
       message = "Máximo de 8 dígitos";
+    } else if(this.registerForm.get(field)?.hasError('pattern')){
+      message = "El campo solo admite dígitos"
     }
     return message;
   }
@@ -98,47 +119,78 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   }
   getErrorMessagePassword(field: string) {
     let message;
+
     if (this.registerForm.get(field)?.errors?.required) {
       message = `El campo ${field} es obligatorio`;
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 8 caracteres";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
-      message = "Máximo de 15 caracteres";
+      message = "Máximo de 32 caracteres";
+    } else if( this.registerForm.get(field)?.hasError('pattern')){
+      message = "La contraseña debe tener al menos una letra minúscula, al menos una letra mayúscula y al menos un dígito";
+
     }
     return message;
 
   }
-
-  // tslint:disable-next-line: typedef
   insertData() {
-    console.log(this.RegisterUser);
-    this.RegisteruserService.insertData(this.RegisterUser).subscribe(res => {
-      console.log(res);
-      this.OnResetForm();
-    });
+    this.getEmail();
   }
   //load Unit DropDown
- /* getUnits(){
+  getEmail(){
+    this.RegisteruserService.getEmail(this.registerForm.get('email')?.value).subscribe((res: any) => {
+    this.email = res;
+    this.getCi();
+  })
+
+  }
+  getCi(){
+    this.RegisteruserService.getCi(this.registerForm.get('ci')?.value).subscribe((res: any) => {
+      this.ci = res;
+      this.compare();
+    })
+
+  }
+  compare(){
+    if(this.email===null){
+      console.log(this.ci+'ci');
+      if(this.ci===null){
+          this.RegisteruserService.insertData(this.registerForm.value).subscribe(res => {
+          this.showToastSuccess();
+          this.registerForm.reset();
+        });
+      }else{
+        this.showToastrErrorCi();
+      }
+
+    }else{
+      this.showToastrErrorEmail();
+    }
+
+  }
+  getUnits(){
     this.unitService.getUnits().subscribe((unit) => {
-      console.log(unit);
+
       return this.units = unit;
     });
-  }*/
+  }
+  getRoles(){
+    this.rolService.getRoles().subscribe((rol) => {
+      return this.roles = rol;
+    });
+
+  }
 
   isValid(field: string) {
     return (this.registerForm.get(field)?.touched || this.registerForm.get(field)?.dirty) && !this.registerForm.get(field)?.valid;
   }
 
-
-  get f() {
-    return this.registerForm.controls;
-
-  }
   OnResetForm() {
     this.registerForm.reset();
   }
   ngOnInit(): void {
-   // this.getUnits();
+    this.getUnits();
+    this.getRoles();
   }
 
   onSaveForm() {
@@ -162,20 +214,14 @@ export class RegisterUserAdministrativeComponent implements OnInit {
 
     }
   }
- /* public inputValidatorEmail(event:any){
-    const pattern = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
-    if(!pattern.test(event.target.value)){
-      event.targe.value = event.target.value.replace(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/)
-    }
-  }*/
   // Validar campos solo numeros
-  onKeyPress(event: any) {
-    const regexpNumber = /[0-9\+\-\ ]/;
-    let inputCharacter = String.fromCharCode(event.charCode);
-    if (event.keyCode != 8 && !regexpNumber.test(inputCharacter)) {
-      event.preventDefault();
-    }
-  }
+  // onKeyPress(event: any) {
+  //   const regexpNumber = /[0-9\+\-\ ]/;
+  //   let inputCharacter = String.fromCharCode(event.charCode);
+  //   if (event.keyCode != 8 && !regexpNumber.test(inputCharacter)) {
+  //     event.preventDefault();
+  //   }
+  // }
 
 
 }

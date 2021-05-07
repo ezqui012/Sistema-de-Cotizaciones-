@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { RegisterUserAdministrativeComponent } from './register-user-administrative/register-user-administrative.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ToastrModule} from 'ngx-toastr';
 import { LoginComponent } from './login/login.component';
 import { RolesListComponent } from './roles-list/roles-list.component';
 import { CreateRolComponent } from './create-rol/create-rol.component';
@@ -16,7 +16,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { EditRolComponent } from './edit-rol/edit-rol.component';
 import {MatSelectModule} from '@angular/material/select';
-import { UnitComponent } from './unit/unit.component';
 import { UnitsRegisterComponent } from './units-register/units-register.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { NavbarOutsideComponent } from './navbar-outside/navbar-outside.component';
@@ -28,7 +27,7 @@ import { SchoolListComponent } from './school-list/school-list.component';
 import { SchoolCreateComponent } from './school-create/school-create.component';
 import { SchoolEditComponent } from './school-edit/school-edit.component';
 import { MatCardModule } from '@angular/material/card';
-import { RolDropdownComponent } from './rol-dropdown/rol-dropdown.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +38,6 @@ import { RolDropdownComponent } from './rol-dropdown/rol-dropdown.component';
     CreateRolComponent,
     NavbarComponent,
     EditRolComponent,
-    UnitComponent,
     UnitsRegisterComponent,
     NavbarOutsideComponent,
     InfoSiteComponent,
@@ -49,7 +47,7 @@ import { RolDropdownComponent } from './rol-dropdown/rol-dropdown.component';
     SchoolListComponent,
     SchoolCreateComponent,
     SchoolEditComponent,
-    RolDropdownComponent
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +56,12 @@ import { RolDropdownComponent } from './rol-dropdown/rol-dropdown.component';
     ReactiveFormsModule,
     NgbModule,
     HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      preventDuplicates: false
+    }),
     BrowserAnimationsModule,
     MatInputModule,
     MatSelectModule,

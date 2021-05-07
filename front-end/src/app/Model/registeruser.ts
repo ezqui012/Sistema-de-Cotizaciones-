@@ -1,6 +1,6 @@
 export class Registeruser {
-  idUnit: any;
-  idRol: any;
+  id_rol: any;
+  id_unit: any;
   name: any;
   phone: any;
   ci: any;

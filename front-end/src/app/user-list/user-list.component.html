@@ -1,0 +1,106 @@
+<!--Navbar-->
+<app-navbar></app-navbar>
+<!--Modal Roles-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="dateInfo">
+      <h3><b>Nombre:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].name}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Rol:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].name_role}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Unidad:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].name_unit}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Teléfono:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].phone}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>CI:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].ci}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Email:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].email}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Dirección:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].address}}</h3>
+      </div>
+    </div>
+
+  </div>
+
+</ng-template>
+
+
+<!--header-->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Administrar Personal</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/register-user')">Registrar Personal</button>
+
+    </div>
+  </div>
+
+  <!--Tabla-->
+  <div class="containerTable">
+    <div class="newHeadTable">
+      <div class="numHead"><b>Nº</b></div>
+      <div class="nomHead"><b>Nombre</b></div>
+      <div class="accHead"><b>Acciones</b></div>
+    </div>
+    <div class="newBodyTable">
+      <table class="table table-striped table-fixed">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-faculty" *ngFor="let user of personalUser; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{user.name}}</td>
+            <td>
+              <div class="row justify-content-end" style="padding-right: 20%;">
+                <button type="button" class="btn btn-edit" (click)="navigateTo('/edit')">Editar</button>
+                <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content, i)">Ver</button>
+              </div>
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
