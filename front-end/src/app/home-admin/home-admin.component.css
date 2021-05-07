@@ -20,7 +20,15 @@ body{
   margin: 2%;
 
 }
+.option{
+  list-style: none;
+  font-size: 1rem;
+  padding: 5px;
+}
 .optBtn{
   width: 100%;
   transition: all 0.9s;
 }
+.option:hover{
+  background-color: rgb(102, 137, 252);
+  }
