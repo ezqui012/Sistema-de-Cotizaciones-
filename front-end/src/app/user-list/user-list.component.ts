@@ -10,13 +10,15 @@ import {PersonalUser} from '../Model/personalUser'
   encapsulation:ViewEncapsulation.Emulated,
 
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  styleUrls: ['./user-list.component.css'],
+
 })
 export class UserListComponent implements OnInit {
 
   //description_faculty:FormControl = new FormControl('')
   personalUser: Array<PersonalUser>=[]
   pos = 0;
+  chkAproveSol:boolean = false;
   constructor(
     private modal: NgbModal,
     private router: Router,
@@ -41,4 +43,6 @@ export class UserListComponent implements OnInit {
 
     })
   }
+
+
 }
