@@ -64,9 +64,6 @@ body{
     border-collapse: collapse;
 }
 
-
-
-
 thead{
     background-color:#003b72;
     border-bottom: solid 5px;
@@ -74,15 +71,22 @@ thead{
     align-items: center;
 }
 
-
-
-
-.modal-header{
-    background-color: #F6F3F5;
-    color: #1C2331;
+.modal-content{
+  color: #003b72;
+  background-color: #F0F0F8;
+  width: 140%;
 }
 
-.modal-body{
-    background-color: #F6F3F5;
-    color: #003b72;
+
+.close:hover{
+  color: #003b72;
+}
+.dateInfo{
+  font-weight: bold;
+  display: flex;
+}
+.dateInfoValue{
+  font-weight: normal;
+  color: #1C2331;
+  margin-left: 10px;
 }
