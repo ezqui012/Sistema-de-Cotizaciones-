@@ -32,6 +32,26 @@ class UnitController extends Controller
         }
     }
 
+    public function getUnitList(Request $request)
+    {
+        try{
+                //$unit = Unit::where('type', '=', $request->type)->get();
+                $unit = DB::select('SELECT u.name_unit, fa.name_faculty, u.type, u.amount
+
+                FROM units u, faculties fa
+                WHERE u.id_faculty = fa.id_faculty
+                AND u.type = ? ORDER BY u.name_unit ASC', [$request->type]);
+
+                return $unit;
+
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
+
 
     public function store(CreateUnitRequest $request)
     {
@@ -68,6 +88,7 @@ class UnitController extends Controller
                 'message' => $ex
             ], 404);
         }
+
     }
 
 

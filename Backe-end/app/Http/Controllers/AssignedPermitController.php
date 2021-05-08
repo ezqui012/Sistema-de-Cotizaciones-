@@ -63,7 +63,11 @@ class AssignedPermitController extends Controller
     public function show($id)
     {
         try{
-            $assignedPermit = DB::select('SELECT p.id_permission, p.name_permission FROM permissions p, assigned_permissions ap WHERE p.id_permission = ap.id_permission AND ap.id_role = ?', [$id]);
+            $assignedPermit = DB::select('SELECT p.id_permission, p.name_permission
+
+            FROM permissions p, assigned_permissions ap
+            WHERE p.id_permission = ap.id_permission
+            AND ap.id_role = ?', [$id]);
 
             return $assignedPermit;
         }catch(Exception $ex){

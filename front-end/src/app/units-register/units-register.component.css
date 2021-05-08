@@ -68,17 +68,7 @@ body{
   text-align: center;
 }
 
-.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle , .mat-radio-outer-circle {
-  border-color: #1C2331 !important;
-}
 
-.mat-radio-button.mat-accent .mat-radio-inner-circle{
-  background-color: #1C2331 !important;
-}
-
-.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
-  opacity: 0 !important;
-}
 
 .btn-one{
   color: white;

@@ -31,27 +31,24 @@ color: white;
   background-color: #1C2331;
   margin-left: 10px;
   width: 80px;
-  /*height: 30px;
-  font-size: small;
-  text-align: center;*/
 }
 .btn-edit{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
   width: 80px;
-  /* font-size: small;
-  text-align: center;
-
-  height: 30px; */
 }
 
 
 /*estilos Modal*/
+.contentModal{
+  background-color: #F0F0F8 !important;
+}
 .modal-title{
   color: #003b72 !important;
  }
-.colorModal .modal-content{
+
+.colorModal, .modal-content{
   color: #003b72;
   background-color: #F0F0F8;
 }
@@ -72,67 +69,12 @@ color: white;
   margin-left: 10px;
 }
 
-/*Estilos de la tabla*/
-/* .bodyTable{
-  width: 100% !important;
-  overflow-y: auto !important;
-  padding-left: 0.2%;
-  padding-right: 0.2%;
-  height: 450px !important;
-
-
-} */
-/* .table-fixed{
-  margin-left: 25rem;
-  margin-top: 10rem;
-} */
-/* thead{
-  width: 100%;
-}
-.table-fixed thead,
-.table-fixed thead>th{
-  background-color: #003b72;
-  color: white;
-}
-.table-fixed tbody tr td{
-  background-color: #F0F0F8;
-}
-.table-fixed>thead>tr>th{
-  border: 0 !important;
-}
-.table-fixed>tbody>tr>td:last-child{
-  border-right: 0;
-}
-.table-fixed tbody td,
-.table-fixed thead>tr>th{
-  float: left;
-  padding-left: 20px;
-}
-.table-fixed .col{
-  width: 33%;
-}
-.table-fixed tbody{
-  display: block;
-  height: 300px;
-  overflow-y: auto;
-}
- .table-fixed tr{
-  display: block;
-}
-tr{
-  right: 0;
-} */
 .headTable{
-
   background-color: #003b72;
   color: white;
-/*style="padding-right: 12%; text-align: right;"*/
   display: none;
-
 }
-/* .containerTable{
 
-}*/
 .newBodyTable{
   color:#0000 ;
   background-color: #fafafa;
