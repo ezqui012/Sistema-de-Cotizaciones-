@@ -105,7 +105,7 @@ export class SchoolCreateComponent implements OnInit {
     if(field === 'name_faculty'){
       return 'Nombre de facultad';
     }else if(field === 'phone_faculty'){
-      return 'Telefóno de la facultad';
+      return 'Teléfono de la facultad';
     }else if(field === 'email_faculty'){
       return 'Correo de la facultad';
     }else if(field === 'address_faculty'){
