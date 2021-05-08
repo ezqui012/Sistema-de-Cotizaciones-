@@ -28,6 +28,8 @@ import { SchoolCreateComponent } from './school-create/school-create.component';
 import { SchoolEditComponent } from './school-edit/school-edit.component';
 import { MatCardModule } from '@angular/material/card';
 import { UserListComponent } from './user-list/user-list.component';
+import { AdministrativasComponent } from './administrativas/administrativas.component';
+import { EditarComponent } from './editar/editar.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { UserListComponent } from './user-list/user-list.component';
     SchoolListComponent,
     SchoolCreateComponent,
     SchoolEditComponent,
-    UserListComponent
+    UserListComponent,
+    AdministrativasComponent,
+    EditarComponent
   ],
   imports: [
     BrowserModule,

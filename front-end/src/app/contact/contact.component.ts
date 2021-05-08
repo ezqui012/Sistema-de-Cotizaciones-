@@ -1,4 +1,5 @@
 import { Component, OnInit,ViewEncapsulation } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contact',
@@ -8,7 +9,11 @@ import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private titlePage: Title
+  ) {
+    this.titlePage.setTitle('Contactos - QUOT-UMSS');
+  }
 
   ngOnInit(): void {
   }

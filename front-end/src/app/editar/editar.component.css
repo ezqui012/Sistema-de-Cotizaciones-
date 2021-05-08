@@ -1,0 +1,187 @@
+body{
+    background-color: #F0F0F8;
+  }
+  
+  .title-page{
+    font-size: 4em !important;
+    color: #1C2331 !important;
+  }
+  
+  #select-faculty{
+    margin-left: 5% !important;
+  }
+  
+  .containerBody{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 20px;
+    width: 100%;
+  }
+  
+  .container-form{
+    width: 95%;
+    margin: 0;
+    justify-items: center !important;
+  }
+  
+  .containertop{
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    font-weight: bolder;
+  }
+  
+  .imput-check{
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: 0;
+  }
+  
+  .inputs-f1{
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+  }
+  
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 2%;
+  }
+  
+  .label-select{
+    margin-right: 2%;
+    color: #1C2331;
+  }
+  
+  .form-newRol{
+    width: 100%;
+    font-size: 1.2rem;
+  }
+  
+  .nameUnit-full-width, .selectFaculty-full-width, .mount-full-width{
+    width: 50%;
+  }
+  
+  .containerBtn{
+    text-align: center;
+  }
+  
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle , .mat-radio-outer-circle {
+    border-color: #1C2331 !important;
+  }
+  
+  .mat-radio-button.mat-accent .mat-radio-inner-circle{
+    background-color: #1C2331 !important;
+  }
+  
+  .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    opacity: 0 !important;
+  }
+  
+  .btn-one{
+    color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+    background-color:#003b72;
+    width: 200px;
+    margin-left: 20px;
+  }
+
+  .btn-two{
+    color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+    background-color:#1C2331;
+    width: 200px;
+    margin-left: 20px;
+  }
+  
+  .btn-cancel, .btn-register{
+    color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+    width: 120px;
+  }
+  
+  .btn-cancel{
+    background-color: #1C2331;
+    margin-right: 20px;
+  }
+  
+  .btn-register{
+    background-color:#003b72;
+  }
+  
+  .btn:hover{
+    background-color: #2f82ff;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+  }
+  
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+      }
+  input[type=number] { -moz-appearance:textfield; }
+  
+  
+  @media(max-width:970px){
+    .title-page{
+      font-size: 3em !important;
+    }
+  
+    .form-newRol{
+      font-size: 1rem;
+    }
+  
+    .inputs-f1{
+      display: flex;
+      flex-flow: column;
+    }
+  
+    .nameUnit-full-width, .selectFaculty-full-width, .mount-full-width{
+      width: 90%;
+    }
+  
+    #select-faculty{
+      margin-left: 0% !important;
+    }
+  }
+  
+  @media(max-width:600px){
+    .containertop{
+      width: 100%;
+      display: flex;
+      flex-flow: column;
+      text-align: center;
+    }
+  
+    .imput-check{
+      display: flex;
+      flex-flow: column;
+    }
+  
+    .mat-radio-button ~ .mat-radio-button {
+      margin-left: 0%;
+    }
+  
+    .mat-radio-button{
+      margin-top: 8px;
+    }
+  
+    .containerBtn{
+      margin-bottom: 15px;
+    }
+  
+    .btn-List{
+      margin-left: 0;
+    }
+    .btn-Unidad{
+        margin-left: 0;
+        background-color: #1C2331;
+        margin-right: 20px;
+    }
+
+
+  }
+  

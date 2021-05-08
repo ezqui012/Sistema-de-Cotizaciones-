@@ -49,15 +49,15 @@
   color: #1C2331 !important;
  }
 
- ::ng-deep.mat-form-field-underline {
-  /*change color of underline*/
+ /* ::ng-deep.mat-form-field-underline {
+  /*change color of underline
 
-  background-color: #1C2331 !important;
+  background-color: #003b72 !important;
 }
 ::ng-deep.mat-form-field-ripple {
- /*change color of underline when focused*/
- background-color: #1C2331 !important;;
-}
+ /*change color of underline when focused
+ background-color: #003b72 !important;;
+}*/
 .btn-primary{
   margin-top: 5%;
   border-color: #003b72 ;

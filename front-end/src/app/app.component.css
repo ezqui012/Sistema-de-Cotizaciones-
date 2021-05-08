@@ -1,1 +1,20 @@
+body{
+  background-color: #F0F0F8;
+}
 
+.colorModal .modal-content{
+  color: #003b72 !important;
+  background-color: #F0F0F8;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle , .mat-radio-outer-circle {
+  border-color: #003b72 !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle{
+  background-color: #003b72 !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  opacity: 0 !important;
+}

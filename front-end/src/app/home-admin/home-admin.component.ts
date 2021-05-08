@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-admin',
@@ -11,9 +12,13 @@ export class HomeAdminComponent implements OnInit {
 
   nameUser = localStorage.getItem('quot-user') ? localStorage.getItem('quot-user') : '';
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
-
+  navigateTo(path: String){
+    this.router.navigate([path]);
+  }
 }

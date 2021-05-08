@@ -17,7 +17,8 @@ body{
 background-color:#2f82ff !important;
 color: white;
 }
-.btn-one {
+.btn-one{
+
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
@@ -35,30 +36,21 @@ color: white;
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
-
   width: 80px;
 }
 
-.headTable{
-  background-color: #003b72;
-  color: white;
-  display: none;
-}
-.containerTable{
-  color:#0000 ;
-  background-color: #fafafa;
-}
+
 /*estilos Modal*/
 .contentModal{
   background-color: #F0F0F8 !important;
 }
-
-.colorModal .modal-content{
-  color: #003b72 !important;
-  background-color: #F0F0F8;
-}
 .modal-title{
- color: #003b72 !important;
+  color: #003b72 !important;
+ }
+
+.colorModal, .modal-content{
+  color: #003b72;
+  background-color: #F0F0F8;
 }
 .close{
   color: rgb(7, 7, 7);
@@ -69,14 +61,20 @@ color: white;
 .dateInfo{
   font-weight: bold;
   display: flex;
-  color:#003b72 !important;
+  color: #003b72 !important;
 }
 .dateInfoValue{
   font-weight: normal;
   color: #1C2331;
   margin-left: 10px;
 }
-/*Estilos de tabla*/
+
+.headTable{
+  background-color: #003b72;
+  color: white;
+  display: none;
+}
+
 .newBodyTable{
   color:#0000 ;
   background-color: #fafafa;
@@ -98,6 +96,15 @@ color: white;
 }
 .nomHead{
   width: 72%;
+}
 
+.numHeadG{
+  width: 6%;
+}
+.nomHeadG{
+  width: 49%;
+}
+.monHeadG{
+  width: 28%;
 }
 

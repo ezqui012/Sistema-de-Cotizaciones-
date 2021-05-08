@@ -35,4 +35,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('email','UserController@getEmail');
     Route::post('ci', 'UserController@getCi');
     Route::ApiResource('assignedPermit', 'AssignedPermitController');
+    Route::get('list','UnitController@getUnitList');
 });
+
+
+
+
