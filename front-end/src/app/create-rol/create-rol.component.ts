@@ -8,7 +8,7 @@ import { AssignedPermit, RegisterAssignedPermitResponse } from '../Model/assigne
 import { PermitService } from '../services/permit.service';
 import { RolesService } from '../services/roles.service';
 import { AssignedPermitService } from '../services/assignedPermit.service';
-
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -52,8 +52,11 @@ export class CreateRolComponent implements OnInit {
     public _roleService: RolesService,
     public _permitService: PermitService,
     public _assignedPermit: AssignedPermitService,
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private titlePage: Title
+  ) {
+    this.titlePage.setTitle('Registro de roles - QUOT-UMSS');
+  }
 
   ngOnInit(): void {
     this.getPermit();

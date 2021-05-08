@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { FacultyService } from '../services/faculty.service';
 import { ResponseRegister } from '../Model/faculty';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-school-create',
@@ -33,8 +34,11 @@ export class SchoolCreateComponent implements OnInit {
     private router:Router,
     private fb: FormBuilder,
     private service: FacultyService,
-    public toastr: ToastrService
-  ) { }
+    public toastr: ToastrService,
+    private titlePage: Title
+  ) {
+    this.titlePage.setTitle('Registro de facultades - QUOT-UMSS');
+   }
 
   navigateTo(path: String){
     this.router.navigate([path]);

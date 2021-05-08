@@ -5,6 +5,7 @@ import { FacultyService } from '../services/faculty.service';
 import { UnitService } from '../services/unit.service';
 import { RegisterUnitResponse } from '../Model/unit';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-units-register',
@@ -32,8 +33,11 @@ export class UnitsRegisterComponent implements OnInit {
     private service: FacultyService,
     private fb: FormBuilder,
     private serviceUnit: UnitService,
-    public toastr: ToastrService
-    ) { }
+    public toastr: ToastrService,
+    private titlePage: Title
+    ) {
+      this.titlePage.setTitle('Registro de unidades - QUOT-UMSS');
+    }
 
   ngOnInit(): void {
     this.getFaculties();

@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PersonalUserService } from '../services/personalUser.service';
+import { PersonalUserService } from '../services/PersonalUser.service';
 import { FormControl } from '@angular/forms';
 import {PersonalUser} from '../Model/personalUser'
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-list',
@@ -22,9 +23,10 @@ export class UserListComponent implements OnInit {
   constructor(
     private modal: NgbModal,
     private router: Router,
-    public _personalUserService: PersonalUserService
+    public _personalUserService: PersonalUserService,
+    private titlePage: Title
   ) {
-
+    this.titlePage.setTitle('Lista de usuarios - QUOT-UMSS');
   }
 
   ngOnInit(): void {

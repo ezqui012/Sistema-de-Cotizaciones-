@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FacultyService } from '../services/faculty.service';
 import { FormControl } from '@angular/forms';
-import {Faculty} from '../Model/faculty'
+import {Faculty} from '../Model/faculty';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-school-list',
@@ -20,9 +21,10 @@ export class SchoolListComponent implements OnInit {
   constructor(
     private modal: NgbModal,
     private router: Router,
-    public _facultyService: FacultyService
+    public _facultyService: FacultyService,
+    private titlePage: Title
   ) {
-
+    this.titlePage.setTitle('Lista de facultades - QUOT-UMSS');
   }
 
   ngOnInit(): void {
