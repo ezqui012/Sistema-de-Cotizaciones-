@@ -19,7 +19,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { AuthAdminGuard } from './guards/auth-admin.guard';
 import { AuthLoginGuard } from './guards/auth-login.guard';
 import { AdministrativasComponent } from './administrativas/administrativas.component';
-import { EditarComponent } from './editar/editar.component';
+//import { EditarComponent } from './editar/editar.component';
 
 const routes: Routes = [
   {
@@ -96,10 +96,10 @@ const routes: Routes = [
     path:'unit-list',
     component: AdministrativasComponent
   },
-  {
+  /*{
     path: 'unit-edit',
     component: EditarComponent
-  }
+  }*/
 
 ];
 

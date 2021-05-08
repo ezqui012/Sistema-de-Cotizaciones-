@@ -40,7 +40,7 @@ class UnitController extends Controller
 
                 FROM units u, faculties fa
                 WHERE u.id_faculty = fa.id_faculty
-                AND u.type = ?', [$request->type]);
+                AND u.type = ? ORDER BY u.name_unit ASC', [$request->type]);
 
                 return $unit;
 
