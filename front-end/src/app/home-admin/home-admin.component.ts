@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import {Router} from '@angular/router';
 
 @Component({
@@ -13,8 +14,11 @@ export class HomeAdminComponent implements OnInit {
   nameUser = localStorage.getItem('quot-user') ? localStorage.getItem('quot-user') : '';
 
   constructor(
-    private router: Router
-  ) { }
+    private router: Router,
+    private titlePage: Title
+  ) {
+    this.titlePage.setTitle('Inicio administrador - QUOT-UMSS');
+   }
 
   ngOnInit(): void {
   }

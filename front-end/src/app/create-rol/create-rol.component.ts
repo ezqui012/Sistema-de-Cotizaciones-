@@ -8,6 +8,7 @@ import { AssignedPermit, RegisterAssignedPermitResponse } from '../Model/assigne
 import { PermitService } from '../services/permit.service';
 import { RolesService } from '../services/roles.service';
 import { AssignedPermitService } from '../services/assignedPermit.service';
+import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -31,13 +32,13 @@ export class CreateRolComponent implements OnInit {
   idRole:any;
 
   //private patternNumber = /^[0-9]+(\.?[0-9]+)?$/;
-  private pattern_name = /^[a-zA-Z]*$/;
-  private pattern_des = /^[a-zA-Z-z0-9-zñÑ\u00E0-\u00FC ]*$/
+  //private pattern_name = /^[a-zA-Z]*$/;
+  private pattern_name = /^[a-zA-Z-zñÑ\u00E0-\u00FC ]*$/
 
   registerForm = this.fb.group({
     //id_permit: ['', [Validators.required]],
     name_role: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(75), Validators.pattern(this.pattern_name)]],
-    description_role: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(100), Validators.pattern(this.pattern_des)]],
+    description_role: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(100)]],
     checkAproveSol: [false],
     checkCreateCot: [false],
     checkCreateSol: [false],
@@ -54,8 +55,11 @@ export class CreateRolComponent implements OnInit {
     public _permitService: PermitService,
     public _assignedPermit: AssignedPermitService,
     private fb: FormBuilder,
-    public toastr: ToastrService
-  ) { }
+    public toastr: ToastrService,
+    private titlePage: Title
+  ) {
+    this.titlePage.setTitle('Registro de roles - QUOT-UMSS');
+  }
 
   ngOnInit(): void {
     this.getPermit();
