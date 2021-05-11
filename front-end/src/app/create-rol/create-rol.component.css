@@ -1,0 +1,73 @@
+.containerBody{
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 20px;
+}
+body{
+  background-color: #F0F0F8;
+}
+.containertop{
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  color: #003b72;
+  font-weight: bolder;
+}
+
+.btn-one{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 200px;
+  margin-left: 20px;
+}
+.btn-cancel{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color: #1C2331;
+  margin-right: 20px;
+  width: 120px;
+}
+.btn-register{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 120px;
+}
+.btn:hover{
+  background-color: #2f82ff !important;
+  color: white;
+}
+/*Formulario*/
+.form-newRol{
+  width: 100%;
+
+}
+.nameRol-full-width{
+  width: 40%;
+  font-size: 1rem;
+}
+.desRol-full-width{
+  width: 100%;
+  font-size: 1rem;
+}
+/*Permisos*/
+.containerPermiso{
+ padding: 50px;
+ font-size: 1.3em;
+}
+
+.containerBtn{
+  text-align: center;
+}
+.form-check{
+  margin-top: 8px;
+}
+
+.failed-register{
+  padding-top: 10px;
+  /*margin-bottom: 0px;*/
+  font-size: 1rem;
+  text-align: center;
+  color: red;
+}

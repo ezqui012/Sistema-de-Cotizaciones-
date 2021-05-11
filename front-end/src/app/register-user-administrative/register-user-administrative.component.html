@@ -1,0 +1,89 @@
+<main>
+  <app-navbar></app-navbar>
+  <div>
+    <div class="containerTop">
+      <h1><b> Registrar Personal</b></h1>
+      <div class="btnCreate">
+        <button type="button" class="btn btn-one" (click)="navigateTo('/user-list')"> Ver Lista</button>
+      </div>
+    </div>
+  </div>
+  <form class="form-container" [formGroup]="registerForm" (ngSubmit)="insertData()">
+    <div class="leftDiv">
+      <mat-form-field>
+        <input class="fieldRegister" formControlName="email" matInput placeholder="Titulo" type="email"
+          placeholder="Ingrese Correo"  [(ngModel)]="RegisterUser.email">
+        <mat-error *ngIf="isValid('email')">
+          {{getErrorMessageEmail('email')}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input class="fieldRegister" formControlName="name" matInput placeholder="Titulo" type="text"
+          placeholder="Ingrese Nombre Completo"  [(ngModel)]="RegisterUser.name"
+          (input)="inputValidator($event)" >
+        <mat-error *ngIf="isValid('name')">
+          {{getErrorMessageName('name')}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input class="fieldRegister" formControlName="ci" matInput placeholder="Titulo" type="text"
+          placeholder="Ingrese CI" [(ngModel)]="RegisterUser.ci"
+          >
+        <mat-error *ngIf="isValid('ci')">
+          {{getErrorMessageCi('ci')}}
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="matformLeft">
+        <input input class="fieldRegister" formControlName="address" matInput placeholder="Titulo" type="text"
+          placeholder="Ingrese Dirección"  [(ngModel)]="RegisterUser.address">
+        <mat-error *ngIf="isValid('address')">
+          {{getErrorMessageAddress('address')}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="rightDiv">
+      <mat-form-field class=leftCol>
+        <mat-select placeholder="Seleccione rol" formControlName="id_role" >
+          <mat-option *ngFor="let rol of roles" [value]="rol.id_role">
+            {{rol.name_role}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class=leftCol>
+        <mat-select placeholder="Seleccione Unidad" #unidad formControlName="id_unit">
+          <mat-option *ngFor="let unit of units" [value]="unit.id_unit">
+            {{unit.name_unit}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input class="fieldRegister" formControlName="phone" matInput placeholder="Titulo" type="text"
+          placeholder="Ingrese Teléfono" [(ngModel)]="RegisterUser.phone"
+         >
+        <mat-error *ngIf="isValid('phone')">
+          {{getErrorMessagePhone('phone')}}
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input class="fieldRegister" formControlName="password" matInput placeholder="Contraseña" type="password"
+          placeholder="Contraseña" [(ngModel)]="RegisterUser.password">
+        <mat-error *ngIf="isValid('password')">
+          {{getErrorMessagePassword('password')}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="containerButton">
+      <button class="btn btn-danger" (click)="navigateTo('/user-list')">
+        Cancelar
+      </button>
+      <button class="btn btn-primary">
+        Registrar
+      </button>
+    </div>
+  </form>
+</main>

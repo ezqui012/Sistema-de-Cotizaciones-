@@ -1,0 +1,53 @@
+body{
+  margin: 0;
+  background-color: #f0f0f8;
+}
+
+.contentBody{
+  padding-top: 50px;
+  display: flex;
+}
+.contentImg{
+  width: 50%;
+  text-align: center;
+  padding-left: 6%;
+  padding-right: 6%;
+}
+.imgContact{
+  width: 100%;
+}
+.contentInfo{
+width: 50%;
+padding-right: 5%;
+}
+.titleInfo{
+  color: #003b72;
+  font-size: 1.5rem;
+  padding-bottom:50Px;
+}
+.titleTwo{
+  color: #1C2331;
+  font-size: 1.2rem;
+}
+.textP{
+  font-size: 1.2rem;
+}
+.imgIcon{
+padding-right: 20px;
+margin-right: 10px;
+width: 46px;
+height: 46px;
+}
+@media(max-width:500px){
+.contentBody{
+  width: 100%;
+  display: block;
+  padding-left: 5%;
+  padding-right: 5%;
+
+}
+.contentImg,.contentInfo{
+  width: 100%;
+}
+
+}

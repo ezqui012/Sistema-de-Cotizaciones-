@@ -1,0 +1,61 @@
+<app-navbar-outside></app-navbar-outside>
+
+<div class="main-container">
+  <div class="login-container">
+    <div class="img-login">
+      <img src="../../assets/img-login/image-login.svg" alt="Work image" class="img-work">
+    </div>
+    <div class="login-form">
+      <mat-card class="card-login">
+        <mat-card-content>
+
+          <h1 class="title-login"><b>Iniciar Sesión</b></h1>
+          <br>
+          <form class="form-container" [formGroup]="loginForm">
+            <mat-form-field class="full-width-input separator">
+              <mat-label>Correo</mat-label>
+              <input matInput placeholder="Ingrese su correo" type="email" formControlName="email" (keypress)="onKeyPress()" required>
+              <mat-error *ngIf="isValid('email')">
+                {{ getErrorMessage('email') }}
+              </mat-error>
+            </mat-form-field>
+            <br>
+            <br>
+            <mat-form-field class="full-width-input separator">
+              <mat-label>Contraseña</mat-label>
+              <input matInput placeholder="Ingrese su contraseña" type="password" formControlName="password" (keypress)="onKeyPress()" required>
+              <mat-error *ngIf="isValid('password')">
+                {{ getErrorMessage('password') }}
+              </mat-error>
+            </mat-form-field>
+            <br>
+            <br>
+            <button (click)="onLogin()" type="button" class="btn-form">Ingresar</button>
+          </form>
+          <br>
+          <p *ngIf="messageFail" class="failed-login">
+            {{ this.messageLoginFailed }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="footer-container">
+    <div class="social-media">
+      <a class="navbar-brand" href="https://www.facebook.com/UmssBolOficial/" target="_blank">
+        <img src="../../assets/img-social-media/facebook-icon-white.svg" alt="facebook icon" class="img-social-media">
+      </a>
+      <a class="navbar-brand" href="https://www.twitter.com/UmssBolOficial/" target="_blank">
+        <img src="../../assets/img-social-media/twitter-icon-white.svg" alt="twitter icon" class="img-social-media">
+      </a>
+      <a class="navbar-brand" href="https://www.instagram.com/umssboloficial" target="_blank">
+        <img src="../../assets/img-social-media/instagram-icon-white.svg" alt="instagram icon" class="img-social-media">
+      </a>
+    </div>
+    <div class="copyright">
+      <p>Derechos Reservados ©・Universidad Mayor de San Simón・THNS</p>
+    </div>
+  </div>
+
+</div>

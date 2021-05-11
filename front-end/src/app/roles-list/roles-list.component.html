@@ -1,0 +1,90 @@
+<!--Navbar-->
+<app-navbar></app-navbar>
+<!--Modal Roles-->
+<ng-template #content let-modal>
+
+    <div class="modal-header">
+      <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
+      <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="dateInfo">
+        <h3><b>Nombre del rol:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{roles[pos].name_role}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>Descipción:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{roles[pos].description_role}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>Permisos:</b></h3>
+        <div class="conentPermiso">
+          <div class="dateInfoValue" *ngFor="let permit of permits">
+            <h3>{{permit.name_permission}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</ng-template>
+
+
+<!--header-->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Administrar Roles</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/roles-create')">Registrar Rol</button>
+
+    </div>
+  </div>
+
+  <!--Tabla-->
+  <div class="containerTable">
+    <div class="newHeadTable">
+      <div class="numHead"><b>Nº</b></div>
+      <div class="nomHead"><b>Nombre</b></div>
+      <div class="accHead"><b>Acciones</b></div>
+    </div>
+    <div class="newBodyTable">
+      <table class="table table-striped table-fixed">
+        <thead class="headTable">
+          <tr id="titleHead" class="row-table">
+            <th scope="col">Nº</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody class="bodyTable">
+
+          <tr class="row-table" *ngFor="let role of roles; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{role.name_role}}</td>
+
+            <td>
+              <div class="row justify-content-end" style="padding-right: 20%;">
+                <button type="button" class="btn btn-edit">Editar</button>
+                <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content,i, role.id_role)">Ver</button>
+              </div>
+            </td>
+
+          </tr>
+
+
+
+        </tbody>
+
+
+      </table>
+    </div>
+
+  </div>
+
+</div>
