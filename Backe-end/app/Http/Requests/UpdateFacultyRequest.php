@@ -24,7 +24,7 @@ class UpdateFacultyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_faculty' => 'required|min:6|max:100|unique:faculties,name_faculty' . $this->route('faculty')->id_faculty,
+            'name_faculty' => 'required|min:6|max:100',
             'phone_faculty' => 'required|min:7|max:8',
             'email_faculty' => 'required|min:6|max:100',
             'address_faculty' => 'required|min:15|max:100',
