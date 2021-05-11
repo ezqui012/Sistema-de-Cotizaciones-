@@ -32,13 +32,13 @@ export class CreateRolComponent implements OnInit {
   idRole:any;
 
   //private patternNumber = /^[0-9]+(\.?[0-9]+)?$/;
-  private pattern_name = /^[a-zA-Z]*$/;
-  private pattern_des = /^[a-zA-Z-z0-9-zñÑ\u00E0-\u00FC ]*$/
+  //private pattern_name = /^[a-zA-Z]*$/;
+  private pattern_name = /^[a-zA-Z-zñÑ\u00E0-\u00FC ]*$/
 
   registerForm = this.fb.group({
     //id_permit: ['', [Validators.required]],
     name_role: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(75), Validators.pattern(this.pattern_name)]],
-    description_role: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(100), Validators.pattern(this.pattern_des)]],
+    description_role: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(100)]],
     checkAproveSol: [false],
     checkCreateCot: [false],
     checkCreateSol: [false],
