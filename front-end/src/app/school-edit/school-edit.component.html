@@ -14,26 +14,38 @@
   <div>
 
 
-    <form class="form-newRol">
+    <form class="form-newRol" [formGroup]="facultyRegisterForm">
       <div class="formOne">
         <div class="formTwo">
           <mat-form-field class="date-info">
             <mat-label>Nombre</mat-label>
-            <input matInput placeholder="Ingrese el nombre del rol">
+            <input matInput placeholder="Ingrese el nombre de la facultad" formControlName="name_faculty" (keypress)="onKeyPress()">
+            <mat-error *ngIf="isValid('name_faculty')">
+              {{ getErrorMessage('name_faculty') }}
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="date-info">
-            <mat-label>Email</mat-label>
-            <input matInput placeholder="Ingrese descricioón del rol">
+            <mat-label>Correo</mat-label>
+            <input matInput placeholder="Ingrese correo" formControlName="email_faculty" (keypress)="onKeyPress()">
+            <mat-error *ngIf="isValid('email_faculty')">
+              {{ getErrorMessage('email_faculty') }}
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="formTwo">
           <mat-form-field class="date-info">
             <mat-label>Decano</mat-label>
-            <input matInput placeholder="Ingrese el nombre del rol">
+            <input matInput placeholder="Ingrese el nombre del decano" formControlName="dean_faculty" (keypress)="onKeyPress()">
+            <mat-error *ngIf="isValid('dean_faculty')">
+              {{ getErrorMessage('dean_faculty') }}
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="date-info">
             <mat-label>Teléfono</mat-label>
-            <input matInput placeholder="Ingrese descricioón del rol">
+            <input matInput placeholder="Ingrese número de teléfono" formControlName="phone_faculty" (keypress)="onKeyPress()">
+            <mat-error *ngIf="isValid('phone_faculty')">
+              {{ getErrorMessage('phone_faculty') }}
+            </mat-error>
           </mat-form-field>
         </div>
 
@@ -43,7 +55,10 @@
       <div class="contentAdress">
         <mat-form-field class="date-info-full-width">
           <mat-label>Dirección</mat-label>
-          <input matInput placeholder="Ingrese descricioón del rol">
+          <input matInput placeholder="Ingrese descricioón del rol" formControlName="address_faculty" (keypress)="onKeyPress()">
+          <mat-error *ngIf="isValid('address_faculty')">
+            {{ getErrorMessage('address_faculty') }}
+          </mat-error>
         </mat-form-field>
 
       </div>
@@ -55,11 +70,12 @@
       <div class="containerBtn">
         <div>
           <button class="btn btn-cancel" (click)="navigateTo('/school-list')">Cancelar</button>
-          <button class="btn btn-register">Registrar</button>
+          <button class="btn btn-register" (click)="editFaculty()">Guardar</button>
         </div>
-
       </div>
-
+      <p *ngIf="messageFail" class="failed-register">
+        {{ this.messageRegisterFailed }}
+      </p>
     </form>
 
   </div>
