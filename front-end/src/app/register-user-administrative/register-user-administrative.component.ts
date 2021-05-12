@@ -8,6 +8,8 @@ import { RegisteruserService } from 'src/app/services/registeruser.service';
 import { RolDropdownService } from '../services/rol-dropdown.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-register-user-administrative',
   templateUrl: './register-user-administrative.component.html',
@@ -38,7 +40,9 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   }
   //fb=formbuilder esta en el import
   constructor(private formBuilder: FormBuilder, private RegisteruserService: RegisteruserService,
-     public unitService: UnitService, public rolService: RolDropdownService, public toastr: ToastrService,private router:Router) {
+     public unitService: UnitService, public rolService: RolDropdownService, public toastr: ToastrService,private router:Router,
+     private titlePage: Title) {
+      this.titlePage.setTitle('Registro de personal - QUOT-UMSS');
     }
   showToastrErrorEmail(){
     this.toastr.error('El email ya está en uso','Campo Inválido');

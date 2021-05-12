@@ -64,3 +64,10 @@ body{
   margin-top: 8px;
 }
 
+.failed-register{
+  padding-top: 10px;
+  /*margin-bottom: 0px;*/
+  font-size: 1rem;
+  text-align: center;
+  color: red;
+}

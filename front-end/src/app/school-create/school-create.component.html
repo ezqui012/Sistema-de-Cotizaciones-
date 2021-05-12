@@ -22,7 +22,7 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field class="date-info">
-            <mat-label>Email</mat-label>
+            <mat-label>Correo</mat-label>
             <input matInput placeholder="Ingrese correo" formControlName="email_faculty" (keypress)="onKeyPress()">
             <mat-error *ngIf="isValid('email_faculty')">
               {{ getErrorMessage('email_faculty') }}

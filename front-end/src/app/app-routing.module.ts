@@ -84,7 +84,7 @@ const routes: Routes = [
     canActivate: [AuthAdminGuard]
   },
   {
-    path:'school-edit',
+    path:'school-edit/:id',
     component: SchoolEditComponent,
     canActivate: [AuthAdminGuard]
   },
