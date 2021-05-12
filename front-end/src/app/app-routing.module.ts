@@ -1,5 +1,5 @@
 import { RegisterUserAdministrativeComponent } from './register-user-administrative/register-user-administrative.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateRolComponent } from './create-rol/create-rol.component';
 import { EditRolComponent } from './edit-rol/edit-rol.component';
@@ -19,6 +19,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { AuthAdminGuard } from './guards/auth-admin.guard';
 import { AuthLoginGuard } from './guards/auth-login.guard';
 import { AdministrativasComponent } from './administrativas/administrativas.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 //import { EditarComponent } from './editar/editar.component';
 
 const routes: Routes = [
@@ -96,6 +97,10 @@ const routes: Routes = [
     path:'unit-list',
     component: AdministrativasComponent
   },
+  {
+    path:'edit-user/:id',
+    component: EditUserComponent
+  }
   /*{
     path: 'unit-edit',
     component: EditarComponent

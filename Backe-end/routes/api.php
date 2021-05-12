@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::ApiResource('assignedPermit', 'AssignedPermitController');
     Route::get('list','UnitController@getUnitList');
 });
+Route::get('user/{id}', 'UserController@getUserById');
+Route::put('updateAdministrativeUser/{id}', 'UserController@updateUser');
 
 
 

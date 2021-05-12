@@ -1,20 +1,24 @@
+import { PersonalUserService } from './../services/PersonalUser.service';
+import { EditUserService } from './../services/edit-user.service';
+import { Component, OnInit } from '@angular/core';
 import { Unit } from './../Model/unit';
 import { Rol } from './../Model/rol';
 import { Registeruser } from './../Model/registeruser';
 import { UnitService } from './../services/unit.service';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { RegisteruserService } from 'src/app/services/registeruser.service';
 import { RolDropdownService } from '../services/rol-dropdown.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
-  selector: 'app-register-user-administrative',
-  templateUrl: './register-user-administrative.component.html',
-  styleUrls: ['./register-user-administrative.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  selector: 'app-edit-user',
+  templateUrl: './edit-user.component.html',
+  styleUrls: ['./edit-user.component.css']
 })
-export class RegisterUserAdministrativeComponent implements OnInit {
+export class EditUserComponent implements OnInit {
+  id:any;
+  dataToUpdate: any;
   user: any;
   units: Unit []|undefined;
   roles: Rol []|undefined;
@@ -22,7 +26,7 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   ci: any;
   RegisterUser = new Registeruser();
   submitted = false;
-  registerForm = this.formBuilder.group({
+  updateForm = this.formBuilder.group({
     id_role: ['', [Validators.required]],
     id_unit: ['', [Validators.required]],
     name: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(15),
@@ -37,8 +41,22 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     this.router.navigate([path]);
   }
   //fb=formbuilder esta en el import
-  constructor(private formBuilder: FormBuilder, private RegisteruserService: RegisteruserService,
-     public unitService: UnitService, public rolService: RolDropdownService, public toastr: ToastrService,private router:Router) {
+  constructor(private formBuilder: FormBuilder,
+    private RegisteruserService: RegisteruserService,
+    private unitService: UnitService,
+    private rolService: RolDropdownService,
+    private toastr: ToastrService,
+    private router:Router,
+    private updateService: EditUserService,
+    private route : ActivatedRoute,
+    private userDataService : PersonalUserService
+    ) {}
+  ngOnInit(): void {
+      console.log(this.route.snapshot.params.id);
+      this.id = this.route.snapshot.params.id;
+      this.getData();
+      this.getUnits();
+      this.getRoles();
     }
   showToastrErrorEmail(){
     this.toastr.error('El email ya está en uso','Campo Inválido');
@@ -52,24 +70,24 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   getErrorMessageEmail(field: string) {
     let message;
 
-    if (this.registerForm.get(field)?.errors?.required) {
+    if (this.updateForm.get(field)?.errors?.required) {
       message = `El campo ${field} es obligatorio`;
-    } else if (this.registerForm.get(field)?.hasError('minlength')) {
+    } else if (this.updateForm.get(field)?.hasError('minlength')) {
       message = "Ingrese minimo 8 caracteres";
-    } else if (this.registerForm.get(field)?.hasError('maxlength')) {
+    } else if (this.updateForm.get(field)?.hasError('maxlength')) {
       message = "Ingrese maximo 100 caracteres";
-    }  else if (this.registerForm.get(field)?.hasError('pattern')) {
+    }  else if (this.updateForm.get(field)?.hasError('pattern')) {
       message = "Ingrese un email valido, ejemplo: Carlos@gmail.com";
     }
     return message;
   }
   getErrorMessageName(field: string) {
     let message;
-    if (this.registerForm.get(field)?.errors?.required) {
+    if (this.updateForm.get(field)?.errors?.required) {
       message = `El campo ${field} es obligatorio`;
-    } else if (this.registerForm.get(field)?.hasError('minlength')) {
+    } else if (this.updateForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 15 caracteres";
-    } else if (this.registerForm.get(field)?.hasError('maxlength')) {
+    } else if (this.updateForm.get(field)?.hasError('maxlength')) {
       message = "Máximo de 100 caracteres";
     }
     return message;
@@ -78,13 +96,13 @@ export class RegisterUserAdministrativeComponent implements OnInit {
 
   getErrorMessageCi(field: string) {
     let message;
-    if (this.registerForm.get(field)?.errors?.required) {
+    if (this.updateForm.get(field)?.errors?.required) {
       message = `El campo ${field} es obligatorio`;
-    } else if (this.registerForm.get(field)?.hasError('minlength')) {
+    } else if (this.updateForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 7 dígitos";
-    } else if (this.registerForm.get(field)?.hasError('maxlength')) {
+    } else if (this.updateForm.get(field)?.hasError('maxlength')) {
       message = "Máximo de 9 dígitos";
-    } else if(this.registerForm.get(field)?.hasError('pattern')){
+    } else if(this.updateForm.get(field)?.hasError('pattern')){
       message = "El campo solo admite dígitos"
     }
     return message;
@@ -92,11 +110,11 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   }
   getErrorMessageAddress(field: string) {
     let message;
-    if (this.registerForm.get(field)?.errors?.required) {
+    if (this.updateForm.get(field)?.errors?.required) {
       message = `El campo ${field} es obligatorio`;
-    } else if (this.registerForm.get(field)?.hasError('minlength')) {
+    } else if (this.updateForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 30 caracteres";
-    } else if (this.registerForm.get(field)?.hasError('maxlength')) {
+    } else if (this.updateForm.get(field)?.hasError('maxlength')) {
       message = "Máximo de 100 caracteres";
     }
     return message;
@@ -104,13 +122,13 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   }
   getErrorMessagePhone(field: string) {
     let message;
-    if (this.registerForm.get(field)?.errors?.required) {
+    if (this.updateForm.get(field)?.errors?.required) {
       message = `El campo ${field} es obligatorio`;
-    } else if (this.registerForm.get(field)?.hasError('minlength')) {
+    } else if (this.updateForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 7 dígitos";
-    } else if (this.registerForm.get(field)?.hasError('maxlength')) {
+    } else if (this.updateForm.get(field)?.hasError('maxlength')) {
       message = "Máximo de 8 dígitos";
-    } else if(this.registerForm.get(field)?.hasError('pattern')){
+    } else if(this.updateForm.get(field)?.hasError('pattern')){
       message = "El campo solo admite dígitos"
     }
     return message;
@@ -121,32 +139,39 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   getErrorMessagePassword(field: string) {
     let message;
 
-    if (this.registerForm.get(field)?.errors?.required) {
+    if (this.updateForm.get(field)?.errors?.required) {
       message = `El campo ${field} es obligatorio`;
-    } else if (this.registerForm.get(field)?.hasError('minlength')) {
+    } else if (this.updateForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 8 caracteres";
-    } else if (this.registerForm.get(field)?.hasError('maxlength')) {
+    } else if (this.updateForm.get(field)?.hasError('maxlength')) {
       message = "Máximo de 32 caracteres";
-    } else if( this.registerForm.get(field)?.hasError('pattern')){
+    } else if( this.updateForm.get(field)?.hasError('pattern')){
       message = "La contraseña debe tener al menos una letra minúscula, al menos una letra mayúscula y al menos un dígito";
 
     }
     return message;
 
   }
+  getData(){
+    this.userDataService.getDataUserByID(this.id).subscribe(res =>{
+      console.log(res);
+      this.dataToUpdate = res;
+      this.RegisterUser = this.dataToUpdate;
+    })
+  }
   insertData() {
     this.getEmail();
   }
   //load Unit DropDown
   getEmail(){
-    this.RegisteruserService.getEmail(this.registerForm.get('email')?.value).subscribe((res: any) => {
+    this.RegisteruserService.getEmail(this.updateForm.get('email')?.value).subscribe((res: any) => {
     this.email = res;
     this.getCi();
   })
 
   }
   getCi(){
-    this.RegisteruserService.getCi(this.registerForm.get('ci')?.value).subscribe((res: any) => {
+    this.RegisteruserService.getCi(this.updateForm.get('ci')?.value).subscribe((res: any) => {
       this.ci = res;
       this.compare();
     })
@@ -156,9 +181,9 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     if(this.email===null){
       console.log(this.ci+'ci');
       if(this.ci===null){
-          this.RegisteruserService.insertData(this.registerForm.value).subscribe(res => {
+          this.RegisteruserService.insertData(this.updateForm.value).subscribe(res => {
           this.showToastSuccess();
-          this.registerForm.reset();
+          this.updateForm.reset();
         });
       }else{
         this.showToastrErrorCi();
@@ -183,25 +208,22 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   }
 
   isValid(field: string) {
-    return (this.registerForm.get(field)?.touched || this.registerForm.get(field)?.dirty) && !this.registerForm.get(field)?.valid;
+    return (this.updateForm.get(field)?.touched || this.updateForm.get(field)?.dirty) && !this.updateForm.get(field)?.valid;
   }
 
   OnResetForm() {
-    this.registerForm.reset();
-  }
-  ngOnInit(): void {
-    this.getUnits();
-    this.getRoles();
+    this.updateForm.reset();
   }
 
+
   onSaveForm() {
-    if (this.registerForm.valid) {
+    if (this.updateForm.valid) {
       this.OnResetForm();
       console.log('valid');
     } else { console.log('invalid'); }
   }
   // tslint:disable-next-line: typedef
-  get userName() { return this.registerForm.controls; }
+  get userName() { return this.updateForm.controls; }
 
 
   // tslint:disable-next-line: typedef
@@ -215,14 +237,6 @@ export class RegisterUserAdministrativeComponent implements OnInit {
 
     }
   }
-  // Validar campos solo numeros
-  // onKeyPress(event: any) {
-  //   const regexpNumber = /[0-9\+\-\ ]/;
-  //   let inputCharacter = String.fromCharCode(event.charCode);
-  //   if (event.keyCode != 8 && !regexpNumber.test(inputCharacter)) {
-  //     event.preventDefault();
-  //   }
-  // }
 
 
 }

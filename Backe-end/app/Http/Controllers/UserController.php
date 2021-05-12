@@ -72,6 +72,21 @@ class UserController extends Controller
 
         return $ci;
     }
+    public function getUserById($id){
+        $user = User::find($id);
+        if(is_null($user)){
+            return response()->json(['message' => 'User Not found'], 404);
+        }
+        return response()->json($user::find($id),200);
+    }
+    public function updateUser(Request $request, $id){
+        $user = User::find($id);
+        if(is_null($user)){
+            return response()->json(['message'=> 'Usuario no encontrado'], 404);
+        }
+        $user->update($request->all());
+        return response($user,200);
+    }
 
 
 }
