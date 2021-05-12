@@ -52,10 +52,12 @@ export class AdministrativasComponent implements OnInit {
     })
   }
 
-  navigateTo(path: String){
+  navigateToEdit(path: String ,id:any){
+    this.router.navigate([path,id]);
+  }
+  navigateTo(path: String ){
     this.router.navigate([path]);
   }
-
   openModal(content: any, pos: any) {
     this.modal.open(content, { windowClass: "colorModal" });
     this.pos = pos;

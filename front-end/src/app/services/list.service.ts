@@ -8,7 +8,7 @@ import { List, ListUnit, SpendingUnit } from '../Model/list';
   providedIn: 'root'
 })
 export class ListService{
-  URL = "http://127.0.0.1:8000/api/unit";
+
   constructor(private httpClient: HttpClient) { }
 
   gastoUnit(): Observable<ListUnit | any> {
@@ -18,6 +18,18 @@ export class ListService{
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
       return this.httpClient.get<ListUnit>(`${environment.URI_API}list?type=Gasto`, { headers: httpHeader });
+    }
+    return failed;
+
+  }
+  getUnitSelect(id:any): Observable<ListUnit | any> {
+    console.log("llego a servicios: " + id);
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<ListUnit>(`${environment.URI_API}list/${id}`, { headers: httpHeader });
     }
     return failed;
 
@@ -34,9 +46,7 @@ export class ListService{
 
   }
 
-  getUnit(): Observable<ListUnit> {
-    return this.httpClient.get<ListUnit>(this.URL);
-  }
+
   showList(list: ListUnit):Observable<SpendingUnit | any>{
     let failed: any;
 
