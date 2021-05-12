@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { FacultyService } from '../services/faculty.service';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
-import { ResponseRegister, Faculty } from '../Model/faculty';
+import { ResponseRegister } from '../Model/faculty';
 
 @Component({
   selector: 'app-school-edit',
@@ -55,7 +55,6 @@ export class SchoolEditComponent implements OnInit {
     this.service.getInfoFaculty(id).subscribe(
       (data) => {
         this.dataFaculty = data;
-        //console.log(data);
         this.loadValuesForm();
       },
       (error) => {
@@ -105,7 +104,20 @@ export class SchoolEditComponent implements OnInit {
       this.messageRegisterFailed = 'Existen campos incorrectos';
       return;
     }
-    console.log(this.facultyRegisterForm.value);
+    let res: ResponseRegister;
+    this.service.updateFaculty(this.route.snapshot.params.id, this.facultyRegisterForm.value).subscribe(
+      (data) => {
+        res = data;
+        if(res.res){
+          this.toastr.success('Se guardaron  los cambios con éxito');
+        }else{
+          this.toastr.warning('Ocurrio un error intente de nuevo');
+        }
+      },
+      (error) => {
+        this.toastr.error('El nombre de la facultad ya se encuentra registrado');
+      }
+    );
   }
 
   onKeyPress(){
