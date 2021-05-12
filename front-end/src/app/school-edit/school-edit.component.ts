@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FacultyService } from '../services/faculty.service';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
+import { ResponseRegister, Faculty } from '../Model/faculty';
 
 @Component({
   selector: 'app-school-edit',
@@ -18,8 +19,7 @@ export class SchoolEditComponent implements OnInit {
   private patternEmail = /\S+@\S+\.\S+/;
   private patternNameDean = /^[a-zA-Z-zñÑ\u00E0-\u00FC ]*$/;
 
-  messageFail = false;
-  messageRegisterFailed = '';
+  public dataFaculty: any
 
   facultyRegisterForm = this.fb.group({
     name_faculty: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.pattern(this.patternName)]],
@@ -29,13 +29,16 @@ export class SchoolEditComponent implements OnInit {
     dean_faculty: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50), Validators.pattern(this.patternNameDean)]]
   });
 
+  messageFail = false;
+  messageRegisterFailed = '';
 
   constructor(
     private router:Router,
     private fb: FormBuilder,
     private service: FacultyService,
     public toastr: ToastrService,
-    private titlePage: Title
+    private titlePage: Title,
+    private route: ActivatedRoute
     ) {
       this.titlePage.setTitle('Editar facultad - QUOT-UMSS');
      }
@@ -45,6 +48,29 @@ export class SchoolEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.infoFaculty(this.route.snapshot.params.id);
+  }
+
+  infoFaculty(id: any){
+    this.service.getInfoFaculty(id).subscribe(
+      (data) => {
+        this.dataFaculty = data;
+        //console.log(data);
+        this.loadValuesForm();
+      },
+      (error) => {
+        this.toastr.error(`Falla en la conexion ${error}`);
+        this.navigateTo('/school-list');
+      }
+    );
+  }
+
+  loadValuesForm(){
+    this.facultyRegisterForm.controls['name_faculty'].setValue(this.dataFaculty.name_faculty);
+    this.facultyRegisterForm.controls['phone_faculty'].setValue(this.dataFaculty.phone_faculty);
+    this.facultyRegisterForm.controls['email_faculty'].setValue(this.dataFaculty.email_faculty);
+    this.facultyRegisterForm.controls['address_faculty'].setValue(this.dataFaculty.address_faculty);
+    this.facultyRegisterForm.controls['dean_faculty'].setValue(this.dataFaculty.dean_faculty);
   }
 
   isValid(field:string){
