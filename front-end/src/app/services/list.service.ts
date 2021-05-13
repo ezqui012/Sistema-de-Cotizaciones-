@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
-import { List, ListUnit, SpendingUnit } from '../Model/list';
+import { ListUnitData, ListUnit, SpendingUnit, ResponseRegister } from '../Model/list';
 @Injectable({
   providedIn: 'root'
 })
@@ -29,10 +29,22 @@ export class ListService{
       const httpHeader = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
-      return this.httpClient.get<ListUnit>(`${environment.URI_API}list/${id}`, { headers: httpHeader });
+      return this.httpClient.get<ListUnit>(`${environment.URI_API}listId/${id}`, { headers: httpHeader });
     }
+    console.log("despues del servicio: "+failed)
     return failed;
 
+  }
+  updateUnitSelect(id:any, unit: ListUnitData):Observable<ResponseRegister | any>{
+    let failed: any;
+
+    if(localStorage.getItem('quot-umss-tk')){
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.put<ResponseRegister>(`${environment.URI_API}list/${id}`, unit, {headers: httpHeader});
+    }
+    return failed;
   }
   adminUnit(): Observable<ListUnit | any> {
     let failed: any;

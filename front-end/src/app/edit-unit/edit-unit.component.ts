@@ -17,16 +17,17 @@ import { ListService } from '../services/list.service';
 })
 export class EditUnitComponent implements OnInit {
 
-  unit: ListUnit[] | undefined;
+
   faculties: Faculty[] | undefined;
   showAmount:boolean=false;
   messageFail = false;
   messageRegisterFailed = '';
   id:any = '';
+  actualAmount:any
 
   private patternNumber = /^[0-9]+(\.?[0-9]+)?$/;
   private patternName = /^[a-zA-Z-z0-9-zñÑ\u00E0-\u00FC ]*$/
-
+  public unit: any;
   registerForm = this.fb.group({
     id_faculty: ['', [Validators.required]],
     name_unit: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.pattern(this.patternName)]],
@@ -58,9 +59,21 @@ export class EditUnitComponent implements OnInit {
 
   getUnit(id:any){
     this.serviceUnitSelect.getUnitSelect(id).subscribe((data) => {
-      console.log("dentro: "+data);
+      console.log(data);
 
       this.unit = data;
+
+      this.registerForm.controls['id_faculty'].setValue(this.unit.id_faculty);
+      this.registerForm.controls['name_unit'].setValue(this.unit.name_unit);
+      this.registerForm.controls['type'].setValue(this.unit.type);
+
+      if(this.unit.type === 'Gasto'){
+        this.actualAmount = this.unit.amount;
+        this.showAmount = true;
+        this.showInputAmout(true);
+        this.registerForm.controls['amount'].setValue(this.unit.amount);
+      }
+
 
       },
       (error:any) => {
@@ -112,40 +125,39 @@ export class EditUnitComponent implements OnInit {
     this.registerForm.get('amount')?.reset;
     if(this.showAmount){
       this.registerForm = this.fb.group({
-        id_faculty: ['', [Validators.required]],
-        name_unit: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.pattern(this.patternName)]],
+        id_faculty: [this.registerForm.get('id_faculty')?.value, [Validators.required]],
+        name_unit: [this.registerForm.get('name_unit')?.value, [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.pattern(this.patternName)]],
         type: ['Gasto', [Validators.required]],
-        amount: ['', [Validators.required, Validators.max(9999999999.99), Validators.pattern(this.patternNumber)]]
+        amount: [this.actualAmount, [Validators.required, Validators.max(9999999999.99), Validators.pattern(this.patternNumber)]]
       });
     }else{
       this.registerForm = this.fb.group({
-        id_faculty: ['', [Validators.required]],
-        name_unit: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.pattern(this.patternName)]],
+        id_faculty: [this.registerForm.get('id_faculty')?.value, [Validators.required]],
+        name_unit: [this.registerForm.get('name_unit')?.value, [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.pattern(this.patternName)]],
         type: ['Administrativa', [Validators.required]]
       });
     }
   }
 
-  registerUnit(){
+  updateUnit(){
     if(this.registerForm.invalid){
       this.messageFail = true;
       this.messageRegisterFailed = 'Existen campos incorrectos';
       return;
     }
     let res: RegisterUnitResponse;
-    this.serviceUnit.registerUnit(this.registerForm.value).subscribe(
+    this.serviceUnitSelect.updateUnitSelect(this.id, this.registerForm.value).subscribe(
       (data) => {
         res = data;
         if(res.res){
-          this.toastr.success('Unidad registrada con éxito');
+          this.toastr.success('Se guardaron  los cambios con éxito');
           this.clearInput();
         }else{
           this.toastr.warning('Ocurrio un error intente de nuevo');
         }
       },
       (error) => {
-        console.log(error.message);
-        this.toastr.error('El nombre de la unidad ya se encuentra registrado');
+        this.toastr.error('El nombre de la facultad ya se encuentra registrado');
       }
     );
   }
