@@ -29,7 +29,7 @@ export class ListService{
       const httpHeader = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
-      return this.httpClient.get<ListUnit>(`${environment.URI_API}listId/${id}`, { headers: httpHeader });
+      return this.httpClient.get<ListUnit>(`${environment.URI_API}unit/${id}`, { headers: httpHeader });
     }
     console.log("despues del servicio: "+failed)
     return failed;
@@ -42,7 +42,7 @@ export class ListService{
       const httpHeader = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
-      return this.httpClient.put<ResponseRegister>(`${environment.URI_API}list/${id}`, unit, {headers: httpHeader});
+      return this.httpClient.put<ResponseRegister>(`${environment.URI_API}unit/${id}`, unit, {headers: httpHeader});
     }
     return failed;
   }

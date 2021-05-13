@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     //Route:: get('listId/{id}','UnitController@getUnitSelect');
 
 });
+//Route::ApiResource('unit', 'UnitController');
 
 Route:: get('listId/{id}','UnitController@getUnitSelect');
 

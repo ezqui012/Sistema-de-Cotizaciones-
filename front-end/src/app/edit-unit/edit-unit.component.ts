@@ -63,7 +63,7 @@ export class EditUnitComponent implements OnInit {
 
       this.unit = data;
 
-      this.registerForm.controls['id_faculty'].setValue(this.unit.id_faculty);
+      /*this.registerForm.controls['id_faculty'].setValue(this.unit.id_faculty);
       this.registerForm.controls['name_unit'].setValue(this.unit.name_unit);
       this.registerForm.controls['type'].setValue(this.unit.type);
 
@@ -72,7 +72,9 @@ export class EditUnitComponent implements OnInit {
         this.showAmount = true;
         this.showInputAmout(true);
         this.registerForm.controls['amount'].setValue(this.unit.amount);
-      }
+      }*/
+
+      this.setUnitData();
 
 
       },
@@ -120,11 +122,24 @@ export class EditUnitComponent implements OnInit {
     return message;
   }
 
+  setUnitData(){
+      this.registerForm.controls['id_faculty'].setValue(this.unit.id_faculty);
+      this.registerForm.controls['name_unit'].setValue(this.unit.name_unit);
+      this.registerForm.controls['type'].setValue(this.unit.type);
+
+      if(this.unit.type === 'Gasto'){
+        this.actualAmount = this.unit.amount;
+        this.showAmount = true;
+        this.showInputAmout(true);
+        this.registerForm.controls['amount'].setValue(this.unit.amount);
+      }
+  }
+
   showInputAmout(show:boolean){
     this.showAmount =show;
     this.registerForm.get('amount')?.reset;
     if(this.showAmount){
-      this.registerForm = this.fb.group({
+      this.registerForm = this.fb.group({ //'this.registerForm.get('id_faculty')?.value'
         id_faculty: [this.registerForm.get('id_faculty')?.value, [Validators.required]],
         name_unit: [this.registerForm.get('name_unit')?.value, [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.pattern(this.patternName)]],
         type: ['Gasto', [Validators.required]],
@@ -150,14 +165,14 @@ export class EditUnitComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
-          this.toastr.success('Se guardaron  los cambios con éxito');
+          this.toastr.success('Se guardaron los cambios con éxito');
           this.clearInput();
         }else{
           this.toastr.warning('Ocurrio un error intente de nuevo');
         }
       },
       (error) => {
-        this.toastr.error('El nombre de la facultad ya se encuentra registrado');
+        this.toastr.error('El nombre de la Unidad ya se encuentra registrado');
       }
     );
   }
