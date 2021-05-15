@@ -55,9 +55,10 @@ export class EditRolComponent implements OnInit {
    // var unidad:ListUnit =
     //this.getRole(this.id);
   }
-  navigateToEdit(path: String ,id:any){
-    this.router.navigate([path,id]);
+  navigateTo(path: String){
+    this.router.navigate([path]);
   }
+
 
   /*getRole(id:any){
     this.serviceUnitSelect.getUnitSelect(id).subscribe((data) => {

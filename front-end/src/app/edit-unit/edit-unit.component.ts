@@ -63,7 +63,7 @@ export class EditUnitComponent implements OnInit {
 
       this.unit = data;
 
-      //this.setUnitData();
+      this.setUnitData();
 
 
       },
@@ -155,7 +155,8 @@ export class EditUnitComponent implements OnInit {
         res = data;
         if(res.res){
           this.toastr.success('Se guardaron los cambios con éxito');
-          this.clearInput();
+          this.navigateTo('/unit-list')
+
         }else{
           this.toastr.warning('Ocurrio un error intente de nuevo');
         }

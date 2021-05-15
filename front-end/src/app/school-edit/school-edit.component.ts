@@ -109,7 +109,8 @@ export class SchoolEditComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
-          this.toastr.success('Se guardaron  los cambios con éxito');
+          this.toastr.success('Se guardaron los cambios con éxito');
+          this.navigateTo('/school-list')
         }else{
           this.toastr.warning('Ocurrio un error intente de nuevo');
         }
