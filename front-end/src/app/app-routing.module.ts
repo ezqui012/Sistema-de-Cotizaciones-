@@ -39,7 +39,7 @@ const routes: Routes = [
     canActivate: [AuthAdminGuard]
   },
   {
-    path: 'roles-edit',
+    path: 'roles-edit/:id',
     component: EditRolComponent,
     canActivate: [AuthAdminGuard]
   },

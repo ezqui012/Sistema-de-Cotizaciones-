@@ -63,18 +63,7 @@ export class EditUnitComponent implements OnInit {
 
       this.unit = data;
 
-      /*this.registerForm.controls['id_faculty'].setValue(this.unit.id_faculty);
-      this.registerForm.controls['name_unit'].setValue(this.unit.name_unit);
-      this.registerForm.controls['type'].setValue(this.unit.type);
-
-      if(this.unit.type === 'Gasto'){
-        this.actualAmount = this.unit.amount;
-        this.showAmount = true;
-        this.showInputAmout(true);
-        this.registerForm.controls['amount'].setValue(this.unit.amount);
-      }*/
-
-      this.setUnitData();
+      //this.setUnitData();
 
 
       },

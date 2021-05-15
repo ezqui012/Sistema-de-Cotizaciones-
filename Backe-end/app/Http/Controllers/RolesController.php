@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Roles;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\DB;
+
 
 class RolesController extends Controller
 {
@@ -54,6 +56,18 @@ class RolesController extends Controller
         }
     }
 
+    public function getRoleSelect($id)
+    {  try{
+        $unit = Roles::where('id_role', '=', $id)->first();
+        return $unit;
+    }catch(Exception $ex){
+        return response()->json([
+            'res' => false,
+            'message' => $ex
+        ], 404);
+    }
+    }
+
     /**
      * Display the specified resource.
      *
@@ -74,7 +88,19 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $input = $request->all();
+            DB::table('roles')->where('id_role', $id)->update($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'Successfully upgraded Roles'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     /**
