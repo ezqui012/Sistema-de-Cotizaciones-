@@ -42,7 +42,7 @@ class EnterpriseSeeder extends Seeder
                 'sector_enterprise' => 'Electrodomesticos',
                 'nit_enterprise' => '4875220199',
                 'legal_representative' => 'Mariana Villaroel Herbas',
-                'phone_enterprise' => '',
+                'phone_enterprise' => '4255858',
                 'address_enterprise' => 'Calle Juan Capriles #484 entre Pantaleon Dalence y AV. Santa Cruz'
             ]
         ]);
