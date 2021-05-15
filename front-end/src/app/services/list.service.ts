@@ -23,7 +23,7 @@ export class ListService{
 
   }
   getUnitSelect(id:any): Observable<ListUnit | any> {
-    console.log("llego a servicios: " + id);
+
     let failed: any;
     if (localStorage.getItem('quot-umss-tk')) {
       const httpHeader = new HttpHeaders({
@@ -31,9 +31,7 @@ export class ListService{
       });
       return this.httpClient.get<ListUnit>(`${environment.URI_API}listId/${id}`, { headers: httpHeader });
     }
-    console.log("despues del servicio: "+failed)
     return failed;
-
   }
   updateUnitSelect(id:any, unit: ListUnitData):Observable<ResponseRegister | any>{
     let failed: any;
