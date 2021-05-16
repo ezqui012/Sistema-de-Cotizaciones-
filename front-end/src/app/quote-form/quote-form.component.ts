@@ -17,8 +17,8 @@ import { ItemRequest } from '../Model/expense-item';
 })
 export class QuoteFormComponent implements OnInit {
 
-  business_name:string = 'Actualizacion de monitores del laboratorio';
-  statusQuot:string = 'Proceso';
+  business_name:any;
+  statusQuot:any;
 
   enterprises: Enterprise[] | undefined;
 
@@ -54,6 +54,7 @@ export class QuoteFormComponent implements OnInit {
   ngOnInit(): void {
     this.getEnterprises();
     this.getItemsRequest(this.route.snapshot.params.id);
+    this.getQuotInfo(this.route.snapshot.params.id);
   }
 
   isValid(field:string){
@@ -115,6 +116,19 @@ export class QuoteFormComponent implements OnInit {
     this.service.getItems(id).subscribe(
       (data) => {
         this.items = data;
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
+  }
+
+  getQuotInfo(id:any){
+    this.service.getInfoQuote(id).subscribe(
+      (data) => {
+        this.business_name = data[0].business_name;
+        this.statusQuot = data[0].status_quotation;
       },
       (error) => {
         console.log(`Error: ${error}`);
