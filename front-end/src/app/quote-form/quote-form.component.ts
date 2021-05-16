@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-quote-form',
@@ -15,23 +14,27 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class QuoteFormComponent implements OnInit {
 
-  /* Razon social estatica */
+  /* titulos estaticos */
   business_name:string = 'Actualizacion de monitores del laboratorio';
+  statusQuot:string = 'Proceso';
 
-  findControl = new FormControl();
   options: string[] = ['Tigo', 'Muebles rr', 'Mundo Tecno', 'Viva', 'Pollos de la case'];
-  filteredOptions: Observable<string[]> | undefined;
 
   items: string[] = ['Monitores', 'Sillas'];
+
+  dateControl = new FormControl(Validators.required);
+
+  private patternNumber = '^[0-9]+';
+  private patternDecimal = /^[0-9]+(\.?[0-9]+)?$/;
 
   registerForm = this.fb.group({
     id_enterprise: ['', [Validators.required]],
     id_item: ['', [Validators.required]],
     id_quotation: ['', [Validators.required]],
-    quantity: ['', [Validators.required]],
-    unit_cost: ['', [Validators.required]],
+    quantity: ['', [Validators.required, Validators.min(1), Validators.pattern(this.patternNumber)]],
+    unit_cost: ['', [Validators.required, Validators.min(1), Validators.pattern(this.patternDecimal)]],
     date:['', [Validators.required]],
-    delivery_days: ['', [Validators.required]]
+    delivery_days: ['', [Validators.required, Validators.min(1), Validators.pattern(this.patternNumber)]]
   });
 
   constructor(
@@ -44,20 +47,12 @@ export class QuoteFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.filteredOptions = this.findControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   showValue(){
+    let newDate: moment.Moment = moment.utc(this.dateControl.value).local();
+    this.registerForm.controls['date'].setValue(newDate.format('YYYY-MM-DD'));
+
     console.log(this.registerForm.value);
   }
 

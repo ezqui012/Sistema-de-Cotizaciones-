@@ -48,12 +48,26 @@ body{
   width: 120px;
 }
 
-.btn-cancel{
+.btn-attachment, .btn-finish{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  width: 150px;
+}
+
+.btn-attachment{
+  margin-right: 1%;
+}
+
+.btn-finish{
+  margin-left: 1%;
+}
+
+.btn-cancel, .btn-finish{
   background-color: #1C2331;
   margin-right: 20px;
 }
 
-.btn-register{
+.btn-register, .btn-attachment{
   background-color:#003b72;
 }
 
@@ -68,11 +82,13 @@ body{
   margin: 0;
   background-color: #ffffff !important;
   justify-items: center !important;
+  border-radius: 7px;
 }
 
 .form-quote{
   width: 100%;
   font-size: 1.1rem;
+  padding-bottom: 0%;
 }
 
 .inputs-f1{
@@ -90,4 +106,9 @@ body{
 
 .containerBtn{
   text-align: center;
+}
+
+.containerBtn-2{
+  text-align: center;
+  margin-top: 2%;
 }

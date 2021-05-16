@@ -10,25 +10,18 @@
 
   <div class="container-subTitle">
     <h2 class="title-quote"><b>Razon social:</b> {{business_name}}</h2>
-    <h2 class="title-quote"><b>Estado:</b> Proceso</h2>
+    <h2 class="title-quote"><b>Estado:</b> {{statusQuot}}</h2>
   </div>
 
   <div class="container-form">
     <form class="form-quote" [formGroup]="registerForm">
       <mat-form-field class="form-camp-full-width">
         <mat-label>Empresa</mat-label>
-        <input type="text"
-               placeholder="Pick one"
-               aria-label="Empresa"
-               matInput
-               [formControl]="findControl"
-               [matAutocomplete]="auto"
-               formControlName="id_enterprise">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        <mat-select formControlName="id_enterprise">
+          <mat-option *ngFor="let option of options" [value]="option">
             {{option}}
           </mat-option>
-        </mat-autocomplete>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field class="form-camp-full-width">
@@ -55,7 +48,7 @@
       <div class="inputs-f1">
         <mat-form-field class="form-camp-full-width">
           <mat-label>Fecha</mat-label>
-          <input matInput [matDatepicker]="picker" placeholder="Ingrese fecha de cotización" formControlName="date">
+          <input matInput [matDatepicker]="picker" placeholder="Ingrese fecha de cotización" [formControl]="dateControl">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -78,6 +71,13 @@
       <br>
       <br>
     </form>
+  </div>
+
+  <div class="containerBtn-2">
+    <div>
+      <button class="btn btn-attachment" type="button">Archivo Adjunto</button>
+      <button class="btn btn-finish" type="button">Finalizar</button>
+    </div>
   </div>
 
 </div>
