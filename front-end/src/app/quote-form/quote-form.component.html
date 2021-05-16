@@ -22,6 +22,9 @@
             {{option}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="isValid('id_enterprise')">
+          {{ getErrorMessage('id_enterprise') }}
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="form-camp-full-width">
@@ -31,17 +34,26 @@
             {{item}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="isValid('id_item')">
+          {{ getErrorMessage('id_item') }}
+        </mat-error>
       </mat-form-field>
 
       <div class="inputs-f1">
         <mat-form-field class="form-camp-full-width">
           <mat-label>Cantidad</mat-label>
           <input matInput placeholder="Ingrese la cantidad" formControlName="quantity">
+          <mat-error *ngIf="isValid('quantity')">
+            {{ getErrorMessage('quantity') }}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field class="form-camp-full-width">
           <mat-label>Costo unitario</mat-label>
           <input matInput placeholder="Ingrese el costo unitario" formControlName="unit_cost">
+          <mat-error *ngIf="isValid('unit_cost')">
+            {{ getErrorMessage('unit_cost') }}
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -51,11 +63,17 @@
           <input matInput [matDatepicker]="picker" placeholder="Ingrese fecha de cotización" [formControl]="dateControl">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="isValidDate()">
+            {{ dateErrorMessage }}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field class="form-camp-full-width">
           <mat-label>Dias de entrega</mat-label>
           <input matInput placeholder="Ingrese el tiempo de entrega en dias" formControlName="delivery_days">
+          <mat-error *ngIf="isValid('delivery_days')">
+            {{ getErrorMessage('delivery_days') }}
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -68,7 +86,6 @@
           <button class="btn btn-register" type="button" (click)="showValue()">Registrar</button>
         </div>
       </div>
-      <br>
       <br>
     </form>
   </div>
