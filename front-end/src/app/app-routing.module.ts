@@ -20,6 +20,7 @@ import { AuthAdminGuard } from './guards/auth-admin.guard';
 import { AuthLoginGuard } from './guards/auth-login.guard';
 import { AdministrativasComponent } from './administrativas/administrativas.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { EditUnitComponent } from './edit-unit/edit-unit.component';
 //import { EditarComponent } from './editar/editar.component';
 
 const routes: Routes = [
@@ -39,7 +40,7 @@ const routes: Routes = [
     canActivate: [AuthAdminGuard]
   },
   {
-    path: 'roles-edit',
+    path: 'roles-edit/:id',
     component: EditRolComponent,
     canActivate: [AuthAdminGuard]
   },
@@ -100,11 +101,15 @@ const routes: Routes = [
   {
     path:'edit-user/:id',
     component: EditUserComponent
-  }
+  },
   /*{
     path: 'unit-edit',
     component: EditarComponent
   }*/
+  {
+    path: 'unit-edit/:id',
+    component: EditUnitComponent
+  }
 
 ];
 

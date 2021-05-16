@@ -36,7 +36,7 @@ class UnitController extends Controller
     {
         try{
                 //$unit = Unit::where('type', '=', $request->type)->get();
-                $unit = DB::select('SELECT u.name_unit, fa.name_faculty, u.type, u.amount
+                $unit = DB::select('SELECT u.id_unit, u.name_unit, fa.name_faculty, u.type, u.amount
 
                 FROM units u, faculties fa
                 WHERE u.id_faculty = fa.id_faculty
@@ -50,6 +50,18 @@ class UnitController extends Controller
                 'message' => $ex
             ], 404);
         }
+    }
+
+    public function getUnitSelect($id)
+    {  try{
+        $unit = Unit::where('id_unit', '=', $id)->first();
+        return $unit;
+    }catch(Exception $ex){
+        return response()->json([
+            'res' => false,
+            'message' => $ex
+        ], 404);
+    }
     }
 
 
@@ -94,7 +106,19 @@ class UnitController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $input = $request->all();
+            DB::table('units')->where('id_unit', $id)->update($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'Successfully upgraded faculty'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
 

@@ -32,6 +32,7 @@ import { AdministrativasComponent } from './administrativas/administrativas.comp
 import { EditarComponent } from './editar/editar.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { PasswordComponent } from './PopUp/password/password.component';
+import { EditUnitComponent } from './edit-unit/edit-unit.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { PasswordComponent } from './PopUp/password/password.component';
     AdministrativasComponent,
     EditarComponent,
     EditUserComponent,
-    PasswordComponent
+    PasswordComponent,
+    EditUnitComponent
   ],
   imports: [
     BrowserModule,
