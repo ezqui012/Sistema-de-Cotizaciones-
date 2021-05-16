@@ -31,6 +31,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { AdministrativasComponent } from './administrativas/administrativas.component';
 import { EditarComponent } from './editar/editar.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { PasswordComponent } from './PopUp/password/password.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     UserListComponent,
     AdministrativasComponent,
     EditarComponent,
-    EditUserComponent
+    EditUserComponent,
+    PasswordComponent
   ],
   imports: [
     BrowserModule,

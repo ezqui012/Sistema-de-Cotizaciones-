@@ -1,9 +1,11 @@
+import { PasswordComponent } from './../PopUp/password/password.component';
+import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { PersonalUserService } from './../services/PersonalUser.service';
 import { EditUserService } from './../services/edit-user.service';
 import { Component, OnInit } from '@angular/core';
 import { Unit } from './../Model/unit';
 import { Rol } from './../Model/rol';
-import { Registeruser } from './../Model/registeruser';
+import { Registeruser, UpdatePassword } from './../Model/registeruser';
 import { UnitService } from './../services/unit.service';
 import { ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -17,16 +19,27 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./edit-user.component.css']
 })
 export class EditUserComponent implements OnInit {
-  id:any;
+  public id= this.route.snapshot.params.id;
   dataToUpdate: any;
   user: any;
   units: Unit []|undefined;
   roles: Rol []|undefined;
   email: any;
   ci: any;
+  pass1:any;
+  pass2:any;
+  upPassword = new UpdatePassword();
   RegisterUser = new Registeruser();
-  submitted = false;
+  phone='231313';
+  pos= 0;
+  updatePassForm = this.formBuilder.group({
+    pass1: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(32), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]],
+    pass2: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(32), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]]
+  });
+
+
   updateForm = this.formBuilder.group({
+    id:[''],
     id_role: ['', [Validators.required]],
     id_unit: ['', [Validators.required]],
     name: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(15),
@@ -35,8 +48,14 @@ export class EditUserComponent implements OnInit {
     ci: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(7), Validators.pattern('^-?[0-9 ]\\d*(\\.\\d{1,2})?$')]],
     address: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(30)]],
     email: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(8), Validators.pattern(/\S+@\S+\.\S+/)]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(32), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]]
+    pass1: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(32), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]],
+    pass2: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(32), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]]
   });
+  getName(){
+    return this.updateForm.get('name')?.value;
+  }
+
+
   navigateTo(path: String){
     this.router.navigate([path]);
   }
@@ -49,15 +68,32 @@ export class EditUserComponent implements OnInit {
     private router:Router,
     private updateService: EditUserService,
     private route : ActivatedRoute,
-    private userDataService : PersonalUserService
+    private userDataService : PersonalUserService,
+    private modal: NgbModal,
+    private passwordService : EditUserService
     ) {}
   ngOnInit(): void {
-      console.log(this.route.snapshot.params.id);
-      this.id = this.route.snapshot.params.id;
-      this.getData();
+     // console.log(this.route.snapshot.params.id);
+      this.id
+      this.getDataUser();
       this.getUnits();
       this.getRoles();
+
+     // console.log(this.id);
+
     }
+
+    editPassword(){
+      const ref =this.modal.open(PasswordComponent)
+      ref.componentInstance.idUser = this.route.snapshot.params.id;
+      ref.result.then((yes)=>{
+        console.log('Yes');
+      },(cancel)=>{
+        console.log('Cancel');
+      })
+
+    }
+
   showToastrErrorEmail(){
     this.toastr.error('El email ya está en uso','Campo Inválido');
   }
@@ -65,7 +101,7 @@ export class EditUserComponent implements OnInit {
     this.toastr.error('El ci ya está en uso');
   }
   showToastSuccess(){
-    this.toastr.success('Se registraron los datos con éxito');
+    this.toastr.success('Se guardaron los cambios con éxito');
   }
   getErrorMessageEmail(field: string) {
     let message;
@@ -81,6 +117,22 @@ export class EditUserComponent implements OnInit {
     }
     return message;
   }
+  verifyPasswordMessage(field:string){
+    let message;
+    if (this.updatePassForm.get(field)?.errors?.required) {
+      message = `El campo ${field} es obligatorio`;
+    } else if (this.updatePassForm.get(field)?.hasError('minlength')) {
+      message = "Mínimo 8 caracteres";
+    } else if (this.updatePassForm.get(field)?.hasError('maxlength')) {
+      message = "Máximo de 32 caracteres";
+    } else if( this.updatePassForm.get(field)?.hasError('pattern')){
+      message = "La contraseña debe tener al menos una letra minúscula, al menos una letra mayúscula y al menos un dígito";
+
+    }
+    return message;
+
+  }
+
   getErrorMessageName(field: string) {
     let message;
     if (this.updateForm.get(field)?.errors?.required) {
@@ -136,28 +188,34 @@ export class EditUserComponent implements OnInit {
   getTraduction(field: string) {
     return field === 'password' ? 'contraseña' : 'correo';
   }
-  getErrorMessagePassword(field: string) {
-    let message;
 
-    if (this.updateForm.get(field)?.errors?.required) {
-      message = `El campo ${field} es obligatorio`;
-    } else if (this.updateForm.get(field)?.hasError('minlength')) {
-      message = "Mínimo 8 caracteres";
-    } else if (this.updateForm.get(field)?.hasError('maxlength')) {
-      message = "Máximo de 32 caracteres";
-    } else if( this.updateForm.get(field)?.hasError('pattern')){
-      message = "La contraseña debe tener al menos una letra minúscula, al menos una letra mayúscula y al menos un dígito";
-
-    }
-    return message;
-
-  }
-  getData(){
+  getDataUser(){
     this.userDataService.getDataUserByID(this.id).subscribe(res =>{
-      console.log(res);
+     // console.log(res);
       this.dataToUpdate = res;
+      //console.log(this.dataToUpdate);
       this.RegisterUser = this.dataToUpdate;
+      this.updateForm.controls['id_role'].setValue(this.RegisterUser.id_role);
+      this.updateForm.controls['id_unit'].setValue(this.RegisterUser.id_unit);
+      this.upPassword = this.dataToUpdate;
+      this.updateForm.controls['id'].setValue(this.upPassword.id);
+      console.log(this.upPassword.id);
+    //  console.log(this.upPassword.id);
     })
+  }
+  updateDataUser(){
+    this.updateService.updateData(this.id, this.RegisterUser).subscribe(res=>{
+      this.showToastSuccess();
+    },
+    (error:any)=>{
+       let message= error;
+        if(message.error.errors.email[0]){
+          this.toastr.error(message.error.errors.email[0]);
+        }
+        if(message.error.errors.ci[0]){
+          this.toastr.error(message.error.errors.ci[0]);
+        }
+    });
   }
   insertData() {
     this.getEmail();
@@ -167,7 +225,7 @@ export class EditUserComponent implements OnInit {
     this.RegisteruserService.getEmail(this.updateForm.get('email')?.value).subscribe((res: any) => {
     this.email = res;
     this.getCi();
-  })
+    });
 
   }
   getCi(){
@@ -181,16 +239,15 @@ export class EditUserComponent implements OnInit {
     if(this.email===null){
       console.log(this.ci+'ci');
       if(this.ci===null){
-          this.RegisteruserService.insertData(this.updateForm.value).subscribe(res => {
-          this.showToastSuccess();
-          this.updateForm.reset();
-        });
+          console.log(this.id +'ids');
+          console.log(this.RegisterUser);
+          this.updateService.updateData(this.id, this.RegisterUser).subscribe(res=>{
+            this.showToastSuccess();
+          })
       }else{
-        this.showToastrErrorCi();
       }
-
     }else{
-      this.showToastrErrorEmail();
+
     }
 
   }
@@ -201,6 +258,7 @@ export class EditUserComponent implements OnInit {
     });
   }
   getRoles(){
+
     this.rolService.getRoles().subscribe((rol) => {
       return this.roles = rol;
     });
@@ -237,6 +295,59 @@ export class EditUserComponent implements OnInit {
 
     }
   }
+
+  getErrorMessagePassword(field: string) {
+    let message;
+
+    if (this.updatePassForm.get(field)?.errors?.required) {
+      message = `El campo es obligatorio`;
+    } else if (this.updatePassForm.get(field)?.hasError('minlength')) {
+      message = "Mínimo 8 caracteres";
+    } else if (this.updatePassForm.get(field)?.hasError('maxlength')) {
+      message = "Máximo de 32 caracteres";
+    } else if( this.updatePassForm.get(field)?.hasError('pattern')){
+      message = "La contraseña debe tener al menos una letra minúscula, al menos una letra mayúscula y al menos un dígito";
+
+    }
+    return message;
+
+  }
+
+
+
+
+
+  openModal(content: any, id: any) {
+    this.modal.open(content, { windowClass: "colorModal" });
+    this.saveNewPassword(id);
+
+  }
+  close(){
+  }
+  saveNewPassword(id:any){
+    if(this.updatePassForm.invalid){
+      return;
+    }
+    this.passwordService.changePassword(this.id, this.upPassword).subscribe(res=>{
+       this.showToastSuccess();
+    })
+    console.log(this.id);
+  }
+  confirmPasswordMessage(field1:string, field2:string){
+    let message;
+    if (this.updatePassForm.get(field1)?.errors?.required) {
+      message = `El campo es obligatorio`;
+    }else if(this.updatePassForm.get(field2)!=this.updatePassForm.get(field1)){
+      message="Las contraseñas no coinciden"
+    }
+
+    return message;
+  }
+
+
+
+
+
 
 
 }

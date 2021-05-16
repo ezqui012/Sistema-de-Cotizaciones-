@@ -20,7 +20,7 @@ class PersonalController extends Controller
     {
 
         try{
-            $personals = DB::select('SELECT us.name, r.name_role, un.name_unit, us.phone, us.ci, us.email, us.address
+            $personals = DB::select('SELECT us.id, us.name, r.name_role, un.name_unit, us.phone, us.ci, us.email, us.address
             FROM roles r, units un, users us
             WHERE us.id_role = r.id_role
             AND us.id_unit = un.id_unit

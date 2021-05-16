@@ -1,14 +1,51 @@
 <main>
   <app-navbar></app-navbar>
+  <!-- <ng-template #content let-modal>
+
+    <div class="modal-header">
+      <h1 class="modal-title" id="modal-basic-title"><b>Cambio de contraseña</b></h1>
+      <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" >
+      <div class="dateInfo">
+        <mat-form-field>
+          <mat-label>Ingresar nueva contraseña</mat-label>
+          <input class="form-control" matInput [(ngModel)]="upPassword.pass1">
+          <mat-error *ngIf="isValid('pass1')" >
+            {{verifyPasswordMessage('pass1')}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <mat-label>Ingresar nueva contraseña</mat-label>
+        <input matInput [(ngModel)]="upPassword.pass2">
+      </mat-form-field>
+      <div class="containerButton">
+        <button class="btn btn-danger"  (click)="modal.dismiss()">
+          Cancelar
+        </button>
+        <button class="btn btn-primary" (clic)= "getDataModal()">
+          Guardar
+        </button>
+      </div>
+    </div>
+</ng-template> -->
+
+
+
+
+
   <div>
     <div class="containerTop">
-      <h1><b> Registrar Personal</b></h1>
+      <h1><b> Editar Personal</b></h1>
       <div class="btnCreate">
         <button type="button" class="btn btn-one" (click)="navigateTo('/user-list')"> Ver Lista</button>
       </div>
     </div>
   </div>
-  <form class="form-container" [formGroup]="updateForm" (ngSubmit)="insertData()">
+  <form class="form-container" [formGroup]="updateForm" (ngSubmit)="updateDataUser()">
     <div class="leftDiv">
       <mat-form-field>
         <input class="fieldRegister" formControlName="email" matInput placeholder="Titulo" type="email"
@@ -69,16 +106,14 @@
         </mat-error>
       </mat-form-field>
       <br>
-      <mat-form-field>
-        <input class="fieldRegister" formControlName="password" matInput placeholder="Contraseña" type="password"
-          placeholder="Contraseña" [(ngModel)]="RegisterUser.password">
-        <mat-error *ngIf="isValid('password')">
-          {{getErrorMessagePassword('password')}}
-        </mat-error>
-      </mat-form-field>
+
+        <button class="btn btn-password" type="button" (click)="editPassword()">
+          Cambiar contraseña
+        </button>
+
     </div>
     <div class="containerButton">
-      <button class="btn btn-danger" (click)="navigateTo('/user-list')">
+      <button class="btn btn-danger"  (click)="navigateTo('/user-list')">
         Cancelar
       </button>
       <button class="btn btn-primary">
