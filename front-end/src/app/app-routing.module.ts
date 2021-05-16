@@ -103,7 +103,7 @@ const routes: Routes = [
     component: EditUnitComponent
   },
   {
-    path: 'quote-form',
+    path: 'quote-form/:id',
     component: QuoteFormComponent
   }
 ];

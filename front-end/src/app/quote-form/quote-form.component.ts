@@ -2,11 +2,12 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { EnterpriseService } from '../services/enterprise.service';
 import { Enterprise } from '../Model/enterprise';
+import { ItemRequest } from '../Model/expense-item';
 
 @Component({
   selector: 'app-quote-form',
@@ -21,7 +22,7 @@ export class QuoteFormComponent implements OnInit {
 
   enterprises: Enterprise[] | undefined;
 
-  items: string[] = ['Monitores', 'Sillas'];
+  items: ItemRequest[] | undefined;
 
   dateControl = new FormControl(Validators.required);
   dateErrorMessage:string = 'El campo Fecha es de caracter obligatorio';
@@ -32,7 +33,7 @@ export class QuoteFormComponent implements OnInit {
   registerForm = this.fb.group({
     id_enterprise: ['', [Validators.required]],
     id_item: ['', [Validators.required]],
-    id_quotation: [1, [Validators.required]],
+    id_quotation: [this.route.snapshot.params.id, [Validators.required]],
     quantity: ['', [Validators.required, Validators.min(1), Validators.pattern(this.patternNumber)]],
     unit_cost: ['', [Validators.required, Validators.min(1), Validators.max(9999999999.99), Validators.pattern(this.patternDecimal)]],
     date:['', [Validators.required]],
@@ -44,13 +45,15 @@ export class QuoteFormComponent implements OnInit {
     public toastr: ToastrService,
     private router:Router,
     private titlePage: Title,
-    private service: EnterpriseService
+    private service: EnterpriseService,
+    private route: ActivatedRoute
   ) {
     this.titlePage.setTitle('Formulario de cotización - QUOT-UMSS');
   }
 
   ngOnInit(): void {
     this.getEnterprises();
+    this.getItemsRequest(this.route.snapshot.params.id);
   }
 
   isValid(field:string){
@@ -100,6 +103,18 @@ export class QuoteFormComponent implements OnInit {
     this.service.allEnterprise().subscribe(
       (data) => {
         this.enterprises = data;
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
+  }
+
+  getItemsRequest(id:any){
+    this.service.getItems(id).subscribe(
+      (data) => {
+        this.items = data;
       },
       (error) => {
         console.log(`Error: ${error}`);

@@ -30,8 +30,8 @@
       <mat-form-field class="form-camp-full-width">
         <mat-label>Detalle o Item de gasto</mat-label>
         <mat-select formControlName="id_item">
-          <mat-option *ngFor="let item of items" [value]="item">
-            {{item}}
+          <mat-option *ngFor="let itemOption of items" [value]="itemOption.id_item">
+            {{itemOption.name_item}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="isValid('id_item')">

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Enterprise } from '../Model/enterprise';
+import { ItemRequest } from '../Model/expense-item';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,18 @@ export class EnterpriseService {
     // }
     // return failed;
     return this.httpClient.get<Enterprise>(`${environment.URI_API}enterprise`);
+  }
+
+  getItems(id:any): Observable<ItemRequest | any>{
+    // let failed: any;
+    // if (localStorage.getItem('quot-umss-tk')) {
+    //   const httpHeader = new HttpHeaders({
+    //     'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    //   });
+    //   return this.httpClient.get<ItemRequest>(`${environment.URI_API}items-rq/${id}`, { headers: httpHeader });
+    // }
+    // return failed;
+    return this.httpClient.get<ItemRequest>(`${environment.URI_API}items-rq/${id}`);
   }
 
 }
