@@ -21,6 +21,7 @@ import { AuthLoginGuard } from './guards/auth-login.guard';
 import { AdministrativasComponent } from './administrativas/administrativas.component';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
 //import { EditarComponent } from './editar/editar.component';
+import { QuoteFormComponent } from './quote-form/quote-form.component'
 
 const routes: Routes = [
   {
@@ -100,8 +101,11 @@ const routes: Routes = [
   {
     path: 'unit-edit/:id',
     component: EditUnitComponent
+  },
+  {
+    path: 'quote-form',
+    component: QuoteFormComponent
   }
-
 ];
 
 @NgModule({

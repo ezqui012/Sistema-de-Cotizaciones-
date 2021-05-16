@@ -31,6 +31,10 @@ import { UserListComponent } from './user-list/user-list.component';
 import { AdministrativasComponent } from './administrativas/administrativas.component';
 import { EditarComponent } from './editar/editar.component';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
+import { QuoteFormComponent } from './quote-form/quote-form.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,8 @@ import { EditUnitComponent } from './edit-unit/edit-unit.component';
     UserListComponent,
     AdministrativasComponent,
     EditarComponent,
-    EditUnitComponent
+    EditUnitComponent,
+    QuoteFormComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,10 @@ import { EditUnitComponent } from './edit-unit/edit-unit.component';
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
