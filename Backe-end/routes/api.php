@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 });
 //Route::ApiResource('unit', 'UnitController');
+Route::apiResource('enterprise', 'EnterpriseController');
 
 
 
