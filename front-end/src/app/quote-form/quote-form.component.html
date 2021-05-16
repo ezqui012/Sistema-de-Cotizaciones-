@@ -18,8 +18,8 @@
       <mat-form-field class="form-camp-full-width">
         <mat-label>Empresa</mat-label>
         <mat-select formControlName="id_enterprise">
-          <mat-option *ngFor="let option of options" [value]="option">
-            {{option}}
+          <mat-option *ngFor="let option of enterprises" [value]="option.id_enterprise">
+            {{option.name_enterprise}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="isValid('id_enterprise')">

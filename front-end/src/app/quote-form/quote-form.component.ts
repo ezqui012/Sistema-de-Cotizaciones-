@@ -5,6 +5,8 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { EnterpriseService } from '../services/enterprise.service';
+import { Enterprise } from '../Model/enterprise';
 
 @Component({
   selector: 'app-quote-form',
@@ -17,7 +19,7 @@ export class QuoteFormComponent implements OnInit {
   business_name:string = 'Actualizacion de monitores del laboratorio';
   statusQuot:string = 'Proceso';
 
-  options: string[] = ['Tigo', 'Muebles rr', 'Mundo Tecno', 'Viva', 'Pollos de la case'];
+  enterprises: Enterprise[] | undefined;
 
   items: string[] = ['Monitores', 'Sillas'];
 
@@ -41,12 +43,14 @@ export class QuoteFormComponent implements OnInit {
     private fb: FormBuilder,
     public toastr: ToastrService,
     private router:Router,
-    private titlePage: Title
+    private titlePage: Title,
+    private service: EnterpriseService
   ) {
     this.titlePage.setTitle('Formulario de cotización - QUOT-UMSS');
   }
 
   ngOnInit(): void {
+    this.getEnterprises();
   }
 
   isValid(field:string){
@@ -90,6 +94,18 @@ export class QuoteFormComponent implements OnInit {
     }
 
     console.log(this.registerForm.value);
+  }
+
+  getEnterprises(){
+    this.service.allEnterprise().subscribe(
+      (data) => {
+        this.enterprises = data;
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
   }
 
   private translate(field: string):string|void{
