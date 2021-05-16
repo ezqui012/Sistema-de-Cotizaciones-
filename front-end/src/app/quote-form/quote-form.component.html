@@ -9,12 +9,12 @@
   </div>
 
   <div class="container-subTitle">
-    <h2 class="title-quote"><b>Razon social:</b> Actualizacion de monitores del laboratorio</h2>
+    <h2 class="title-quote"><b>Razon social:</b> {{business_name}}</h2>
     <h2 class="title-quote"><b>Estado:</b> Proceso</h2>
   </div>
 
   <div class="container-form">
-    <form class="form-quote">
+    <form class="form-quote" [formGroup]="registerForm">
       <mat-form-field class="form-camp-full-width">
         <mat-label>Empresa</mat-label>
         <input type="text"
@@ -22,7 +22,8 @@
                aria-label="Empresa"
                matInput
                [formControl]="findControl"
-               [matAutocomplete]="auto">
+               [matAutocomplete]="auto"
+               formControlName="id_enterprise">
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
             {{option}}
@@ -32,7 +33,7 @@
 
       <mat-form-field class="form-camp-full-width">
         <mat-label>Detalle o Item de gasto</mat-label>
-        <mat-select >
+        <mat-select formControlName="id_item">
           <mat-option *ngFor="let item of items" [value]="item">
             {{item}}
           </mat-option>
@@ -42,26 +43,26 @@
       <div class="inputs-f1">
         <mat-form-field class="form-camp-full-width">
           <mat-label>Cantidad</mat-label>
-          <input matInput placeholder="Ingrese la cantidad" >
+          <input matInput placeholder="Ingrese la cantidad" formControlName="quantity">
         </mat-form-field>
 
         <mat-form-field class="form-camp-full-width">
           <mat-label>Costo unitario</mat-label>
-          <input matInput placeholder="Ingrese el costo unitario" >
+          <input matInput placeholder="Ingrese el costo unitario" formControlName="unit_cost">
         </mat-form-field>
       </div>
 
       <div class="inputs-f1">
         <mat-form-field class="form-camp-full-width">
           <mat-label>Fecha</mat-label>
-          <input matInput [matDatepicker]="picker" placeholder="Ingrese fecha de cotización">
+          <input matInput [matDatepicker]="picker" placeholder="Ingrese fecha de cotización" formControlName="date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field class="form-camp-full-width">
           <mat-label>Dias de entrega</mat-label>
-          <input matInput placeholder="Ingrese el tiempo de entrega en dias">
+          <input matInput placeholder="Ingrese el tiempo de entrega en dias" formControlName="delivery_days">
         </mat-form-field>
       </div>
 
@@ -70,8 +71,8 @@
 
       <div class="containerBtn">
         <div>
-          <button class="btn btn-cancel" >Cancelar</button>
-          <button class="btn btn-register" >Registrar</button>
+          <button class="btn btn-cancel" type="button">Cancelar</button>
+          <button class="btn btn-register" type="button" (click)="showValue()">Registrar</button>
         </div>
       </div>
       <br>
