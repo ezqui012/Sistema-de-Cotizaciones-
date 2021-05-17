@@ -45,3 +45,4 @@ Route::group(['middleware' => 'auth:api'], function(){
 Route::apiResource('enterprise', 'EnterpriseController');
 Route:: get('items-rq/{id}','ExpenseItemController@getItemRequest');
 Route:: get('quot-infoStatus/{id}','QuotationController@getInfo');
+Route::apiResource('insertQuote', 'QuoteDetailController');
