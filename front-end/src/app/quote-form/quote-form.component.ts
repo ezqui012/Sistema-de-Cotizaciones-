@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { EnterpriseService } from '../services/enterprise.service';
 import { Enterprise } from '../Model/enterprise';
 import { ItemRequest } from '../Model/expense-item';
+import { QuoteDetailService } from '../services/quote-detail.service'
 
 @Component({
   selector: 'app-quote-form',
@@ -46,7 +47,8 @@ export class QuoteFormComponent implements OnInit {
     private router:Router,
     private titlePage: Title,
     private service: EnterpriseService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private serviceQuote: QuoteDetailService
   ) {
     this.titlePage.setTitle('Formulario de cotización - QUOT-UMSS');
   }
@@ -83,7 +85,7 @@ export class QuoteFormComponent implements OnInit {
     return message;
   }
 
-  showValue(){
+  registerQuote(){
     if(this.dateControl.invalid){
       this.toastr.error('Existen campos incorrectos');
       return;
@@ -97,7 +99,19 @@ export class QuoteFormComponent implements OnInit {
       return;
     }
 
-    console.log(this.registerForm.value);
+    let res: any
+    this.serviceQuote.insertQuote(this.registerForm.value).subscribe(
+      (data) => {
+        res = data;
+        if(res.res){
+          this.toastr.success('Se registro la cotizacion con exito')
+        }
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error('Ocurrio un problema, intente nuevamente');
+      }
+    );
   }
 
   getEnterprises(){
