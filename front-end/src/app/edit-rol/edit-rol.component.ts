@@ -2,14 +2,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { AssignedPermit, RegisterAssignedPermitResponse } from '../Model/assignedPermit';
-import { PermitService } from '../services/permit.service';
+import { AssignedPermit, RegisterAssignedPermitResponse, PermitOfRole } from '../Model/assignedPermit';
 import { RolesService } from '../services/roles.service';
 import { AssignedPermitService } from '../services/assignedPermit.service';
 import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import {RegisterRolesResponse, Register_Role} from '../Model/roles';
-import { Permit } from '../Model/permit';
+
 
 
 @Component({
@@ -28,7 +27,7 @@ export class EditRolComponent implements OnInit {
   permitAssigned: AssignedPermit = new AssignedPermit;
   roleDate: Register_Role = new Register_Role;
   permit_id = new Array();
-  permits: Array<Permit> = [];
+  permits: Array<PermitOfRole> = [];
 
   private pattern_name = /^[a-zA-Z-zñÑ\u00E0-\u00FC ]*$/
   public role:any;
@@ -60,7 +59,8 @@ export class EditRolComponent implements OnInit {
     }
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log("recupere el id: "+this.id);
+
+    this.getPermits(this.id);
     this.getRole(this.id);
   }
   navigateTo(path: String){
@@ -70,9 +70,10 @@ export class EditRolComponent implements OnInit {
 
   getRole(id:any){
     this._roleService.getRoleSelect(id).subscribe((data) => {
-      console.log(data);
+
       this.role = data;
 
+      this.setPermisOfRole();
       this.setRoleData();
 
       },
@@ -82,12 +83,65 @@ export class EditRolComponent implements OnInit {
       }
     );
   }
+  getPermits(idRole:any) {
+    this._assignedPermit.allPermitOfRole(idRole).subscribe((permit) => {
+      console.log(permit)
+      this.permits = permit
+    })
+  }
+  selectPermit(idPermit:any){
 
+    switch(idPermit) {
+      case 1: {
+        this.registerForm.controls['checkCreateCot'].setValue(true);
+         break;
+      }
+      case 2: {
+        this.registerForm.controls['checkEditCot'].setValue(true);
+         break;
+      }
+      case 3: {
+        this.registerForm.controls['checkAproveSol'].setValue(true);
+         break;
+      }
+      case 4: {
+        this.registerForm.controls['checkCreateSol'].setValue(true);
+         break;
+      }
+      case 5: {
+        this.registerForm.controls['checkEditSol'].setValue(true);
+         break;
+      }
+      case 6: {
+        this.registerForm.controls['checkListSol'].setValue(true);
+         break;
+      }
+      case 7: {
+        this.registerForm.controls['checkItemGasto'].setValue(true);
+         break;
+      }case 8: {
+        this.registerForm.controls['checkRegisterEmp'].setValue(true);
+         break;
+      }
+      default: {
+         console.log("permiso no habilitado")
+         break;
+      }
+   }
+
+  }
+  setPermisOfRole(){
+    if(this.permits.length !== 0){
+      for(let i=0; i < this.permits.length; i++){
+        this.selectPermit(this.permits[i].id_permission);
+     }
+    }
+
+  }
   setRoleData(){
 
       this.registerForm.controls['name_role'].setValue(this.role.name_role);
       this.registerForm.controls['description_role'].setValue(this.role.description_role);
-      //SetLa asignacion de permisos
   }
   updateRole(){
    /* if(this.registerForm.invalid){
