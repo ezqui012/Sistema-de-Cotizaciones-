@@ -5,7 +5,7 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 class UserController extends Controller
 {
     public function login(Request $request){
@@ -72,6 +72,31 @@ class UserController extends Controller
 
         return $ci;
     }
-
-
+    public function getUserById($id){
+        $user = User::find($id);
+        if(is_null($user)){
+            return response()->json(['message' => 'User Not found'], 404);
+        }
+        return response()->json($user::find($id),200);
+    }
+    public function updateUser(UpdateUserRequest $request, User $id){
+        $user = User::find($id);
+        if(is_null($user)){
+            return response()->json(['message'=> 'User not found'], 404);
+        }
+        $id->update($request->all());
+        return response()->json(['message'=> 'User updated'],200);
+    }
+    public function update(UpdateUserRequest $request, User $user)
+    {
+        $user->update($request->all());
+    }
+    public function updatePassword(Request $request, User $id){
+        $user = User::find($id);
+        if(is_null($user)){
+            return response()->json(['message'=> 'Password not updated'], 404);
+        }
+        $id->update(['password' => Hash::make($request->password)]);
+        return response()->json(['message'=> 'Password updated'],200);
+    }
 }
