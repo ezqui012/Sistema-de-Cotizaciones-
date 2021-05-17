@@ -30,6 +30,8 @@ import { MatCardModule } from '@angular/material/card';
 import { UserListComponent } from './user-list/user-list.component';
 import { AdministrativasComponent } from './administrativas/administrativas.component';
 import { EditarComponent } from './editar/editar.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { PasswordComponent } from './PopUp/password/password.component';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
 import { QuoteFormComponent } from './quote-form/quote-form.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -58,7 +60,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     AdministrativasComponent,
     EditarComponent,
     EditUnitComponent,
-    QuoteFormComponent
+    QuoteFormComponent,
+    EditUserComponent,
+    PasswordComponent,
+    EditUnitComponent
   ],
   imports: [
     BrowserModule,

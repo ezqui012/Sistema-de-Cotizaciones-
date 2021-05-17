@@ -51,7 +51,7 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     this.toastr.error('El ci ya está en uso');
   }
   showToastSuccess(){
-    this.toastr.success('Se registraron los datos con exito');
+    this.toastr.success('Se registraron los datos con éxito');
   }
   getErrorMessageEmail(field: string) {
     let message;
