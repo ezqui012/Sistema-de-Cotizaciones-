@@ -35,13 +35,13 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('ci', 'UserController@getCi');
     Route::ApiResource('assignedPermit', 'AssignedPermitController');
     Route::get('list','UnitController@getUnitList');
-    //Route:: get('listId/{id}','UnitController@getUnitSelect');
     Route::ApiResource('roles','RolesController');
     Route:: get('listId/{id}','UnitController@getUnitSelect');
     Route:: get('roleId/{id}','RolesController@getRoleSelect');
 
 });
 //Route::ApiResource('unit', 'UnitController');
+//Route::ApiResource('assignedPermit', 'AssignedPermitController');
 
 
 
