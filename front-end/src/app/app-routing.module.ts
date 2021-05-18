@@ -23,6 +23,10 @@ import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
 import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quotes.component';
+import { RequestQuotationComponent } from './request-quotation/request-quotation.component';
+import { RequestQuotationListComponent } from './request-quotation-list/request-quotation-list.component';
+import { RequestQuotationEditComponent } from './request-quotation-edit/request-quotation-edit.component';
+import { RequestDetailComponent } from './request-detail/request-detail.component';
 
 const routes: Routes = [
   {
@@ -107,7 +111,7 @@ const routes: Routes = [
     path:'edit-user/:id',
     component: EditUserComponent
   },
-  
+
   {
     path: 'comparative-quotes',
     component: ComparativeQuotesComponent
@@ -115,7 +119,24 @@ const routes: Routes = [
   {
     path: 'unit-edit/:id',
     component: EditUnitComponent
+  },
+  {
+    path: 'request-quotation',
+    component: RequestQuotationComponent
+  },
+  {
+    path: 'request-quotation-list',
+    component: RequestQuotationListComponent
+  },
+  {
+    path: 'request-quotation-edit',
+    component: RequestQuotationEditComponent
+  },
+  {
+    path: 'request-detail',
+    component: RequestDetailComponent
   }
+
 
 ];
 
