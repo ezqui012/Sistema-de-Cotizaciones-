@@ -30,6 +30,8 @@ import { MatCardModule } from '@angular/material/card';
 import { UserListComponent } from './user-list/user-list.component';
 import { AdministrativasComponent } from './administrativas/administrativas.component';
 import { EditarComponent } from './editar/editar.component';
+import { ListQuotesComponent } from './list-quotes/list-quotes.component';
+import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quotes.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { PasswordComponent } from './PopUp/password/password.component';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
@@ -55,6 +57,8 @@ import { EditUnitComponent } from './edit-unit/edit-unit.component';
     UserListComponent,
     AdministrativasComponent,
     EditarComponent,
+    ListQuotesComponent,
+    ComparativeQuotesComponent,
     EditUserComponent,
     PasswordComponent,
     EditUnitComponent
