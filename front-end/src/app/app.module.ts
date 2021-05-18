@@ -30,6 +30,8 @@ import { MatCardModule } from '@angular/material/card';
 import { UserListComponent } from './user-list/user-list.component';
 import { AdministrativasComponent } from './administrativas/administrativas.component';
 import { EditarComponent } from './editar/editar.component';
+import { ListQuotesComponent } from './list-quotes/list-quotes.component';
+import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quotes.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { EditarComponent } from './editar/editar.component';
     SchoolEditComponent,
     UserListComponent,
     AdministrativasComponent,
-    EditarComponent
+    EditarComponent,
+    ListQuotesComponent,
+    ComparativeQuotesComponent
   ],
   imports: [
     BrowserModule,

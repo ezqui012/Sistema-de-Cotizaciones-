@@ -19,7 +19,9 @@ import { UserListComponent } from './user-list/user-list.component';
 import { AuthAdminGuard } from './guards/auth-admin.guard';
 import { AuthLoginGuard } from './guards/auth-login.guard';
 import { AdministrativasComponent } from './administrativas/administrativas.component';
+import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 //import { EditarComponent } from './editar/editar.component';
+import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quotes.component';
 
 const routes: Routes = [
   {
@@ -96,10 +98,18 @@ const routes: Routes = [
     path:'unit-list',
     component: AdministrativasComponent
   },
+  {
+    path:'list-quotes',
+    component: ListQuotesComponent
+  },
   /*{
     path: 'unit-edit',
     component: EditarComponent
-  }*/
+  },*/
+  {
+    path: 'comparative-quotes',
+    component: ComparativeQuotesComponent
+  }
 
 ];
 
