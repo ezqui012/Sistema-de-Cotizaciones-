@@ -1,5 +1,5 @@
 import { RegisterUserAdministrativeComponent } from './register-user-administrative/register-user-administrative.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateRolComponent } from './create-rol/create-rol.component';
 import { EditRolComponent } from './edit-rol/edit-rol.component';
@@ -20,7 +20,8 @@ import { AuthAdminGuard } from './guards/auth-admin.guard';
 import { AuthLoginGuard } from './guards/auth-login.guard';
 import { AdministrativasComponent } from './administrativas/administrativas.component';
 import { ListQuotesComponent } from './list-quotes/list-quotes.component';
-//import { EditarComponent } from './editar/editar.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { EditUnitComponent } from './edit-unit/edit-unit.component';
 import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quotes.component';
 
 const routes: Routes = [
@@ -40,7 +41,7 @@ const routes: Routes = [
     canActivate: [AuthAdminGuard]
   },
   {
-    path: 'roles-edit',
+    path: 'roles-edit/:id',
     component: EditRolComponent,
     canActivate: [AuthAdminGuard]
   },
@@ -85,7 +86,7 @@ const routes: Routes = [
     canActivate: [AuthAdminGuard]
   },
   {
-    path:'school-edit',
+    path:'school-edit/:id',
     component: SchoolEditComponent,
     canActivate: [AuthAdminGuard]
   },
@@ -102,13 +103,18 @@ const routes: Routes = [
     path:'list-quotes',
     component: ListQuotesComponent
   },
-  /*{
-    path: 'unit-edit',
-    component: EditarComponent
-  },*/
+  {
+    path:'edit-user/:id',
+    component: EditUserComponent
+  },
+  
   {
     path: 'comparative-quotes',
     component: ComparativeQuotesComponent
+  },
+  {
+    path: 'unit-edit/:id',
+    component: EditUnitComponent
   }
 
 ];

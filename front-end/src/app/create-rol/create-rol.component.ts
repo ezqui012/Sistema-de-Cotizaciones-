@@ -8,6 +8,7 @@ import { AssignedPermit, RegisterAssignedPermitResponse } from '../Model/assigne
 import { PermitService } from '../services/permit.service';
 import { RolesService } from '../services/roles.service';
 import { AssignedPermitService } from '../services/assignedPermit.service';
+import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -30,14 +31,12 @@ export class CreateRolComponent implements OnInit {
   messageRegisterFailed = '';
   idRole:any;
 
-  //private patternNumber = /^[0-9]+(\.?[0-9]+)?$/;
-  private pattern_name = /^[a-zA-Z]*$/;
-  private pattern_des = /^[a-zA-Z-z0-9-zñÑ\u00E0-\u00FC ]*$/
+  private pattern_name = /^[a-zA-Z-zñÑ\u00E0-\u00FC ]*$/
 
   registerForm = this.fb.group({
-    //id_permit: ['', [Validators.required]],
+
     name_role: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(75), Validators.pattern(this.pattern_name)]],
-    description_role: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(100), Validators.pattern(this.pattern_des)]],
+    description_role: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(100)]],
     checkAproveSol: [false],
     checkCreateCot: [false],
     checkCreateSol: [false],
@@ -54,8 +53,11 @@ export class CreateRolComponent implements OnInit {
     public _permitService: PermitService,
     public _assignedPermit: AssignedPermitService,
     private fb: FormBuilder,
-    public toastr: ToastrService
-  ) { }
+    public toastr: ToastrService,
+    private titlePage: Title
+  ) {
+    this.titlePage.setTitle('Registro de roles - QUOT-UMSS');
+  }
 
   ngOnInit(): void {
     this.getPermit();
@@ -95,11 +97,8 @@ export class CreateRolComponent implements OnInit {
       (data) => {
         res = data;
         if (res.res) {
-          //this.idRole=
-          //localStorage.setItem('id-role', res.id);
-          this.addAssignedPermission(res.id);
 
-          console.log("registro el Id: " + res.id)
+          this.addAssignedPermission(res.id);
           this.showToastSuccess();
           this.clearInput();
 
@@ -173,16 +172,13 @@ export class CreateRolComponent implements OnInit {
       this.registerForm.get('checkListSol')?.value);
   }
   addAssignedPermission(idRol:number) {
-    console.log("hhhhID: " +idRol);
     if (idRol !== 0) {
 
       var permitArray = new Array();
       permitArray = this.permit_id;
-      //console.log("en el IF id YA ESTA del Rol registrado: " + permitArray.length);
       for (let i = 0; i < permitArray.length; i++) {
         this.permitAssigned.id_permission = permitArray[i];
         this.permitAssigned.id_role = idRol;
-        //console.log("El ide YA ESTA del Rol registrado: " + idRol);
         let res: RegisterAssignedPermitResponse;
         this._assignedPermit.registerAssignedPermit(this.permitAssigned).subscribe(
           (data) => {

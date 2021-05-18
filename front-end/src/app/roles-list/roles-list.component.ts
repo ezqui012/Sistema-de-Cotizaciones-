@@ -8,7 +8,7 @@ import { Permit } from '../Model/permit';
 import { AssignedPermitService } from '../services/assignedPermit.service';
 import { PermitOfRole } from '../Model/assignedPermit';
 import { PermitService } from '../services/permit.service';
-
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-roles-list',
@@ -30,8 +30,11 @@ export class RolesListComponent implements OnInit {
     private router: Router,
     public _roleService: RolesService,
     public _assignedPermitService: AssignedPermitService,
-    public _permitService: PermitService
-  ) { }
+    public _permitService: PermitService,
+    private titlePage: Title
+  ) {
+    this.titlePage.setTitle('Lista de roles - QUOT-UMSS');
+  }
 
   ngOnInit(): void {
     this.getRole();
@@ -50,6 +53,9 @@ export class RolesListComponent implements OnInit {
 
   navigateTo(path: String) {
     this.router.navigate([path]);
+  }
+  navigateToEdit(path: String ,id:any){
+    this.router.navigate([path,id]);
   }
   openModal(content: any, pos: any, idRole: any) {
 

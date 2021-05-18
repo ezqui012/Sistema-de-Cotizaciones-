@@ -90,13 +90,10 @@
           <button class="btn btn-cancel" (click)="navigateTo('/roles-list')">Cancelar</button>
           <button class="btn btn-register" (click)="registerPermitAndRole()">Registrar</button>
         </div>
-
       </div>
-
-
-
-
-
+      <p *ngIf="messageFail" class="failed-register">
+        {{ this.messageRegisterFailed }}
+      </p>
     </form>
 
   </div>

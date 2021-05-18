@@ -63,25 +63,19 @@
         </thead>
 
         <tbody class="bodyTable">
-
           <tr class="row-table" *ngFor="let role of roles; let i = index">
             <th scope="row">{{i+1}}</th>
             <td>{{role.name_role}}</td>
 
             <td>
               <div class="row justify-content-end" style="padding-right: 20%;">
-                <button type="button" class="btn btn-edit">Editar</button>
+                <button type="button" class="btn btn-edit" (click)="navigateToEdit('/roles-edit', role.id_role)">Editar</button>
                 <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content,i, role.id_role)">Ver</button>
               </div>
             </td>
 
           </tr>
-
-
-
         </tbody>
-
-
       </table>
     </div>
 
