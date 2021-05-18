@@ -38,10 +38,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::ApiResource('roles','RolesController');
     Route:: get('listId/{id}','UnitController@getUnitSelect');
     Route:: get('roleId/{id}','RolesController@getRoleSelect');
-
 });
-//Route::ApiResource('unit', 'UnitController');
-//Route::ApiResource('assignedPermit', 'AssignedPermitController');
-
+Route::get('user/{id}', 'UserController@getUserById');
+Route::put('updateUser/{id}', 'UserController@updateUser');
+Route::put('updatePassword/{id}', 'UserController@updatePassword');
 
 
