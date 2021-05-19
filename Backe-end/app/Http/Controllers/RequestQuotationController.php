@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
+
 class RequestQuotationController extends Controller
 {
     public function index()
@@ -20,7 +21,20 @@ class RequestQuotationController extends Controller
 
     public function show($id)
     {
-        //
+        try{
+
+            $res = DB::table('request_quotation')
+                        ->join('users', 'request_quotation.id', '=', 'users.id')
+                        ->select('request_quotation.id_request', 'request_quotation.business_name', 'request_quotation.date', 'users.name')
+                        ->where('request_quotation.id_request', '=', $id)
+                        ->get();
+            return json_decode($res, true)[0];
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function update(Request $request, $id)
