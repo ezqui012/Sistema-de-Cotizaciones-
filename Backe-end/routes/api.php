@@ -47,3 +47,7 @@ Route::apiResource('enterprise', 'EnterpriseController');
 Route:: get('items-rq/{id}','ExpenseItemController@getItemRequest');
 Route:: get('quot-infoStatus/{id}','QuotationController@getInfo');
 Route::apiResource('insertQuote', 'QuoteDetailController');
+
+/* Controladores historia Creacion de solicitud de compra */
+//lista de solicitudes
+Route:: get('list-request','RequestQuotationController@listRequestQuot');
