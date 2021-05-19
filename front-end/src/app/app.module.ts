@@ -35,6 +35,10 @@ import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quo
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { PasswordComponent } from './PopUp/password/password.component';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
+import { RequestQuotationComponent } from './request-quotation/request-quotation.component';
+import { RequestQuotationListComponent } from './request-quotation-list/request-quotation-list.component';
+import { RequestQuotationEditComponent } from './request-quotation-edit/request-quotation-edit.component';
+import { RequestDetailComponent } from './request-detail/request-detail.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +65,11 @@ import { EditUnitComponent } from './edit-unit/edit-unit.component';
     ComparativeQuotesComponent,
     EditUserComponent,
     PasswordComponent,
-    EditUnitComponent
+    EditUnitComponent,
+    RequestQuotationComponent,
+    RequestQuotationListComponent,
+    RequestQuotationEditComponent,
+    RequestDetailComponent
   ],
   imports: [
     BrowserModule,
