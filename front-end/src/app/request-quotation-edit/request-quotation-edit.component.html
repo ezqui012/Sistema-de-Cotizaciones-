@@ -1,0 +1,120 @@
+<app-navbar></app-navbar>
+
+<!--header-->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Editar Solicitud de Cotización</b></h1>
+  </div>
+  <div class="titleQoute">
+    <mat-form-field class="date-info">
+      <mat-label>Razon social</mat-label>
+      <input matInput placeholder="Ingrese Razon social">
+      <mat-error >
+
+      </mat-error>
+    </mat-form-field>
+
+  </div>
+  <div class="contentFormItem">
+    <div class="contentSelect">
+      <mat-form-field class="selectItem-full-width" id="select-item">
+        <mat-label>Seleccione Item</mat-label>
+        <mat-select >
+          <mat-option>
+            selction
+          </mat-option>
+        </mat-select>
+        <mat-error>
+
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="contentBtnPlus">
+      <button type="button" class="btn btnPlus"><img src="../../assets/icon-quote/plus.png" alt="" width="25" height="25"></button>
+    </div>
+    <div class="contentCount">
+      <mat-form-field class="date-info">
+        <mat-label>Cantidad</mat-label>
+        <input matInput placeholder="Ingrese Cantida de Item">
+        <mat-error >
+
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="contentButton">
+      <div class="row justify-content-end" style="padding-right: 20%;">
+        <button type="button" class="btn btn-add" >Guardar</button>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <!--Tabla-->
+  <div class="containerTable">
+    <div class="newHeadTable">
+      <div class="numHead"><b>Nº</b></div>
+      <div class="dateHead"><b>Cantidad</b></div>
+      <div class="undHead"><b>Unidad</b></div>
+      <div class="nomHead"><b>Detalle</b></div>
+      <div class="uniHead"><b>Unitario</b></div>
+      <div class="totalHead"><b>Total</b></div>
+      <div class="accHead"><b>Acciones</b></div>
+    </div>
+    <div class="newBodyTable">
+      <table class="table">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-faculty" >
+            <th scope="row">1</th>
+            <td>2</td>
+            <td>Und</td>
+            <td>Sillas giratorias</td>
+            <td>450</td>
+            <td>900</td>
+            <td>
+              <div class="row justify-content-end" style="padding-right: 20%;">
+                <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25"></button>
+                <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/bin2.png" alt="" width="25" height="25"></button>
+
+              </div>
+            </td>
+
+          </tr>
+          <tr class="row-faculty" >
+            <th scope="row">1</th>
+            <td>2</td>
+            <td>Und</td>
+            <td>Sillas giratorias</td>
+            <td>450</td>
+            <td>900</td>
+            <td>
+              <div class="row justify-content-end" style="padding-right: 20%;">
+                <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25"></button>
+                <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/bin2.png" alt="" width="25" height="25"></button>
+
+              </div>
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="containerBtn">
+    <div>
+      <button class="btn btn-cancel">Cancelar</button>
+      <button class="btn btn-register">Guardar</button>
+    </div>
+  </div>
+
+</div>

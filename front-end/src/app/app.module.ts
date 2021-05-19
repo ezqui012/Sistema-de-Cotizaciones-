@@ -39,6 +39,10 @@ import { QuoteFormComponent } from './quote-form/quote-form.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { RequestQuotationComponent } from './request-quotation/request-quotation.component';
+import { RequestQuotationListComponent } from './request-quotation-list/request-quotation-list.component';
+import { RequestQuotationEditComponent } from './request-quotation-edit/request-quotation-edit.component';
+import { RequestDetailComponent } from './request-detail/request-detail.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +71,11 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     ComparativeQuotesComponent,
     EditUserComponent,
     PasswordComponent,
-    EditUnitComponent
+    EditUnitComponent,
+    RequestQuotationComponent,
+    RequestQuotationListComponent,
+    RequestQuotationEditComponent,
+    RequestDetailComponent
   ],
   imports: [
     BrowserModule,

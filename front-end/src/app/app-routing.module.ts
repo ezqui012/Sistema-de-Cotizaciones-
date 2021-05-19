@@ -25,6 +25,10 @@ import { EditUnitComponent } from './edit-unit/edit-unit.component';
 //import { EditarComponent } from './editar/editar.component';
 import { QuoteFormComponent } from './quote-form/quote-form.component'
 import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quotes.component';
+import { RequestQuotationComponent } from './request-quotation/request-quotation.component';
+import { RequestQuotationListComponent } from './request-quotation-list/request-quotation-list.component';
+import { RequestQuotationEditComponent } from './request-quotation-edit/request-quotation-edit.component';
+import { RequestDetailComponent } from './request-detail/request-detail.component';
 
 const routes: Routes = [
   {
@@ -121,7 +125,25 @@ const routes: Routes = [
   {
     path: 'quote-form/:id',
     component: QuoteFormComponent
+  },
+  {
+    path: 'request-quotation',
+    component: RequestQuotationComponent
+  },
+  {
+    path: 'request-quotation-list',
+    component: RequestQuotationListComponent
+  },
+  {
+    path: 'request-quotation-edit',
+    component: RequestQuotationEditComponent
+  },
+  {
+    path: 'request-detail',
+    component: RequestDetailComponent
   }
+
+
 ];
 
 @NgModule({
