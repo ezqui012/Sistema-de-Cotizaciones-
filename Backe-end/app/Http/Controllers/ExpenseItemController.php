@@ -5,13 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use App\ExpensiveItem;
 
 class ExpenseItemController extends Controller
 {
 
     public function index()
     {
-        //
+        try{
+            $res = ExpensiveItem::orderBy('name_item')->get();
+            return $res;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function store(Request $request)

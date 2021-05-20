@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExpensiveItem extends Model
 {
-    protected $table = 'enterprise';
+    protected $table = 'expense_item';
 
     public $updated_at = null;
     public $created_at = null;
