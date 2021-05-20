@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\RequestDetails;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use App\Http\Requests\CreateRequestDetailsRequestst;
 
 class RequestDetailsController extends Controller
 {
@@ -14,9 +15,21 @@ class RequestDetailsController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(CreateRequestDetailsRequestst $request)
     {
-        //
+        try{
+            $input = $request->all();
+            RequestDetails::create($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'Registered request deatil'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function show($id)

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Illuminate\Support\Carbon;
+use App\Http\Requests\CreateRequestQuotationRequest;
+use App\RequestQuotation;
 
 
 class RequestQuotationController extends Controller
@@ -14,9 +17,25 @@ class RequestQuotationController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(CreateRequestQuotationRequest $request)
     {
-        //
+        try{
+            $now = Carbon::now();
+            $input = $request->all();
+            $input['date'] = $now->format('Y-m-d');
+            $input['status'] = 'Proceso';
+            $data = RequestQuotation::create($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'Registered request quototation',
+                'id' => $data->id
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function show($id)

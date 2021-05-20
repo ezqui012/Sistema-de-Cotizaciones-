@@ -55,3 +55,5 @@ Route:: get('list-request','RequestQuotationController@listRequestQuot');
 Route::apiResource('request-quotation', 'RequestQuotationController');
 
 Route::get('items-request/{id}', 'RequestDetailsController@detailItem');
+
+Route::apiResource('detail-request', 'RequestDetailsController');
