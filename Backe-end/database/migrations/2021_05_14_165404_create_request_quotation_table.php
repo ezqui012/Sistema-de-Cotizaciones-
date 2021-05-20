@@ -20,7 +20,7 @@ class CreateRequestQuotationTable extends Migration
             $table->foreign('id')->references('id')->on('users');
             $table->string('business_name', 100);
             $table->date('date');
-            $table->string('status', 9);
+            $table->string('status', 10);
         });
     }
 
