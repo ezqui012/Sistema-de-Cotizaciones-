@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::ApiResource('roles','RolesController');
     Route:: get('listId/{id}','UnitController@getUnitSelect');
     Route:: get('roleId/{id}','RolesController@getRoleSelect');
+    Route:: get('quoteItem/{id}','QuoteController@getItem');
+    Route::ApiResource('quote', 'QuoteController');
 });
 Route::get('user/{id}', 'UserController@getUserById');
 Route::put('updateUser/{id}', 'UserController@updateUser');

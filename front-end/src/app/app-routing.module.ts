@@ -113,7 +113,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'comparative-quotes',
+    path: 'comparative-quotes/:id/:entrusted',
     component: ComparativeQuotesComponent
   },
   {
