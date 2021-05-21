@@ -7,6 +7,8 @@ use App\RequestDetails;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use App\Http\Requests\CreateRequestDetailsRequestst;
+use App\Http\Requests\UpdateRequestDetailsRequest;
+use App\Http\Requests\UpdateRequestDetailsRequestst;
 
 class RequestDetailsController extends Controller
 {
@@ -37,9 +39,23 @@ class RequestDetailsController extends Controller
         //
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateRequestDetailsRequest $request, $id)
     {
-        //
+        try{
+            $input['id_item'] = $request->id_item;
+            $input['quantity'] = $request->quantity;
+            $input['total_cost'] = $request->total_cost;
+            DB::table('request_details')->where('id_request', $id)->where('id_item', $request->id_itemOld)->update($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'Successfully upgraded request detail'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function destroy($id)
