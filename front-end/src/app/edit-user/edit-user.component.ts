@@ -190,7 +190,7 @@ export class EditUserComponent implements OnInit {
   }
 
   getDataUser(){
-    this.userDataService.getDataUserByID(this.id).subscribe(res =>{
+    this.userDataService.getDataUserByID(this.id).subscribe((res: any) =>{
      // console.log(res);
       this.dataToUpdate = res;
       //console.log(this.dataToUpdate);

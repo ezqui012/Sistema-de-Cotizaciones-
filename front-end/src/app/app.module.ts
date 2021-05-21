@@ -33,6 +33,8 @@ import { EditarComponent } from './editar/editar.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { PasswordComponent } from './PopUp/password/password.component';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
+import { QuoteListProcessComponent } from './quote-list-process/quote-list-process.component';
+import { QuoteListFinalizedComponent } from './quote-list-finalized/quote-list-finalized.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { EditUnitComponent } from './edit-unit/edit-unit.component';
     EditarComponent,
     EditUserComponent,
     PasswordComponent,
-    EditUnitComponent
+    EditUnitComponent,
+    QuoteListProcessComponent,
+    QuoteListFinalizedComponent
   ],
   imports: [
     BrowserModule,

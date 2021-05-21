@@ -1,0 +1,130 @@
+<!--Navbar-->
+<app-navbar></app-navbar>
+<!--Modal Roles-->
+<!-- <ng-template #content let-modal>
+
+    <div class="modal-header">
+      <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
+      <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="dateInfo">
+        <h3><b>Nombre:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{personalUser[pos].name}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>Rol:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{personalUser[pos].name_role}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>Unidad:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{personalUser[pos].name_unit}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>Teléfono:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{personalUser[pos].phone}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>CI:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{personalUser[pos].ci}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>Email:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{personalUser[pos].email}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>Dirección:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{personalUser[pos].address}}</h3>
+        </div>
+      </div>
+
+    </div>
+
+
+
+</ng-template> -->
+<script src="https://kit.fontawesome.com/28526825ef.js" crossorigin="anonymous"></script>
+
+<!--header-->
+<head>
+
+  <div class="containertop">
+
+    <h2><b>Detalle de cotizaciones</b></h2>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/register-user')">Registro de Cotización</button>
+
+    </div>
+  </div>
+</head>
+
+<div class="containerBody">
+
+
+  <!--Tabla-->
+  <div class="labeldiv">
+    <label class="reason"><b>Razón social: </b>{{business}}</label>
+    <label class="state"><b>Estado:</b> Finalizado</label>
+  </div>
+  <div class="containerTable">
+    <div class="newHeadTable">
+      <div class="numHead"><b>Nº</b></div>
+      <div class="cantHead"><b>Cantidad</b></div>
+      <div class="unHead"><b>Unidad</b></div>
+      <div class="detHead"><b>Detalle</b></div>
+      <div class="emHead"><b>Empresa</b></div>
+      <div class="peHead"><b>Periodo</b></div>
+      <div class="unitHead"><b>Unitario</b></div>
+      <div class="totalHead"><b>Total</b></div>
+      <div class="accHead"><b>Acciones</b></div>
+    </div>
+    <div class="newBodyTable">
+      <table class="table table-striped table-fixed">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-quote" *ngFor="let quote of quotes; let i = index">
+            <th scope="row" class="tdNum">{{i+1}}</th>
+            <td class="tdquan">{{quote.quantity}}</td>
+            <td class="tdunit">{{quote.unit_item}}</td>
+            <td class="tdbname">{{quote.name_item}}</td>
+            <td class="tdenter">{{quote.name_enterprise}}</td>
+            <td class="tddel">{{quote.delivery_days}}</td>
+            <td class="tdcost">{{quote.unit_cost}}</td>
+            <td class="tdcost">{{quote.unit_cost*quote.quantity}}</td>
+            <td>
+              <div class="row justify-content-end" style="padding-right: 20%;">
+                <button type="button" class="btn btn-edit" disabled routerLink="/edit-user/{{quote}}"><img id="ed" src="../../assets/img-outsite/pencil.png" width="25" height="25"></button>
+                <button id="verRol" type="button" disabled class="btn btn-ver" ><img src="../../assets/img-outsite/trash.png" width="25" height="25"></button>
+              </div>
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
