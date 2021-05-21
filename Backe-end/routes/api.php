@@ -50,8 +50,9 @@ Route::apiResource('insertQuote', 'QuoteDetailController');
 
 /* Controladores historia Creacion de solicitud de compra */
 //lista de solicitudes
-Route:: get('list-request','RequestQuotationController@listRequestQuot');
+Route::get('list-request','RequestQuotationController@listRequestQuot');
 Route::apiResource('request-quotation', 'RequestQuotationController');
 Route::get('items-request/{id}', 'RequestDetailsController@detailItem');
 Route::apiResource('detail-request', 'RequestDetailsController');
 Route::apiResource('expense-item', 'ExpenseItemController');
+Route::put('update-status/{id_request}','RequestQuotationController@changeStatus');

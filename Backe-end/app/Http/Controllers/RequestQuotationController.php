@@ -82,4 +82,20 @@ class RequestQuotationController extends Controller
             ], 404);
         }
     }
+
+    public function changeStatus(Request $request, $id_request){
+        try{
+            $data = $request->all();
+            DB::table('request_quotation')->where('id_request', $id_request)->update($data);
+            return response()->json([
+                'res' => true,
+                'message' => 'Update status'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
 }
