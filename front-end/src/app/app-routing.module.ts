@@ -22,6 +22,8 @@ import { AdministrativasComponent } from './administrativas/administrativas.comp
 import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
+//import { EditarComponent } from './editar/editar.component';
+import { QuoteFormComponent } from './quote-form/quote-form.component'
 import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quotes.component';
 import { RequestQuotationComponent } from './request-quotation/request-quotation.component';
 import { RequestQuotationListComponent } from './request-quotation-list/request-quotation-list.component';
@@ -119,6 +121,10 @@ const routes: Routes = [
   {
     path: 'unit-edit/:id',
     component: EditUnitComponent
+  },
+  {
+    path: 'quote-form/:id',
+    component: QuoteFormComponent
   },
   {
     path: 'request-quotation',

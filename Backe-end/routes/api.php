@@ -45,4 +45,15 @@ Route::get('user/{id}', 'UserController@getUserById');
 Route::put('updateUser/{id}', 'UserController@updateUser');
 Route::put('updatePassword/{id}', 'UserController@updatePassword');
 
+Route::apiResource('enterprise', 'EnterpriseController');
+Route:: get('items-rq/{id}','ExpenseItemController@getItemRequest');
+Route:: get('quot-infoStatus/{id}','QuotationController@getInfo');
+Route::apiResource('insertQuote', 'QuoteDetailController');
 
+/* Controladores historia Creacion de solicitud de compra */
+//lista de solicitudes
+Route:: get('list-request','RequestQuotationController@listRequestQuot');
+Route::apiResource('request-quotation', 'RequestQuotationController');
+Route::get('items-request/{id}', 'RequestDetailsController@detailItem');
+Route::apiResource('detail-request', 'RequestDetailsController');
+Route::apiResource('expense-item', 'ExpenseItemController');

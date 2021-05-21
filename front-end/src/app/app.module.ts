@@ -35,6 +35,10 @@ import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quo
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { PasswordComponent } from './PopUp/password/password.component';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
+import { QuoteFormComponent } from './quote-form/quote-form.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { RequestQuotationComponent } from './request-quotation/request-quotation.component';
 import { RequestQuotationListComponent } from './request-quotation-list/request-quotation-list.component';
 import { RequestQuotationEditComponent } from './request-quotation-edit/request-quotation-edit.component';
@@ -61,6 +65,8 @@ import { RequestDetailComponent } from './request-detail/request-detail.componen
     UserListComponent,
     AdministrativasComponent,
     EditarComponent,
+    EditUnitComponent,
+    QuoteFormComponent,
     ListQuotesComponent,
     ComparativeQuotesComponent,
     EditUserComponent,
@@ -88,7 +94,10 @@ import { RequestDetailComponent } from './request-detail/request-detail.componen
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
