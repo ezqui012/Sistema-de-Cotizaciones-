@@ -1,35 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { QuotationService } from '../services/quotation.service';
+import { Title } from '@angular/platform-browser';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ListAssignedQuotes } from '../Model/quotation';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-quote-list',
   templateUrl: './quote-list.component.html',
-  styleUrls: ['./quote-list.component.css']
+  styleUrls: ['./quote-list.component.css'],
+  encapsulation:ViewEncapsulation.Emulated
 })
 export class QuoteListComponent implements OnInit {
 
-  quotes:any = [{
-      id_request: 1,
-      id: 2,
-      business_name: "Compra de muchas cosas bonitas",
-      date: '2021-05-18',
-      status: 'Proceso'
-    },
-    {
-      id_request: 2,
-      id: 3,
-      business_name: "Compra de muchas cosas feas",
-      date: '2021-05-18',
-      status: 'Cotizacion'
-    }
-  ]
+  quotes: ListAssignedQuotes | any;
 
   showThis = (algo: any) => {
     alert(algo);
   }
 
-  constructor() { }
+  constructor(
+    private services:QuotationService,
+    private router:Router,
+    private titlePage: Title,
+    private route: ActivatedRoute,
+    public toastr: ToastrService
+  ) {
+    this.titlePage.setTitle('Lista de cotizaciones asignadas - QUOT-UMSS')
+  }
 
   ngOnInit(): void {
+    //pasar id del usuario
+    this.getList(2);
+  }
+
+  getList(id: any){
+    this.services.getListQuotes(id).subscribe(
+      (data) => {
+        this.quotes = data;
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error('Ocurrio un error al cargar la pagina, intente nuevamente');
+      }
+    );
   }
 
 }

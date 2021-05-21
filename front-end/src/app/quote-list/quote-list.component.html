@@ -18,7 +18,7 @@
           <tr class="row-faculty" *ngFor="let list of quotes ; let i = index">
             <th scope="row">{{i+1}}</th>
             <td>{{list.business_name}}</td>
-            <td>{{list.status}}</td>
+            <td>{{list.status_quotation}}</td>
             <td>
               <div class="row justify-content-end" style="padding-right: 20%;">
                 <button type="button" class="btn btn-register" (click)="showThis(list.id_request)">Registrar</button>
