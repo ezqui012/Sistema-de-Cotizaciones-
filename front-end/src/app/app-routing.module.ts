@@ -29,6 +29,7 @@ import { RequestQuotationComponent } from './request-quotation/request-quotation
 import { RequestQuotationListComponent } from './request-quotation-list/request-quotation-list.component';
 import { RequestQuotationEditComponent } from './request-quotation-edit/request-quotation-edit.component';
 import { RequestDetailComponent } from './request-detail/request-detail.component';
+import { QuoteListComponent } from './quote-list/quote-list.component';
 
 const routes: Routes = [
   {
@@ -141,8 +142,11 @@ const routes: Routes = [
   {
     path: 'request-detail',
     component: RequestDetailComponent
+  },
+  {
+    path: 'quote-list',
+    component: QuoteListComponent
   }
-
 
 ];
 

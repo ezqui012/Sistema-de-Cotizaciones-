@@ -1,0 +1,33 @@
+
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Lista de cotizaciones</b></h1>
+  </div>
+
+  <!--Tabla-->
+  <div class="containerTable">
+    <div class="newHeadTable">
+      <div class="numHead"><b>Nº</b></div>
+      <div class="nomHead"><b>Razón social</b></div>
+      <div class="statusHead"><b>Estado</b></div>
+      <div class="accHead" style="padding-right: 12%; text-align: right;"><b>Acciones</b></div>
+    </div>
+    <div class="newBodyTable">
+      <table class="table table-striped table-fixed">
+        <tbody>
+          <tr class="row-faculty" *ngFor="let list of quotes ; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{list.business_name}}</td>
+            <td>{{list.status}}</td>
+            <td>
+              <div class="row justify-content-end" style="padding-right: 20%;">
+                <button type="button" class="btn btn-register" (click)="showThis(list.id_request)">Registrar</button>
+                <button type="button" class="btn btn-detail" (click)="showThis('Detalle')">Detalle</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
