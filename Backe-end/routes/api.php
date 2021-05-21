@@ -57,3 +57,4 @@ Route::apiResource('detail-request', 'RequestDetailsController');
 Route::apiResource('expense-item', 'ExpenseItemController');
 Route::put('update-status/{id_request}','RequestQuotationController@changeStatus');
 Route::apiResource('rejected', 'RejectedController');
+Route::get('unit-amount/{id}', 'UnitController@getAmount');
