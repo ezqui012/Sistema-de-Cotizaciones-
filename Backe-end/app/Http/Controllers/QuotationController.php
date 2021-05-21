@@ -46,4 +46,22 @@ class QuotationController extends Controller
             ], 404);
         }
     }
+
+    public function getListQuoteUser($id){
+        try{
+            $list = DB::table('quotation')
+                        ->join('request_quotation', 'quotation.id_request', '=', 'request_quotation.id_request')
+                        ->select('request_quotation.id_request', 'request_quotation.business_name', 'quotation.status_quotation')
+                        ->where('quotation.id', '=', $id)
+                        ->where('request_quotation.status', '=', 'Cotización')
+                        ->get();
+            return $list;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
+
 }
