@@ -1,0 +1,154 @@
+<app-navbar></app-navbar>
+<!--Modal-Rechazo-->
+<ng-template #contentR let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Formulario de rechazo</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="contentMotive">
+      <mat-form-field class="date-info">
+        <mat-label>Motivo de Rechazo</mat-label>
+        <input matInput placeholder="Ingrese el motivo de rechazo">
+        <mat-error >
+
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="containerBtn">
+      <div>
+        <button class="btn btn-cancelar" (click)="modal.dismiss()">Cancelar</button>
+        <button class="btn btn-reporte">Guardar</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- Modal-Engardado -->
+<ng-template #contentG let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Asignación de cotizador</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="contentMotive">
+      <mat-form-field class="selectItem-full-width" id="select-item">
+        <mat-label>Cotizador</mat-label>
+        <mat-select >
+          <mat-option>
+            selection
+          </mat-option>
+        </mat-select>
+        <mat-error>
+
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="containerBtn">
+      <div>
+        <button class="btn btn-cancelar" (click)="modal.dismiss()">Cancelar</button>
+        <button class="btn btn-reporte">Guardar</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!--header-->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Detalles de Solicitud</b></h1>
+  </div>
+<div class="contentInfo">
+  <div class="infoHead">
+    <div class="nameRequest">
+      <b>Razon social: </b>
+      Equipamiento de oficina
+    </div>
+    <div class="dateRequest">
+      <b>Fecha: </b>
+      01/02/2021
+    </div>
+  </div>
+  <div class="nameAttedant">
+    <b>Encargado de solicitud: </b>
+    Fernado Medina Medina
+  </div>
+</div>
+  <!--Tabla-->
+
+  <div class="containerTable">
+    <div class="newHeadTable">
+      <div class="numHead"><b>Nº</b></div>
+      <div class="dateHead"><b>Cantidad</b></div>
+      <div class="undHead"><b>Unidad</b></div>
+      <div class="nomHead"><b>Detalle</b></div>
+      <div class="uniHead"><b>Unitario</b></div>
+      <div class="totalHead"><b>Total</b></div>
+    </div>
+    <div class="newBodyTable">
+      <table class="table">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr class="row-faculty" >
+            <th scope="row">1</th>
+            <td>2</td>
+            <td>Und</td>
+            <td>Sillas giratorias</td>
+            <td>450</td>
+            <td>900</td>
+          </tr>
+          <tr class="row-faculty" >
+            <th scope="row">2</th>
+            <td>1</td>
+            <td>Und</td>
+            <td>Sillas giratorias</td>
+            <td>450</td>
+            <td>900</td>
+          </tr>
+          <tr class="row-faculty" >
+            <th scope="row">3</th>
+            <td>2</td>
+            <td>Und</td>
+            <td>Sillas giratorias</td>
+            <td>450</td>
+            <td>900</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="infoHead">
+    <div class="nameRequest">
+      <b>Moto disponible de la Unidad: </b>
+      1000000.00
+    </div>
+    <div class="dateRequest">
+      <b>TOTAL: </b>
+      1800.00
+    </div>
+  </div>
+  <div class="containerBtn">
+    <div>
+      <button class="btn btn-aceptar" (click)="openModal(contentG)">Aceptar</button>
+      <button class="btn btn-rechazar" (click)="openModal(contentR)">Rechazar</button>
+      <button class="btn btn-reporte" >Reporte PDF</button>
+    </div>
+  </div>
+
+</div>

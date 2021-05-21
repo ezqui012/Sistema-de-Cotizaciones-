@@ -43,15 +43,15 @@ Route::get('processQuote/{id}', 'QuoteController@getProcessQuote');
 Route::get('finalizedQuote/{id}', 'QuoteController@getFinalizedQuote');
 Route::delete('processQuote/{id}', 'QuoteController@deleteProcessQuote');
 
-//Route::get('user/{id}', 'UserController@getUserById');
-//Route::put('updateUser/{id}', 'UserController@updateUser');
+Route::apiResource('enterprise', 'EnterpriseController');
+Route:: get('items-rq/{id}','ExpenseItemController@getItemRequest');
+Route:: get('quot-infoStatus/{id}','QuotationController@getInfo');
+Route::apiResource('insertQuote', 'QuoteDetailController');
 
-    //Route:: get('listId/{id}','UnitController@getUnitSelect');
-    Route::ApiResource('roles','RolesController');
-    Route:: get('listId/{id}','UnitController@getUnitSelect');
-    Route:: get('roleId/{id}','RolesController@getRoleSelect');
-
-//Route::ApiResource('unit', 'UnitController');
-
-
-
+/* Controladores historia Creacion de solicitud de compra */
+//lista de solicitudes
+Route:: get('list-request','RequestQuotationController@listRequestQuot');
+Route::apiResource('request-quotation', 'RequestQuotationController');
+Route::get('items-request/{id}', 'RequestDetailsController@detailItem');
+Route::apiResource('detail-request', 'RequestDetailsController');
+Route::apiResource('expense-item', 'ExpenseItemController');

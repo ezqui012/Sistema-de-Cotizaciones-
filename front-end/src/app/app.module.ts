@@ -30,11 +30,21 @@ import { MatCardModule } from '@angular/material/card';
 import { UserListComponent } from './user-list/user-list.component';
 import { AdministrativasComponent } from './administrativas/administrativas.component';
 import { EditarComponent } from './editar/editar.component';
+import { ListQuotesComponent } from './list-quotes/list-quotes.component';
+import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quotes.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { PasswordComponent } from './PopUp/password/password.component';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
 import { QuoteListProcessComponent } from './quote-list-process/quote-list-process.component';
 import { QuoteListFinalizedComponent } from './quote-list-finalized/quote-list-finalized.component';
+import { QuoteFormComponent } from './quote-form/quote-form.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { RequestQuotationComponent } from './request-quotation/request-quotation.component';
+import { RequestQuotationListComponent } from './request-quotation-list/request-quotation-list.component';
+import { RequestQuotationEditComponent } from './request-quotation-edit/request-quotation-edit.component';
+import { RequestDetailComponent } from './request-detail/request-detail.component';
 
 @NgModule({
   declarations: [
@@ -57,11 +67,19 @@ import { QuoteListFinalizedComponent } from './quote-list-finalized/quote-list-f
     UserListComponent,
     AdministrativasComponent,
     EditarComponent,
+    EditUnitComponent,
+    QuoteFormComponent,
+    ListQuotesComponent,
+    ComparativeQuotesComponent,
     EditUserComponent,
     PasswordComponent,
     EditUnitComponent,
     QuoteListProcessComponent,
-    QuoteListFinalizedComponent
+    QuoteListFinalizedComponent,
+    RequestQuotationComponent,
+    RequestQuotationListComponent,
+    RequestQuotationEditComponent,
+    RequestDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +98,10 @@ import { QuoteListFinalizedComponent } from './quote-list-finalized/quote-list-f
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
