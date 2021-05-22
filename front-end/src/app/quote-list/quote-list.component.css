@@ -37,15 +37,17 @@ body{
   padding: 12px;
   width: 100%;
 }
+
 .numHead{
   width: 6%;
 }
+
 .nomHead{
-  width: 72%;
+  width: 70%;
 }
 
 .statusHead{
-  width: 50%
+  width: 30%
 }
 
 .btn-detail{
