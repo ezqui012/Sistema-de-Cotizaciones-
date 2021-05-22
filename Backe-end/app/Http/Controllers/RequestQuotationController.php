@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Support\Carbon;
 use App\Http\Requests\CreateRequestQuotationRequest;
 use App\RequestQuotation;
+use App\Http\Requests\UpdateRequestQuotationRequest;
 
 
 class RequestQuotationController extends Controller
@@ -56,9 +57,21 @@ class RequestQuotationController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateRequestQuotationRequest $request, $id)
     {
-        //
+        try{
+            $data = $request->all();
+            DB::table('request_quotation')->where('id_request', '=', $id)->update($data);
+            return response()->json([
+                'res' => true,
+                'message' => 'Update business name'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function destroy($id)
