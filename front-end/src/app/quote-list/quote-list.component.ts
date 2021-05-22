@@ -46,4 +46,8 @@ export class QuoteListComponent implements OnInit {
     );
   }
 
+  navigateTo(path: String){
+    this.router.navigate([path]);
+  }
+
 }
