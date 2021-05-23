@@ -17,3 +17,8 @@ export class ResponseObtained{
   res: any;
   message: any;
 }
+
+export class RejectedRequest{
+  id_request: any;
+  reason: any;
+}

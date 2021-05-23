@@ -117,11 +117,42 @@ export class RequestDetailComponent implements OnInit {
     return message;
   }
 
-  registerRejected(){
+  registerRejectedForm(){
     if(this.rejectedForm.invalid){
       return;
     }
-    this.modal.dismissAll();
-    this.toastr.success("La solicitud a sido rechazada");
+    this.service.registerRejected(this.rejectedForm.value).subscribe(
+      (data) => {
+        if(data.res){
+          this.changeStatus("Rechazado", "La solicitud a sido rechazada");
+        }else{
+          this.toastr.error("Ocurrio un error al registrar intente nuevamente");
+        }
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(`Error: ${error} intente nuevamente`);
+      }
+    );
+  }
+
+  changeStatus(data: any, message: any){
+    let obj = {
+      status: data
+    }
+    this.service.updateStatus(this.rejectedForm.get('id_request')?.value, obj).subscribe(
+      (data) => {
+        if(data.res){
+          this.modal.dismissAll();
+          this.toastr.success("La solicitud a sido rechazada");
+        }else{
+          this.toastr.error("Ocurrio un error al registrar intente nuevamente");
+        }
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(`Error: ${error} intente nuevamente`);
+      }
+    );
   }
 }

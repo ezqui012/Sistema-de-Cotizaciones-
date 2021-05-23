@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { RequestDetail, ListItemsRequest } from '../Model/request-detail';
+import { RequestDetail, ListItemsRequest, ResponseObtained, RejectedRequest } from '../Model/request-detail';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +45,27 @@ export class DetailRequestService {
     //   return this.httpClient.get<RequestDetail>(`${environment.URI_API}items-request/${id}`, { headers: httpHeader });
     // }
     return this.httpClient.get<any>(`${environment.URI_API}unit-amount/${id}`);
+  }
+
+  registerRejected(data: RejectedRequest): Observable<ResponseObtained | any>{
+    let failed: any;
+    // if (localStorage.getItem('quot-umss-tk')) {
+    //   const httpHeader = new HttpHeaders({
+    //     'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    //   });
+    //   return his.httpClient.post<ResponseObtained>(`${environment.URI_API}rejected`, data, { headers: httpHeader });
+    // }
+    return this.httpClient.post<ResponseObtained>(`${environment.URI_API}rejected`, data);
+  }
+
+  updateStatus(id: any, status: any): Observable<ResponseObtained | any>{
+    let failed: any;
+    // if (localStorage.getItem('quot-umss-tk')) {
+    //   const httpHeader = new HttpHeaders({
+    //     'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    //   });
+    //   return his.httpClient.post<ResponseObtained>(`${environment.URI_API}update-status/${id}`, status, { headers: httpHeader });
+    // }
+    return this.httpClient.put<ResponseObtained>(`${environment.URI_API}update-status/${id}`, status);
   }
 }
