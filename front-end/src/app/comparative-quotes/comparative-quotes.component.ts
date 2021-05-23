@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ExpenseItems } from '../Model/expenseItem';
+import { ItemQuoteAcepted, ItemQuotes, ResponseQuote } from '../Model/quote';
 import { QuoteService } from '../services/quote.service';
 
 
@@ -11,18 +12,30 @@ import { QuoteService } from '../services/quote.service';
   styleUrls: ['./comparative-quotes.component.css']
 })
 export class ComparativeQuotesComponent implements OnInit {
+  //indexSelect:boolean =true;
+  isSelect:any
+  //selectItem:boolean =false
   id:any
+  idQuote:any
   entrusted:any
+  idItem:any
   items:Array<ExpenseItems>=[]
+  itemsQuotes:Array<ItemQuotes>=[]
+  //itemsSelect:Array<any>[3]=[]
+  register:ItemQuoteAcepted = new ItemQuoteAcepted
+
   constructor(
     private route: ActivatedRoute,
     public serviceQuote: QuoteService
   ) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.paramMap.get('idR');
+    this.idQuote = this.route.snapshot.paramMap.get('idQ');
     this.entrusted = this.route.snapshot.paramMap.get('entrusted');
     this.getItems(this.id);
+    console.log("id Re: "+this.id)
+    console.log("id Qu: "+this.idQuote)
   }
 
   getItems(idRequest:any){
@@ -30,6 +43,47 @@ export class ComparativeQuotesComponent implements OnInit {
       this.items = item
 
     })
+  }
+
+  showItems(idItem:any){
+    //console.log("llega el id: "+idItem)
+    //console.log(this.idQuote)
+    this.idItem = idItem;
+    this.serviceQuote.getItemsQuotes(this.idQuote, idItem).subscribe((data)=> {
+      this.itemsQuotes = data
+      //console.log(data)
+    })
+  }
+
+  elegirItem(i:any){
+    //this.indexSelect=i;
+    //this.itemsSelect[i]=false;
+    //this.selectItem = true
+    //this.select(i);
+    this.isSelect=false;
+    console.log("se activo el boton")
+  }
+
+  selectItem(i:any){
+
+    this.register.id_request = this.id
+    this.register.id_qd = this.idItem
+
+    let res: ResponseQuote;
+    this.serviceQuote.registerItemQuoteAccepted(this.register).subscribe(
+      (data) => {
+        res = data;
+        if (res.res) {
+          console.log("se registro el item aceptado")
+          //this.elegirItem(i)
+        } else {
+          console.log('Ocurrio un error');
+        }
+      },
+      (error) => {
+        console.log(error.message);
+      }
+    );
   }
 
 }

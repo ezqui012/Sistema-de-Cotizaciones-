@@ -19,8 +19,8 @@ export class ListQuotesComponent implements OnInit {
   ngOnInit(): void {
     this.getQoutesFinish();
   }
-  navigateTo(path: String, id:any, entrusted:any){
-    this.router.navigate([path,id,entrusted]);
+  navigateTo(path: String, id:any, idQ:any, entrusted:any){
+    this.router.navigate([path,id,idQ,entrusted]);
   }
   getQoutesFinish(){
     this.serviceQuote.getQuoteFinish().subscribe((quote)=> {

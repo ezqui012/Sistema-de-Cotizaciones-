@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Accepted;
 use Illuminate\Support\Facades\DB;
 use Exception;
-
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 
 class QuoteController extends Controller
@@ -38,7 +40,7 @@ class QuoteController extends Controller
     {
         try{
 
-            $personals = DB::select('SELECT ei.id_item, ei.name_item
+            $personals = DB::select('SELECT ei.id_item, ei.name_item, ei.unit_item
             FROM expense_item ei, request_details rd
             WHERE rd.id_item = ei.id_item
             AND rd.id_request = ?
@@ -53,15 +55,57 @@ class QuoteController extends Controller
         }
     }
 
+    //funcion de recupracion de datos en detalles de cotizaciones de los items
+    public function getItemQuotes($idQuote, $idItem)
+    {
+        try{
+
+            $personals = DB::select('SELECT q.id_qd, qo.id_request, q.quantity, ei.unit_item, ei.name_item, e.name_enterprise, q.delivery_days, q.unit_cost
+            FROM expense_item ei, quote_detail q, enterprise e, quotation qo
+            WHERE q.id_item = ei.id_item
+            AND q.id_enterprise = e.id_enterprise
+            AND q.id_quotation = qo.id_quotation
+            AND q.id_quotation = ?
+            AND q.id_item = ?
+            ORDER BY q.unit_cost ASC',[$idQuote, $idItem]);
+
+            return $personals;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
+
+    //Selectionar y aceptar de un iten cotizado
+
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //Selectionar y aceptar de un iten cotizado
     public function store(Request $request)
     {
-        //
+        try{
+            $now = Carbon::now();
+            $input = $request->all();
+            $input['date'] = $now->format('Y-m-d');
+            Accepted::create($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'Registered Assigned Quotes Item Accepted'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     /**

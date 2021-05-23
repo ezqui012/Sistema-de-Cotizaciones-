@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 
-import { QuoteList, ResponseQuote} from '../Model/quote';
+import { QuoteList, ResponseQuote, ItemQuotes, ItemQuoteAcepted} from '../Model/quote';
 import { ExpenseItems } from '../Model/expenseItem';
 
 
@@ -35,17 +35,26 @@ export class QuoteService {
     return failed;
   }
 
+  getItemsQuotes(idQuote:any, idItem:any): Observable<ItemQuotes | any>{
+    let failed: any;
+    if(localStorage.getItem('quot-umss-tk')){
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<ItemQuotes>(`${environment.URI_API}itemQuotes/${idQuote}/${idItem}`, {headers: httpHeader});
+    }
+    return failed;
+  }
+  registerItemQuoteAccepted(register:ItemQuoteAcepted):Observable<ResponseQuote|any>{
+    let failed: any;
 
-  // registerUnit(unit: UnitA|SpendingUnit):Observable<RegisterUnitResponse | any>{
-  //   let failed: any;
-  //   if(localStorage.getItem('quot-umss-tk')){
-  //     const httpHeader = new HttpHeaders({
-  //       'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
-  //     });
+    if(localStorage.getItem('quot-umss-tk')){
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
 
-  //     return this.httpClient.post<RegisterUnitResponse>(`${environment.URI_API}unit`, unit, {headers: httpHeader});
-  //   }
-  //   return failed
-  // }
-
+      return this.httpClient.post<ResponseQuote>(`${environment.URI_API}quote`, register, {headers: httpHeader});
+    }
+    return failed;
+  }
 }

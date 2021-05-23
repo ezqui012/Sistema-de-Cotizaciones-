@@ -9,19 +9,17 @@
   <div class="contentQuoteDate">
     <div class="contentQuote">
       <b>Encargado de Cotizacion: </b>
-      {{entrusted}}
+      {{ entrusted }}
     </div>
     <div class="contentSelect">
       <mat-form-field class="selectItem-full-width" id="select-item">
         <mat-label>Seleccione Item</mat-label>
-        <mat-select >
+        <mat-select #mySelect (selectionChange)="showItems(mySelect.value)">
           <mat-option *ngFor="let item of items" [value]="item.id_item">
-            {{item.name_item}}
+            {{ item.name_item }}
           </mat-option>
         </mat-select>
-        <mat-error>
-
-        </mat-error>
+        <mat-error> </mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -55,77 +53,41 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>
+          <tr
+            class="rowQoute"
+            *ngFor="let itemQuote of itemsQuotes; let i = index"
+          >
+            <th style="padding-top:20px;" scope="row">{{ i + 1}}</th>
+            <td style="width:8%; padding-left: 2%; padding-top:20px;">{{itemQuote.quantity}}</td>
+            <td style="width:7%; padding-top:20px;">{{itemQuote.unit_item}}</td>
+            <td style="width:28%; padding-top:20px;">{{itemQuote.name_item}}</td>
+            <td style="width:26%; padding-top:20px;">{{itemQuote.name_enterprise}}</td>
+            <td style="width:7%; padding-top:20px;">{{itemQuote.delivery_days}}</td>
+            <td style="width:8%; padding-top:20px;">{{itemQuote.unit_cost}}</td>
+            <td style="width:8%; padding-top:20px;">{{itemQuote.unit_cost * itemQuote.quantity }}</td>
+            <td style="width:8%">
               <div>
-                <input
+                <button class="btn btn-edit" disabled={{isSelect}} (click)="selectItem(i)">
+                  Elegir
+                </button>
+                <!--<input
                   class="form-check-input"
                   type="checkbox"
                   id="checkboxNoLabel"
                   value=""
                   aria-label="..."
-                />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>
-              <div>
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="checkboxNoLabel"
-                  value=""
-                  aria-label="..."
-                />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>
-              <div>
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="checkboxNoLabel"
-                  value=""
-                  aria-label="..."
-                />
+                />-->
               </div>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="containerBtn">
+    <!-- <div class="containerBtn">
       <div>
         <button class="btn btn-cancel">Cancelar</button>
         <button class="btn btn-register">Registrar</button>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

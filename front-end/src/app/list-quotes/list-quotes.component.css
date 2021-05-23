@@ -14,7 +14,8 @@ body{
     color: white;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
     background-color:#003b72;
-    width: 80px;
+    width: 170px;
+    font-size: 0.8rem;
   }
   .btn:hover{
     background-color:#2f82ff !important;
@@ -48,9 +49,9 @@ body{
         width: 5%;
       }
       .razHeadC{
-        width: 51%;
+        width: 49%;
       }
       .encHeadC{
-        width: 33%;
+        width: 36%;
       }
 

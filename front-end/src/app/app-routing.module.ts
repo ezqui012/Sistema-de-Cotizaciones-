@@ -115,7 +115,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'comparative-quotes/:id/:entrusted',
+    path: 'comparative-quotes/:idR/:idQ/:entrusted',
     component: ComparativeQuotesComponent
   },
   {

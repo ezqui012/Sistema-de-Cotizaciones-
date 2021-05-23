@@ -29,8 +29,8 @@
                         <td style="width: 55%; padding-left: 3%; padding-top: 20px;">{{quote.business_name}}</td>
                         <td style="width: 35%; padding-top: 20px">{{quote.name}}</td>
                         <td style="width: 10%;">
-                        <div class="row justify-content-end" style="padding-right: 50%;">
-                            <button type="button" class="btn btn-choose" (click)="navigateTo('/comparative-quotes', quote.id_request, quote.name)">Elegir</button>
+                        <div class="row justify-content-end" style="padding-right: 5%;">
+                            <button type="button" class="btn btn-choose" (click)="navigateTo('/comparative-quotes', quote.id_request, quote.id_quotation, quote.name)">Comparar Cotizaciones</button>
                         </div>
                         </td>
                     </tr>

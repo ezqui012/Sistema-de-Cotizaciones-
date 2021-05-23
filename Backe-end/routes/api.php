@@ -57,3 +57,6 @@ Route::apiResource('request-quotation', 'RequestQuotationController');
 Route::get('items-request/{id}', 'RequestDetailsController@detailItem');
 Route::apiResource('detail-request', 'RequestDetailsController');
 Route::apiResource('expense-item', 'ExpenseItemController');
+
+//metodos de ddetalle
+Route:: get('itemQuotes/{idQuote}/{idItem}','QuoteController@getItemQuotes');

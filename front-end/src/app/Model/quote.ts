@@ -13,6 +13,22 @@ export class QuoteList{
   status_quotation: any;
 }
 
+export class ItemQuotes{
+  id_qd: any;
+  id_request: any;
+  quantity: any;
+  unit_item: any;
+  name_item: any;
+  name_enterprise: any;
+  delivery_days: any;
+  unit_cost: any;
+}
+
+export class ItemQuoteAcepted{
+  id_request: any;
+  id_qd:any;
+}
+
 export class ResponseQuote{
   res: any;
   message: any;

@@ -1,6 +1,7 @@
 export class ExpenseItems {
   id_item: any;
   name_item: any;
+  unit_item: any;
 
 }
 
