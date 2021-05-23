@@ -7,26 +7,27 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    <div class="contentMotive">
-      <mat-form-field class="date-info">
-        <mat-label>Motivo de Rechazo</mat-label>
-        <input matInput placeholder="Ingrese el motivo de rechazo">
-        <mat-error >
-
-        </mat-error>
-      </mat-form-field>
-
-    </div>
-  </div>
-  <div class="modal-footer">
-    <div class="containerBtn">
-      <div>
-        <button class="btn btn-cancelar" (click)="modal.dismiss()">Cancelar</button>
-        <button class="btn btn-reporte">Guardar</button>
+  <form [formGroup]="rejectedForm">
+    <div class="modal-body">
+      <div class="contentMotive">
+        <mat-form-field class="date-info">
+          <mat-label>Motivo de Rechazo</mat-label>
+          <input matInput placeholder="Ingrese el motivo de rechazo" formControlName="reason">
+          <mat-error *ngIf="isValidRejectedForm()">
+            {{ getErrorMessageRejected() }}
+          </mat-error>
+        </mat-form-field>
       </div>
     </div>
-  </div>
+    <div class="modal-footer">
+      <div class="containerBtn">
+        <div>
+          <button class="btn btn-cancelar" type="button" (click)="modal.dismiss()">Cancelar</button>
+          <button class="btn btn-reporte" type="button" (click)="registerRejected()">Guardar</button>
+        </div>
+      </div>
+    </div>
+</form>
 </ng-template>
 <!-- Modal-Engardado -->
 <ng-template #contentG let-modal>
@@ -132,7 +133,7 @@
     <div>
       <button class="btn btn-aceptar" (click)="openModal(contentG)">Aceptar</button>
       <button class="btn btn-rechazar" (click)="openModal(contentR)">Rechazar</button>
-      <button class="btn btn-reporte" >Reporte PDF</button>
+      <button class="btn btn-reporte" *ngIf="false">Reporte PDF</button>
     </div>
   </div>
 

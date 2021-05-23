@@ -12,3 +12,8 @@ export class ListItemsRequest{
   unit_item: any;
   unit_cost: any;
 }
+
+export class ResponseObtained{
+  res: any;
+  message: any;
+}

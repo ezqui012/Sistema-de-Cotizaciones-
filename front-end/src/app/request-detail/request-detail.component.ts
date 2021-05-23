@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DetailRequestService } from '../services/detail-request.service';
 import { ListItemsRequest } from '../Model/request-detail';
 
@@ -26,13 +27,19 @@ export class RequestDetailComponent implements OnInit {
 
   actualAmount: number | any;
 
+  rejectedForm = this.fb.group({
+    id_request: [this.route.snapshot.params.id,[Validators.required]],
+    reason: ['', [Validators.required, Validators.minLength(10)]]
+  });
+
   constructor(
     private modal: NgbModal,
     public toastr: ToastrService,
     private titlePage: Title,
     private route: ActivatedRoute,
     private router:Router,
-    private service: DetailRequestService
+    private service: DetailRequestService,
+    private fb: FormBuilder
   ) {
     this.titlePage.setTitle('Detalle de solicitud - QUOT-UMSS');
   }
@@ -94,5 +101,27 @@ export class RequestDetailComponent implements OnInit {
         this.toastr.error(`Error: ${error}. Recargue la página`);
       }
     );
+  }
+
+  isValidRejectedForm(){
+    return ( this.rejectedForm.get('reason')?.touched || this.rejectedForm.get('reason')?.dirty) && !this.rejectedForm.get('reason')?.valid;
+  }
+
+  getErrorMessageRejected(){
+    let message;
+    if(this.rejectedForm.get('reason')?.errors?.required){
+      message = "El campo Motivo de rechazo es obligatorio";
+    }else if(this.rejectedForm.get('reason')?.hasError('minlength')){
+      message = "El campo Motivo de rechazo requiere como mínimo 10 caracteres";
+    }
+    return message;
+  }
+
+  registerRejected(){
+    if(this.rejectedForm.invalid){
+      return;
+    }
+    this.modal.dismissAll();
+    this.toastr.success("La solicitud a sido rechazada");
   }
 }
