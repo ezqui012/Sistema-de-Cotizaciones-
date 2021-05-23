@@ -140,7 +140,7 @@ const routes: Routes = [
     component: RequestQuotationEditComponent
   },
   {
-    path: 'request-detail',
+    path: 'request-detail/:id',
     component: RequestDetailComponent
   },
   {

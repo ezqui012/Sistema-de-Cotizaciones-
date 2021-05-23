@@ -40,9 +40,12 @@
     <div class="contentMotive">
       <mat-form-field class="selectItem-full-width" id="select-item">
         <mat-label>Cotizador</mat-label>
-        <mat-select >
-          <mat-option>
+        <mat-select>
+          <mat-option class="option-selected">
             selection
+          </mat-option>
+          <mat-option>
+            selection2
           </mat-option>
         </mat-select>
         <mat-error>
@@ -70,16 +73,16 @@
   <div class="infoHead">
     <div class="nameRequest">
       <b>Razon social: </b>
-      Equipamiento de oficina
+      {{business}}
     </div>
     <div class="dateRequest">
       <b>Fecha: </b>
-      01/02/2021
+      {{dateRequest}}
     </div>
   </div>
   <div class="nameAttedant">
     <b>Encargado de solicitud: </b>
-    Fernado Medina Medina
+    {{userName}}
   </div>
 </div>
   <!--Tabla-->
@@ -103,32 +106,14 @@
           </tr>
         </thead>
         <tbody>
-
-          <tr class="row-faculty" >
-            <th scope="row">1</th>
-            <td>2</td>
-            <td>Und</td>
-            <td>Sillas giratorias</td>
-            <td>450</td>
-            <td>900</td>
+          <tr class="row-faculty" *ngFor="let list of items ; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{list.quantity}}</td>
+            <td>{{list.unit_item}}</td>
+            <td>{{list.name_item}}</td>
+            <td>{{list.unit_cost}}</td>
+            <td>{{list.total_cost}}</td>
           </tr>
-          <tr class="row-faculty" >
-            <th scope="row">2</th>
-            <td>1</td>
-            <td>Und</td>
-            <td>Sillas giratorias</td>
-            <td>450</td>
-            <td>900</td>
-          </tr>
-          <tr class="row-faculty" >
-            <th scope="row">3</th>
-            <td>2</td>
-            <td>Und</td>
-            <td>Sillas giratorias</td>
-            <td>450</td>
-            <td>900</td>
-          </tr>
-
         </tbody>
       </table>
     </div>
@@ -140,7 +125,7 @@
     </div>
     <div class="dateRequest">
       <b>TOTAL: </b>
-      1800.00
+      {{totalCost}}
     </div>
   </div>
   <div class="containerBtn">
