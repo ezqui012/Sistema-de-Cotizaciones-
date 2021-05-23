@@ -126,4 +126,19 @@ class UnitController extends Controller
     {
         //
     }
+
+    public function getAmount($id){
+        try{
+            $amountUnit = DB::table('units')->select('amount')
+                                            ->where('id_unit', '=', $id)
+                                            ->get();
+            return json_decode($amountUnit, true)[0];
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+
+    }
 }

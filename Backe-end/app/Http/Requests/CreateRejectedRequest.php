@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRequestQuotationRequest extends FormRequest
+class CreateRejectedRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class CreateRequestQuotationRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'=>'required',
-            'business_name'=>'required|max:100|min:10'
+            'id_request' => 'required',
+            'reason' => 'required|min:10'
         ];
     }
 }

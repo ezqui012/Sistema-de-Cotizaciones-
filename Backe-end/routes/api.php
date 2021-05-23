@@ -46,13 +46,13 @@ Route::put('updateUser/{id}', 'UserController@updateUser');
 Route::put('updatePassword/{id}', 'UserController@updatePassword');
 
 Route::apiResource('enterprise', 'EnterpriseController');
-Route:: get('items-rq/{id}','ExpenseItemController@getItemRequest');
-Route:: get('quot-infoStatus/{id}','QuotationController@getInfo');
+Route::get('items-rq/{id}','ExpenseItemController@getItemRequest');
+Route::get('quot-infoStatus/{id}','QuotationController@getInfo');
 Route::apiResource('insertQuote', 'QuoteDetailController');
 
 /* Controladores historia Creacion de solicitud de compra */
 //lista de solicitudes
-Route:: get('list-request','RequestQuotationController@listRequestQuot');
+Route::get('list-request','RequestQuotationController@listRequestQuot');
 Route::apiResource('request-quotation', 'RequestQuotationController');
 Route::get('items-request/{id}', 'RequestDetailsController@detailItem');
 Route::apiResource('detail-request', 'RequestDetailsController');
@@ -60,3 +60,9 @@ Route::apiResource('expense-item', 'ExpenseItemController');
 
 //metodos de ddetalle
 Route:: get('itemQuotes/{idQuote}/{idItem}','QuoteController@getItemQuotes');
+Route::put('update-status/{id_request}','RequestQuotationController@changeStatus');
+Route::apiResource('rejected', 'RejectedController');
+Route::get('unit-amount/{id}', 'UnitController@getAmount');
+
+/* lista de cotizaciones asignadas a un usuario */
+Route::get('quot-assigned/{id}','QuotationController@getListQuoteUser');
