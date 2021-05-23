@@ -24,6 +24,8 @@ export class RequestDetailComponent implements OnInit {
 
   totalCost: number = 0;
 
+  actualAmount: number | any;
+
   constructor(
     private modal: NgbModal,
     public toastr: ToastrService,
@@ -78,5 +80,19 @@ export class RequestDetailComponent implements OnInit {
       price += parseFloat(total.total_cost);
     }
     this.totalCost = price;
+    this.getAmount();
+  }
+
+  getAmount(){
+    /*Obtener el id de la unidad y cambiar */
+    this.service.getActualAmount(3).subscribe(
+      (data) => {
+        this.actualAmount = data.amount;
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
   }
 }

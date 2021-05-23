@@ -35,4 +35,15 @@ export class DetailRequestService {
     // }
     return this.httpClient.get<RequestDetail>(`${environment.URI_API}items-request/${id}`);
   }
+
+  getActualAmount(id: any): Observable<any>{
+    let failed: any;
+    // if (localStorage.getItem('quot-umss-tk')) {
+    //   const httpHeader = new HttpHeaders({
+    //     'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    //   });
+    //   return this.httpClient.get<RequestDetail>(`${environment.URI_API}items-request/${id}`, { headers: httpHeader });
+    // }
+    return this.httpClient.get<any>(`${environment.URI_API}unit-amount/${id}`);
+  }
 }
