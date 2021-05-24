@@ -11,12 +11,12 @@
     <div class="newHeadTable">
       <div class="numHead"><b>Nº</b></div>
       <div class="nomHead"><b>Razon social</b></div>
-      <div class="totalHead"><b>Total</b></div>
+      <div class="totalHead"><b>Encargdo de solicitud</b></div>
       <div class="statusHead"><b>Estado</b></div>
       <div class="accHead"><b>Acciones</b></div>
     </div>
     <div class="newBodyTable">
-      <table class="table">
+      <table class="table table-hover">
         <thead class="headTable">
           <tr>
             <th scope="col">Nº</th>
@@ -25,53 +25,35 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="row-faculty" >
-            <th scope="row">1</th>
-            <td>Elemetos de de oficina</td>
-            <td>900</td>
-            <td>
+          <tr class="row-request" *ngFor="let request of request_quotation; let i = index " >
+            <th style="padding-top:20px" scope="row">{{i+1}}</th>
+            <td style="padding-top:20px; width:40%; padding-left:5% ;">{{request.business_name}}</td>
+            <td style="padding-top:20px; width:20%;">{{request.name}}</td>
+            <td style="padding-top:20px; width:15%;">
               <div class="contentStatusP">
-                Proceso
+                {{request.status}}
               </div>
-            </td>
-            <td>
-              <div class="row justify-content-end" style="padding-right: 20%;">
-                <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25"></button>
-                <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/file-text.png" alt="" width="25" height="25"></button>
+              <!-- <div>{{setStatus(request.status)}}</div>
+              <div [ngSwitch]="status">
+                <div class="contentStatusP" *ngSwitchCase = "Proceso">
+                  Proceso
+                </div>
+                <div class="contentStatusA" *ngSwitchCase = "Aceptado">
+                  Aprobado
+                </div>
+                <div class="contentStatusR" *ngSwitchCase = "Rechazado">
+                  Rechazado
+                </div>
+                <div class="contentStatusR" *ngSwitchCase = "Rechazado">
+                  Cotizacion
+                </div>
 
-              </div>
+              </div> -->
             </td>
-          </tr>
-          <tr class="row-faculty" >
-            <th scope="row">2</th>
-            <td>Elemetos de de oficina</td>
-            <td>900</td>
-            <td>
-              <div class="contentStatusA">
-                Aprobado
-              </div>
-            </td>
-            <td>
-              <div class="row justify-content-end" style="padding-right: 20%;">
+            <td style="width:25%;">
+              <div class="row justify-content-end" style="padding-right: 20%">
                 <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25"></button>
-                <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/file-text.png" alt="" width="25" height="25"></button>
-
-              </div>
-            </td>
-          </tr>
-          <tr class="row-faculty" >
-            <th scope="row">3</th>
-            <td>Elemetos de de oficina</td>
-            <td>900</td>
-            <td>
-              <div class="contentStatusR">
-                Rechazado
-              </div>
-            </td>
-            <td>
-              <div class="row justify-content-end" style="padding-right: 20%;">
-                <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25"></button>
-                <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/file-text.png" alt="" width="25" height="25"></button>
+                <button type="button" class="btn btnAction" (click)="navigateTo('request-detail', request.id_request)"><img src="../../assets/icon-quote/file-text.png" alt="" width="25" height="25"></button>
 
               </div>
             </td>

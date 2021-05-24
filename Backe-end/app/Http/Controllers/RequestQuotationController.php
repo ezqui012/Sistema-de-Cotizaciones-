@@ -95,7 +95,23 @@ class RequestQuotationController extends Controller
             ], 404);
         }
     }
+    public function getListRequest()
+    {
+        try{
 
+            $personals = DB::select('SELECT rq.id_request, rq.business_name, u.name, rq.status
+            FROM request_quotation rq, users u
+            WHERE rq.id = u.id
+            ORDER BY rq.date DESC');
+
+            return $personals;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
     public function changeStatus(Request $request, $id_request){
         try{
             $data = $request->all();
