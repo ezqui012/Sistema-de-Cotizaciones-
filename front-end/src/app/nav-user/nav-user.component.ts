@@ -45,6 +45,7 @@ export class NavUserComponent implements OnInit {
         localStorage.removeItem('quot-umss-p');
         localStorage.removeItem('quot-umss-u');
         localStorage.removeItem('quot-umss-pa');
+        localStorage.removeItem('quot-umss-f');
         this.router.navigate(['/login']);
       },
       (error: any) => {
@@ -57,9 +58,11 @@ export class NavUserComponent implements OnInit {
   hasAccess(){
     if(this.permission.includes(1) &&  this.permission.includes(2)){
       this.showQuote = true;
-    }else if(this.permission.includes(3) &&  this.permission.includes(4)  &&  this.permission.includes(5)){
+    }
+    if(this.permission.includes(3) &&  this.permission.includes(4)  &&  this.permission.includes(5)){
       this.showRequest = true;
-    }else if(this.permission.includes(3)){
+    }
+    if(this.permission.includes(3)){
       this.showAccept = true;
     }
   }

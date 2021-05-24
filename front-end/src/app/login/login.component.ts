@@ -5,7 +5,8 @@ import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
-import { AssignedPermitService }  from '../services/assignedPermit.service'
+import { AssignedPermitService }  from '../services/assignedPermit.service';
+import { FacultyService } from '../services/faculty.service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,8 @@ export class LoginComponent implements OnInit {
     private router:Router,
     public toastr: ToastrService,
     private titlePage: Title,
-    private servicePermission: AssignedPermitService
+    private servicePermission: AssignedPermitService,
+    private serviceFaculty: FacultyService
   ) {
     this.titlePage.setTitle('Inicio de sesión - QUOT-UMSS');
   }
@@ -112,6 +114,15 @@ export class LoginComponent implements OnInit {
         }
         permission = permission + '0'
         localStorage.setItem('quot-umss-pa', permission);
+        this.getFacultyId();
+      }
+    );
+  }
+
+  getFacultyId(){
+    this.serviceFaculty.getIdFaculty(localStorage.getItem('quot-umss-u')).subscribe(
+      (data) => {
+        localStorage.setItem('quot-umss-f', data.id_faculty);
         this.router.navigate(['/request-detail/2']);
       }
     );
