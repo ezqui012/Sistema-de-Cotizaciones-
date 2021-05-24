@@ -65,3 +65,5 @@ Route::get('quot-assigned/{id}','QuotationController@getListQuoteUser');
 Route::apiResource('quotation','QuotationController');
 /* ID de facultad */
 Route::get('get-facultyId/{id}', 'FacultyController@getIdFaculty');
+
+Route::get('get-numberQuotes/{id_request}/{id_item}', 'QuoteDetailController@numberQuotes');
