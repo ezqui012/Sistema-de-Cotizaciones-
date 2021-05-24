@@ -5,12 +5,20 @@ import { LoginService } from '../services/login.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-navbar',
-  encapsulation: ViewEncapsulation.Emulated,
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  selector: 'app-nav-user',
+  templateUrl: './nav-user.component.html',
+  styleUrls: ['./nav-user.component.css'],
+  encapsulation: ViewEncapsulation.Emulated
 })
-export class NavbarComponent implements OnInit {
+export class NavUserComponent implements OnInit {
+
+  show: boolean = false;
+
+  showQuote: boolean = false;
+  showRequest: boolean = false;
+  showAccept: boolean = false;
+
+  permission: number[] | any;
 
   constructor(
     private router:Router,
@@ -18,11 +26,13 @@ export class NavbarComponent implements OnInit {
     public toastr: ToastrService
   ) { }
 
+  ngOnInit(): void {
+    this.permission = JSON.parse("[" + localStorage.getItem('quot-umss-pa') + "]");
+    this.hasAccess();
+  }
+
   navigateTo(path: String){
     this.router.navigate([path]);
-  }
-  show: boolean = false;
-  ngOnInit(): void {
   }
 
   logout(){
@@ -34,6 +44,7 @@ export class NavbarComponent implements OnInit {
         localStorage.removeItem('quot-user');
         localStorage.removeItem('quot-umss-p');
         localStorage.removeItem('quot-umss-u');
+        localStorage.removeItem('quot-umss-pa');
         this.router.navigate(['/login']);
       },
       (error: any) => {
@@ -41,6 +52,16 @@ export class NavbarComponent implements OnInit {
         this.toastr.error(`Se produjo un error ${error} intente de nuevo`);
       }
     );
+  }
+
+  hasAccess(){
+    if(this.permission.includes(1) &&  this.permission.includes(2)){
+      this.showQuote = true;
+    }else if(this.permission.includes(3) &&  this.permission.includes(4)  &&  this.permission.includes(5)){
+      this.showRequest = true;
+    }else if(this.permission.includes(3)){
+      this.showAccept = true;
+    }
   }
 
 }

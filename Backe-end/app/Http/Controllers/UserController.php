@@ -19,7 +19,8 @@ class UserController extends Controller
                 'token' => $token,
                 'message' => 'Welcome to system',
                 'name' => $user->name,
-                'role' => $user->id_role
+                'role' => $user->id_role,
+                'unit' => $user->id_unit
             ], 200);
         }else{
             return response()->json([

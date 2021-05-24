@@ -1,0 +1,40 @@
+<!--Barra de navegacion-->
+<div>
+  <div class="navbar">
+
+    <div class="contenNavbar">
+      <div>
+        <img src="../../assets/img/navbar/Frame.svg" height="60" alt="">
+      </div>
+      <div class="contentLink">
+        <div class="link" *ngIf="showRequest">
+          <b>Solicitud</b>
+        </div>
+        <div class="link" *ngIf="showQuote">
+          <b>Cotización</b>
+        </div>
+        <div class="link" *ngIf="showAccept">
+          <b>Aprobar</b>
+        </div>
+        <div class="link" (click)="logout()">
+          <b>Salir</b>
+        </div>
+      </div>
+      <div class="imgmenu" (click)="show=!show">
+        <img src="../../assets/img/navbar/IcoMenu.svg" width="40" height="40" alt="">
+      </div>
+    </div>
+
+  </div>
+  <!--Medal menu-->
+  <div class="menuContent" *ngIf="show">
+
+    <div class="menuOption">
+      <li class="option" *ngIf="showRequest">Solicitud</li>
+      <li class="option" *ngIf="showQuote">Cotización</li>
+      <li class="option" *ngIf="showAccept">Aprobar</li>
+      <li class="option" (click)="logout()">Salir</li>
+    </div>
+  </div>
+</div>
+

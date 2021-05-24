@@ -136,7 +136,7 @@ export class RequestDetailComponent implements OnInit {
     );
   }
 
-  changeStatus(data: any, message: any){
+  changeStatus(data: any, messageToast: any){
     let obj = {
       status: data
     }
@@ -144,7 +144,7 @@ export class RequestDetailComponent implements OnInit {
       (data) => {
         if(data.res){
           this.modal.dismissAll();
-          this.toastr.success("La solicitud a sido rechazada");
+          this.toastr.success(messageToast);
         }else{
           this.toastr.error("Ocurrio un error al registrar intente nuevamente");
         }

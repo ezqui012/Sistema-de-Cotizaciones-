@@ -9,6 +9,7 @@ export class LoginResponse{
   message: any;
   name: any;
   role: any;
+  unit: any;
 }
 
 export class LogoutResponse{
