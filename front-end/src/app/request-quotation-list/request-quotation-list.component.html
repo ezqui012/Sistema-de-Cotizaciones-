@@ -52,7 +52,7 @@
             </td>
             <td style="width:25%;">
               <div class="row justify-content-end" style="padding-right: 20%">
-                <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25"></button>
+                <button type="button" class="btn btnAction" (click)="navigateTo('request-quotation-edit', request.id_request)"><img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25"></button>
                 <button type="button" class="btn btnAction" (click)="navigateTo('request-detail', request.id_request)"><img src="../../assets/icon-quote/file-text.png" alt="" width="25" height="25"></button>
 
               </div>

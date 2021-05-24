@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { RequestList } from '../Model/request';
+import { DateExpenseItem } from '../Model/expenseItem';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,14 @@ allRequestQuote(): Observable<RequestList | any> {
   }
   return failed;
 }
-
+allItem(): Observable<DateExpenseItem | any> {
+  let failed: any;
+  if (localStorage.getItem('quot-umss-tk')) {
+    const httpHeader = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    });
+    return this.httpClient.get<DateExpenseItem>(`${environment.URI_API}expense-item`, { headers: httpHeader });
+  }
+  return failed;
+}
 }

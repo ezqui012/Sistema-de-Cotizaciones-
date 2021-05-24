@@ -136,7 +136,7 @@ const routes: Routes = [
     component: RequestQuotationListComponent
   },
   {
-    path: 'request-quotation-edit',
+    path: 'request-quotation-edit/:id',
     component: RequestQuotationEditComponent
   },
   {
