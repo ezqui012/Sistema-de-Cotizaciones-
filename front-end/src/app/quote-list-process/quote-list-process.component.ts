@@ -20,7 +20,8 @@ export class QuoteListProcessComponent implements OnInit {
   quantity:any
   reason: any;
   total: any;
-  quoteId=1;
+  id_rq: any;
+  quoteId=6;
   pos = 0;
   chkAproveSol:boolean = false;
   constructor(
@@ -40,6 +41,11 @@ export class QuoteListProcessComponent implements OnInit {
   navigateTo(path: String){
     this.router.navigate([path]);
   }
+  navigateToEdit(path: String){
+    this.router.navigate([path]);
+    console.log(path)
+  }
+
   getTotalQuote(){
 
   }
@@ -47,13 +53,17 @@ export class QuoteListProcessComponent implements OnInit {
   getQuoteProcess(){
     this.quoteProcessService.getQuoteProcess(this.quoteId).subscribe((res)=>{
     this.quotes = res
-    console.log(res)
     this.business =this.quotes[0].business_name
+    this.id_rq = this.quotes[0].id_request
+
+    console.log(this.quotes[0].id_qd);
+
     })
   }
-  deleteQuoteProcess(){
-    this.quoteProcessService.deleteProcess(this.quoteId).subscribe(data=>{
-      console.log(data);
+  deleteQuoteProcess(id:any){
+    this.quoteProcessService.deleteProcess(id).subscribe(data=>{
+      console.log(id)
+      this.getQuoteProcess();
     })
   }
 

@@ -12,12 +12,34 @@ export class QuoteProcessService {
   constructor(private httpClient:HttpClient) {}
 
   getQuoteProcess(id:any):Observable<Quote | any>{
-    return this.httpClient.get<Quote>('http://127.0.0.1:8000/api/processQuote/'+id);
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<Quote>(`${environment.URI_API}processQuote/${id}`, { headers: httpHeader });
+    }
+    return failed;
   }
   getQuoteFinalized(id:any):Observable<Quote | any>{
-    return this.httpClient.get<Quote>('http://127.0.0.1:8000/api/finalizedQuote/'+id);
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<Quote>(`${environment.URI_API}finalizedQuote/${id}`, { headers: httpHeader });
+    }
+    return failed;
   }
+
   deleteProcess(id:any):Observable<Quote>{
-    return this.httpClient.delete<Quote>('http://127.0.0.1:8000/api/processQuote/'+id);
-  }
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.delete<Quote>(`${environment.URI_API}processQuoteDelete/${id}`, { headers: httpHeader });
+    }
+    return failed;
+   }
 }

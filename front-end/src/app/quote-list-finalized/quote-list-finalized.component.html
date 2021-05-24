@@ -58,28 +58,21 @@
 
 
 </ng-template> -->
-<script src="https://kit.fontawesome.com/28526825ef.js" crossorigin="anonymous"></script>
 
 <!--header-->
-<head>
 
+
+<div class="containerBody">
   <div class="containertop">
 
     <h2><b>Detalle de cotizaciones</b></h2>
-    <div class="btnCreate">
-      <button type="button" class="btn btn-one" (click)="navigateTo('/register-user')">Registro de Cotización</button>
 
-    </div>
   </div>
-</head>
-
-<div class="containerBody">
-
 
   <!--Tabla-->
   <div class="labeldiv">
     <label class="reason"><b>Razón social: </b>{{business}}</label>
-    <label class="state"><b>Estado:</b> Finalizado</label>
+    <label class="state"><b>Estado:</b> {{status}}</label>
   </div>
   <div class="containerTable">
     <div class="newHeadTable">
@@ -114,8 +107,8 @@
             <td class="tdcost">{{quote.unit_cost*quote.quantity}}</td>
             <td>
               <div class="row justify-content-end" style="padding-right: 20%;">
-                <button type="button" class="btn btn-edit" disabled routerLink="/edit-user/{{quote}}"><img id="ed" src="../../assets/img-outsite/pencil.png" width="25" height="25"></button>
-                <button id="verRol" type="button" disabled class="btn btn-ver" ><img src="../../assets/img-outsite/trash.png" width="25" height="25"></button>
+                <button type="button" class="btn btn-edit" disabled ><img id="ed" src="../../assets/img-outsite/greyPencial.png" width="25" height="25"></button>
+                <button id="verRol" type="button" disabled class="btn btn-ver" ><img src="../../assets/img-outsite/bin2 1.png" width="25" height="25"></button>
               </div>
             </td>
 

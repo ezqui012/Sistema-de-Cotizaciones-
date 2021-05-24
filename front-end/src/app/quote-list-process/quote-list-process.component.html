@@ -65,7 +65,7 @@
   <div class="containertop">
     <h2><b>Detalle de cotizaciones</b></h2>
     <div class="btnCreate">
-      <button type="button" class="btn btn-one" (click)="navigateTo('/register-user')">Registro de Cotización</button>
+      <button type="button" class="btn btn-one" (click)="navigateTo('/quote-form/' + id_rq)">Registro de Cotización</button>
 
     </div>
   </div>
@@ -114,8 +114,8 @@
             <td class="tdcost">{{quote.unit_cost*quote.quantity}}</td>
             <td class="button">
               <div class="row justify-content-end" style="padding-right: 20%;">
-                <button type="button" class="btn btn-edit" routerLink="/edit-user/{{quote}}"> <img src="../../assets/img-outsite/pencil.png" width="25" height="25"></button>
-                <button id="verRol" type="button" class="btn btn-ver" (click)="deleteQuoteProcess()" ><img src="../../assets/img-outsite/trash.png" width="25" height="25"></button>
+                <button type="button" class="btn btn-edit" (click)="navigateToEdit('/request-quotation-edit')"> <img src="../../assets/img-outsite/pencil.png" width="25" height="25"></button>
+                <button id="verRol" type="button" class="btn btn-ver" (click)="deleteQuoteProcess(quote.id_qd)" ><img src="../../assets/img-outsite/trash.png" width="25" height="25"></button>
 
               </div>
             </td>
