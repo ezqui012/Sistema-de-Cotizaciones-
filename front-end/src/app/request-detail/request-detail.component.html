@@ -36,33 +36,31 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    <div class="contentMotive">
-      <mat-form-field class="selectItem-full-width" id="select-item">
-        <mat-label>Cotizador</mat-label>
-        <mat-select>
-          <mat-option class="option-selected" value="selection">
-            selection
-          </mat-option>
-          <mat-option value="selection2">
-            selection2
-          </mat-option>
-        </mat-select>
-        <mat-error>
-
-        </mat-error>
-      </mat-form-field>
-
-    </div>
-  </div>
-  <div class="modal-footer">
-    <div class="containerBtn">
-      <div>
-        <button class="btn btn-cancelar" (click)="modal.dismiss()">Cancelar</button>
-        <button class="btn btn-reporte">Guardar</button>
+  <form [formGroup]="registerQuotForm">
+    <div class="modal-body">
+      <div class="contentMotive">
+        <mat-form-field class="selectItem-full-width" id="select-item">
+          <mat-label>Cotizador</mat-label>
+          <mat-select formControlName="id">
+            <mat-option class="option-selected" *ngFor="let quot of personal" [value]="quot.id">
+              {{quot.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="isValidForm()">
+            {{getErrorMessage()}}
+          </mat-error>
+        </mat-form-field>
       </div>
     </div>
-  </div>
+    <div class="modal-footer">
+      <div class="containerBtn">
+        <div>
+          <button class="btn btn-cancelar" type="button" (click)="modal.dismiss()">Cancelar</button>
+          <button class="btn btn-reporte" type="button">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </form>
 </ng-template>
 
 <!--header-->

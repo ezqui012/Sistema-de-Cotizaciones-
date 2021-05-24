@@ -22,3 +22,8 @@ export class RejectedRequest{
   id_request: any;
   reason: any;
 }
+
+export class PersonalQuote{
+  id: any;
+  name: any;
+}

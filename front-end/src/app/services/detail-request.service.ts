@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { RequestDetail, ListItemsRequest, ResponseObtained, RejectedRequest } from '../Model/request-detail';
+import { RequestDetail, ListItemsRequest, ResponseObtained, RejectedRequest, PersonalQuote } from '../Model/request-detail';
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +67,16 @@ export class DetailRequestService {
     //   return his.httpClient.post<ResponseObtained>(`${environment.URI_API}update-status/${id}`, status, { headers: httpHeader });
     // }
     return this.httpClient.put<ResponseObtained>(`${environment.URI_API}update-status/${id}`, status);
+  }
+
+  getPersonalList(id: any): Observable< PersonalQuote | any>{
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<PersonalQuote>(`${environment.URI_API}list-personal/${id}`, { headers: httpHeader });
+    }
+    return failed;
   }
 }

@@ -5,7 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DetailRequestService } from '../services/detail-request.service';
-import { ListItemsRequest } from '../Model/request-detail';
+import { ListItemsRequest, PersonalQuote } from '../Model/request-detail';
 
 @Component({
   selector: 'app-request-detail',
@@ -22,14 +22,20 @@ export class RequestDetailComponent implements OnInit {
   idReq: any;
 
   items: ListItemsRequest | any;
+  personal: PersonalQuote[] | any;
 
   totalCost: number = 0;
 
   actualAmount: number | any;
 
   rejectedForm = this.fb.group({
-    id_request: [this.route.snapshot.params.id,[Validators.required]],
+    id_request: [this.route.snapshot.params.id, [Validators.required]],
     reason: ['', [Validators.required, Validators.minLength(10)]]
+  });
+
+  registerQuotForm = this.fb.group({
+    id: ['', [Validators.required]],
+    id_request: [this.route.snapshot.params.id, [Validators.required]]
   });
 
   constructor(
@@ -91,10 +97,22 @@ export class RequestDetailComponent implements OnInit {
   }
 
   getAmount(){
-    /*Obtener el id de la unidad y cambiar */
-    this.service.getActualAmount(3).subscribe(
+    this.service.getActualAmount(localStorage.getItem('quot-umss-u')).subscribe(
       (data) => {
         this.actualAmount = data.amount;
+        this.getPersonal();
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
+  }
+
+  getPersonal(){
+    this.service.getPersonalList(localStorage.getItem('quot-umss-f')).subscribe(
+      (data) => {
+        this.personal = data;
       },
       (error) => {
         console.log(`Error: ${error}`);
@@ -107,12 +125,24 @@ export class RequestDetailComponent implements OnInit {
     return ( this.rejectedForm.get('reason')?.touched || this.rejectedForm.get('reason')?.dirty) && !this.rejectedForm.get('reason')?.valid;
   }
 
+  isValidForm(){
+    return ( this.registerQuotForm.get('id')?.touched || this.registerQuotForm.get('id')?.dirty) && !this.registerQuotForm.get('id')?.valid;
+  }
+
   getErrorMessageRejected(){
     let message;
     if(this.rejectedForm.get('reason')?.errors?.required){
       message = "El campo Motivo de rechazo es obligatorio";
     }else if(this.rejectedForm.get('reason')?.hasError('minlength')){
       message = "El campo Motivo de rechazo requiere como mínimo 10 caracteres";
+    }
+    return message;
+  }
+
+  getErrorMessage(){
+    let message;
+    if(this.registerQuotForm.get('id')?.errors?.required){
+      message = "Tiene que seleccionar un cotizador";
     }
     return message;
   }

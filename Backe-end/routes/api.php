@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::ApiResource('roles','RolesController');
     Route:: get('listId/{id}','UnitController@getUnitSelect');
     Route:: get('roleId/{id}','RolesController@getRoleSelect');
+    Route::get('list-personal/{id}', 'UserController@getListPersonalQuote');
 });
 Route::get('user/{id}', 'UserController@getUserById');
 Route::put('updateUser/{id}', 'UserController@updateUser');
@@ -64,5 +65,3 @@ Route::get('quot-assigned/{id}','QuotationController@getListQuoteUser');
 
 /* ID de facultad */
 Route::get('get-facultyId/{id}', 'FacultyController@getIdFaculty');
-
-Route::get('list-personal/{id}', 'UserController@getListPersonalQuote');
