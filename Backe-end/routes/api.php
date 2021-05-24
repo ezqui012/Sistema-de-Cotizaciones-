@@ -61,3 +61,6 @@ Route::get('unit-amount/{id}', 'UnitController@getAmount');
 
 /* lista de cotizaciones asignadas a un usuario */
 Route::get('quot-assigned/{id}','QuotationController@getListQuoteUser');
+
+/* ID de facultad */
+Route::get('get-facultyId/{id}', 'FacultyController@getIdFaculty');
