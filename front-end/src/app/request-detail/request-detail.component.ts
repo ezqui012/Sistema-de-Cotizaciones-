@@ -34,8 +34,8 @@ export class RequestDetailComponent implements OnInit {
   });
 
   registerQuotForm = this.fb.group({
-    id: ['', [Validators.required]],
-    id_request: [this.route.snapshot.params.id, [Validators.required]]
+    id_request: [this.route.snapshot.params.id, [Validators.required]],
+    id: ['', [Validators.required]]
   });
 
   constructor(
@@ -177,6 +177,25 @@ export class RequestDetailComponent implements OnInit {
           this.toastr.success(messageToast);
         }else{
           this.toastr.error("Ocurrio un error al registrar intente nuevamente");
+        }
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(`Error: ${error} intente nuevamente`);
+      }
+    );
+  }
+
+  assignedQuotation(){
+    if(this.registerQuotForm.invalid){
+      return;
+    }
+    this.service.registerQuotation(this.registerQuotForm.value).subscribe(
+      (data) => {
+        if(data.res){
+          this.changeStatus("Cotización", "La solicitud fue aceptada y se encuentra en etapa de cotización");
+        }else{
+          this.toastr.error('Ocurrio un error intente de nuevo');
         }
       },
       (error) => {

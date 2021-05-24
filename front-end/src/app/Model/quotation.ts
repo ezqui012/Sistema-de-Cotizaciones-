@@ -11,3 +11,13 @@ export class ListAssignedQuotes{
   business_name: any;
   status_quotation: any;
 }
+
+export class RegisterQuotation{
+  id_request: any;
+  id: any;
+}
+
+export class ResponseQuotation{
+  res: any;
+  message: any;
+}
