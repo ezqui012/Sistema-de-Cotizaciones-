@@ -90,6 +90,11 @@ class FacultyController extends Controller
                         ->where('units.id_unit', '=', $id)
                         ->get();
             return json_decode($res, true)[0];
-        }catch(Exception $ex){}
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 }

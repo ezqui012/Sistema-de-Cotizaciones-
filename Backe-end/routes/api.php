@@ -64,3 +64,5 @@ Route::get('quot-assigned/{id}','QuotationController@getListQuoteUser');
 
 /* ID de facultad */
 Route::get('get-facultyId/{id}', 'FacultyController@getIdFaculty');
+
+Route::get('list-personal/{id}', 'UserController@getListPersonalQuote');

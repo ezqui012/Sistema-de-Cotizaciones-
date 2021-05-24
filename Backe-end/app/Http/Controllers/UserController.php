@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdateUserRequest;
+use Exception;
+
 class UserController extends Controller
 {
     public function login(Request $request){
@@ -99,5 +101,25 @@ class UserController extends Controller
         }
         $id->update(['password' => Hash::make($request->password)]);
         return response()->json(['message'=> 'Password updated'],200);
+    }
+
+    public function getListPersonalQuote($id){
+        try{
+            $res = DB::table('users')
+                    ->join('units', 'users.id_unit', '=', 'units.id_unit')
+                    ->join('faculties', 'units.id_faculty', '=', 'faculties.id_faculty')
+                    ->join('roles', 'users.id_role', '=', 'roles.id_role')
+                    ->join('assigned_permissions', 'roles.id_role', '=', 'assigned_permissions.id_role')
+                    ->select('users.id', 'users.name')
+                    ->where('assigned_permissions.id_permission', '=', 1)
+                    ->where('faculties.id_faculty', '=', $id)
+                    ->get();
+            return $res;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 }
