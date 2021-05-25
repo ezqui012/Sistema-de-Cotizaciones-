@@ -46,6 +46,7 @@ export class NavUserComponent implements OnInit {
         localStorage.removeItem('quot-umss-u');
         localStorage.removeItem('quot-umss-pa');
         localStorage.removeItem('quot-umss-f');
+        localStorage.removeItem('quot-umss-usr');
         this.router.navigate(['/login']);
       },
       (error: any) => {

@@ -95,6 +95,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('quot-user', res.name);
           localStorage.setItem('quot-umss-p', res.role);
           localStorage.setItem('quot-umss-u', res.unit);
+          localStorage.setItem('quot-umss-usr', res.id);
           this.permissionUser();
         }
       }, (error: any) => {

@@ -10,6 +10,7 @@ export class LoginResponse{
   name: any;
   role: any;
   unit: any;
+  id: any;
 }
 
 export class LogoutResponse{

@@ -27,7 +27,7 @@ export class QuoteListComponent implements OnInit {
 
   ngOnInit(): void {
     //pasar id del usuario
-    this.getList(2);
+    this.getList(localStorage.getItem('quot-umss-usr'));
   }
 
   getList(id: any){
