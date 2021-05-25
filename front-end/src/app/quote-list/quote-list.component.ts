@@ -15,10 +15,6 @@ export class QuoteListComponent implements OnInit {
 
   quotes: ListAssignedQuotes | any;
 
-  showThis = (algo: any) => {
-    alert(algo);
-  }
-
   constructor(
     private services:QuotationService,
     private router:Router,
@@ -44,6 +40,14 @@ export class QuoteListComponent implements OnInit {
         this.toastr.error('Ocurrio un error al cargar la pagina, intente nuevamente');
       }
     );
+  }
+
+  detailRequest(status: string, business: string, id: number){
+    if(status==='Proceso'){
+      this.navigateTo(`/quote-list-process/${business}/${id}`)
+    }else{
+      this.navigateTo(`/quote-list-finalized/${business}/${id}`)
+    }
   }
 
   navigateTo(path: String){

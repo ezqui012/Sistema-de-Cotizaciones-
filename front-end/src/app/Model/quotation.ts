@@ -10,6 +10,7 @@ export class ListAssignedQuotes{
   id_request: any;
   business_name: any;
   status_quotation: any;
+  id_quotation: any;
 }
 
 export class RegisterQuotation{

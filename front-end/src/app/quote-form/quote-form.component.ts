@@ -21,6 +21,8 @@ export class QuoteFormComponent implements OnInit {
   business_name:any;
   statusQuot:any;
 
+  idquotation: number | any;
+
   enterprises: Enterprise[] | undefined;
 
   items: ItemRequest[] | undefined;
@@ -54,6 +56,7 @@ export class QuoteFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.idquotation = this.route.snapshot.params.id;
     this.getEnterprises();
     this.getItemsRequest(this.route.snapshot.params.id);
     this.getQuotInfo(this.route.snapshot.params.id);

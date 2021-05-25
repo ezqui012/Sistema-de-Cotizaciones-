@@ -33,7 +33,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('registerUser', 'UserController@addData');
     Route::post('email','UserController@getEmail');
     Route::post('ci', 'UserController@getCi');
-    Route::ApiResource('assignedPermit', 'AssignedPermitController');
     Route::get('list','UnitController@getUnitList');
     Route::ApiResource('roles','RolesController');
     Route:: get('listId/{id}','UnitController@getUnitSelect');
@@ -44,8 +43,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('updatePassword/{id}', 'UserController@updatePassword');
     Route::get('processQuote/{id}', 'QuoteController@getProcessQuote');
     Route::get('finalizedQuote/{id}', 'QuoteController@getFinalizedQuote');
-
 });
+
 Route::delete('processQuoteDelete/{id}', 'QuoteController@deleteProcessQuote');
 
 

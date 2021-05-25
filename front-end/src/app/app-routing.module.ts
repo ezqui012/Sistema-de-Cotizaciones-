@@ -126,11 +126,11 @@ const routes: Routes = [
     component: EditUnitComponent
   },
   {
-    path: 'quote-list-process',
+    path: 'quote-list-process/:business/:id',
     component: QuoteListProcessComponent
   },
   {
-    path: 'quote-list-finalized',
+    path: 'quote-list-finalized/:business/:id',
     component: QuoteListFinalizedComponent
   },
   {

@@ -2,7 +2,7 @@ import { QuoteProcessService } from './../services/quote-process.service';
 import { Quote } from './../Model/Quote';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PersonalUser } from '../Model/personalUser';
 import { PersonalUserService } from '../services/PersonalUser.service';
@@ -21,7 +21,7 @@ export class QuoteListProcessComponent implements OnInit {
   reason: any;
   total: any;
   id_rq: any;
-  quoteId=6;
+  quoteId: any;
   pos = 0;
   chkAproveSol:boolean = false;
   constructor(
@@ -29,12 +29,15 @@ export class QuoteListProcessComponent implements OnInit {
     private router: Router,
     public _personalUserService: PersonalUserService,
     private titlePage: Title,
-    public quoteProcessService:QuoteProcessService
+    public quoteProcessService:QuoteProcessService,
+    private route: ActivatedRoute
   ) {
     this.titlePage.setTitle('Lista de usuarios - QUOT-UMSS');
   }
 
   ngOnInit(): void {
+    this.business = this.route.snapshot.params.business;
+    this.quoteId = this.route.snapshot.params.id;
     this.getQuoteProcess();
 
   }
@@ -43,7 +46,6 @@ export class QuoteListProcessComponent implements OnInit {
   }
   navigateToEdit(path: String){
     this.router.navigate([path]);
-    console.log(path)
   }
 
   getTotalQuote(){
@@ -53,11 +55,6 @@ export class QuoteListProcessComponent implements OnInit {
   getQuoteProcess(){
     this.quoteProcessService.getQuoteProcess(this.quoteId).subscribe((res)=>{
     this.quotes = res
-    this.business =this.quotes[0].business_name
-    this.id_rq = this.quotes[0].id_request
-
-    console.log(this.quotes[0].id_qd);
-
     })
   }
   deleteQuoteProcess(id:any){
