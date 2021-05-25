@@ -35,6 +35,8 @@ import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quo
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { PasswordComponent } from './PopUp/password/password.component';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
+import { QuoteListProcessComponent } from './quote-list-process/quote-list-process.component';
+import { QuoteListFinalizedComponent } from './quote-list-finalized/quote-list-finalized.component';
 import { QuoteFormComponent } from './quote-form/quote-form.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -72,6 +74,8 @@ import { RequestDetailComponent } from './request-detail/request-detail.componen
     EditUserComponent,
     PasswordComponent,
     EditUnitComponent,
+    QuoteListProcessComponent,
+    QuoteListFinalizedComponent,
     RequestQuotationComponent,
     RequestQuotationListComponent,
     RequestQuotationEditComponent,

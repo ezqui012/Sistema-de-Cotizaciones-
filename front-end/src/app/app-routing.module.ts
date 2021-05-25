@@ -1,3 +1,5 @@
+import { QuoteListFinalizedComponent } from './quote-list-finalized/quote-list-finalized.component';
+import { QuoteListProcessComponent } from './quote-list-process/quote-list-process.component';
 import { RegisterUserAdministrativeComponent } from './register-user-administrative/register-user-administrative.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -121,6 +123,14 @@ const routes: Routes = [
   {
     path: 'unit-edit/:id',
     component: EditUnitComponent
+  },
+  {
+    path: 'quote-list-process',
+    component: QuoteListProcessComponent
+  },
+  {
+    path: 'quote-list-finalized',
+    component: QuoteListFinalizedComponent
   },
   {
     path: 'quote-form/:id',

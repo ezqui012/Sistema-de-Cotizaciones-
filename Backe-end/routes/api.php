@@ -35,13 +35,15 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('ci', 'UserController@getCi');
     Route::ApiResource('assignedPermit', 'AssignedPermitController');
     Route::get('list','UnitController@getUnitList');
-    Route::ApiResource('roles','RolesController');
-    Route:: get('listId/{id}','UnitController@getUnitSelect');
-    Route:: get('roleId/{id}','RolesController@getRoleSelect');
+    Route::get('user/{id}', 'UserController@getUserById');
+    Route::put('updateUser/{id}', 'UserController@updateUser');
+    Route::put('updatePassword/{id}', 'UserController@updatePassword');
+    Route::get('processQuote/{id}', 'QuoteController@getProcessQuote');
+    Route::get('finalizedQuote/{id}', 'QuoteController@getFinalizedQuote');
+
 });
-Route::get('user/{id}', 'UserController@getUserById');
-Route::put('updateUser/{id}', 'UserController@updateUser');
-Route::put('updatePassword/{id}', 'UserController@updatePassword');
+Route::delete('processQuoteDelete/{id}', 'QuoteController@deleteProcessQuote');
+
 
 Route::apiResource('enterprise', 'EnterpriseController');
 Route:: get('items-rq/{id}','ExpenseItemController@getItemRequest');
