@@ -70,4 +70,4 @@ Route::apiResource('quotation','QuotationController');
 /* ID de facultad */
 Route::get('get-facultyId/{id}', 'FacultyController@getIdFaculty');
 
-Route::get('get-numberQuotes/{id_request}/{id_item}', 'QuoteDetailController@numberQuotes');
+Route::get('get-numberQuotes/{id_quotation}/{id_item}', 'QuoteDetailController@numberQuotes');

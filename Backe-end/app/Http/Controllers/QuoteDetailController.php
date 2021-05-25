@@ -47,13 +47,14 @@ class QuoteDetailController extends Controller
         //
     }
 
-    public function numberQuotes($id_request, $id_item){
+    public function numberQuotes($id_quotation, $id_item){
         try{
             $res = DB::table('quote_detail')
                     ->join('quotation', 'quote_detail.id_quotation', '=', 'quotation.id_quotation')
-                    ->join('request_quotation', 'quotation.id_request', '=', 'request_quotation.id_request')
+                    //->join('request_quotation', 'quotation.id_request', '=', 'request_quotation.id_request')
                     ->select(DB::raw('count(*) AS total'))
-                    ->where('request_quotation.id_request', '=', $id_request)
+                    //->where('request_quotation.id_request', '=', $id_request)
+                    ->where('quotation.id_quotation', '=', $id_quotation)
                     ->where('quote_detail.id_item', '=', $id_item)
                     ->get();
             return json_decode($res, true)[0];
