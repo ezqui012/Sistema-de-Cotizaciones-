@@ -14,9 +14,6 @@ export class RegisteruserService {
   constructor(private httpClient: HttpClient) { }
 
   // tslint:disable-next-line: typedef
-  getData(){
-      return this.httpClient.get('http://127.0.0.1:8000/api/register');
-  }
   insertData(data: Registeruser): Observable<Registeruser>{
     console.log(data.name);
     let failed: any;
