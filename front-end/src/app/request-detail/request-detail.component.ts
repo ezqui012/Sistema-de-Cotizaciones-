@@ -58,6 +58,14 @@ export class RequestDetailComponent implements OnInit {
     this.modal.open(content,{ windowClass:"colorModal"});
   }
 
+  openModalAccept(content: any){
+    if(this.actualAmount >= this.totalCost){
+      this.modal.open(content,{ windowClass:"colorModal"});
+    }else{
+      this.toastr.error('El monto actual de la unidad es menor al solicitado');
+    }
+  }
+
   getInfoRequestById(id: any){
     this.service.getInfoRequest(id).subscribe(
       (data) => {
