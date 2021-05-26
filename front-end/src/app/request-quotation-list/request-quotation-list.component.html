@@ -25,43 +25,123 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="row-request" *ngFor="let request of request_quotation; let i = index " >
-            <th style="padding-top:20px" scope="row">{{i+1}}</th>
-            <td style="padding-top:20px; width:40%; padding-left:5% ;">{{request.business_name}}</td>
-            <td style="padding-top:20px; width:20%;">{{request.name}}</td>
-            <td style="padding-top:20px; width:15%;">
-              <div class="contentStatusP">
-                {{request.status}}
-              </div>
-              <!-- <div>{{setStatus(request.status)}}</div>
+          <tr
+            class="row-request"
+            *ngFor="let request of request_quotation; let i = index"
+          >
+            <th style="padding-top: 20px" scope="row">{{ i + 1 }}</th>
+            <td style="padding-top: 20px; width: 40%; padding-left: 5%">
+              {{ request.business_name }}
+            </td>
+            <td style="padding-top: 20px; width: 20%">{{ request.name }}</td>
+            <td style="padding-top: 20px; width: 15%">
+              <div>{{ setStatus(request.status) }}</div>
               <div [ngSwitch]="status">
-                <div class="contentStatusP" *ngSwitchCase = "Proceso">
+                <div
+                  class="contentStatusP"
+                  *ngSwitchCase="statusRequest.process"
+                >
                   Proceso
                 </div>
-                <div class="contentStatusA" *ngSwitchCase = "Aceptado">
-                  Aprobado
+                <div
+                  class="contentStatusA"
+                  *ngSwitchCase="statusRequest.accepted"
+                >
+                  Aceptado
                 </div>
-                <div class="contentStatusR" *ngSwitchCase = "Rechazado">
+                <div
+                  class="contentStatusR"
+                  *ngSwitchCase="statusRequest.rejected"
+                >
                   Rechazado
                 </div>
-                <div class="contentStatusR" *ngSwitchCase = "Rechazado">
-                  Cotizacion
+                <div class="contentStatusC" *ngSwitchCase="statusRequest.quote">
+                  Cotización
                 </div>
-
-              </div> -->
+              </div>
             </td>
-            <td style="width:25%;">
-              <div class="row justify-content-end" style="padding-right: 20%">
-                <button type="button" class="btn btnAction" (click)="navigateTo('request-quotation-edit', request.id_request)"><img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25"></button>
-                <button type="button" class="btn btnAction" (click)="navigateTo('request-detail', request.id_request)"><img src="../../assets/icon-quote/file-text.png" alt="" width="25" height="25"></button>
+            <td style="width: 25%">
+              <div
+                [ngSwitch]="status"
+                class="row justify-content-end"
+                style="padding-right: 20%"
+              >
+                <button
+                  *ngSwitchCase="statusRequest.accepted"
+                  disabled
+                  type="button"
+                  class="btn btnAction"
+                  ngbPopover="Deshabilitado"
+                >
+                  <img
+                    src="../../assets/icon-quote/pencilNulo.png"
+                    alt=""
+                    width="25"
+                    height="25"
+                  />
+                </button>
 
+                <button
+                  *ngSwitchCase="statusRequest.rejected"
+                  disabled
+                  type="button"
+                  class="btn btnAction"
+                  ngbPopover="Deshabilitado"
+                >
+                  <img
+                    src="../../assets/icon-quote/pencilNulo.png"
+                    alt=""
+                    width="25"
+                    height="25"
+                  />
+                </button>
+                <button
+                  *ngSwitchCase="statusRequest.quote"
+                  disabled
+                  type="button"
+                  class="btn btnAction"
+                  ngbPopover="Deshabilitado"
+                >
+                  <img
+                    src="../../assets/icon-quote/pencilNulo.png"
+                    alt=""
+                    width="25"
+                    height="25"
+                  />
+                </button>
+                <button
+                  *ngSwitchCase="statusRequest.process"
+                  type="button"
+                  class="btn btnAction"
+                  (click)="navigateTo('request-quotation-edit', request.id_request)"
+                  ngbPopover="Editar"
+                >
+                  <img
+                    src="../../assets/icon-quote/pencil.png"
+                    alt=""
+                    width="25"
+                    height="25"
+                  />
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btnAction"
+                  (click)="navigateTo('request-detail', request.id_request)"
+                  ngbPopover="Ver detalle"
+                >
+                  <img
+                    src="../../assets/icon-quote/file-text.png"
+                    alt=""
+                    width="25"
+                    height="25"
+                  />
+                </button>
               </div>
             </td>
           </tr>
-
         </tbody>
       </table>
     </div>
   </div>
-
 </div>

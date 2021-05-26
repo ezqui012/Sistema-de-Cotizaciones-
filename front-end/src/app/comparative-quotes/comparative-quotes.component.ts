@@ -24,6 +24,8 @@ export class ComparativeQuotesComponent implements OnInit {
   //itemsSelect:Array<any>[3]=[]
   register:ItemQuoteAcepted = new ItemQuoteAcepted
 
+  showBtn:boolean=false
+
   constructor(
     private route: ActivatedRoute,
     public serviceQuote: QuoteService
@@ -34,8 +36,8 @@ export class ComparativeQuotesComponent implements OnInit {
     this.idQuote = this.route.snapshot.paramMap.get('idQ');
     this.entrusted = this.route.snapshot.paramMap.get('entrusted');
     this.getItems(this.id);
-    console.log("id Re: "+this.id)
-    console.log("id Qu: "+this.idQuote)
+    // console.log("id Re: "+this.id)
+    // console.log("id Qu: "+this.idQuote)
   }
 
   getItems(idRequest:any){

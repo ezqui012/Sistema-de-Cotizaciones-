@@ -22,6 +22,7 @@ export class ItemQuotes{
   name_enterprise: any;
   delivery_days: any;
   unit_cost: any;
+  accepted:boolean=false;
 }
 
 export class ItemQuoteAcepted{

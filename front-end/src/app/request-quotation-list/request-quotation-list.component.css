@@ -78,10 +78,10 @@ color: white;
   padding: 5px;
   margin-right: 5%;
 	text-align:center;
-	border:1px solid #007095;
+	/* border:1px solid #007095; */
 	border-radius:5px;
 	cursor:pointer;
-  background-color:#f1f1f1;
+  /* background-color:#dedede; */
 
 }
 .btnAction:hover{
@@ -107,6 +107,14 @@ color: white;
   border:1px solid #c42121;
 	border-radius:7px;
   color:#c42121;
+  width: 90px;
+  padding: 2px;
+  text-align: center;
+}
+.contentStatusC{
+  border:1px solid #242424;
+	border-radius:7px;
+  color:#242424;
   width: 90px;
   padding: 2px;
   text-align: center;

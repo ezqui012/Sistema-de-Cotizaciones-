@@ -90,20 +90,23 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.btn-cancel {
+.btn-reject {
   color: white;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
-  background-color: #1C2331;
+  background-color: #DD3333;
   margin-right: 20px;
   width: 120px;
 }
+.btn-reject:hover{
+  background-color:#f04b4b !important;
+  color: white;
+  }
 .btn-register{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
   width: 120px;
 }
-.btn:hover{
+.btn-registe:hover{
   background-color:#2f82ff !important;
   color: white;
   }

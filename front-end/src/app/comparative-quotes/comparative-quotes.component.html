@@ -67,7 +67,10 @@
             <td style="width:8%; padding-top:20px;">{{itemQuote.unit_cost * itemQuote.quantity }}</td>
             <td style="width:8%">
               <div>
-                <button class="btn btn-edit" disabled={{isSelect}} (click)="selectItem(i)">
+                <button class="btn btn-edit" *ngIf="showBtn" (click)="selectItem(i)">
+                  Elegir
+                </button>
+                <button class="btn btn-edit" *ngIf="!showBtn" disabled (click)="selectItem(i)">
                   Elegir
                 </button>
                 <!--<input
@@ -83,11 +86,11 @@
         </tbody>
       </table>
     </div>
-    <!-- <div class="containerBtn">
+    <div class="containerBtn">
       <div>
-        <button class="btn btn-cancel">Cancelar</button>
+        <button class="btn btn-reject">Rechazar</button>
         <button class="btn btn-register">Registrar</button>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>
