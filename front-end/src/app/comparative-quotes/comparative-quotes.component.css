@@ -111,3 +111,39 @@ body {
   color: white;
   }
 
+/*estilos Modal*/
+.contentModal{
+  background-color: #F0F0F8 !important;
+}
+.modal-title{
+  color: #003b72 !important;
+ }
+.colorModal .modal-content{
+  color: #003b72;
+  background-color: #F0F0F8 !important;
+}
+.btn-cancelar{
+  color: white;
+  background-color: #1C2331 !important;
+  margin-right: 10px;
+  width: 100px;
+}
+.btn-cancelar:hover{
+  background-color: #253049 !important;
+}
+
+.btn-ok:hover{
+  background-color: #DD3333 !important;
+}
+.btn-ok{
+  color: white;
+  background-color:#a72020 !important;
+  /* margin-right: 20px; */
+  width: 100px;
+}
+.containerBtn{
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}

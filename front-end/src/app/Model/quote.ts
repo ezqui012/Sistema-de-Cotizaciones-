@@ -22,9 +22,13 @@ export class ItemQuotes{
   name_enterprise: any;
   delivery_days: any;
   unit_cost: any;
-  accepted:boolean=false;
+  //accepted:boolean=false;
 }
-
+export class SelectControlItem{
+  id_qd:any;
+  id_item:any;
+  elected:any;
+}
 export class ItemQuoteAcepted{
   id_request: any;
   id_qd:any;
