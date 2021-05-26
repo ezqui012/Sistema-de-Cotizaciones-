@@ -57,4 +57,25 @@ export class QuoteService {
     }
     return failed;
   }
+  putStateQuote(idQuote:number, status:string): Observable<ResponseQuote | any>{
+    console.log("de servicios.. idQ: "+idQuote)
+    let failed: any;
+    if(localStorage.getItem('quot-umss-tk')){
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.put<ResponseQuote>(`${environment.URI_API}updateStatusQ/${idQuote}/${status}`, {headers: httpHeader});
+    }
+    return failed;
+  }
+  putStateRequestQuote(idRequest:number, status:string): Observable<ResponseQuote | any>{
+    let failed: any;
+    if(localStorage.getItem('quot-umss-tk')){
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.put<ResponseQuote>(`${environment.URI_API}updateStatusR/${idRequest}/${status}`, {headers: httpHeader});
+    }
+    return failed;
+  }
 }

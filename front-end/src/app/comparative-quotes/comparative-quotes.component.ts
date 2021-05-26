@@ -8,7 +8,6 @@ import { ItemQuoteAcepted, ItemQuotes, ResponseQuote, SelectControlItem } from '
 import { QuoteService } from '../services/quote.service';
 
 
-
 @Component({
   selector: 'app-comparative-quotes',
   templateUrl: './comparative-quotes.component.html',
@@ -34,6 +33,7 @@ export class ComparativeQuotesComponent implements OnInit {
 
   constructor(
     private modal: NgbModal,
+    private router: Router,
     private route: ActivatedRoute,
     public serviceQuote: QuoteService,
     public toastr: ToastrService
@@ -53,6 +53,9 @@ export class ComparativeQuotesComponent implements OnInit {
     this.pos = pos;
     this.modal.open(content,{ windowClass:"colorModal",size: 'sm'});
 
+  }
+  navigateTo(path: String) {
+    this.router.navigate([path]);
   }
   getItems(idRequest:any){
     this.serviceQuote.getItemsRequest(idRequest).subscribe((item)=> {
@@ -105,6 +108,9 @@ export class ComparativeQuotesComponent implements OnInit {
         this.registerSelectItem(this.itemsSelect[i].id_qd);
       }
       this.toastr.success('Se registro las elecciones de la cotización con exito');
+      this.updateStateAccepted();
+      this.navigateTo('/list-quotes')
+
     }else{
       this.toastr.warning('Existen Items sin elegir');
     }
@@ -112,8 +118,6 @@ export class ComparativeQuotesComponent implements OnInit {
   }
   registerSelectItem(idDq:number){
 
-    //this.register.id_request = this.id
-    //this.register.id_qd = this.idItem
     let register:ItemQuoteAcepted = new ItemQuoteAcepted
     register.id_qd = idDq
     register.id_request = this.id
@@ -123,7 +127,7 @@ export class ComparativeQuotesComponent implements OnInit {
         res = data;
         if (res.res) {
           console.log("se registro el item aceptado")
-          //this.elegirItem(i)
+
         } else {
           console.log('Ocurrio un error');
         }
@@ -132,6 +136,72 @@ export class ComparativeQuotesComponent implements OnInit {
         console.log(error.message);
       }
     );
+  }
+
+  updateStateAccepted(){
+    let res:ResponseQuote
+    this.serviceQuote.putStateQuote(this.idQuote,'Aceptado').subscribe(
+      (data) => {
+        res = data;
+        if(res.res){
+          console.log("seguardo los cambios con exito")
+
+        }else{
+          console.log("error al actualizar el estado intente de nuevo")
+        }
+      },
+      (error) => {
+        console.log("error al actualizar el estado")
+      }
+    );
+
+    this.serviceQuote.putStateRequestQuote(this.id,'Aceptado').subscribe(
+      (data) => {
+        res = data;
+        if(res.res){
+          console.log("seguardo los cambios con exito")
+
+        }else{
+          console.log("error al actualizar el estado intente de nuevo")
+        }
+      },
+      (error) => {
+        console.log("error al actualizar el estado")
+      }
+    );
+  }
+  updateStateRejected(){
+    let res:ResponseQuote
+    this.serviceQuote.putStateQuote(this.idQuote,'Rechazado').subscribe(
+      (data) => {
+        res = data;
+        if(res.res){
+          console.log("seguardo los cambios con exito")
+
+        }else{
+          console.log("error al actualizar el estado intente de nuevo")
+        }
+      },
+      (error) => {
+        console.log("error al actualizar el estado")
+      }
+    );
+    this.serviceQuote.putStateRequestQuote(this.id,'Rechazado').subscribe(
+      (data) => {
+        res = data;
+        if(res.res){
+          console.log("seguardo los cambios con exito")
+
+        }else{
+          console.log("error al actualizar el estado intente de nuevo")
+        }
+      },
+      (error) => {
+        console.log("error al actualizar el estado")
+      }
+    );
+    this.navigateTo('/list-quotes')
+
   }
 
 }

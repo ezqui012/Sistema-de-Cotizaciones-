@@ -60,9 +60,12 @@ Route::apiResource('expense-item', 'ExpenseItemController');
 Route::get('request','RequestQuotationController@getListRequest');
 //metodos de ddetalle
 Route:: get('itemQuotes/{idQuote}/{idItem}','QuoteController@getItemQuotes');
+Route:: put('updateStatusQ/{id}/{status}','QuoteController@updateStatusQuote'); //mi api
+Route:: put('updateStatusR/{id}/{status}','QuoteController@updateStatusRequestQuote'); //mi api
 Route::put('update-status/{id_request}','RequestQuotationController@changeStatus');
 Route::apiResource('rejected', 'RejectedController');
 Route::get('unit-amount/{id}', 'UnitController@getAmount');
+
 
 /* lista de cotizaciones asignadas a un usuario */
 Route::get('quot-assigned/{id}','QuotationController@getListQuoteUser');

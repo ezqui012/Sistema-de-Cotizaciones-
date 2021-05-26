@@ -128,9 +128,44 @@ class QuoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
 
+    }
+    public function updateStatusQuote($id,$status)
+    {
+        try{
+
+            DB::update('UPDATE quotation
+            SET status_quotation = ?
+            WHERE id_quotation = ?', [$status,$id]);;
+            return response()->json([
+                'res' => true,
+                'message' => 'Update status quotation'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
+    public function updateStatusRequestQuote($id, $status)
+    {
+        try{
+
+            DB::update('UPDATE request_quotation
+            SET status = ?
+            WHERE id_request = ?', [$status,$id]);;
+            return response()->json([
+                'res' => true,
+                'message' => 'Update status Request quotation'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *
