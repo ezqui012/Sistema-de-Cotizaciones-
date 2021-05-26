@@ -15,7 +15,7 @@ import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { SchoolListComponent } from './school-list/school-list.component';
 import { SchoolCreateComponent } from './school-create/school-create.component';
 import { SchoolEditComponent } from './school-edit/school-edit.component';
-import { PersonalUser } from './Model/personalUser';
+//import { PersonalUser } from './Model/personalUser';
 import { UserListComponent } from './user-list/user-list.component';
 
 import { AuthAdminGuard } from './guards/auth-admin.guard';
@@ -32,6 +32,7 @@ import { RequestQuotationListComponent } from './request-quotation-list/request-
 import { RequestQuotationEditComponent } from './request-quotation-edit/request-quotation-edit.component';
 import { RequestDetailComponent } from './request-detail/request-detail.component';
 import { QuoteListComponent } from './quote-list/quote-list.component';
+import { HomeUserComponent } from './home-user/home-user.component';
 
 const routes: Routes = [
   {
@@ -156,6 +157,10 @@ const routes: Routes = [
   {
     path: 'quote-list',
     component: QuoteListComponent
+  },
+  {
+    path: 'home-user',
+    component: HomeUserComponent
   }
 
 ];

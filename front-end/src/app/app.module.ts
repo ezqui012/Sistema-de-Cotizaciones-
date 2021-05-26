@@ -47,6 +47,7 @@ import { RequestQuotationEditComponent } from './request-quotation-edit/request-
 import { RequestDetailComponent } from './request-detail/request-detail.component';
 import { QuoteListComponent } from './quote-list/quote-list.component';
 import { NavUserComponent } from './nav-user/nav-user.component';
+import { HomeUserComponent } from './home-user/home-user.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { NavUserComponent } from './nav-user/nav-user.component';
     RequestQuotationEditComponent,
     RequestDetailComponent,
     QuoteListComponent,
-    NavUserComponent
+    NavUserComponent,
+    HomeUserComponent
   ],
   imports: [
     BrowserModule,

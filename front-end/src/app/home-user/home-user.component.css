@@ -1,0 +1,11 @@
+body{
+  margin: 0;
+  background-color: #f0f0f8;
+}
+
+.username{
+  padding-left: 30px;
+  font-size: 1.5rem;
+  color: #1C2331;
+  padding: 40px;
+}

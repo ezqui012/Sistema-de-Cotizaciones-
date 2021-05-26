@@ -124,7 +124,7 @@ export class LoginComponent implements OnInit {
     this.serviceFaculty.getIdFaculty(localStorage.getItem('quot-umss-u')).subscribe(
       (data) => {
         localStorage.setItem('quot-umss-f', data.id_faculty);
-        this.router.navigate(['/request-detail/2']);
+        this.router.navigate(['/home-user']);
       }
     );
   }
