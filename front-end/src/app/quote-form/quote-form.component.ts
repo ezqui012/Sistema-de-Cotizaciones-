@@ -23,6 +23,9 @@ export class QuoteFormComponent implements OnInit {
   business_name:any;
   statusQuot:any;
 
+  private numbQT: number = 0;
+  private lenght: number = 0;
+
   idquotation: number | any;
 
   enterprises: Enterprise[] | undefined;
@@ -148,14 +151,15 @@ export class QuoteFormComponent implements OnInit {
     );
   }
 
-  finishQuote(){
-    for(let option of this.items){
+  async finishQuote(){
+    this.numbQT = 0;
+    this.lenght = 0;
+    for await(let option of this.items){
+      this.lenght = this.lenght + 1;
       this.serviceQ.getNumberQuotesItem(this.route.snapshot.params.id, option.id_item).subscribe(
         (data) => {
           if(data.total >= 3){
-            this.finish = true;
-          }else{
-            this.finish = false;
+            this.numbQT = this.numbQT + 1;
           }
         },
         (error) => {
@@ -168,19 +172,36 @@ export class QuoteFormComponent implements OnInit {
   }
 
   endQuote(){
+    (this.numbQT === this.lenght) ? this.finish=true : this.finish=false;
     if(this.finish){
-      //
-      this.toastr.success('No pos ahora has el controlador para actualizar esta cosa');
+      let newStatus: any = {
+        status_quotation: 'Finalizado'
+      };
+      this.serviceQ.changeStatusQuotation(this.idquotation, newStatus).subscribe(
+        (data: any) => {
+          if(data.res){
+            this.navigateTo('/quote-list');
+            this.toastr.success(`Las cotizaciones para la solicitud ${this.business_name}, se mandaron al encargado para su revisión`);
+          }
+        }, (error:any) => {
+          this.toastr.error(error);
+        }
+      );
     }else{
-      this.toastr.error('Se necesita como minimo registrar 3 cotizaciones por cada item solicitado');
+      this.toastr.error('Se necesita como mínimo registrar 3 cotizaciones por cada ítem solicitado');
     }
   }
 
   getQuotInfo(id:any){
     this.service.getInfoQuote(id).subscribe(
       (data) => {
-        this.business_name = data[0].business_name;
-        this.statusQuot = data[0].status_quotation;
+        if(data[0].status_quotation === 'Proceso'){
+          this.business_name = data[0].business_name;
+          this.statusQuot = data[0].status_quotation;
+        }else{
+          this.navigateTo('/quote-list');
+          this.toastr.info('Solo las cotizaciones que se encuentran en estado de Proceso son editables');
+        }
       },
       (error) => {
         console.log(`Error: ${error}`);

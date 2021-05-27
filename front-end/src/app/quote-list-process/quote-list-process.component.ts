@@ -5,12 +5,15 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PersonalUserService } from '../services/PersonalUser.service';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-quote-list-process',
   templateUrl: './quote-list-process.component.html',
   styleUrls: ['./quote-list-process.component.css'],
   encapsulation: ViewEncapsulation.Emulated
 })
+
 export class QuoteListProcessComponent implements OnInit {
 
   quotes: Array<Quote>=[];
@@ -24,13 +27,15 @@ export class QuoteListProcessComponent implements OnInit {
   quoteId: any;
   pos = 0;
   chkAproveSol:boolean = false;
+
   constructor(
     private modal: NgbModal,
     private router: Router,
     public _personalUserService: PersonalUserService,
     private titlePage: Title,
     public quoteProcessService:QuoteProcessService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public toastr: ToastrService
   ) {
     this.titlePage.setTitle('Detalle de cotización - QUOT-UMSS');
   }
@@ -54,16 +59,15 @@ export class QuoteListProcessComponent implements OnInit {
 
   getQuoteProcess(){
     this.quoteProcessService.getQuoteProcess(this.quoteId).subscribe((res)=>{
-    this.quotes = res
+      this.quotes = res;
     })
   }
+
   deleteQuoteProcess(id:any){
     this.quoteProcessService.deleteProcess(id).subscribe(data=>{
       console.log(id)
       this.getQuoteProcess();
     })
   }
-
-
 
 }
