@@ -31,7 +31,11 @@ body{
 .container-subTitle{
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+
+#subtitle-margin{
+  margin-right: 6%;
 }
 
 .btn-one{
@@ -105,7 +109,7 @@ body{
 }
 
 #input-large{
-  width: 90%;
+  width: 93%;
 }
 
 .containerBtn{

@@ -119,10 +119,32 @@ export class EditDetailQuotationComponent implements OnInit {
     this.service.getItems(id).subscribe(
       (data) => {
         this.items = data;
+        this.showDetailUpdate();
       },
       (error) => {
         console.log(`Error: ${error}`);
         this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
+  }
+
+  showDetailUpdate(){
+    this.serviceQuote.showDetailQuote(this.route.snapshot.params.idqd).subscribe(
+      (data) => {
+        this.registerForm.controls['id_enterprise'].setValue(data.id_enterprise);
+        this.registerForm.controls['id_item'].setValue(data.id_item);
+        this.registerForm.controls['quantity'].setValue(data.quantity);
+        this.registerForm.controls['date'].setValue(data.date);
+        this.registerForm.controls['delivery_days'].setValue(data.delivery_days);
+        this.registerForm.controls['unit_cost'].setValue(data.unit_cost);
+        let newDate: moment.Moment = moment.utc(data.date);
+        let dateShow: Date = new Date(newDate.format('YYYY-MM-DD'));
+        dateShow.setDate(dateShow.getDate() + 1);
+        this.dateControl.setValue(dateShow);
+        console.log(this.dateControl.value);
+      },
+      (error) => {
+        this.toastr.error(`Error: ${error} Recargue la pagina`);
       }
     );
   }
@@ -149,6 +171,11 @@ export class EditDetailQuotationComponent implements OnInit {
 
   updateQuote(){
     this.toastr.success('ta bueno');
+    console.log(this.dateControl.value);
+    let newDate: moment.Moment = moment.utc(this.dateControl.value).local();
+    this.registerForm.controls['date'].setValue(newDate.format('YYYY-MM-DD'));
+    console.log("fechaaa: " + this.registerForm.get('date')?.value);
+
   }
 
 }

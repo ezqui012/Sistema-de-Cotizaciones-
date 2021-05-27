@@ -23,4 +23,17 @@ export class QuoteDetailService {
     return this.httpClient.post<ResponseRegisterQuote>(`${environment.URI_API}insertQuote`, quote);
   }
 
+  showDetailQuote(id: number):Observable<RegisterQuoteDetail | any>{
+    // let failed: any;
+    // if (localStorage.getItem('quot-umss-tk')) {
+    //   const httpHeader = new HttpHeaders({
+    //     'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    //   });
+    //   return this.httpClient.get<RegisterQuoteDetail>(`${environment.URI_API}insertQuote/${id}`, { headers: httpHeader });
+    // }
+    // return failed;
+    return this.httpClient.get<RegisterQuoteDetail>(`${environment.URI_API}insertQuote/${id}`);
+
+  }
+
 }

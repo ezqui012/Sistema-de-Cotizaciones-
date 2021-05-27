@@ -35,7 +35,15 @@ class QuoteDetailController extends Controller
 
     public function show($id)
     {
-        //
+        try{
+            $detail = QuoteDetail::where('id_qd', '=', $id)->first();
+            return $detail;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function update(UpdateQuotationDetailRequest $request, $id)

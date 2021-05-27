@@ -2,7 +2,7 @@
 <div class="containerBody">
 
   <div class="containertop">
-    <h1 class="title-page"><b>Registro de Cotizaciones</b></h1>
+    <h1 class="title-page"><b>Editar cotización</b></h1>
     <div class="btnCreate">
       <button type="button" id="btn-List" class="btn btn-one" (click)="navigateTo('/quote-list-process/' + business_name + '/' + idquotation)">Detalle de cotización</button>
     </div>
@@ -10,12 +10,12 @@
 
   <div class="container-subTitle">
     <label class="title-quote"><b>Razon social:</b> {{business_name}}</label>
-    <label class="title-quote"><b>Estado:</b> {{statusQuot}}</label>
+    <label class="title-quote" id="subtitle-margin"><b>Estado:</b> {{statusQuot}}</label>
   </div>
 
   <div class="container-form">
     <form class="form-quote" [formGroup]="registerForm">
-      <mat-form-field class="form-camp-full-width">
+      <mat-form-field class="form-camp-full-width" id="input-large">
         <mat-label>Empresa</mat-label>
         <mat-select formControlName="id_enterprise">
           <mat-option *ngFor="let option of enterprises" [value]="option.id_enterprise">
@@ -27,7 +27,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="form-camp-full-width">
+      <mat-form-field class="form-camp-full-width" id="input-large">
         <mat-label>Detalle o Item de gasto</mat-label>
         <mat-select formControlName="id_item">
           <mat-option *ngFor="let itemOption of items" [value]="itemOption.id_item">
@@ -40,7 +40,7 @@
       </mat-form-field>
 
       <div class="inputs-f1">
-        <mat-form-field class="form-camp-full-width" id="input-large">
+        <mat-form-field class="form-camp-full-width" >
           <mat-label>Cantidad</mat-label>
           <input matInput placeholder="Ingrese la cantidad" formControlName="quantity">
           <mat-error *ngIf="isValid('quantity')">
@@ -48,7 +48,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-camp-full-width" id="input-large">
+        <mat-form-field class="form-camp-full-width">
           <mat-label>Costo unitario</mat-label>
           <input matInput placeholder="Ingrese el costo unitario" formControlName="unit_cost">
           <mat-error *ngIf="isValid('unit_cost')">
@@ -60,7 +60,7 @@
       <div class="inputs-f1">
         <mat-form-field class="form-camp-full-width">
           <mat-label>Fecha</mat-label>
-          <input matInput [matDatepicker]="picker" placeholder="Ingrese fecha de cotización" [formControl]="dateControl">
+          <input matInput [matDatepicker]="picker" placeholder="Ingrese fecha de cotización" [formControl]="dateControl" readonly>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           <mat-error *ngIf="isValidDate()">

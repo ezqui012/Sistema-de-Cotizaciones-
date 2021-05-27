@@ -164,7 +164,7 @@ const routes: Routes = [
     component: HomeUserComponent
   },
   {
-    path: 'edit-detail-quotation/:id',
+    path: 'edit-detail-quotation/:id/:idqd',
     component: EditDetailQuotationComponent
   }
 
