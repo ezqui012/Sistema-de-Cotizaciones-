@@ -71,3 +71,5 @@ Route::apiResource('quotation','QuotationController');
 Route::get('get-facultyId/{id}', 'FacultyController@getIdFaculty');
 
 Route::get('get-numberQuotes/{id_quotation}/{id_item}', 'QuoteDetailController@numberQuotes');
+
+Route::put('status-quotation-update/{id}','QuotationController@updateStatus');

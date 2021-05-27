@@ -169,9 +169,10 @@ export class QuoteFormComponent implements OnInit {
 
   endQuote(){
     if(this.finish){
+      //
       this.toastr.success('No pos ahora has el controlador para actualizar esta cosa');
     }else{
-      this.toastr.error('Se nececita como minimo registrar 3 cotizaciones por cada item solicitado');
+      this.toastr.error('Se necesita como minimo registrar 3 cotizaciones por cada item solicitado');
     }
   }
 
