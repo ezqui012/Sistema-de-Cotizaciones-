@@ -8,22 +8,28 @@ import * as moment from 'moment';
 import { EnterpriseService } from '../services/enterprise.service';
 import { Enterprise } from '../Model/enterprise';
 import { ItemRequest } from '../Model/expense-item';
-import { QuoteDetailService } from '../services/quote-detail.service'
+import { QuoteDetailService } from '../services/quote-detail.service';
+import { QuotationService } from '../services/quotation.service';
 
 @Component({
   selector: 'app-quote-form',
   templateUrl: './quote-form.component.html',
   styleUrls: ['./quote-form.component.css'],
-  encapsulation:ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated
 })
+
 export class QuoteFormComponent implements OnInit {
 
   business_name:any;
   statusQuot:any;
 
+  idquotation: number | any;
+
   enterprises: Enterprise[] | undefined;
 
-  items: ItemRequest[] | undefined;
+  items: ItemRequest[] | any;
+
+  finish: boolean = false;
 
   dateControl = new FormControl(Validators.required);
   dateErrorMessage:string = 'El campo Fecha es de caracter obligatorio';
@@ -48,12 +54,14 @@ export class QuoteFormComponent implements OnInit {
     private titlePage: Title,
     private service: EnterpriseService,
     private route: ActivatedRoute,
-    private serviceQuote: QuoteDetailService
+    private serviceQuote: QuoteDetailService,
+    private serviceQ: QuotationService
   ) {
     this.titlePage.setTitle('Formulario de cotización - QUOT-UMSS');
   }
 
   ngOnInit(): void {
+    this.idquotation = this.route.snapshot.params.id;
     this.getEnterprises();
     this.getItemsRequest(this.route.snapshot.params.id);
     this.getQuotInfo(this.route.snapshot.params.id);
@@ -104,7 +112,8 @@ export class QuoteFormComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
-          this.toastr.success('Se registro la cotizacion con exito')
+          this.toastr.success('Se registro la cotizacion con exito');
+          this.finishQuote();
         }
       },
       (error) => {
@@ -130,12 +139,40 @@ export class QuoteFormComponent implements OnInit {
     this.service.getItems(id).subscribe(
       (data) => {
         this.items = data;
+        this.finishQuote();
       },
       (error) => {
         console.log(`Error: ${error}`);
         this.toastr.error(`Error: ${error}. Recargue la página`);
       }
     );
+  }
+
+  finishQuote(){
+    for(let option of this.items){
+      this.serviceQ.getNumberQuotesItem(this.route.snapshot.params.id, option.id_item).subscribe(
+        (data) => {
+          if(data.total >= 3){
+            this.finish = true;
+          }else{
+            this.finish = false;
+          }
+        },
+        (error) => {
+          console.log(error);
+          this.toastr.error(`Ocurrio un error: ${error} recargue la pagina`);
+          this.finish =false;
+        }
+      );
+    }
+  }
+
+  endQuote(){
+    if(this.finish){
+      this.toastr.success('No pos ahora has el controlador para actualizar esta cosa');
+    }else{
+      this.toastr.error('Se nececita como minimo registrar 3 cotizaciones por cada item solicitado');
+    }
   }
 
   getQuotInfo(id:any){

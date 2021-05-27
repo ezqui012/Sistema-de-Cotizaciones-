@@ -64,4 +64,16 @@ export class FacultyService {
     return failed;
   }
 
+  getIdFaculty(id: any):Observable<any>{
+    let failed: any;
+
+    if(localStorage.getItem('quot-umss-tk')){
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<ResponseRegister>(`${environment.URI_API}get-facultyId/${id}`, {headers: httpHeader});
+    }
+    return failed;
+  }
+
 }

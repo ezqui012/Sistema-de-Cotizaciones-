@@ -35,6 +35,8 @@ import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quo
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { PasswordComponent } from './PopUp/password/password.component';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
+import { QuoteListProcessComponent } from './quote-list-process/quote-list-process.component';
+import { QuoteListFinalizedComponent } from './quote-list-finalized/quote-list-finalized.component';
 import { QuoteFormComponent } from './quote-form/quote-form.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -44,6 +46,8 @@ import { RequestQuotationListComponent } from './request-quotation-list/request-
 import { RequestQuotationEditComponent } from './request-quotation-edit/request-quotation-edit.component';
 import { RequestDetailComponent } from './request-detail/request-detail.component';
 import { QuoteListComponent } from './quote-list/quote-list.component';
+import { NavUserComponent } from './nav-user/nav-user.component';
+import { HomeUserComponent } from './home-user/home-user.component';
 
 @NgModule({
   declarations: [
@@ -73,11 +77,15 @@ import { QuoteListComponent } from './quote-list/quote-list.component';
     EditUserComponent,
     PasswordComponent,
     EditUnitComponent,
+    QuoteListProcessComponent,
+    QuoteListFinalizedComponent,
     RequestQuotationComponent,
     RequestQuotationListComponent,
     RequestQuotationEditComponent,
     RequestDetailComponent,
-    QuoteListComponent
+    QuoteListComponent,
+    NavUserComponent,
+    HomeUserComponent
   ],
   imports: [
     BrowserModule,

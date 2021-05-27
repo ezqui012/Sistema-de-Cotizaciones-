@@ -1,10 +1,10 @@
-
+<app-nav-user></app-nav-user>
 <div class="containerBody">
 
   <div class="containertop">
     <h1 class="title-page"><b>Registro de Cotizaciones</b></h1>
     <div class="btnCreate">
-      <button type="button" id="btn-List" class="btn btn-one" >Detalle de cotización</button>
+      <button type="button" id="btn-List" class="btn btn-one" (click)="navigateTo('/quote-list-process/' + business_name + '/' + idquotation)">Detalle de cotización</button>
     </div>
   </div>
 
@@ -82,7 +82,7 @@
 
       <div class="containerBtn">
         <div>
-          <button class="btn btn-cancel" type="button">Cancelar</button>
+          <button class="btn btn-cancel" type="button" (click)="navigateTo('/quote-list')">Cancelar</button>
           <button class="btn btn-register" type="button" (click)="registerQuote()">Registrar</button>
         </div>
       </div>
@@ -93,7 +93,7 @@
   <div class="containerBtn-2">
     <div>
       <button class="btn btn-attachment" type="button">Archivo Adjunto</button>
-      <button class="btn btn-finish" type="button">Finalizar</button>
+      <button class="btn btn-finish" type="button" (click)="endQuote()">Finalizar</button>
     </div>
   </div>
 

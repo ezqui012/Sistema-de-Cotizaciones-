@@ -85,7 +85,7 @@ class UnitController extends Controller
         }
     }
     public function getUnit(){
-        $unities = DB::table('units')->select('id_unit','name_unit')->get();
+        $unities = DB::table('units')->select('id_unit','name_unit')->where('name_unit', '<>', 'Administrador de sistema')->get();
         return $unities;
     }
 

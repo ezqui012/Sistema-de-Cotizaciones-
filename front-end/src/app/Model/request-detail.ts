@@ -12,3 +12,18 @@ export class ListItemsRequest{
   unit_item: any;
   unit_cost: any;
 }
+
+export class ResponseObtained{
+  res: any;
+  message: any;
+}
+
+export class RejectedRequest{
+  id_request: any;
+  reason: any;
+}
+
+export class PersonalQuote{
+  id: any;
+  name: any;
+}

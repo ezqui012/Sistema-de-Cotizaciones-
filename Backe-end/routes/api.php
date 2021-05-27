@@ -33,17 +33,22 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('registerUser', 'UserController@addData');
     Route::post('email','UserController@getEmail');
     Route::post('ci', 'UserController@getCi');
-    Route::ApiResource('assignedPermit', 'AssignedPermitController');
     Route::get('list','UnitController@getUnitList');
     Route::ApiResource('roles','RolesController');
     Route:: get('listId/{id}','UnitController@getUnitSelect');
     Route:: get('roleId/{id}','RolesController@getRoleSelect');
     Route:: get('quoteItem/{id}','QuoteController@getItem');
     Route::ApiResource('quote', 'QuoteController');
+    Route::get('list-personal/{id}', 'UserController@getListPersonalQuote');
+    Route::get('user/{id}', 'UserController@getUserById');
+    Route::put('updateUser/{id}', 'UserController@updateUser');
+    Route::put('updatePassword/{id}', 'UserController@updatePassword');
+    Route::get('processQuote/{id}', 'QuoteController@getProcessQuote');
+    Route::get('finalizedQuote/{id}', 'QuoteController@getFinalizedQuote');
 });
-Route::get('user/{id}', 'UserController@getUserById');
-Route::put('updateUser/{id}', 'UserController@updateUser');
-Route::put('updatePassword/{id}', 'UserController@updatePassword');
+
+Route::delete('processQuoteDelete/{id}', 'QuoteController@deleteProcessQuote');
+
 
 Route::apiResource('enterprise', 'EnterpriseController');
 Route::get('items-rq/{id}','ExpenseItemController@getItemRequest');
@@ -69,3 +74,8 @@ Route::get('unit-amount/{id}', 'UnitController@getAmount');
 
 /* lista de cotizaciones asignadas a un usuario */
 Route::get('quot-assigned/{id}','QuotationController@getListQuoteUser');
+Route::apiResource('quotation','QuotationController');
+/* ID de facultad */
+Route::get('get-facultyId/{id}', 'FacultyController@getIdFaculty');
+
+Route::get('get-numberQuotes/{id_quotation}/{id_item}', 'QuoteDetailController@numberQuotes');

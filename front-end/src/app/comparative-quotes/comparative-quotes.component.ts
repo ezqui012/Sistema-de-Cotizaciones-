@@ -4,7 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 import { ExpenseItems } from '../Model/expenseItem';
-import { ItemQuoteAcepted, ItemQuotes, ResponseQuote, SelectControlItem } from '../Model/quote';
+import { ItemQuoteAcepted, ItemQuotes, ResponseQuote, SelectControlItem } from '../Model/Quote';
 import { QuoteService } from '../services/quote.service';
 
 

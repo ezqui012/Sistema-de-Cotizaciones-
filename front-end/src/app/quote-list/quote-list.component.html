@@ -1,4 +1,4 @@
-
+<app-nav-user></app-nav-user>
 <div class="containerBody">
   <div class="containertop">
     <h1><b>Lista de cotizaciones</b></h1>
@@ -22,7 +22,7 @@
             <td>
               <div class="row justify-content-end" style="padding-right: 20%;">
                 <button type="button" class="btn btn-register" (click)="navigateTo('/quote-form/'+list.id_request)">Registrar</button>
-                <button type="button" class="btn btn-detail" (click)="showThis('Detalle')">Detalle</button>
+                <button type="button" class="btn btn-detail" (click)="detailRequest(list.status_quotation, list.business_name, list.id_quotation)">Detalle</button>
               </div>
             </td>
           </tr>

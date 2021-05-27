@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 
-import { QuoteList, ResponseQuote, ItemQuotes, ItemQuoteAcepted} from '../Model/quote';
+import { QuoteList, ResponseQuote, ItemQuotes, ItemQuoteAcepted} from '../Model/Quote';
 import { ExpenseItems } from '../Model/expenseItem';
 
 

@@ -8,7 +8,9 @@ class RolController extends Controller
 {
     //
     public function getRol(){
-        $roles = DB::table('roles')->select('id_role','name_role')->get();
+        $roles = DB::table('roles')->select('id_role','name_role')
+                                ->where('name_role', '<>', 'Admin')
+                                ->get();
         return $roles;
     }
 }

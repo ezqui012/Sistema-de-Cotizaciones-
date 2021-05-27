@@ -1,0 +1,20 @@
+<app-nav-user></app-nav-user>
+
+<div class="contentBody">
+  <div class="username">
+    <b>Bienvenido {{ this.nameUser }}</b>
+  </div>
+  <div class="bodyOption">
+    <div class="contentOption">
+        <div class="option" *ngIf="showQuote">
+          <img src="../../assets/img-user-home/Btn-Solicitud.svg"  class="optBtn">
+        </div>
+        <div class="option" *ngIf="showRequest">
+          <img src="../../assets/img-user-home/Btn-Cotizacion.svg"  class="optBtn">
+        </div>
+        <div class="option" *ngIf="showAccept">
+          <img src="../../assets/img-user-home/Btn-Aprobar.svg" class="optBtn">
+        </div>
+    </div>
+  </div>
+</div>

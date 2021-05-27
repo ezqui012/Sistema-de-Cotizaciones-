@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use App\Http\Requests\CreateQuotationRequest;
+use App\Quotation;
 
 class QuotationController extends Controller
 {
@@ -13,9 +15,22 @@ class QuotationController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(CreateQuotationRequest $request)
     {
-        //
+        try{
+            $input = $request->all();
+            $input['status_quotation'] = 'Proceso';
+            Quotation::create($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'Registered quotation'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function show($id)
@@ -51,7 +66,7 @@ class QuotationController extends Controller
         try{
             $list = DB::table('quotation')
                         ->join('request_quotation', 'quotation.id_request', '=', 'request_quotation.id_request')
-                        ->select('request_quotation.id_request', 'request_quotation.business_name', 'quotation.status_quotation')
+                        ->select('request_quotation.id_request', 'request_quotation.business_name', 'quotation.status_quotation', 'quotation.id_quotation')
                         ->where('quotation.id', '=', $id)
                         ->where('request_quotation.status', '=', 'Cotización')
                         ->get();
