@@ -1,0 +1,145 @@
+body{
+  background-color: #F0F0F8;
+}
+
+.title-page{
+  color: #003b72 !important;
+}
+
+.title-quote{
+  color: #1C2331 !important;
+  font-size: 1,2rem !important;
+}
+
+.containerBody{
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 20px;
+  width: 100%;
+}
+
+.containertop{
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  font-weight: bolder;
+}
+
+.container-subTitle{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.btn-one{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 200px;
+  margin-left: 20px;
+}
+
+.btn-cancel, .btn-register{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  width: 120px;
+}
+
+.btn-attachment, .btn-finish{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  width: 150px;
+}
+
+.btn-attachment{
+  margin-right: 1%;
+}
+
+.btn-finish{
+  margin-left: 1%;
+}
+
+.btn-cancel, .btn-finish{
+  background-color: #1C2331;
+  margin-right: 20px;
+}
+
+.btn-register, .btn-attachment{
+  background-color:#003b72;
+}
+
+.btn:hover{
+  background-color: #2f82ff;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+.container-form{
+  width: 95%;
+  margin: 0;
+  background-color: #ffffff !important;
+  justify-items: center !important;
+  border-radius: 7px;
+}
+
+.form-quote{
+  width: 100%;
+  font-size: 1.1rem;
+  padding-bottom: 0%;
+}
+
+.inputs-f1{
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+}
+
+.form-camp-full-width{
+  width: 50%;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 1%;
+}
+
+#input-large{
+  width: 90%;
+}
+
+.containerBtn{
+  text-align: center;
+}
+
+.containerBtn-2{
+  text-align: center;
+  margin-top: 2%;
+}
+
+@media(max-width:970px){
+  .title-page{
+    font-size: 2em !important;
+  }
+
+  .form-quote{
+    font-size: 1rem;
+  }
+
+  .inputs-f1{
+    display: flex;
+    flex-flow: column;
+  }
+
+  .form-camp-full-width{
+    width: 90%;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+
+  .container-subTitle{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+  }
+}

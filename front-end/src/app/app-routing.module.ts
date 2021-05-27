@@ -33,6 +33,7 @@ import { RequestQuotationEditComponent } from './request-quotation-edit/request-
 import { RequestDetailComponent } from './request-detail/request-detail.component';
 import { QuoteListComponent } from './quote-list/quote-list.component';
 import { HomeUserComponent } from './home-user/home-user.component';
+import { EditDetailQuotationComponent } from './edit-detail-quotation/edit-detail-quotation.component';
 
 const routes: Routes = [
   {
@@ -161,6 +162,10 @@ const routes: Routes = [
   {
     path: 'home-user',
     component: HomeUserComponent
+  },
+  {
+    path: 'edit-detail-quotation/:id',
+    component: EditDetailQuotationComponent
   }
 
 ];
