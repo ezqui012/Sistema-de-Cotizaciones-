@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 import { ExpenseItems } from '../Model/expenseItem';
 import { ItemQuoteAcepted, ItemQuotes, ResponseQuote, SelectControlItem } from '../Model/Quote';
+import { DetailRequestService } from '../services/detail-request.service';
 import { QuoteService } from '../services/quote.service';
 
 
@@ -30,13 +32,22 @@ export class ComparativeQuotesComponent implements OnInit {
   //register:ItemQuoteAcepted = new ItemQuoteAcepted
   //itemSelected:SelectControlItem = new SelectControlItem
   showBtn:boolean=true
+  totalCost: number = 0;
+
+  actualAmount: number | any;
+  rejectedForm = this.fb.group({
+    id_request: [ this.route.snapshot.paramMap.get('idR'), [Validators.required]],
+    reason: ['', [Validators.required, Validators.minLength(10)]]
+  });
 
   constructor(
     private modal: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
     public serviceQuote: QuoteService,
-    public toastr: ToastrService
+    public toastr: ToastrService,
+    private service: DetailRequestService,
+    private fb: FormBuilder
 
   ) { }
 
@@ -45,13 +56,19 @@ export class ComparativeQuotesComponent implements OnInit {
     this.idQuote = this.route.snapshot.paramMap.get('idQ');
     this.entrusted = this.route.snapshot.paramMap.get('entrusted');
     this.getItems(this.id);
-    // console.log("id Re: "+this.id)
-    // console.log("id Qu: "+this.idQuote)
+
+    this.getAmount();
   }
-  openModal(content: any, idDq:number, pos:number):void{
+  openModal(content: any, idDq:number, pos:number, info:boolean):void{
     this.idDq = idDq;
     this.pos = pos;
-    this.modal.open(content,{ windowClass:"colorModal",size: 'sm'});
+    this.modal.open(content,{ windowClass:"colorModal"});
+
+  }
+  openModalRejected(content: any):void{
+    // this.idDq = idDq;
+    // this.pos = pos;
+    this.modal.open(content,{ windowClass:"colorModal"});
 
   }
   navigateTo(path: String) {
@@ -75,7 +92,7 @@ export class ComparativeQuotesComponent implements OnInit {
     this.checkItemSelect();
   }
 
-  elegirItem(){
+  elegirItem(totalCost:number){
     const itemSelected:SelectControlItem = new SelectControlItem
 
     itemSelected.id_qd = this.idDq
@@ -85,6 +102,7 @@ export class ComparativeQuotesComponent implements OnInit {
     this.showBtn=false
     this.modal.dismissAll()
     console.log(this.itemsSelect)
+    this.totalCost=this.totalCost+totalCost;
   }
   checkItemSelect(){
     if(this.itemsSelect.length === 0){
@@ -103,13 +121,18 @@ export class ComparativeQuotesComponent implements OnInit {
     }
   }
   registerQuoteAccepted(){
-    if(this.items.length === this.itemsSelect.length){
-      for(let i=0; i<this.itemsSelect.length; i++){
-        this.registerSelectItem(this.itemsSelect[i].id_qd);
+    if(this.items.length === this.itemsSelect.length && this.items.length !== 0){
+      if(this.actualAmount >= this.totalCost){
+        for(let i=0; i<this.itemsSelect.length; i++){
+          this.registerSelectItem(this.itemsSelect[i].id_qd);
+        }
+        this.toastr.success('Se registro las elecciones de la cotización con exito');
+        this.updateStateAccepted();
+        this.navigateTo('/list-quotes')
+
+      }else{
+        this.toastr.error('El monto actual de la unidad es menor al solicitado');
       }
-      this.toastr.success('Se registro las elecciones de la cotización con exito');
-      this.updateStateAccepted();
-      this.navigateTo('/list-quotes')
 
     }else{
       this.toastr.warning('Existen Items sin elegir');
@@ -204,4 +227,59 @@ export class ComparativeQuotesComponent implements OnInit {
 
   }
 
+  //metodos de rechazo
+  isValidRejectedForm(){
+    return ( this.rejectedForm.get('reason')?.touched || this.rejectedForm.get('reason')?.dirty) && !this.rejectedForm.get('reason')?.valid;
+  }
+
+  getErrorMessageRejected(){
+    let message;
+    if(this.rejectedForm.get('reason')?.errors?.required){
+      message = "El campo Motivo de rechazo es obligatorio";
+    }else if(this.rejectedForm.get('reason')?.hasError('minlength')){
+      message = "El campo Motivo de rechazo requiere como mínimo 10 caracteres";
+    }
+    return message;
+  }
+  registerRejectedForm(){
+    if(this.rejectedForm.invalid){
+      return;
+    }
+    this.service.registerRejected(this.rejectedForm.value).subscribe(
+      (data) => {
+        if(data.res){
+          //this.changeStatus("Rechazado", "La solicitud a sido rechazada");
+          this.updateStateRejected();
+          this.modal.dismissAll();
+          this.navigateTo('/list-quotes');
+
+        }else{
+          this.toastr.error("Ocurrio un error al registrar intente nuevamente");
+        }
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(`Error: ${error} intente nuevamente`);
+      }
+    );
+  }
+  openModalAccept(content: any){
+    if(this.actualAmount >= this.totalCost){
+      //this.modal.open(content,{ windowClass:"colorModal"});
+    }else{
+      this.toastr.error('El monto actual de la unidad es menor al solicitado');
+    }
+  }
+  getAmount(){
+    this.service.getActualAmount(localStorage.getItem('quot-umss-u')).subscribe(
+      (data) => {
+        this.actualAmount = data.amount;
+        //this.getPersonal();
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
+  }
 }

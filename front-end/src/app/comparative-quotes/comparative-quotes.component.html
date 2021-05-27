@@ -1,5 +1,35 @@
 <!--Barra de navegacion-->
 <app-navbar></app-navbar>
+<!--Modal-Rechazo-->
+<ng-template #contentR let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Formulario de rechazo</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup]="rejectedForm">
+    <div class="modal-body">
+      <div class="contentMotive">
+        <mat-form-field class="date-info">
+          <mat-label>Motivo de Rechazo</mat-label>
+          <input matInput placeholder="Ingrese el motivo de rechazo" formControlName="reason">
+          <mat-error *ngIf="isValidRejectedForm()">
+            {{ getErrorMessageRejected() }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="containerBtn">
+        <div>
+          <button class="btn btn-cancelar" type="button" (click)="modal.dismiss()">Cancelar</button>
+          <button class="btn btn-reporte" type="button" (click)="registerRejectedForm()">Guardar</button>
+        </div>
+      </div>
+    </div>
+</form>
+</ng-template>
 <!-- Modal Confirm -->
 <ng-template #content let-modal>
   <div class="modal-header">
@@ -25,15 +55,19 @@
     <div class="containerBtn">
       <div>
         <button class="btn btn-cancelar" (click)="modal.dismiss()">Cancelar</button>
-        <button class="btn btn-ok" (click)="elegirItem()">OK</button>
+        <button class="btn btn-ok" (click)="elegirItem(itemsQuotes[pos].unit_cost*itemsQuotes[pos].quantity)">OK</button>
       </div>
     </div>
   </div>
 </ng-template>
 <!--header-->
 <div class="containerBody">
-  <div class="containerTop">
+  <div class="containertop">
     <h1><b>Cuadro comparativo de cotizaciones</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/list-quotes')">Lista de Cotizaciones</button>
+
+    </div>
   </div>
 
   <div class="contentQuoteDate">
@@ -97,7 +131,7 @@
             <td style="width:8%; padding-top:20px;">{{itemQuote.unit_cost * itemQuote.quantity }}</td>
             <td style="width:8%">
               <div>
-                <button class="btn btn-edit" *ngIf="showBtn" (click)="openModal(content, itemQuote.id_qd, i)">
+                <button class="btn btn-edit" *ngIf="showBtn" (click)="openModal(content, itemQuote.id_qd, i, true)">
                   Elegir
                 </button>
                 <button class="btn btn-edit" *ngIf="!showBtn" disabled >
@@ -109,9 +143,19 @@
         </tbody>
       </table>
     </div>
+    <div class="infoHead">
+      <div class="nameRequest">
+        <b>Moto disponible de la Unidad: </b>
+        {{actualAmount}}
+      </div>
+      <div class="dateRequest">
+        <b>TOTAL: </b>
+        {{totalCost}}
+      </div>
+    </div>
     <div class="containerBtn">
       <div>
-        <button class="btn btn-reject"(click)="updateStateRejected()">Rechazar</button>
+        <button class="btn btn-reject" (click)="openModalRejected(contentR)">Rechazar</button>
         <button class="btn btn-register" (click)="registerQuoteAccepted()">Registrar</button>
       </div>
     </div>

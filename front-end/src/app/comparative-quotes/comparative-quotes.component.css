@@ -50,7 +50,7 @@ body {
   overflow-y: auto;
   padding-left: 0.2%;
   padding-right: 0.2%;
-  height: 320px;
+  height: 300px;
 }
 
 .newHeadTable {
@@ -131,7 +131,10 @@ body {
 .btn-cancelar:hover{
   background-color: #253049 !important;
 }
-
+.contentMotive{
+  width: 100%;
+  text-align: center;
+}
 .btn-ok:hover{
   background-color: #DD3333 !important;
 }
@@ -147,3 +150,46 @@ body {
   margin-bottom: 10px;
   width: 100%;
 }
+.btn-reporte{
+  color: white;
+  background-color:#003b72;
+  /* margin-right: 20px; */
+  width: 100px;
+}
+
+.date-info{
+  width: 90%;
+  font-size: 1rem;
+}
+
+/* more styles */
+.btn-one{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 200px;
+  margin-left: 20px;
+}
+.containertop{
+  display: flex;
+  box-sizing: border-box;
+  /* margin-bottom: 10px; */
+  color: #003b72;
+  font-weight: bolder;
+}
+.contentInfo{
+  font-size: 1rem;
+  display: block;
+  }
+  .infoHead{
+    display: flex;
+    padding: 5px;
+  }
+  .nameRequest{
+    width: 85%;
+  }
+  .nameAttedant{
+    width: 100%;
+    padding: 5px;
+
+  }
