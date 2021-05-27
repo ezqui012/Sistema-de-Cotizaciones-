@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PersonalUser } from '../Model/personalUser';
 import { PersonalUserService } from '../services/PersonalUser.service';
@@ -16,7 +16,7 @@ export class QuoteListFinalizedComponent implements OnInit {
 
   pos = 0;
   business:any;
-  quoteId=2;
+  quoteId:any;
   quantity:any;
   quoteUnitecost: any;
   reason: any;
@@ -28,13 +28,14 @@ export class QuoteListFinalizedComponent implements OnInit {
     private router: Router,
     public _personalUserService: PersonalUserService,
     private titlePage: Title,
-    public quoteProcessService:QuoteProcessService
+    public quoteProcessService:QuoteProcessService,
+    private route: ActivatedRoute
   ) {
     this.titlePage.setTitle('Lista de usuarios - QUOT-UMSS');
   }
 
   ngOnInit(): void {
-
+    this.quoteId = this.route.snapshot.params.id;
     this.getFinalizedQuote();
   }
   navigateTo(path: String){

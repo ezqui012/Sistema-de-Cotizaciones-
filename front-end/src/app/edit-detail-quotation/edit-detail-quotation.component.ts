@@ -105,8 +105,13 @@ export class EditDetailQuotationComponent implements OnInit {
   getQuotInfo(id:any){
     this.service.getInfoQuote(id).subscribe(
       (data) => {
-        this.business_name = data[0].business_name;
-        this.statusQuot = data[0].status_quotation;
+        if(data[0].status_quotation === 'Proceso'){
+          this.business_name = data[0].business_name;
+          this.statusQuot = data[0].status_quotation;
+        }else{
+          this.navigateTo('/quote-list');
+          this.toastr.info('Solo las cotizaciones que se encuentran en estado de Proceso son editables');
+        }
       },
       (error) => {
         console.log(`Error: ${error}`);
@@ -170,11 +175,33 @@ export class EditDetailQuotationComponent implements OnInit {
   }
 
   updateQuote(){
-    this.toastr.success('ta bueno');
-    console.log(this.dateControl.value);
+
+    if(this.dateControl.invalid){
+      this.toastr.error('Existen campos incorrectos');
+      return;
+    }
+
     let newDate: moment.Moment = moment.utc(this.dateControl.value).local();
     this.registerForm.controls['date'].setValue(newDate.format('YYYY-MM-DD'));
-    console.log("fechaaa: " + this.registerForm.get('date')?.value);
+
+    if(this.registerForm.invalid ){
+      this.toastr.error('Existen campos incorrectos');
+      return;
+    }
+
+    this.serviceQuote.updateDetailQuote(this.route.snapshot.params.idqd, this.registerForm.value).subscribe(
+      (data) => {
+        if(data.res){
+          this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
+          this.toastr.success('Cotización actualizada con exito');
+        }else{
+          this.toastr.error('Ocurrio un error de conexión intente de nuevo');
+        }
+      },
+      (error) => {
+        this.toastr.error(`Error: ${error} Intente de nuevo`);
+      }
+    );
 
   }
 
