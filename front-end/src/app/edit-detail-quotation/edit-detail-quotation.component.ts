@@ -9,7 +9,6 @@ import { EnterpriseService } from '../services/enterprise.service';
 import { Enterprise } from '../Model/enterprise';
 import { ItemRequest } from '../Model/expense-item';
 import { QuoteDetailService } from '../services/quote-detail.service';
-import { QuotationService } from '../services/quotation.service';
 
 @Component({
   selector: 'app-edit-detail-quotation',
@@ -51,10 +50,9 @@ export class EditDetailQuotationComponent implements OnInit {
     private titlePage: Title,
     private service: EnterpriseService,
     private route: ActivatedRoute,
-    private serviceQuote: QuoteDetailService,
-    private serviceQ: QuotationService
+    private serviceQuote: QuoteDetailService
   ) {
-    this.titlePage.setTitle('Formulario de cotización - QUOT-UMSS');
+    this.titlePage.setTitle('Editar cotización - QUOT-UMSS');
   }
 
   ngOnInit(): void {
@@ -79,7 +77,7 @@ export class EditDetailQuotationComponent implements OnInit {
     if(this.registerForm.get(field)?.errors?.required){
       message = `El campo ${fieldSpanish} es obligatorio`;
     }else if(this.registerForm.get(field)?.hasError('pattern')){
-      field === 'quantity' ? message = `El campo ${fieldSpanish} solo acepta caracteres numéricos`
+      field === 'quantity' || field === 'delivery_days' ? message = `El campo ${fieldSpanish} solo acepta caracteres numéricos`
       : message = `El campo ${fieldSpanish} solo acepta caracteres numéricos y decimales`;
     }else if(this.registerForm.get(field)?.hasError('min')){
       message = `El campo ${fieldSpanish} solo acepta valores mayores a 0`;

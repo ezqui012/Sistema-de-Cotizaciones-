@@ -9,13 +9,13 @@
   </div>
 
   <div class="container-subTitle">
-    <h2 class="title-quote"><b>Razon social:</b> {{business_name}}</h2>
-    <h2 class="title-quote"><b>Estado:</b> {{statusQuot}}</h2>
+    <label class="title-quote"><b>Razon social:</b> {{business_name}}</label>
+    <label class="title-quote" id="subtitle-margin"><b>Estado:</b> {{statusQuot}}</label>
   </div>
 
   <div class="container-form">
     <form class="form-quote" [formGroup]="registerForm">
-      <mat-form-field class="form-camp-full-width">
+      <mat-form-field class="form-camp-full-width" id="input-large">
         <mat-label>Empresa</mat-label>
         <mat-select formControlName="id_enterprise">
           <mat-option *ngFor="let option of enterprises" [value]="option.id_enterprise">
@@ -27,7 +27,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="form-camp-full-width">
+      <mat-form-field class="form-camp-full-width" id="input-large">
         <mat-label>Detalle o Item de gasto</mat-label>
         <mat-select formControlName="id_item">
           <mat-option *ngFor="let itemOption of items" [value]="itemOption.id_item">

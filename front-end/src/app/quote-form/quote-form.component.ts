@@ -82,7 +82,7 @@ export class QuoteFormComponent implements OnInit {
     if(this.registerForm.get(field)?.errors?.required){
       message = `El campo ${fieldSpanish} es obligatorio`;
     }else if(this.registerForm.get(field)?.hasError('pattern')){
-      field === 'quantity' ? message = `El campo ${fieldSpanish} solo acepta caracteres numéricos`
+      field === 'quantity' || field === 'delivery_days' ? message = `El campo ${fieldSpanish} solo acepta caracteres numéricos`
       : message = `El campo ${fieldSpanish} solo acepta caracteres numéricos y decimales`;
     }else if(this.registerForm.get(field)?.hasError('min')){
       message = `El campo ${fieldSpanish} solo acepta valores mayores a 0`;

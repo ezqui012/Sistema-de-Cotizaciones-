@@ -1,15 +1,15 @@
 import { QuoteProcessService } from './../services/quote-process.service';
 import { Quote } from './../Model/Quote';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PersonalUser } from '../Model/personalUser';
 import { PersonalUserService } from '../services/PersonalUser.service';
 @Component({
   selector: 'app-quote-list-process',
   templateUrl: './quote-list-process.component.html',
-  styleUrls: ['./quote-list-process.component.css']
+  styleUrls: ['./quote-list-process.component.css'],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class QuoteListProcessComponent implements OnInit {
 
@@ -32,7 +32,7 @@ export class QuoteListProcessComponent implements OnInit {
     public quoteProcessService:QuoteProcessService,
     private route: ActivatedRoute
   ) {
-    this.titlePage.setTitle('Lista de usuarios - QUOT-UMSS');
+    this.titlePage.setTitle('Detalle de cotización - QUOT-UMSS');
   }
 
   ngOnInit(): void {
