@@ -1,65 +1,5 @@
 <!--Navbar-->
-<app-navbar></app-navbar>
-<!--Modal Roles-->
-<!-- <ng-template #content let-modal>
-
-    <div class="modal-header">
-      <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
-      <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="dateInfo">
-        <h3><b>Nombre:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{personalUser[pos].name}}</h3>
-        </div>
-      </div>
-      <div class="dateInfo">
-        <h3><b>Rol:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{personalUser[pos].name_role}}</h3>
-        </div>
-      </div>
-      <div class="dateInfo">
-        <h3><b>Unidad:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{personalUser[pos].name_unit}}</h3>
-        </div>
-      </div>
-      <div class="dateInfo">
-        <h3><b>Teléfono:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{personalUser[pos].phone}}</h3>
-        </div>
-      </div>
-      <div class="dateInfo">
-        <h3><b>CI:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{personalUser[pos].ci}}</h3>
-        </div>
-      </div>
-      <div class="dateInfo">
-        <h3><b>Email:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{personalUser[pos].email}}</h3>
-        </div>
-      </div>
-      <div class="dateInfo">
-        <h3><b>Dirección:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{personalUser[pos].address}}</h3>
-        </div>
-      </div>
-
-    </div>
-
-
-
-</ng-template> -->
-
-
+<app-nav-user></app-nav-user>
 <!--header-->
 <div class="containerBody">
   <div class="containertop">
@@ -114,7 +54,7 @@
             <td class="tdcost">{{quote.unit_cost*quote.quantity}}</td>
             <td class="button">
               <div class="row justify-content-end" style="padding-right: 20%;">
-                <button type="button" class="btn btn-edit" (click)="navigateToEdit('/request-quotation-edit')"> <img src="../../assets/img-outsite/pencil.png" width="25" height="25"></button>
+                <button type="button" class="btn btn-edit" (click)="navigateToEdit('/edit-detail-quotation/'+quoteId+'/'+quote.id_qd)"> <img src="../../assets/img-outsite/pencil.png" width="25" height="25"></button>
                 <button id="verRol" type="button" class="btn btn-ver" (click)="deleteQuoteProcess(quote.id_qd)" ><img src="../../assets/img-outsite/trash.png" width="25" height="25"></button>
 
               </div>
