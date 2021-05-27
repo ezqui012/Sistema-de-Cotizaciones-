@@ -23,7 +23,7 @@ export class QuoteFinalized{
   status_quotation: any;
   id_request:any;
 }
-///Eze arriba
+
 export class QuoteTwo {
   id_quotation: any;
   id_request: any;
