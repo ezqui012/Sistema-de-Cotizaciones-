@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PersonalUser } from '../Model/personalUser';
 import { PersonalUserService } from '../services/PersonalUser.service';
 import { QuoteProcessService } from '../services/quote-process.service';
-import { Quote } from './../Model/Quote';
+import { Quote } from './../Model/quoteModel';
 @Component({
   selector: 'app-quote-list-finalized',
   templateUrl: './quote-list-finalized.component.html',

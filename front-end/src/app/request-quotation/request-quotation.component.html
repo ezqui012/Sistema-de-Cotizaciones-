@@ -3,14 +3,18 @@
 <!--header-->
 <div class="containerBody">
   <div class="containertop">
-    <h1><b>Solicitud de Cotización</b></h1>
+    <h1><b>Solicitud de cotización</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/request-quotation-list')">Lista de Solicitudes</button>
+
+    </div>
   </div>
-  <div class="titleQoute">
+  <div class="titleQoute" [formGroup]="requestForm">
     <mat-form-field class="date-info">
       <mat-label>Razon social</mat-label>
-      <input matInput placeholder="Ingrese Razon social">
-      <mat-error >
-
+      <input matInput placeholder="Ingrese Razon social" formControlName="business_name">
+      <mat-error *ngIf="isValidRequestForm()">
+        {{ getErrorMessageRequest() }}
       </mat-error>
     </mat-form-field>
 
@@ -35,8 +39,9 @@
     <div class="contentCount">
       <mat-form-field class="date-info">
         <mat-label>Cantidad</mat-label>
-        <input matInput placeholder="Ingrese Cantida de Item" type="number" formControlName="quantity">
-        <mat-error >
+        <input matInput placeholder="Ingrese Cantida de Item" type="number" min="1" formControlName="quantity">
+        <mat-error *ngIf="isValidQuantityForm()">
+          {{ getErrorMessageQuantity() }}
 
         </mat-error>
       </mat-form-field>

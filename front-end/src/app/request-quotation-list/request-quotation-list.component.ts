@@ -34,14 +34,16 @@ export class RequestQuotationListComponent implements OnInit {
   ngOnInit(): void {
     this.getListRequestQuote();
   }
-
+  navigateTo(path: String) {
+    this.router.navigate([path]);
+  }
   getListRequestQuote(){
     this.serviceRequestQuote.allRequestQuote().subscribe((date) => {
       return this.request_quotation = date
     })
   }
 
-  navigateTo(path: String ,id:any){
+  navigateToPage(path: String ,id:any){
     this.router.navigate([path,id]);
   }
 

@@ -64,4 +64,3 @@ export class ResponseQuote{
   res: any;
   message: any;
 }
-

@@ -3,9 +3,11 @@
 <!--header-->
 <div class="containerBody">
   <div class="containertop">
-    <h1><b>Lista Solicitud de Cotización</b></h1>
+    <h1><b>Solicitud de cotización</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/request-quotation')">Lista de Solicitudes</button>
+    </div>
   </div>
-
   <!--Tabla-->
   <div class="containerTable">
     <div class="newHeadTable">
@@ -113,7 +115,7 @@
                   *ngSwitchCase="statusRequest.process"
                   type="button"
                   class="btn btnAction"
-                  (click)="navigateTo('request-quotation-edit', request.id_request)"
+                  (click)="navigateToPage('request-quotation-edit', request.id_request)"
                   ngbPopover="Editar"
                 >
                   <img
@@ -127,7 +129,7 @@
                 <button
                   type="button"
                   class="btn btnAction"
-                  (click)="navigateTo('request-detail', request.id_request)"
+                  (click)="navigateToPage('request-detail', request.id_request)"
                   ngbPopover="Ver detalle"
                 >
                   <img

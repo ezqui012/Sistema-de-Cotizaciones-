@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { QuoteList } from '../Model/Quote';
+import { QuoteList } from '../Model/quoteModel';
 import { QuoteService } from '../services/quote.service';
 
 @Component({

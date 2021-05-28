@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DateExpenseItem, RequestItem } from '../Model/expenseItem';
 import { RequestQuoteService } from '../services/request.service';
 
@@ -17,21 +18,33 @@ export class RequestQuotationComponent implements OnInit {
    idItemEdit:any
    showEdit:boolean = false
    showAdd:boolean = true
-  private patternNumber = /^[0-9]+(\.?[0-9]+)?$/;
+   private patternNumber = /^[1-9]+(\.?[1-9]+)?$/;
   //private patternName = /^[a-zA-Z-z0-9-zñÑ\u00E0-\u00FC ]*$/
+  //private patternNumber = "^[1-9]+"
+  requestForm = this.fb.group({
+    id: ['3', [Validators.required]],
+    business_name: ['', [Validators.required, Validators.minLength(10),Validators.maxLength(100)]],
+  });
 
   registerForm = this.fb.group({
     id_item: ['', [Validators.required]],
-    quantity: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(this.patternNumber)]],
-    //type: ['Administrativa', [Validators.required]]
+    quantity: ['', [Validators.required,Validators.pattern(this.patternNumber)]],
   });
   constructor(
     public serviceRequestQuote: RequestQuoteService,
     private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+
+
   ) { }
 
   ngOnInit(): void {
     this.getAllItem();
+  }
+
+  navigateTo(path: String) {
+    this.router.navigate([path]);
   }
   getAllItem(){
     this.serviceRequestQuote.allItem().subscribe((item)=>{
@@ -40,8 +53,9 @@ export class RequestQuotationComponent implements OnInit {
   }
 
   addItemRequest(){
-    this.addItem(this.idItem)
-  }
+  //   //if(this.idItem == )
+   this.addItem(this.idItem)
+   }
   addItem(i:number){
    let itemRequest: RequestItem = new RequestItem;
   itemRequest.id_item = this.items[i].id_item;
@@ -88,5 +102,37 @@ export class RequestQuotationComponent implements OnInit {
 
     this.getListItemsShow();
 
+  }
+  //more funtion
+  isValidRequestForm(){
+    return ( this.requestForm.get('business_name')?.touched || this.requestForm.get('business_name')?.dirty) && !this.requestForm.get('business_name')?.valid;
+  }
+
+  getErrorMessageRequest(){
+    let message;
+    if(this.requestForm.get('business_name')?.errors?.required){
+      message = "El campo Razon social es obligatorio";
+    }else if(this.requestForm.get('business_name')?.hasError('minlength')){
+      message = "El campo Razon social requiere como mínimo 10 caracteres";
+    }else if(this.requestForm.get('business_name')?.hasError('mmaxlength')){
+      message = "El campo Razon social requiere como maximo 100 caracteres";
+    }
+    return message;
+  }
+
+  isValidQuantityForm(){
+    return ( this.registerForm.get('quantity')?.touched || this.registerForm.get('quantity')?.dirty) && !this.registerForm.get('quantity')?.valid;
+  }
+
+  getErrorMessageQuantity(){
+    let message;
+    if(this.registerForm.get('quantity')?.errors?.required){
+      message = "El campo Cantidad es obligatorio";
+    }else if(parseInt(this.registerForm.get('quantity')?.value) < 1){
+      message = 'La cantidad debe ser mayor a "0"';
+    }// }else if(this.requestForm.get('quantity')?.hasError('mmaxlength')){
+    //   message = "El campo Razon social requiere como maximo 100 caracteres";
+    // }
+    return message;
   }
 }

@@ -1,5 +1,5 @@
 import { QuoteProcessService } from './../services/quote-process.service';
-import { Quote } from './../Model/Quote';
+import { Quote } from './../Model/quoteModel';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
