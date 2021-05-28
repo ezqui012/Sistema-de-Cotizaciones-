@@ -47,6 +47,16 @@ export class RequestQuotationListComponent implements OnInit {
     this.router.navigate([path,id]);
   }
 
+  navigateToPageDetail(id:any, status:any){
+    if(status === 'Proceso'){
+      this.router.navigate(['/request-detail/'+id]);
+    }else if(status === 'Rechazado'){
+      this.router.navigate(['/info-request-rejected/'+id]);
+    }else if(status === 'Cotización'){
+      this.router.navigate(['/info-request-quote/'+id]);
+    }
+  }
+
   setStatus(status:string):void{
    this.status = status
   }

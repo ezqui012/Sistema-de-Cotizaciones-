@@ -211,3 +211,17 @@ color: white;
   float: right;
   margin-right: 3%;
 }
+
+.btn-list-z{
+  background-color: #003b72;
+  color: #ffffff;
+  margin-left: 7px;
+}
+
+.title-opt{
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: 0px;
+  color: #003b72;
+  font-weight: bolder;
+}
