@@ -50,6 +50,7 @@ import { NavUserComponent } from './nav-user/nav-user.component';
 import { HomeUserComponent } from './home-user/home-user.component';
 import { EditDetailQuotationComponent } from './edit-detail-quotation/edit-detail-quotation.component';
 import { RequestDetailRejectedComponent } from './request-detail-rejected/request-detail-rejected.component';
+import { RequestDetailQuoteComponent } from './request-detail-quote/request-detail-quote.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { RequestDetailRejectedComponent } from './request-detail-rejected/reques
     NavUserComponent,
     HomeUserComponent,
     EditDetailQuotationComponent,
-    RequestDetailRejectedComponent
+    RequestDetailRejectedComponent,
+    RequestDetailQuoteComponent
   ],
   imports: [
     BrowserModule,

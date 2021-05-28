@@ -39,6 +39,7 @@ import { AuthApproveGuard } from './guards/auth-approve.guard';
 import { AuthRequestGuard } from './guards/auth-request.guard';
 
 import { RequestDetailRejectedComponent } from './request-detail-rejected/request-detail-rejected.component';
+import { RequestDetailQuoteComponent } from './request-detail-quote/request-detail-quote.component';
 
 const routes: Routes = [
   {
@@ -184,6 +185,10 @@ const routes: Routes = [
   {
     path: 'info-request-rejected/:id',
     component: RequestDetailRejectedComponent
+  },
+  {
+    path: 'info-request-quote/:id',
+    component: RequestDetailQuoteComponent
   }
 
 ];
