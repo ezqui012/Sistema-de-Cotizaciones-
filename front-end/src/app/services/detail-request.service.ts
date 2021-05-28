@@ -98,8 +98,19 @@ export class DetailRequestService {
     //   const httpHeader = new HttpHeaders({
     //     'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
     //   });
-    //   return this.httpClient.get<ResponseQuotation>(`${environment.URI_API}reason-rejected-request/${id}`, { headers: httpHeader });
+    //   return this.httpClient.get<any>(`${environment.URI_API}reason-rejected-request/${id}`, { headers: httpHeader });
     // }
-    return this.httpClient.get<ResponseQuotation>(`${environment.URI_API}reason-rejected-request/${id}`);
+    return this.httpClient.get<any>(`${environment.URI_API}reason-rejected-request/${id}`);
+  }
+
+  getPersonalQuote(id: any): Observable<any>{
+    let failed: any;
+    // if (localStorage.getItem('quot-umss-tk')) {
+    //   const httpHeader = new HttpHeaders({
+    //     'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    //   });
+    //   return this.httpClient.get<any>(`${environment.URI_API}personal-quote-name/${id}`, { headers: httpHeader });
+    // }
+    return this.httpClient.get<any>(`${environment.URI_API}personal-quote-name/${id}`);
   }
 }

@@ -13,7 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class RequestDetailQuoteComponent implements OnInit {
 
-  personalQuote: string | any = 'yo cotizo esto';
+  personalQuote: string | any;
 
   business: string = '';
   dateRequest: any;
@@ -47,7 +47,7 @@ export class RequestDetailQuoteComponent implements OnInit {
         this.business = data.business_name;
         this.dateRequest = data.date;
         this.userName = data.name;
-        //
+        this.showPersonalQuote(this.route.snapshot.params.id);
         this.listItems(this.route.snapshot.params.id);
       },
       (error) => {
@@ -62,7 +62,16 @@ export class RequestDetailQuoteComponent implements OnInit {
   }
 
   showPersonalQuote(id: any){
-
+    this.service.getPersonalQuote(id).subscribe(
+      (data) => {
+        this.personalQuote = data.name;
+      },
+      (error) => {
+        console.log(error);
+        this.navigateTo('/request-quotation-list');
+        this.toastr.error('La solicitud no se encuentra en cotización');
+      }
+    );
   }
 
   listItems(id: any){
