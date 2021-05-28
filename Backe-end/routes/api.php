@@ -81,5 +81,5 @@ Route::get('get-facultyId/{id}', 'FacultyController@getIdFaculty');
 
 Route::get('get-numberQuotes/{id_quotation}/{id_item}', 'QuoteDetailController@numberQuotes');
 
-//
 Route::get('reason-rejected-request/{id}', 'RejectedController@getReason');
+Route::get('personal-quote-name/{id}', 'QuotationController@namePersonalQuote');
