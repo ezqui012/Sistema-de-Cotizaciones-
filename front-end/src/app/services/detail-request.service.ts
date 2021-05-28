@@ -91,4 +91,15 @@ export class DetailRequestService {
     // }
     return this.httpClient.post<ResponseQuotation>(`${environment.URI_API}quotation`, data);
   }
+
+  getReasonRejected(id: any): Observable<any>{
+    let failed: any;
+    // if (localStorage.getItem('quot-umss-tk')) {
+    //   const httpHeader = new HttpHeaders({
+    //     'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    //   });
+    //   return this.httpClient.get<ResponseQuotation>(`${environment.URI_API}reason-rejected-request/${id}`, { headers: httpHeader });
+    // }
+    return this.httpClient.get<ResponseQuotation>(`${environment.URI_API}reason-rejected-request/${id}`);
+  }
 }

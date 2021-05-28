@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DetailRequestService } from '../services/detail-request.service';
-import { ListItemsRequest, PersonalQuote } from '../Model/request-detail';
+import { ListItemsRequest } from '../Model/request-detail';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -23,7 +23,7 @@ export class RequestDetailRejectedComponent implements OnInit {
 
   totalCost: number = 0;
 
-  reason: string = 'nooo';
+  reason: string | any;
 
   actualAmount: number | any;
 
@@ -31,7 +31,7 @@ export class RequestDetailRejectedComponent implements OnInit {
     public toastr: ToastrService,
     private titlePage: Title,
     private route: ActivatedRoute,
-    private router:Router,
+    private router: Router,
     private service: DetailRequestService
   ) {
     this.titlePage.setTitle('Detalle de solicitud - QUOT-UMSS');
@@ -48,11 +48,29 @@ export class RequestDetailRejectedComponent implements OnInit {
         this.business = data.business_name;
         this.dateRequest = data.date;
         this.userName = data.name;
+        this.showReason(this.route.snapshot.params.id);
         this.listItems(this.route.snapshot.params.id);
       },
       (error) => {
         console.log(`Error: ${error}`);
         this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
+  }
+
+  navigateTo(path: String){
+    this.router.navigate([path]);
+  }
+
+  showReason(id: any){
+    this.service.getReasonRejected(id).subscribe(
+      (data) => {
+        this.reason = data.reason;
+      },
+      (error) => {
+        console.log(error);
+        this.navigateTo('/request-quotation-list');
+        this.toastr.error('La solicitud no se encuentra rechazada');
       }
     );
   }
