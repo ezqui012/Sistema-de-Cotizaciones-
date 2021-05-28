@@ -263,6 +263,8 @@ export class ComparativeQuotesComponent implements OnInit {
       }
     );
   }
+
+  //funcion de la comparacion pendiente*****************
   openModalAccept(content: any){
     if(this.actualAmount >= this.totalCost){
       //this.modal.open(content,{ windowClass:"colorModal"});

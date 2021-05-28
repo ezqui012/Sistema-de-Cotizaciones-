@@ -6,10 +6,10 @@
     <h1><b>Solicitud de cotización</b></h1>
     <div class="btnCreate">
       <button type="button" class="btn btn-one" (click)="navigateTo('/request-quotation-list')">Lista de Solicitudes</button>
-
     </div>
   </div>
   <div class="titleQoute" [formGroup]="requestForm">
+
     <mat-form-field class="date-info">
       <mat-label>Razon social</mat-label>
       <input matInput placeholder="Ingrese Razon social" formControlName="business_name">
@@ -21,20 +21,28 @@
   </div>
   <div class="contentFormItem" [formGroup]="registerForm">
     <div class="contentSelect">
-      <mat-form-field class="selectItem-full-width" id="select-item">
-        <mat-label>Seleccione Item</mat-label>
-        <mat-select formControlName="id_item" #mySelect (selectionChange)="setIdItem(mySelect.value)">
-          <mat-option *ngFor="let item of items; let i=index" [value]="i">
-            {{item.name_item}}
-          </mat-option>
-        </mat-select>
-        <mat-error>
+      <div *ngIf="enableSelect" class="contentSelected">
+        <mat-form-field class="selectItem-full-width" id="select-item">
+          <mat-label>Seleccione Item</mat-label>
+          <mat-select formControlName="index" #mySelect (selectionChange)="setIdItem(mySelect.value)">
+            <mat-option *ngFor="let item of items; let i=index" [value]="i">
+              {{item.name_item}}
+            </mat-option>
+          </mat-select>
+          <mat-error>
 
-        </mat-error>
-      </mat-form-field>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="!enableSelect" class="contentValueSelect">
+        <b style="color: #003b72; padding-left: 5%;">Item: </b>{{valueSelectItem}}
+      </div>
+
     </div>
     <div class="contentBtnPlus">
-      <button type="button" class="btn btnPlus"><img src="../../assets/icon-quote/plus.png" alt="" width="25" height="25"></button>
+      <button *ngIf="false" type="button" class="btn btnPlus"><img src="../../assets/icon-quote/plus.png" alt=""
+          width="25" height="25"></button>
     </div>
     <div class="contentCount">
       <mat-form-field class="date-info">
@@ -78,8 +86,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="row-itemRequest" *ngFor="let itemResquest of listItemsRequestShow; let i=index" >
-            <th scope="row">{{i+1}}</th>
+          <tr class="row-itemRequest" *ngFor="let itemResquest of listItemsRequestShow; let i=index">
+            <th scope="row" style="padding-top: 20px;">{{i+1}}</th>
             <td style="padding-top: 20px; padding-left: 5%; width:10%;">{{itemResquest.quantity}}</td>
             <td style="padding-top: 20px; width:10%;">{{itemResquest.unit_item}}</td>
             <td style="padding-top: 20px; width:35%;">{{itemResquest.name_item}}</td>
@@ -87,8 +95,18 @@
             <td style="padding-top: 20px; width:10%;">{{itemResquest.total_cost}}</td>
             <td style="width:25%;">
               <div class="row justify-content-end" style="padding-right: 10%;">
-                <button type="button" class="btn btnAction" (click)="editItem(i)"><img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25"></button>
-                <button type="button" class="btn btnAction" (click)="deleteItem(i)"><img src="../../assets/icon-quote/bin2.png" alt="" width="25" height="25"></button>
+                <button type="button" class="btn btnAction" (click)="editItem(i)" ngbPopover="Editar">
+                  <img
+                    src="../../assets/icon-quote/pencil.png"
+                    alt="" width="25" height="25"
+                    >
+                  </button>
+                <button type="button" class="btn btnAction" (click)="deleteItem(i)" ngbPopover="Eliminar">
+                  <img
+                    src="../../assets/icon-quote/bin2.png"
+                    alt="" width="25" height="25"
+                    >
+                  </button>
 
               </div>
             </td>
@@ -101,8 +119,8 @@
   </div>
   <div class="containerBtn">
     <div>
-      <button class="btn btn-cancel">Cancelar</button>
-      <button class="btn btn-register">Registrar</button>
+      <button class="btn btn-cancel" (click)="navigateTo('/request-quotation-list')">Cancelar</button>
+      <button class="btn btn-register" (click)="registerRequestQuotation()">Registrar</button>
     </div>
   </div>
 
