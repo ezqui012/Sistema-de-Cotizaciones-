@@ -6,13 +6,13 @@
   </div>
   <div class="bodyOption">
     <div class="contentOption">
-        <div class="option" *ngIf="showRequest">
+        <div class="option" *ngIf="showRequest" (click)="navigateTo('/request-quotation-list')">
           <img src="../../assets/img-user-home/Btn-Solicitud.svg"  class="optBtn">
         </div>
         <div class="option" *ngIf="showQuote" (click)="navigateTo('/quote-list')">
           <img src="../../assets/img-user-home/Btn-Cotizacion.svg"  class="optBtn">
         </div>
-        <div class="option" *ngIf="showAccept" >
+        <div class="option" *ngIf="showAccept" (click)="navigateTo('/list-quotes')">
           <img src="../../assets/img-user-home/Btn-Aprobar.svg" class="optBtn">
         </div>
     </div>
