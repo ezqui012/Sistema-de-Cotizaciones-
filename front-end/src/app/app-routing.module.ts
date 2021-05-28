@@ -15,7 +15,6 @@ import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { SchoolListComponent } from './school-list/school-list.component';
 import { SchoolCreateComponent } from './school-create/school-create.component';
 import { SchoolEditComponent } from './school-edit/school-edit.component';
-//import { PersonalUser } from './Model/personalUser';
 import { UserListComponent } from './user-list/user-list.component';
 
 import { AuthAdminGuard } from './guards/auth-admin.guard';
@@ -24,7 +23,6 @@ import { AdministrativasComponent } from './administrativas/administrativas.comp
 import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
-//import { EditarComponent } from './editar/editar.component';
 import { QuoteFormComponent } from './quote-form/quote-form.component'
 import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quotes.component';
 import { RequestQuotationComponent } from './request-quotation/request-quotation.component';
@@ -108,7 +106,8 @@ const routes: Routes = [
   },
   {
     path:'unit-list',
-    component: AdministrativasComponent
+    component: AdministrativasComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path:'list-quotes',
@@ -116,7 +115,8 @@ const routes: Routes = [
   },
   {
     path:'edit-user/:id',
-    component: EditUserComponent
+    component: EditUserComponent,
+    canActivate: [AuthAdminGuard]
   },
 
   {
@@ -125,7 +125,8 @@ const routes: Routes = [
   },
   {
     path: 'unit-edit/:id',
-    component: EditUnitComponent
+    component: EditUnitComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'quote-list-process/:business/:id',
