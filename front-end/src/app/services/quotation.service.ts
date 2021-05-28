@@ -37,4 +37,16 @@ export class QuotationService {
     return this.httpClient.get<any>(`${environment.URI_API}get-numberQuotes/${id_quotation}/${id_item}`);
   }
 
+  changeStatusQuotation(id: number, status: any):Observable<any>{
+    let failed: any;
+
+    if(localStorage.getItem('quot-umss-tk')){
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.put<any>(`${environment.URI_API}status-quotation-update/${id}`, status, {headers: httpHeader});
+    }
+    return failed;
+  }
+
 }

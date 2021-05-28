@@ -38,10 +38,6 @@ body{
   margin-right: 6%;
 }
 
-#input-large{
-  width: 93%;
-}
-
 .btn-one{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
@@ -110,6 +106,10 @@ body{
   margin-left: 3%;
   margin-right: 3%;
   margin-top: 1%;
+}
+
+#input-large{
+  width: 93%;
 }
 
 .containerBtn{

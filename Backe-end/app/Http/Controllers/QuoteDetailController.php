@@ -7,6 +7,7 @@ use App\QuoteDetail;
 use App\Http\Requests\CreateQuoteDetailRequest;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\UpdateQuotationDetailRequest;
 
 class QuoteDetailController extends Controller
 {
@@ -34,12 +35,32 @@ class QuoteDetailController extends Controller
 
     public function show($id)
     {
-        //
+        try{
+            $detail = QuoteDetail::where('id_qd', '=', $id)->first();
+            return $detail;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateQuotationDetailRequest $request, $id)
     {
-        //
+        try{
+            $input = $request->all();
+            DB::table('quote_detail')->where('id_qd', $id)->update($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'Successfully upgraded request detail'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function destroy($id)

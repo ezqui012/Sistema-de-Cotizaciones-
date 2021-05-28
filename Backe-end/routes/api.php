@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('updatePassword/{id}', 'UserController@updatePassword');
     Route::get('processQuote/{id}', 'QuoteController@getProcessQuote');
     Route::get('finalizedQuote/{id}', 'QuoteController@getFinalizedQuote');
+    Route::put('status-quotation-update/{id}','QuotationController@updateStatus');
 });
 
 Route::delete('processQuoteDelete/{id}', 'QuoteController@deleteProcessQuote');

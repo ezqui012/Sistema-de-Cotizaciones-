@@ -7,10 +7,13 @@
         <img src="../../assets/img/navbar/Frame.svg" height="60" alt="">
       </div>
       <div class="contentLink">
+        <div class="link" (click)="navigateTo('/home-user')">
+          <b>Inicio</b>
+        </div>
         <div class="link" *ngIf="showRequest">
           <b>Solicitud</b>
         </div>
-        <div class="link" *ngIf="showQuote">
+        <div class="link" *ngIf="showQuote" (click)="navigateTo('/quote-list')">
           <b>Cotización</b>
         </div>
         <div class="link" *ngIf="showAccept">
@@ -30,8 +33,9 @@
   <div class="menuContent" *ngIf="show">
 
     <div class="menuOption">
+      <li class="option" (click)="navigateTo('/home-user')">Inicio</li>
       <li class="option" *ngIf="showRequest">Solicitud</li>
-      <li class="option" *ngIf="showQuote">Cotización</li>
+      <li class="option" *ngIf="showQuote" (click)="navigateTo('/quote-list')">Cotización</li>
       <li class="option" *ngIf="showAccept">Aprobar cotización</li>
       <li class="option" (click)="logout()">Salir</li>
     </div>

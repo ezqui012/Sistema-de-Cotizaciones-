@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { QuotationService } from '../services/quotation.service';
 import { Title } from '@angular/platform-browser';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { ListAssignedQuotes } from '../Model/quotation';
 import { ToastrService } from 'ngx-toastr';
 
@@ -19,14 +19,12 @@ export class QuoteListComponent implements OnInit {
     private services:QuotationService,
     private router:Router,
     private titlePage: Title,
-    private route: ActivatedRoute,
     public toastr: ToastrService
   ) {
     this.titlePage.setTitle('Lista de cotizaciones asignadas - QUOT-UMSS')
   }
 
   ngOnInit(): void {
-    //pasar id del usuario
     this.getList(localStorage.getItem('quot-umss-usr'));
   }
 
@@ -52,6 +50,12 @@ export class QuoteListComponent implements OnInit {
 
   navigateTo(path: String){
     this.router.navigate([path]);
+  }
+
+  checkStatus(check: any){
+    let res: boolean;
+    (check === 'Proceso') ? res = true : res = false;
+    return res;
   }
 
 }
