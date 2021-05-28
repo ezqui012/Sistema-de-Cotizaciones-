@@ -38,6 +38,8 @@ import { AuthQuoteGuard } from './guards/auth-quote.guard';
 import { AuthApproveGuard } from './guards/auth-approve.guard';
 import { AuthRequestGuard } from './guards/auth-request.guard';
 
+import { RequestDetailRejectedComponent } from './request-detail-rejected/request-detail-rejected.component';
+
 const routes: Routes = [
   {
     path:'',
@@ -178,6 +180,10 @@ const routes: Routes = [
     path: 'edit-detail-quotation/:id/:idqd',
     component: EditDetailQuotationComponent,
     canActivate: [AuthQuoteGuard]
+  },
+  {
+    path: 'info-request-rejected/:id',
+    component: RequestDetailRejectedComponent
   }
 
 ];

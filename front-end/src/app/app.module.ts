@@ -49,6 +49,7 @@ import { QuoteListComponent } from './quote-list/quote-list.component';
 import { NavUserComponent } from './nav-user/nav-user.component';
 import { HomeUserComponent } from './home-user/home-user.component';
 import { EditDetailQuotationComponent } from './edit-detail-quotation/edit-detail-quotation.component';
+import { RequestDetailRejectedComponent } from './request-detail-rejected/request-detail-rejected.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { EditDetailQuotationComponent } from './edit-detail-quotation/edit-detai
     QuoteListComponent,
     NavUserComponent,
     HomeUserComponent,
-    EditDetailQuotationComponent
+    EditDetailQuotationComponent,
+    RequestDetailRejectedComponent
   ],
   imports: [
     BrowserModule,
