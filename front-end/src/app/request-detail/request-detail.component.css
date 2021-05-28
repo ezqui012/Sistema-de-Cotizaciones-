@@ -22,7 +22,7 @@ display: block;
   padding: 5px;
 }
 .nameRequest{
-  width: 88%;
+  width: 85%;
 }
 .nameAttedant{
   width: 100%;
@@ -164,7 +164,6 @@ color: white;
   display: flex;
   padding: 5px;
 }
-
 .contentSelect{
   width: 40%;
   padding-right: 10px;
@@ -178,7 +177,6 @@ color: white;
   width: 100%;
   font-size: 1rem;
   padding-top: 10px;
-
 }
 
 .contentButton{

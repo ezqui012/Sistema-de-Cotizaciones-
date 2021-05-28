@@ -85,7 +85,7 @@ class UnitController extends Controller
         }
     }
     public function getUnit(){
-        $unities = DB::table('units')->select('id_unit','name_unit')->get();
+        $unities = DB::table('units')->select('id_unit','name_unit')->where('name_unit', '<>', 'Administrador de sistema')->get();
         return $unities;
     }
 
@@ -125,5 +125,20 @@ class UnitController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAmount($id){
+        try{
+            $amountUnit = DB::table('units')->select('amount')
+                                            ->where('id_unit', '=', $id)
+                                            ->get();
+            return json_decode($amountUnit, true)[0];
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+
     }
 }

@@ -18,3 +18,7 @@ body{
 .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
   opacity: 0 !important;
 }
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+  z-index: 99999 !important;
+}

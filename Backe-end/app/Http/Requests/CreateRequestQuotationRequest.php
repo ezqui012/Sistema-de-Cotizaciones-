@@ -25,7 +25,7 @@ class CreateRequestQuotationRequest extends FormRequest
     {
         return [
             'id'=>'required',
-            'business_name'=>'required|max:100'
+            'business_name'=>'required|max:100|min:10'
         ];
     }
 }

@@ -15,7 +15,6 @@ import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { SchoolListComponent } from './school-list/school-list.component';
 import { SchoolCreateComponent } from './school-create/school-create.component';
 import { SchoolEditComponent } from './school-edit/school-edit.component';
-import { PersonalUser } from './Model/personalUser';
 import { UserListComponent } from './user-list/user-list.component';
 
 import { AuthAdminGuard } from './guards/auth-admin.guard';
@@ -24,13 +23,20 @@ import { AdministrativasComponent } from './administrativas/administrativas.comp
 import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
-//import { EditarComponent } from './editar/editar.component';
 import { QuoteFormComponent } from './quote-form/quote-form.component'
 import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quotes.component';
 import { RequestQuotationComponent } from './request-quotation/request-quotation.component';
 import { RequestQuotationListComponent } from './request-quotation-list/request-quotation-list.component';
 import { RequestQuotationEditComponent } from './request-quotation-edit/request-quotation-edit.component';
 import { RequestDetailComponent } from './request-detail/request-detail.component';
+import { QuoteListComponent } from './quote-list/quote-list.component';
+import { HomeUserComponent } from './home-user/home-user.component';
+import { EditDetailQuotationComponent } from './edit-detail-quotation/edit-detail-quotation.component';
+
+import { AuthHomeUserGuard } from './guards/auth-home-user.guard';
+import { AuthQuoteGuard } from './guards/auth-quote.guard';
+import { AuthApproveGuard } from './guards/auth-approve.guard';
+import { AuthRequestGuard } from './guards/auth-request.guard';
 
 const routes: Routes = [
   {
@@ -105,7 +111,8 @@ const routes: Routes = [
   },
   {
     path:'unit-list',
-    component: AdministrativasComponent
+    component: AdministrativasComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path:'list-quotes',
@@ -113,28 +120,33 @@ const routes: Routes = [
   },
   {
     path:'edit-user/:id',
-    component: EditUserComponent
+    component: EditUserComponent,
+    canActivate: [AuthAdminGuard]
   },
 
   {
-    path: 'comparative-quotes',
+    path: 'comparative-quotes/:idR/:idQ/:entrusted',
     component: ComparativeQuotesComponent
   },
   {
     path: 'unit-edit/:id',
-    component: EditUnitComponent
+    component: EditUnitComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
-    path: 'quote-list-process',
-    component: QuoteListProcessComponent
+    path: 'quote-list-process/:business/:id',
+    component: QuoteListProcessComponent,
+    canActivate: [AuthQuoteGuard]
   },
   {
-    path: 'quote-list-finalized',
-    component: QuoteListFinalizedComponent
+    path: 'quote-list-finalized/:business/:id',
+    component: QuoteListFinalizedComponent,
+    canActivate: [AuthQuoteGuard]
   },
   {
     path: 'quote-form/:id',
-    component: QuoteFormComponent
+    component: QuoteFormComponent,
+    canActivate: [AuthQuoteGuard]
   },
   {
     path: 'request-quotation',
@@ -145,14 +157,28 @@ const routes: Routes = [
     component: RequestQuotationListComponent
   },
   {
-    path: 'request-quotation-edit',
+    path: 'request-quotation-edit/:id',
     component: RequestQuotationEditComponent
   },
   {
-    path: 'request-detail',
+    path: 'request-detail/:id',
     component: RequestDetailComponent
+  },
+  {
+    path: 'quote-list',
+    component: QuoteListComponent,
+    canActivate: [AuthQuoteGuard]
+  },
+  {
+    path: 'home-user',
+    component: HomeUserComponent,
+    canActivate: [AuthHomeUserGuard]
+  },
+  {
+    path: 'edit-detail-quotation/:id/:idqd',
+    component: EditDetailQuotationComponent,
+    canActivate: [AuthQuoteGuard]
   }
-
 
 ];
 

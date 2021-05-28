@@ -1,80 +1,195 @@
-body{
-    background-color: #F0F0F8;
-  }
-.containerBody{
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 20px;
-  }
-  .nameQuotes-full-width, .selectItem-full-width{
-    width: 25%;
-  }
-  #select-Item{
-    margin-left: 38% !important;
-    width: 25%;
-  }
-.containerTop{
-    color: #003b72;
+body {
+  background-color: #f0f0f8;
+}
+.containerBody {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 20px;
+}
+.selectItem-full-width {
+  width: 100%;
 }
 
-.btn-choose{
-    color: white;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
-    background-color:#003b72;
-    width: 80px;
+.containerTop {
+  color: #003b72;
+}
+.contentQuoteDate {
+  display: flex;
+  /* background-color: green; */
+  align-items: center;
+}
+.contentQuote {
+  width: 70%;
+  /* background-color: orange; */
+}
+.contentSelect {
+  width: 30%;
+  /* background-color: #2f82ff; */
+}
+.btn-edit {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color: #003b72;
+  font-size: 0.8rem;
+  width: 80px;
+}
+.btn:hover {
+  background-color: #2f82ff !important;
+  color: white;
+}
+
+.headTable {
+  background-color: #003b72;
+  color: white;
+  display: none;
+}
+
+.newBodyTable {
+  color: #0000;
+  background-color: #fafafa;
+  overflow-y: auto;
+  padding-left: 0.2%;
+  padding-right: 0.2%;
+  height: 300px;
+}
+
+.newHeadTable {
+  background-color: #003b72;
+  color: white;
+  font-size: 0.8rem;
+  display: flex;
+  padding: 12px;
+  width: 100%;
+}
+.numHeadC {
+  width: 3.5%;
+}
+.canHeadC {
+  width: 6%;
+}
+.uniHeadC {
+  width: 8%;
+}
+.detHeadC {
+  width: 27%;
+}
+.empHeadC {
+  width: 25%;
+}
+.perHeadC {
+  width: 7.5%;
+}
+.unitHeadC {
+  width: 8%;
+}
+.totHeadC {
+  width: 8%;
+}
+.containerBtn{
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.btn-reject {
+  color: white;
+  background-color: #DD3333;
+  margin-right: 20px;
+  width: 120px;
+}
+.btn-reject:hover{
+  background-color:#f04b4b !important;
+  color: white;
   }
-  .btn:hover{
-    background-color:#2f82ff !important;
-    color: white;
-    }
+.btn-register{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 120px;
+}
+.btn-registe:hover{
+  background-color:#2f82ff !important;
+  color: white;
+  }
 
-    .headTable{
-        background-color: #003b72;
-        color: white;
-        display: none;
-      }
-      
-      .newBodyTable{
-        color:#0000 ;
-        background-color: #fafafa;
-        overflow-y: auto;
-        padding-left: 0.2%;
-        padding-right: 0.2%;
-        height: 420px;
-      }
+/*estilos Modal*/
+.contentModal{
+  background-color: #F0F0F8 !important;
+}
+.modal-title{
+  color: #003b72 !important;
+ }
+.colorModal .modal-content{
+  color: #003b72;
+  background-color: #F0F0F8 !important;
+}
+.btn-cancelar{
+  color: white;
+  background-color: #1C2331 !important;
+  margin-right: 10px;
+  width: 100px;
+}
+.btn-cancelar:hover{
+  background-color: #253049 !important;
+}
+.contentMotive{
+  width: 100%;
+  text-align: center;
+}
+.btn-ok:hover{
+  background-color: #DD3333 !important;
+}
+.btn-ok{
+  color: white;
+  background-color:#a72020 !important;
+  /* margin-right: 20px; */
+  width: 100px;
+}
+.containerBtn{
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.btn-reporte{
+  color: white;
+  background-color:#003b72;
+  /* margin-right: 20px; */
+  width: 100px;
+}
 
-      .newHeadTable{
-        background-color: #003b72;
-        color: white;
-        font-size: 1rem;
-        display: flex;
-        padding: 12px;
-        width: 100%;
-      }
-      .numHeadC{
-        width: 6%;
-      }
-      .canHeadC{
-        width: 14%;
-      }
-      .uniHeadC{
-        width: 17%;
-      }
-      .detHeadC{
-        width: 11%;
-      }
-      .empHeadC{
-        width: 12%;
-      }
-      .perHeadC{
-        width: 12%;
-      }
-      .unitHeadC{
-        width: 12%;
-      }
-      .totHeadC{
-        width: 9%;
-      }
+.date-info{
+  width: 90%;
+  font-size: 1rem;
+}
 
-      
-      
+/* more styles */
+.btn-one{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 200px;
+  margin-left: 20px;
+}
+.containertop{
+  display: flex;
+  box-sizing: border-box;
+  /* margin-bottom: 10px; */
+  color: #003b72;
+  font-weight: bolder;
+}
+.contentInfo{
+  font-size: 1rem;
+  display: block;
+  }
+  .infoHead{
+    display: flex;
+    padding: 5px;
+  }
+  .nameRequest{
+    width: 85%;
+  }
+  .nameAttedant{
+    width: 100%;
+    padding: 5px;
+
+  }

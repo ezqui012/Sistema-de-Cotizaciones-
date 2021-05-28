@@ -3,58 +3,34 @@
 <!--header-->
 <div class="containerBody">
     <div class="containerTop">
-        <h1><b>Lista de Cotizaciones Realizadas</b></h1>
+        <h1><b>Lista de cotizaciones realizadas</b></h1>
     </div>
-
-    <br>
-    <br>
-
     <!--Tabla de lista de cotizaciones realizadas-->
     <div class="conteinerTable">
         <div class="newHeadTable">
             <div class="numHeadC"><b>Nº</b></div>
             <div class="razHeadC"><b>Razon social</b></div>
-            <div class="encHeadC"><b>Encargado de Cotizacion</b></div>
+            <div class="encHeadC"><b>Encargado de cotizacion</b></div>
             <div class="accHead"><b>Acciones</b></div>
         </div>
         <div class="newBodyTable">
-            <table class="table table-hover table-striped">
+            <table class="table table-hover">
                 <thead class="headTable">
                     <tr>
                         <th scope="col">N°</th>
                         <th scope="col">Razon social</th>
-                        <th scope="col">Encargado de Cotizacion</th>
+                        <th scope="col">Encargado de cotizacion</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td style="padding-left: 27%;">Otto</td>
-                        <td>
-                        <div class="row justify-content-end" style="padding-right: 20%;">
-                            <button type="button" class="btn btn-choose" (click)="navigateTo('/comparative-quotes')">Elegir</button>
-                        </div>    
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td style="padding-left: 27%;">Thornton</td>
-                        <td>
-                        <div class="row justify-content-end" style="padding-right: 20%;">
-                        <button type="button" class="btn btn-choose" (click)="navigateTo('/comparative-quotes')">Elegir</button>
-                        </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td style="padding-left: 27%;">the Bird</td>
-                        <td>
-                        <div class="row justify-content-end" style="padding-right: 20%;">
-                        <button type="button" class="btn btn-choose" (click)="navigateTo('/comparative-quotes')">Elegir</button>
+                    <tr class="rowQoute" *ngFor=" let quote of quotes; let i = index">
+                        <th scope="row" style="padding-top: 20px">{{i+1}}</th>
+                        <td style="width: 55%; padding-left: 3%; padding-top: 20px;">{{quote.business_name}}</td>
+                        <td style="width: 35%; padding-top: 20px">{{quote.name}}</td>
+                        <td style="width: 10%;">
+                        <div class="row justify-content-end" style="padding-right: 5%;">
+                            <button type="button" class="btn btn-choose" (click)="navigateTo('/comparative-quotes', quote.id_request, quote.id_quotation, quote.name)">Comparar Cotizaciones</button>
                         </div>
                         </td>
                     </tr>

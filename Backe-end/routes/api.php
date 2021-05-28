@@ -33,27 +33,50 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('registerUser', 'UserController@addData');
     Route::post('email','UserController@getEmail');
     Route::post('ci', 'UserController@getCi');
-    Route::ApiResource('assignedPermit', 'AssignedPermitController');
     Route::get('list','UnitController@getUnitList');
+    Route::ApiResource('roles','RolesController');
+    Route:: get('listId/{id}','UnitController@getUnitSelect');
+    Route:: get('roleId/{id}','RolesController@getRoleSelect');
+    Route:: get('quoteItem/{id}','QuoteController@getItem');
+    Route::ApiResource('quote', 'QuoteController');
+    Route::get('list-personal/{id}', 'UserController@getListPersonalQuote');
     Route::get('user/{id}', 'UserController@getUserById');
     Route::put('updateUser/{id}', 'UserController@updateUser');
     Route::put('updatePassword/{id}', 'UserController@updatePassword');
     Route::get('processQuote/{id}', 'QuoteController@getProcessQuote');
     Route::get('finalizedQuote/{id}', 'QuoteController@getFinalizedQuote');
-
+    Route::put('status-quotation-update/{id}','QuotationController@updateStatus');
 });
+
 Route::delete('processQuoteDelete/{id}', 'QuoteController@deleteProcessQuote');
 
 
 Route::apiResource('enterprise', 'EnterpriseController');
-Route:: get('items-rq/{id}','ExpenseItemController@getItemRequest');
-Route:: get('quot-infoStatus/{id}','QuotationController@getInfo');
+Route::get('items-rq/{id}','ExpenseItemController@getItemRequest');
+Route::get('quot-infoStatus/{id}','QuotationController@getInfo');
 Route::apiResource('insertQuote', 'QuoteDetailController');
 
 /* Controladores historia Creacion de solicitud de compra */
 //lista de solicitudes
-Route:: get('list-request','RequestQuotationController@listRequestQuot');
+Route::get('list-request','RequestQuotationController@listRequestQuot');
 Route::apiResource('request-quotation', 'RequestQuotationController');
 Route::get('items-request/{id}', 'RequestDetailsController@detailItem');
 Route::apiResource('detail-request', 'RequestDetailsController');
 Route::apiResource('expense-item', 'ExpenseItemController');
+Route::get('request','RequestQuotationController@getListRequest');
+//metodos de ddetalle
+Route:: get('itemQuotes/{idQuote}/{idItem}','QuoteController@getItemQuotes');
+Route:: put('updateStatusQ/{id}/{status}','QuoteController@updateStatusQuote'); //mi api
+Route:: put('updateStatusR/{id}/{status}','QuoteController@updateStatusRequestQuote'); //mi api
+Route::put('update-status/{id_request}','RequestQuotationController@changeStatus');
+Route::apiResource('rejected', 'RejectedController');
+Route::get('unit-amount/{id}', 'UnitController@getAmount');
+
+
+/* lista de cotizaciones asignadas a un usuario */
+Route::get('quot-assigned/{id}','QuotationController@getListQuoteUser');
+Route::apiResource('quotation','QuotationController');
+/* ID de facultad */
+Route::get('get-facultyId/{id}', 'FacultyController@getIdFaculty');
+
+Route::get('get-numberQuotes/{id_quotation}/{id_item}', 'QuoteDetailController@numberQuotes');

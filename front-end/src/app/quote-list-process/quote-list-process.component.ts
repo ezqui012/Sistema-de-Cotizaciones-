@@ -1,16 +1,19 @@
 import { QuoteProcessService } from './../services/quote-process.service';
-import { Quote } from './../Model/Quote';
-import { Component, OnInit } from '@angular/core';
+import { Quote } from './../Model/quoteModel';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PersonalUser } from '../Model/personalUser';
 import { PersonalUserService } from '../services/PersonalUser.service';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-quote-list-process',
   templateUrl: './quote-list-process.component.html',
-  styleUrls: ['./quote-list-process.component.css']
+  styleUrls: ['./quote-list-process.component.css'],
+  encapsulation: ViewEncapsulation.Emulated
 })
+
 export class QuoteListProcessComponent implements OnInit {
 
   quotes: Array<Quote>=[];
@@ -21,20 +24,25 @@ export class QuoteListProcessComponent implements OnInit {
   reason: any;
   total: any;
   id_rq: any;
-  quoteId=6;
+  quoteId: any;
   pos = 0;
   chkAproveSol:boolean = false;
+
   constructor(
     private modal: NgbModal,
     private router: Router,
     public _personalUserService: PersonalUserService,
     private titlePage: Title,
-    public quoteProcessService:QuoteProcessService
+    public quoteProcessService:QuoteProcessService,
+    private route: ActivatedRoute,
+    public toastr: ToastrService
   ) {
-    this.titlePage.setTitle('Lista de usuarios - QUOT-UMSS');
+    this.titlePage.setTitle('Detalle de cotización - QUOT-UMSS');
   }
 
   ngOnInit(): void {
+    this.business = this.route.snapshot.params.business;
+    this.quoteId = this.route.snapshot.params.id;
     this.getQuoteProcess();
 
   }
@@ -43,7 +51,6 @@ export class QuoteListProcessComponent implements OnInit {
   }
   navigateToEdit(path: String){
     this.router.navigate([path]);
-    console.log(path)
   }
 
   getTotalQuote(){
@@ -52,21 +59,15 @@ export class QuoteListProcessComponent implements OnInit {
 
   getQuoteProcess(){
     this.quoteProcessService.getQuoteProcess(this.quoteId).subscribe((res)=>{
-    this.quotes = res
-    this.business =this.quotes[0].business_name
-    this.id_rq = this.quotes[0].id_request
-
-    console.log(this.quotes[0].id_qd);
-
+      this.quotes = res;
     })
   }
+
   deleteQuoteProcess(id:any){
     this.quoteProcessService.deleteProcess(id).subscribe(data=>{
       console.log(id)
       this.getQuoteProcess();
     })
   }
-
-
 
 }

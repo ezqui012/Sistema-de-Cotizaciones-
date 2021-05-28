@@ -81,4 +81,20 @@ class FacultyController extends Controller
     {
         //
     }
+
+    public function getIdFaculty($id){
+        try{
+            $res = DB::table('faculties')
+                        ->join('units', 'faculties.id_faculty', '=',  'units.id_faculty')
+                        ->select('faculties.id_faculty')
+                        ->where('units.id_unit', '=', $id)
+                        ->get();
+            return json_decode($res, true)[0];
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
 }

@@ -15,7 +15,7 @@ export class AuthAdminGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(localStorage.getItem('quot-umss-tk') && localStorage.getItem('quot-umss-p')){
+      if(localStorage.getItem('quot-umss-tk') && localStorage.getItem('quot-umss-p') === '1'){
       return true;
     }else{
       this.router.navigate(['/login']);

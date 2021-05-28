@@ -58,12 +58,10 @@ export class RolesListComponent implements OnInit {
     this.router.navigate([path,id]);
   }
   openModal(content: any, pos: any, idRole: any) {
-
     this.permits = [];
     this.modal.open(content, { windowClass: "colorModal" });
     this.pos = pos;
     this.getPermits(idRole);
-
   }
 
 

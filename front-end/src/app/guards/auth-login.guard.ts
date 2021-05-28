@@ -18,14 +18,15 @@ export class AuthLoginGuard implements CanActivate {
 
     if(!localStorage.getItem('quot-umss-tk')){
       return true;
-    }else if(localStorage.getItem('quot-umss-tk') && localStorage.getItem('quot-umss-p')){
+    }else if(localStorage.getItem('quot-umss-tk') && localStorage.getItem('quot-umss-p') === '1'){
       this.router.navigate(['']);
       return false;
-    }else{
-      //aqui los otros usuarios
-      //this.router.navigate(['/login']);
+    }else if(localStorage.getItem('quot-umss-tk') && localStorage.getItem('quot-umss-p') !== '1'){
+      this.router.navigate(['/home-user']);
       return false;
     }
+
+    return false;
 
   }
 

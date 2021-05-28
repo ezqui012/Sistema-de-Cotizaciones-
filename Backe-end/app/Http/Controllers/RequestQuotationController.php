@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Support\Carbon;
 use App\Http\Requests\CreateRequestQuotationRequest;
 use App\RequestQuotation;
+use App\Http\Requests\UpdateRequestQuotationRequest;
 
 
 class RequestQuotationController extends Controller
@@ -56,9 +57,21 @@ class RequestQuotationController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateRequestQuotationRequest $request, $id)
     {
-        //
+        try{
+            $data = $request->all();
+            DB::table('request_quotation')->where('id_request', '=', $id)->update($data);
+            return response()->json([
+                'res' => true,
+                'message' => 'Update business name'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function destroy($id)
@@ -75,6 +88,38 @@ class RequestQuotationController extends Controller
                         ->orderBy('request_quotation.business_name')
                         ->get();
             return $list;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
+    public function getListRequest()
+    {
+        try{
+
+            $personals = DB::select('SELECT rq.id_request, rq.business_name, u.name, rq.status
+            FROM request_quotation rq, users u
+            WHERE rq.id = u.id
+            ORDER BY rq.date DESC');
+
+            return $personals;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
+    public function changeStatus(Request $request, $id_request){
+        try{
+            $data = $request->all();
+            DB::table('request_quotation')->where('id_request', $id_request)->update($data);
+            return response()->json([
+                'res' => true,
+                'message' => 'Update status'
+            ], 200);
         }catch(Exception $ex){
             return response()->json([
                 'res' => false,
