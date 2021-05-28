@@ -60,7 +60,7 @@
       <div class="inputs-f1">
         <mat-form-field class="form-camp-full-width">
           <mat-label>Fecha</mat-label>
-          <input matInput [matDatepicker]="picker" placeholder="Ingrese fecha de cotización" [formControl]="dateControl">
+          <input matInput [matDatepicker]="picker" placeholder="Ingrese fecha de cotización" [formControl]="dateControl" readonly>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           <mat-error *ngIf="isValidDate()">

@@ -33,6 +33,9 @@ import { QuoteListComponent } from './quote-list/quote-list.component';
 import { HomeUserComponent } from './home-user/home-user.component';
 import { EditDetailQuotationComponent } from './edit-detail-quotation/edit-detail-quotation.component';
 
+import { AuthHomeUserGuard } from './guards/auth-home-user.guard';
+import { AuthQuoteGuard } from './guards/auth-quote.guard';
+
 const routes: Routes = [
   {
     path:'',
@@ -130,15 +133,18 @@ const routes: Routes = [
   },
   {
     path: 'quote-list-process/:business/:id',
-    component: QuoteListProcessComponent
+    component: QuoteListProcessComponent,
+    canActivate: [AuthQuoteGuard]
   },
   {
     path: 'quote-list-finalized/:business/:id',
-    component: QuoteListFinalizedComponent
+    component: QuoteListFinalizedComponent,
+    canActivate: [AuthQuoteGuard]
   },
   {
     path: 'quote-form/:id',
-    component: QuoteFormComponent
+    component: QuoteFormComponent,
+    canActivate: [AuthQuoteGuard]
   },
   {
     path: 'request-quotation',
@@ -158,15 +164,18 @@ const routes: Routes = [
   },
   {
     path: 'quote-list',
-    component: QuoteListComponent
+    component: QuoteListComponent,
+    canActivate: [AuthQuoteGuard]
   },
   {
     path: 'home-user',
-    component: HomeUserComponent
+    component: HomeUserComponent,
+    canActivate: [AuthHomeUserGuard]
   },
   {
     path: 'edit-detail-quotation/:id/:idqd',
-    component: EditDetailQuotationComponent
+    component: EditDetailQuotationComponent,
+    canActivate: [AuthQuoteGuard]
   }
 
 ];
