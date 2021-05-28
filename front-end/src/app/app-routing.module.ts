@@ -35,6 +35,8 @@ import { EditDetailQuotationComponent } from './edit-detail-quotation/edit-detai
 
 import { AuthHomeUserGuard } from './guards/auth-home-user.guard';
 import { AuthQuoteGuard } from './guards/auth-quote.guard';
+import { AuthApproveGuard } from './guards/auth-approve.guard';
+import { AuthRequestGuard } from './guards/auth-request.guard';
 
 const routes: Routes = [
   {
