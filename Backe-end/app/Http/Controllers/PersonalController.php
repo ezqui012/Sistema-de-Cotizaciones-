@@ -24,6 +24,7 @@ class PersonalController extends Controller
             FROM roles r, units un, users us
             WHERE us.id_role = r.id_role
             AND us.id_unit = un.id_unit
+            AND us.id_role <> 1
             ORDER BY us.name');
 
             return $personals;
