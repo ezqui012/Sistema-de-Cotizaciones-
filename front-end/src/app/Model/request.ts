@@ -15,7 +15,8 @@ export class ItemRequest{
   quantity: any;
   total_cost: any;
 }
-export class RegisterRequest{
+export class RegisterRequestResponse{
   res: any;
   message: any;
+  id: any;
 }

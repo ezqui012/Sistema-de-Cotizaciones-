@@ -44,8 +44,10 @@ export class EditUserComponent implements OnInit {
     id_unit: ['', [Validators.required]],
     name: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(15),
     ]],
-    phone: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(7),Validators.pattern('^-?[0-9 ]\\d*(\\.\\d{1,2})?$')]],
-    ci: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(7), Validators.pattern('^-?[0-9 ]\\d*(\\.\\d{1,2})?$')]],
+    phone: ['', [Validators.required, Validators.maxLength(8),
+                 Validators.minLength(7), Validators.pattern('^[0-9]*$')]],
+    ci: ['', [Validators.required, Validators.maxLength(9),
+              Validators.minLength(7), Validators.pattern('[0-9]*')]],
     address: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(30)]],
     email: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(8), Validators.pattern(/\S+@\S+\.\S+/)]],
     pass1: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(32), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]],
@@ -152,9 +154,9 @@ export class EditUserComponent implements OnInit {
       message = `El campo ${field} es obligatorio`;
     } else if (this.updateForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 7 dígitos";
-    } else if (this.updateForm.get(field)?.hasError('maxlength')) {
-      message = "Máximo de 9 dígitos";
-    } else if(this.updateForm.get(field)?.hasError('pattern')){
+    }else if (this.updateForm.get(field)?.hasError('maxlength')) {
+      message = "Máximo 9 dígitos";
+    }else if(this.updateForm.get(field)?.hasError('pattern')){
       message = "El campo solo admite dígitos"
     }
     return message;
@@ -195,6 +197,7 @@ export class EditUserComponent implements OnInit {
       this.dataToUpdate = res;
       //console.log(this.dataToUpdate);
       this.RegisterUser = this.dataToUpdate;
+     // this.updateForm.controls['ci'].setValue(this.RegisterUser.ci);
       this.updateForm.controls['id_role'].setValue(this.RegisterUser.id_role);
       this.updateForm.controls['id_unit'].setValue(this.RegisterUser.id_unit);
       this.upPassword = this.dataToUpdate;
@@ -206,16 +209,28 @@ export class EditUserComponent implements OnInit {
   updateDataUser(){
     this.updateService.updateData(this.id, this.RegisterUser).subscribe(res=>{
       this.showToastSuccess();
-    },
-    (error:any)=>{
-       let message= error;
-        if(message.error.errors.email[0]){
-          this.toastr.error(message.error.errors.email[0]);
-        }
-        if(message.error.errors.ci[0]){
+      },
+      (error: any)=>{
+         let message= error;
+         this.repitData(message);
+      }
+
+      );
+
+  }
+  repitData(message: any){
+    try {
+      if(message.error.errors.email[0]){
+        this.toastr.error(message.error.errors.email[0]);
+      }
+      if(message.error.errors.ci[0]){
+        this.toastr.error(message.error.errors.ci[0]);
+      }
+    } catch (error) {
+      if(message.error.errors.ci[0]){
           this.toastr.error(message.error.errors.ci[0]);
         }
-    });
+    }
   }
   insertData() {
     this.getEmail();
@@ -245,9 +260,10 @@ export class EditUserComponent implements OnInit {
             this.showToastSuccess();
           })
       }else{
+        this.showToastrErrorCi();
       }
     }else{
-
+      this.showToastrErrorEmail();
     }
 
   }
@@ -292,9 +308,17 @@ export class EditUserComponent implements OnInit {
     if (!pattern.test(event.target.value)) {
       event.target.value = event.target.value.replace(/[^a-zA-Z ]/g, '');
       // invalid character, prevent input
-
     }
   }
+  public inputValidatorCi(event: any){
+    const pattern = /^[0-9]\d*$/;
+    // let inputChar = String.fromCharCode(event.charCode)
+    if (!pattern.test(event.target.value)) {
+      event.target.value = event.target.value.replace(/^[0-9]\d*$/);
+      // invalid character, prevent input
+    }
+  }
+
 
   getErrorMessagePassword(field: string) {
     let message;
@@ -344,6 +368,14 @@ export class EditUserComponent implements OnInit {
     return message;
   }
 
+onlyNumber(evt: any) {
+  evt = (evt) ? evt : window.event;
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+  }
+  return true;
+}
 
 
 

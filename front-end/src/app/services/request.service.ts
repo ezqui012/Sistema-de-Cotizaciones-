@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { RegisterRequest, RequestList, RequestQuotation } from '../Model/request';
+import { RegisterRequestResponse, RequestList, RequestQuotation,ItemRequest } from '../Model/request';
 import { DateExpenseItem } from '../Model/expenseItem';
-import { ItemRequest } from '../Model/expense-item';
+//import { ItemRequest } from '../Model/expense-item';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,7 @@ allItem(): Observable<DateExpenseItem | any> {
   }
   return failed;
 }
-registerRequestQuotation(request: RequestQuotation):Observable<RegisterRequest | any>{
+registerRequestQuotation(request: RequestQuotation):Observable<RegisterRequestResponse | any>{
   let failed: any;
 
   if(localStorage.getItem('quot-umss-tk')){
@@ -41,11 +41,11 @@ registerRequestQuotation(request: RequestQuotation):Observable<RegisterRequest |
       'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
     });
 
-    return this.httpClient.post<RegisterRequest>(`${environment.URI_API}request-quotation`, request, {headers: httpHeader});
+    return this.httpClient.post<RegisterRequestResponse>(`${environment.URI_API}request-quotation`, request, {headers: httpHeader});
   }
   return failed;
 }
-registerItemRequestQuotation(requestItem: ItemRequest):Observable<RegisterRequest | any>{
+registerItemRequestQuotation(requestItem: ItemRequest):Observable<RegisterRequestResponse | any>{
   let failed: any;
 
   if(localStorage.getItem('quot-umss-tk')){
@@ -53,7 +53,7 @@ registerItemRequestQuotation(requestItem: ItemRequest):Observable<RegisterReques
       'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
     });
 
-    return this.httpClient.post<RegisterRequest>(`${environment.URI_API}detail-request`, requestItem, {headers: httpHeader});
+    return this.httpClient.post<RegisterRequestResponse>(`${environment.URI_API}detail-request`, requestItem, {headers: httpHeader});
   }
   return failed;
 }
