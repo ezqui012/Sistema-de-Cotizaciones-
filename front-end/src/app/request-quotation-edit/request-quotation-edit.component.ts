@@ -95,7 +95,8 @@ export class RequestQuotationEditComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
-          console.log("seguardo los cambios con exito")
+          //console.log("seguardo los cambios con exito")
+          this.toastr.success("La Razón social se modifico con éxito")
 
         }else{
           console.log("error al actualizar el estado intente de nuevo")
@@ -254,6 +255,7 @@ export class RequestQuotationEditComponent implements OnInit {
                 this.toastr.success("Los cambios de guardaron con exito");
                 //console.log("El id  nueva Solicitud: "+res.id)
                 this.clearInput();
+                this.navigateTo("/request-quotation-list");
 
 
       }else{
@@ -266,15 +268,14 @@ export class RequestQuotationEditComponent implements OnInit {
   }
 
   registerAllItemsToRequest(idResquest:number){
-console.log(this.listItemsRequestShow);
+
       for(let i=0; i < this.listItemsRequestShow.length; i++){
         let itemRequest:ItemRequest = new ItemRequest;
         itemRequest.id_request = idResquest;
         itemRequest.id_item = this.listItemsRequestShow[i].id_item;
-      console.log("ide item: "+this.listItemsRequestShow[i].id_item)
         itemRequest.quantity = this.listItemsRequestShow[i].quantity;
         itemRequest.total_cost = this.listItemsRequestShow[i].total_cost;
-        console.log(itemRequest);
+
         this.serviceRequestQuote.registerItemRequestQuotation(itemRequest).subscribe((data) => {
           if(data.res){
               console.log("El item fue registrado con exito");
