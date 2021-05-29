@@ -156,19 +156,23 @@ const routes: Routes = [
   },
   {
     path: 'request-quotation',
-    component: RequestQuotationComponent
+    component: RequestQuotationComponent,
+    canActivate: [AuthRequestGuard]
   },
   {
     path: 'request-quotation-list',
-    component: RequestQuotationListComponent
+    component: RequestQuotationListComponent,
+    canActivate: [AuthRequestGuard]
   },
   {
     path: 'request-quotation-edit/:id',
-    component: RequestQuotationEditComponent
+    component: RequestQuotationEditComponent,
+    canActivate: [AuthRequestGuard]
   },
   {
     path: 'request-detail/:id',
-    component: RequestDetailComponent
+    component: RequestDetailComponent,
+    canActivate: [AuthRequestGuard]
   },
   {
     path: 'quote-list',
@@ -187,15 +191,18 @@ const routes: Routes = [
   },
   {
     path: 'info-request-rejected/:id',
-    component: RequestDetailRejectedComponent
+    component: RequestDetailRejectedComponent,
+    canActivate: [AuthRequestGuard]
   },
   {
     path: 'info-request-quote/:id',
-    component: RequestDetailQuoteComponent
+    component: RequestDetailQuoteComponent,
+    canActivate: [AuthRequestGuard]
   },
   {
     path: 'info-request-approved/:id',
-    component: RequestDetailApprovedComponent
+    component: RequestDetailApprovedComponent,
+    canActivate: [AuthRequestGuard]
   }
 
 ];
