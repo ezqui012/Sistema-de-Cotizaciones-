@@ -220,13 +220,31 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     }
   }
   // Validar campos solo numeros
-  // onKeyPress(event: any) {
-  //   const regexpNumber = /[0-9\+\-\ ]/;
-  //   let inputCharacter = String.fromCharCode(event.charCode);
-  //   if (event.keyCode != 8 && !regexpNumber.test(inputCharacter)) {
-  //     event.preventDefault();
-  //   }
-  // }
+//   onKeyPress(event: any) {
+//     const regexpNumber = /[0-9\+\-\ ]/;
+//     let inputCharacter = String.fromCharCode(event.charCode);
+//     if (event.keyCode != 8 && !regexpNumber.test(inputCharacter)) {
+//       event.preventDefault();
+//     }
+//   }
+
+//   _keyUp(event: any) {
+//     const pattern = /[0-9\+\-\ ]/;
+//     let inputChar = String.fromCharCode(event.charCode);
+
+//     if (!pattern.test(inputChar)) {
+//       // invalid character, prevent input
+//       event.preventDefault();
+//     }
+// }
+onlyNumber(evt: any) {
+  evt = (evt) ? evt : window.event;
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+  }
+  return true;
+}
 
 
 }

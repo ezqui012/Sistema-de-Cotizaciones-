@@ -40,6 +40,27 @@ class Expense_ItemSeeder extends Seeder
                 'unit_item' => 'unid',
                 'unit_cost' => 95,
                 'description_item' => 'Reloj digital marca Samsung para escritorios'
+            ],
+            [
+                'name_item' => 'Mouse inalambrico',
+                'type_item' => 'Equipo de computación',
+                'unit_item' => 'unid',
+                'unit_cost' => 120,
+                'description_item' => 'Mouse optico inalambrico con un rango de alcance de 3 metros'
+            ],
+            [
+                'name_item' => 'Imperesora',
+                'type_item' => 'Material de oficina',
+                'unit_item' => 'unid',
+                'unit_cost' => 1200,
+                'description_item' => 'Impresora marca EPSON Eco Tank serie L120'
+            ],
+            [
+                'name_item' => 'Sillas de plastico trenzada',
+                'type_item' => 'Muebles',
+                'unit_item' => 'unid',
+                'unit_cost' => 80,
+                'description_item' => 'Silla trenzada marca la papelera'
             ]
         ]);
     }

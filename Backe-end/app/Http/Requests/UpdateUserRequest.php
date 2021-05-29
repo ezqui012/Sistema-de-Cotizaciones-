@@ -39,7 +39,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'ci.unique'=> 'El ci que pretende ingresar encuentra en uso',
-            'email.unique'=> 'El email que pretende ingresar se encuentra en uso'
+            'email.unique'=> 'El correo que pretende ingresar se encuentra en uso'
         ];
     }
 }
