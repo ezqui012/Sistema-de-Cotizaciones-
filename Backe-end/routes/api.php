@@ -41,14 +41,14 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::ApiResource('quote', 'QuoteController');
     Route::get('list-personal/{id}', 'UserController@getListPersonalQuote');
     Route::get('user/{id}', 'UserController@getUserById');
-
+    Route::put('updateUser/{id}', 'UserController@updateUser');
+Route::delete('processQuoteDelete/{id}', 'QuoteController@deleteProcessQuote');
     Route::put('updatePassword/{id}', 'UserController@updatePassword');
     Route::get('processQuote/{id}', 'QuoteController@getProcessQuote');
     Route::get('finalizedQuote/{id}', 'QuoteController@getFinalizedQuote');
     Route::put('status-quotation-update/{id}','QuotationController@updateStatus');
 });
-Route::put('updateUser/{id}', 'UserController@updateUser');
-Route::delete('processQuoteDelete/{id}', 'QuoteController@deleteProcessQuote');
+
 
 
 Route::apiResource('enterprise', 'EnterpriseController');
