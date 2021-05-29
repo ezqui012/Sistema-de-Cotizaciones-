@@ -93,24 +93,24 @@ color: white;
   padding: 12px;
   width: 100%;
 }
-.numHead{width: 6%;}
+.numHead{width: 5%;}
 .nomHead{width: 72%;}
 .cantHead{width: 10%;}
 .unHead{width: 10%;}
 .detHead{width: 18%;}
-.emHead{ width: 15%;}
-.peHead{ width: 10%;}
-.unitHead{ width: 8%;}
+.emHead{ width: 17%;}
+.peHead{ width: 9%;}
+.unitHead{ width: 10%;}
 .totalHead{ width: 12%;}
 .accHead{ width: 10%;}
 
-.tdNum{width: 6%;}
-.tdquan{width: 10%;}
-.tdunit{width:9%;}
-.tdbname{width: 18%;}
-.tdenter{width: 15%;}
-.tddel{width: 10%;}
-.tdcost{width: 8%;}
+.tdNum{width: 6%; padding-top: 20px;}
+.tdquan{width: 10%;padding-top: 20px;}
+.tdunit{width:9%;padding-top: 20px;}
+.tdbname{width: 18%;padding-top: 20px;}
+.tdenter{width: 18%;padding-top: 20px;}
+.tddel{width: 8%;padding-top: 20px;}
+.tdcost{width: 10%;padding-top: 20px;}
 
 .reason{
   width: 89%;
@@ -122,4 +122,21 @@ color: white;
 }
 .button{
   width: 50;
+}
+.btnAction{
+
+  align-items: center;
+	width:40px;
+	height:40px;
+  padding: 5px;
+  margin-right: 5%;
+	text-align:center;
+	/* border:1px solid #007095; */
+	border-radius:5px;
+	cursor:pointer;
+  /* background-color:#dedede; */
+
+}
+.btnAction:hover{
+  background-color: #ffffff !important;
 }

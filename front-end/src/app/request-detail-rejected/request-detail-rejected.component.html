@@ -51,12 +51,12 @@
         </thead>
         <tbody>
           <tr class="row-faculty" *ngFor="let list of items ; let i = index">
-            <th scope="row">{{i+1}}</th>
-            <td>{{list.quantity}}</td>
-            <td>{{list.unit_item}}</td>
-            <td>{{list.name_item}}</td>
-            <td>{{list.unit_cost}}</td>
-            <td>{{list.total_cost}}</td>
+            <th style="width: 6%;" scope="row">{{i+1}}</th>
+            <td style="width: 11%;">{{list.quantity}}</td>
+            <td style="width: 15%;">{{list.unit_item}}</td>
+            <td style="width: 35%;">{{list.name_item}}</td>
+            <td style="width: 14%;">{{list.unit_cost}}</td>
+            <td style="width: 17%;">{{list.total_cost}}</td>
           </tr>
         </tbody>
       </table>
