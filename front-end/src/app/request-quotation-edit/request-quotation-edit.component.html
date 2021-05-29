@@ -3,48 +3,66 @@
 <!--header-->
 <div class="containerBody">
   <div class="containertop">
-    <h1><b>Editar Solicitud de Cotización</b></h1>
+    <h1><b>Editar Solicitud de cotización</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/request-quotation-list')">Lista de Solicitudes</button>
+    </div>
   </div>
-  <div class="titleQoute">
+  <div class="titleQoute" [formGroup]="requestForm">
+
     <mat-form-field class="date-info">
       <mat-label>Razon social</mat-label>
-      <input matInput placeholder="Ingrese Razon social">
-      <mat-error >
-
+      <input matInput placeholder="Ingrese Razon social" formControlName="business_name">
+      <mat-error *ngIf="isValidRequestForm()">
+        {{ getErrorMessageRequest() }}
       </mat-error>
     </mat-form-field>
+    <div class="contentBtnSave">
+      <button type="button" class="btn btnPlus" ngbPopover="Guardar cambio de Razón social" (click)="updateNemaRequest()">
+        <img src="../../assets/icon-quote/save.png" alt="" width="25" height="25">
+      </button>
+    </div>
 
   </div>
-  <div class="contentFormItem">
+  <div class="contentFormItem" [formGroup]="registerForm">
     <div class="contentSelect">
-      <mat-form-field class="selectItem-full-width" id="select-item">
-        <mat-label>Seleccione Item</mat-label>
-        <mat-select >
-          <mat-option>
-            selction
-          </mat-option>
-        </mat-select>
-        <mat-error>
+      <div *ngIf="enableSelect" class="contentSelected">
+        <mat-form-field class="selectItem-full-width" id="select-item">
+          <mat-label>Seleccione Item</mat-label>
+          <mat-select formControlName="index" #mySelect (selectionChange)="setIdItem(mySelect.value)">
+            <mat-option *ngFor="let item of items; let i=index" [value]="i">
+              {{item.name_item}}
+            </mat-option>
+          </mat-select>
+          <mat-error>
 
-        </mat-error>
-      </mat-form-field>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="!enableSelect" class="contentValueSelect">
+        <b style="color: #003b72; padding-left: 5%;">Item: </b>{{valueSelectItem}}
+      </div>
+
     </div>
     <div class="contentBtnPlus">
-      <button type="button" class="btn btnPlus"><img src="../../assets/icon-quote/plus.png" alt="" width="25" height="25"></button>
+      <button *ngIf="false" type="button" class="btn btnPlus"><img src="../../assets/icon-quote/plus.png" alt=""
+          width="25" height="25"></button>
     </div>
     <div class="contentCount">
       <mat-form-field class="date-info">
         <mat-label>Cantidad</mat-label>
-        <input matInput placeholder="Ingrese Cantida de Item">
-        <mat-error >
+        <input matInput placeholder="Ingrese Cantida de Item" type="number" min="1" formControlName="quantity">
+        <mat-error *ngIf="isValidQuantityForm()">
+          {{ getErrorMessageQuantity() }}
 
         </mat-error>
       </mat-form-field>
     </div>
     <div class="contentButton">
       <div class="row justify-content-end" style="padding-right: 20%;">
-        <button type="button" class="btn btn-add" >Guardar</button>
-
+        <button *ngIf="showAdd" type="button" class="btn btn-add" (click)="addItemRequest()">Añadir</button>
+        <button *ngIf="showEdit" type="button" class="btn btn-save" (click)="saveChanges()">Guardar</button>
       </div>
 
     </div>
@@ -64,7 +82,7 @@
       <div class="accHead"><b>Acciones</b></div>
     </div>
     <div class="newBodyTable">
-      <table class="table">
+      <table class="table table-hover">
         <thead class="headTable">
           <tr>
             <th scope="col">Nº</th>
@@ -73,33 +91,27 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="row-faculty" >
-            <th scope="row">1</th>
-            <td>2</td>
-            <td>Und</td>
-            <td>Sillas giratorias</td>
-            <td>450</td>
-            <td>900</td>
-            <td>
-              <div class="row justify-content-end" style="padding-right: 20%;">
-                <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25"></button>
-                <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/bin2.png" alt="" width="25" height="25"></button>
-
-              </div>
-            </td>
-
-          </tr>
-          <tr class="row-faculty" >
-            <th scope="row">1</th>
-            <td>2</td>
-            <td>Und</td>
-            <td>Sillas giratorias</td>
-            <td>450</td>
-            <td>900</td>
-            <td>
-              <div class="row justify-content-end" style="padding-right: 20%;">
-                <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25"></button>
-                <button type="button" class="btn btnAction"><img src="../../assets/icon-quote/bin2.png" alt="" width="25" height="25"></button>
+          <tr class="row-itemRequest" *ngFor="let itemResquest of listItemsRequestShow; let i=index">
+            <th scope="row" style="padding-top: 20px;">{{i+1}}</th>
+            <td style="padding-top: 20px; padding-left: 5%; width:10%;">{{itemResquest.quantity}}</td>
+            <td style="padding-top: 20px; width:10%;">{{itemResquest.unit_item}}</td>
+            <td style="padding-top: 20px; width:35%;">{{itemResquest.name_item}}</td>
+            <td style="padding-top: 20px; width:10%;">{{itemResquest.unit_cost}}</td>
+            <td style="padding-top: 20px; width:10%;">{{itemResquest.total_cost}}</td>
+            <td style="width:25%;">
+              <div class="row justify-content-end" style="padding-right: 10%;">
+                <button type="button" class="btn btnAction" (click)="editItem(i)" ngbPopover="Editar">
+                  <img
+                    src="../../assets/icon-quote/pencil.png"
+                    alt="" width="25" height="25"
+                    >
+                  </button>
+                <button type="button" class="btn btnAction" (click)="deleteItem(i)" ngbPopover="Eliminar">
+                  <img
+                    src="../../assets/icon-quote/bin2.png"
+                    alt="" width="25" height="25"
+                    >
+                  </button>
 
               </div>
             </td>
@@ -112,8 +124,8 @@
   </div>
   <div class="containerBtn">
     <div>
-      <button class="btn btn-cancel">Cancelar</button>
-      <button class="btn btn-register">Guardar</button>
+      <button class="btn btn-cancel" (click)="navigateTo('/request-quotation-list')">Cancelar</button>
+      <button class="btn btn-register" (click)="registerNewRequestQuotation()">Guardar</button>
     </div>
   </div>
 

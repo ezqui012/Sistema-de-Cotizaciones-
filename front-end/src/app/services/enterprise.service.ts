@@ -14,39 +14,36 @@ export class EnterpriseService {
   constructor(private httpClient: HttpClient) { }
 
   allEnterprise(): Observable<Enterprise | any>{
-    // let failed: any;
-    // if (localStorage.getItem('quot-umss-tk')) {
-    //   const httpHeader = new HttpHeaders({
-    //     'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
-    //   });
-    //   return this.httpClient.get<Enterprise>(`${environment.URI_API}enterprise`, { headers: httpHeader });
-    // }
-    // return failed;
-    return this.httpClient.get<Enterprise>(`${environment.URI_API}enterprise`);
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<Enterprise>(`${environment.URI_API}enterprise`, { headers: httpHeader });
+    }
+    return failed;
   }
 
   getItems(id:any): Observable<ItemRequest | any>{
-    // let failed: any;
-    // if (localStorage.getItem('quot-umss-tk')) {
-    //   const httpHeader = new HttpHeaders({
-    //     'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
-    //   });
-    //   return this.httpClient.get<ItemRequest>(`${environment.URI_API}items-rq/${id}`, { headers: httpHeader });
-    // }
-    // return failed;
-    return this.httpClient.get<ItemRequest>(`${environment.URI_API}items-rq/${id}`);
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<ItemRequest>(`${environment.URI_API}items-rq/${id}`, { headers: httpHeader });
+    }
+    return failed;
   }
 
   getInfoQuote(id:any): Observable<InfoEquestQuotation | any>{
-    // let failed: any;
-    // if (localStorage.getItem('quot-umss-tk')) {
-    //   const httpHeader = new HttpHeaders({
-    //     'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
-    //   });
-    //   return this.httpClient.get<InfoEquestQuotation>(`${environment.URI_API}quot-infoStatus/${id}`, { headers: httpHeader });
-    // }
-    // return failed;
-    return this.httpClient.get<InfoEquestQuotation>(`${environment.URI_API}quot-infoStatus/${id}`);
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<InfoEquestQuotation>(`${environment.URI_API}quot-infoStatus/${id}`, { headers: httpHeader });
+    }
+    return failed;
   }
 
 }

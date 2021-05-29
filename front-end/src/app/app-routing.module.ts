@@ -38,6 +38,10 @@ import { AuthQuoteGuard } from './guards/auth-quote.guard';
 import { AuthApproveGuard } from './guards/auth-approve.guard';
 import { AuthRequestGuard } from './guards/auth-request.guard';
 
+import { RequestDetailRejectedComponent } from './request-detail-rejected/request-detail-rejected.component';
+import { RequestDetailQuoteComponent } from './request-detail-quote/request-detail-quote.component';
+import { RequestDetailApprovedComponent } from './request-detail-approved/request-detail-approved.component';
+
 const routes: Routes = [
   {
     path:'',
@@ -116,7 +120,8 @@ const routes: Routes = [
   },
   {
     path:'list-quotes',
-    component: ListQuotesComponent
+    component: ListQuotesComponent,
+    canActivate: [AuthApproveGuard]
   },
   {
     path:'edit-user/:id',
@@ -126,7 +131,8 @@ const routes: Routes = [
 
   {
     path: 'comparative-quotes/:idR/:idQ/:entrusted',
-    component: ComparativeQuotesComponent
+    component: ComparativeQuotesComponent,
+    canActivate: [AuthApproveGuard]
   },
   {
     path: 'unit-edit/:id',
@@ -150,19 +156,23 @@ const routes: Routes = [
   },
   {
     path: 'request-quotation',
-    component: RequestQuotationComponent
+    component: RequestQuotationComponent,
+    canActivate: [AuthRequestGuard]
   },
   {
     path: 'request-quotation-list',
-    component: RequestQuotationListComponent
+    component: RequestQuotationListComponent,
+    canActivate: [AuthRequestGuard]
   },
   {
     path: 'request-quotation-edit/:id',
-    component: RequestQuotationEditComponent
+    component: RequestQuotationEditComponent,
+    canActivate: [AuthRequestGuard]
   },
   {
     path: 'request-detail/:id',
-    component: RequestDetailComponent
+    component: RequestDetailComponent,
+    canActivate: [AuthRequestGuard]
   },
   {
     path: 'quote-list',
@@ -178,6 +188,21 @@ const routes: Routes = [
     path: 'edit-detail-quotation/:id/:idqd',
     component: EditDetailQuotationComponent,
     canActivate: [AuthQuoteGuard]
+  },
+  {
+    path: 'info-request-rejected/:id',
+    component: RequestDetailRejectedComponent,
+    canActivate: [AuthRequestGuard]
+  },
+  {
+    path: 'info-request-quote/:id',
+    component: RequestDetailQuoteComponent,
+    canActivate: [AuthRequestGuard]
+  },
+  {
+    path: 'info-request-approved/:id',
+    component: RequestDetailApprovedComponent,
+    canActivate: [AuthRequestGuard]
   }
 
 ];

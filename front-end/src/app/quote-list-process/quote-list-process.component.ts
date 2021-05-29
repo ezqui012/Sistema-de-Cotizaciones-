@@ -6,12 +6,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PersonalUserService } from '../services/PersonalUser.service';
 import { ToastrService } from 'ngx-toastr';
+import {NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-quote-list-process',
   templateUrl: './quote-list-process.component.html',
   styleUrls: ['./quote-list-process.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
+  providers: [NgbPopoverConfig],
 })
 
 export class QuoteListProcessComponent implements OnInit {
@@ -35,9 +38,13 @@ export class QuoteListProcessComponent implements OnInit {
     private titlePage: Title,
     public quoteProcessService:QuoteProcessService,
     private route: ActivatedRoute,
-    public toastr: ToastrService
+    public toastr: ToastrService,
+    public config: NgbPopoverConfig
+
   ) {
     this.titlePage.setTitle('Detalle de cotización - QUOT-UMSS');
+    config.placement = 'left';
+    config.triggers = 'hover';
   }
 
   ngOnInit(): void {

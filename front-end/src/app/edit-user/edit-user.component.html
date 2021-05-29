@@ -65,7 +65,7 @@
       <mat-form-field>
         <input class="fieldRegister" formControlName="ci" matInput placeholder="Titulo" type="text"
           placeholder="Ingrese CI" [(ngModel)]="RegisterUser.ci"
-          (keypress)="onlyNumber($event)" >
+           >
         <mat-error *ngIf="isValid('ci')">
           {{getErrorMessageCi('ci')}}
         </mat-error>
@@ -100,7 +100,7 @@
       <mat-form-field>
         <input class="fieldRegister" formControlName="phone" matInput placeholder="Titulo" type="text"
           placeholder="Ingrese Teléfono" [(ngModel)]="RegisterUser.phone"
-          (keypress)="onlyNumber($event)">
+          >
         <mat-error *ngIf="isValid('phone')">
           {{getErrorMessagePhone('phone')}}
         </mat-error>
