@@ -197,7 +197,7 @@ export class EditUserComponent implements OnInit {
       //console.log(this.dataToUpdate);
       this.RegisterUser = this.dataToUpdate;
      // this.updateForm.controls['ci'].setValue(this.RegisterUser.ci);
-
+      console.log(this.RegisterUser.id_role +"HOLA")
       this.updateForm.controls['id_role'].setValue(this.RegisterUser.id_role);
       this.updateForm.controls['id_unit'].setValue(this.RegisterUser.id_unit);
       this.upPassword = this.dataToUpdate;
@@ -207,6 +207,8 @@ export class EditUserComponent implements OnInit {
     })
   }
   updateDataUser(){
+
+    console.log(this.updateForm.get('id_role')?.value)
     this.updateForm.controls['address'].setValue(this.updateForm.get('address')?.value.trim())
     this.updateForm.controls['name'].setValue(this.updateForm.get('name')?.value.trim())
 
@@ -215,8 +217,9 @@ export class EditUserComponent implements OnInit {
     if(this.updateForm.invalid){
       return
     }
-    this.updateService.updateData(this.id, this.RegisterUser).subscribe(res=>{
+    this.updateService.updateData(this.id, this.updateForm.value).subscribe(res=>{
       this.showToastSuccess();
+      console.log(this.updateForm.get('id_role')?.value)
       },
       (error: any)=>{
          let message= error;
