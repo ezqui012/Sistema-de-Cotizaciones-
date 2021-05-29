@@ -80,5 +80,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('reason-rejected-request/{id}', 'RejectedController@getReason');
     Route::get('personal-quote-name/{id}', 'QuotationController@namePersonalQuote');
     Route::get('get-request-accepted/{id}', 'RequestDetailsController@requestApproved');
+
+    Route::put('updateUser/{id}', 'UserController@updateUser');
 });
-Route::put('updateUser/{id}', 'UserController@updateUser');
+
