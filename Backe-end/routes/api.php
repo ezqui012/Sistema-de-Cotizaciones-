@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('list-personal/{id}', 'UserController@getListPersonalQuote');
     Route::get('user/{id}', 'UserController@getUserById');
     Route::put('updateUser/{id}', 'UserController@updateUser');
-Route::delete('processQuoteDelete/{id}', 'QuoteController@deleteProcessQuote');
+    Route::delete('processQuoteDelete/{id}', 'QuoteController@deleteProcessQuote');
     Route::put('updatePassword/{id}', 'UserController@updatePassword');
     Route::get('processQuote/{id}', 'QuoteController@getProcessQuote');
     Route::get('finalizedQuote/{id}', 'QuoteController@getFinalizedQuote');
