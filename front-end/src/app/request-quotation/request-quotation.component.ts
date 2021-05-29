@@ -31,7 +31,7 @@ export class RequestQuotationComponent implements OnInit {
   //private patternName = /^[a-zA-Z-z0-9-zñÑ\u00E0-\u00FC ]*$/
   private patternNumber = "^[0-9]+"
   requestForm = this.fb.group({
-    id: ['3', [Validators.required]],
+    id: [localStorage.getItem('quot-umss-usr'), [Validators.required]],
     business_name: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100),]],
   });
 
@@ -195,9 +195,9 @@ export class RequestQuotationComponent implements OnInit {
             res=data;
             if(res.res){
                 this.toastr.success("La solicitud de cotización fue registrada con éxito");
-                console.log("El id  nueva Solicitud: "+res.id)
                 this.registerAllItemsToRequest(res.id);
                 this.clearInput();
+                this.navigateTo('/request-quotation-list');
               }else{
                 this.toastr.error("Ocurrio un error al registrar intente nuevamente");
               }

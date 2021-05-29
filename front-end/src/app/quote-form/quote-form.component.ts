@@ -172,7 +172,7 @@ export class QuoteFormComponent implements OnInit {
   }
 
   endQuote(){
-    (this.numbQT === this.lenght) ? this.finish=true : this.finish=false;
+    (this.numbQT === this.lenght && this.numbQT > 0) ? this.finish=true : this.finish=false;
     if(this.finish){
       let newStatus: any = {
         status_quotation: 'Finalizado'

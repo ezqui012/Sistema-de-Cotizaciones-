@@ -182,6 +182,7 @@ export class RequestDetailComponent implements OnInit {
       (data) => {
         if(data.res){
           this.modal.dismissAll();
+          this.navigateTo('/request-quotation-list');
           this.toastr.success(messageToast);
         }else{
           this.toastr.error("Ocurrio un error al registrar intente nuevamente");
@@ -211,5 +212,9 @@ export class RequestDetailComponent implements OnInit {
         this.toastr.error(`Error: ${error} intente nuevamente`);
       }
     );
+  }
+
+  navigateTo(path: String){
+    this.router.navigate([path]);
   }
 }

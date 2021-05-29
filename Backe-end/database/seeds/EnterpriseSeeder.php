@@ -40,9 +40,25 @@ class EnterpriseSeeder extends Seeder
             [
                 'name_enterprise' => 'Electrodomesticos B&C',
                 'sector_enterprise' => 'Electrodomesticos',
-                'nit_enterprise' => '4875220199',
+                'nit_enterprise' => '4875220585',
                 'legal_representative' => 'Mariana Villaroel Herbas',
                 'phone_enterprise' => '4255858',
+                'address_enterprise' => 'Calle Juan Capriles #484 entre Pantaleon Dalence y AV. Santa Cruz'
+            ],
+            [
+                'name_enterprise' => 'La Papelera',
+                'sector_enterprise' => 'Productos plasticos',
+                'nit_enterprise' => '452147852',
+                'legal_representative' => 'Lucio Martinez',
+                'phone_enterprise' => '4255441',
+                'address_enterprise' => 'Calle Juan Capriles #484 entre Pantaleon Dalence y AV. Santa Cruz'
+            ],
+            [
+                'name_enterprise' => 'Controlp',
+                'sector_enterprise' => 'Tecnologia',
+                'nit_enterprise' => '525188489',
+                'legal_representative' => 'David Paes Lopez',
+                'phone_enterprise' => '4251008',
                 'address_enterprise' => 'Calle Juan Capriles #484 entre Pantaleon Dalence y AV. Santa Cruz'
             ]
         ]);

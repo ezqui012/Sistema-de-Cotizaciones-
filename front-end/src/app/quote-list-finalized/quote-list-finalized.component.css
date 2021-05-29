@@ -123,9 +123,14 @@ color: white;
 .reason{
   width: 89%;
 }
-.labeldiv{
 
-}
 .state{
   width: 11%;
 }
+
+.btn-one:hover{
+  background-color: #2f82ff;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+

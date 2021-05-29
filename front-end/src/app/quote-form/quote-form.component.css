@@ -147,3 +147,14 @@ body{
     justify-content: center;
   }
 }
+
+
+#btn-listq{
+  background-color: #1C2331;
+}
+
+#btn-listq:hover{
+  background-color: #2f82ff;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Rejected;
 use App\Http\Requests\CreateRejectedRequest;
 use Exception;
+use Illuminate\Support\Facades\DB;
+use PhpParser\JsonDecoder;
 
 class RejectedController extends Controller
 {
@@ -44,5 +46,17 @@ class RejectedController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getReason($id){
+        try{
+            $res = DB::table('rejected')->select('reason')->where('id_request', '=', $id)->get();
+            return json_decode($res, true)[0];
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 }

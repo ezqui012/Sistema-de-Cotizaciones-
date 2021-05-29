@@ -39,15 +39,15 @@ body{
 }
 
 .numHead{
-  width: 6%;
+  width: 5%;
 }
 
 .nomHead{
-  width: 70%;
+  width: 58%;
 }
 
 .statusHead{
-  width: 30%
+  width: 26%
 }
 
 .btn-detail{
@@ -64,8 +64,18 @@ body{
   background-color:#003b72;
   width: 85px;
 }
+.btn-registerDis{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#476683;
+  width: 85px;
+}
+.btn-registerDis:hover{
+  background-color:#789cd3 !important;
+  color: white;
+}
 
 .btn:hover{
-  background-color:#2f82ff !important;
+  background-color:#2f82ff;
   color: white;
 }
