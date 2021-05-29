@@ -1,8 +1,11 @@
 export class RequestList{
   id_request: any;
+  id_item: any;
   business_name: any;
   name: any;
   status: any;
+  quantity: any;
+  total_cost: any;
 }
 
 export class RequestQuotation{

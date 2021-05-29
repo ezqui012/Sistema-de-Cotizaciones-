@@ -102,7 +102,7 @@ removerListItemRequest(id:any):Observable<RegisterRequestResponse | any>{
       'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
     });
 
-    return this.httpClient.get<RegisterRequestResponse>(`${environment.URI_API}detail-request/${id}`, {headers: httpHeader});
+    return this.httpClient.delete<RegisterRequestResponse>(`${environment.URI_API}detail-request/${id}`, {headers: httpHeader});
   }
   return failed;
 }
