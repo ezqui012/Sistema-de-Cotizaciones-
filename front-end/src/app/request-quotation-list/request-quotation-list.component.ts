@@ -9,7 +9,7 @@ import {NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-request-quotation-list',
   templateUrl: './request-quotation-list.component.html',
   encapsulation: ViewEncapsulation.Emulated,
-  providers: [NgbPopoverConfig], // add NgbPopoverConfig to the component providers
+  providers: [NgbPopoverConfig],
   styleUrls: ['./request-quotation-list.component.css']
 })
 export class RequestQuotationListComponent implements OnInit {

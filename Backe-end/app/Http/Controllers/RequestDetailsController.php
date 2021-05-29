@@ -9,6 +9,7 @@ use Exception;
 use App\Http\Requests\CreateRequestDetailsRequestst;
 use App\Http\Requests\UpdateRequestDetailsRequest;
 use App\Http\Requests\UpdateRequestDetailsRequestst;
+use App\RequestQuotation;
 
 class RequestDetailsController extends Controller
 {
@@ -36,7 +37,34 @@ class RequestDetailsController extends Controller
 
     public function show($id)
     {
-        //
+        try {
+            $request = RequestQuotation::where('id_request', '=', $id)->first();
+        return $request;
+
+
+        } catch (Exception $ex) {
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
+    public function updateRequestName($id, $request)
+    {
+        try {
+            DB::update('UPDATE request_quotation
+            SET business_name = ?
+            WHERE id_request = ?', [$request, $id]);
+            return response()->json([
+                'res' => true,
+                'message' => 'Update name of Request'
+            ], 200);
+        } catch (Exception $ex) {
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function update(UpdateRequestDetailsRequest $request, $id)
@@ -60,7 +88,20 @@ class RequestDetailsController extends Controller
 
     public function destroy($id)
     {
-        //
+        try{
+
+            DB::table('request_details')->where('id_request', $id)->delete();
+
+            return response()->json([
+                'res' => true,
+                'message' => 'Successfully delete Detail Request'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function detailItem($id){
