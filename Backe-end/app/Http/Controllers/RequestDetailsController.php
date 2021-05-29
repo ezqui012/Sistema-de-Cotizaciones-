@@ -108,7 +108,7 @@ class RequestDetailsController extends Controller
         try{
             $res = DB::table('request_details')
                     ->join('expense_item', 'request_details.id_item', '=', 'expense_item.id_item')
-                    ->select('request_details.quantity', 'request_details.total_cost', 'expense_item.name_item', 'expense_item.unit_item', 'expense_item.unit_cost')
+                    ->select('request_details.quantity', 'request_details.total_cost','expense_item.id_item', 'expense_item.name_item', 'expense_item.unit_item', 'expense_item.unit_cost')
                     ->where('request_details.id_request', '=', $id)
                     ->get();
             return $res;

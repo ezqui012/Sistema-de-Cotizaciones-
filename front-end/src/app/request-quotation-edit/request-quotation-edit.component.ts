@@ -34,7 +34,7 @@ export class RequestQuotationEditComponent implements OnInit {
   //private patternName = /^[a-zA-Z-z0-9-zñÑ\u00E0-\u00FC ]*$/
   private patternNumber = "^[0-9]+"
   requestForm = this.fb.group({
-    id: ['3', [Validators.required]],
+    id: [localStorage.getItem('quot-umss-usr'), [Validators.required]],
     business_name: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100),]],
   });
 
@@ -73,7 +73,7 @@ export class RequestQuotationEditComponent implements OnInit {
   getNameRequest() {
     this.serviceRequestQuote.getNameRequest(this.idRequest).subscribe((date) => {
       this.nameRequest = date;
-      console.log(date);
+      //console.log(date);
       this.setNameReques();
     });
   }
@@ -126,6 +126,7 @@ export class RequestQuotationEditComponent implements OnInit {
   }
   addItem(i: number) {
     if (this.registerForm.valid) {
+
       if (parseInt(this.registerForm.get('quantity')?.value) > 0) {
         let itemRequest: RequestItem = new RequestItem();
 
@@ -247,11 +248,11 @@ export class RequestQuotationEditComponent implements OnInit {
   registerNewRequestQuotation(){
     if(this.requestForm.valid){
       if(this.listItemsRequestShow.length !== 0){
-        this.clearItemDetail();
+                this.clearItemDetail();
+                this.registerAllItemsToRequest(this.idRequest);
 
                 this.toastr.success("Los cambios de guardaron con exito");
                 //console.log("El id  nueva Solicitud: "+res.id)
-                this.registerAllItemsToRequest(this.idRequest);
                 this.clearInput();
 
 
@@ -265,13 +266,15 @@ export class RequestQuotationEditComponent implements OnInit {
   }
 
   registerAllItemsToRequest(idResquest:number){
-
+console.log(this.listItemsRequestShow);
       for(let i=0; i < this.listItemsRequestShow.length; i++){
         let itemRequest:ItemRequest = new ItemRequest;
         itemRequest.id_request = idResquest;
         itemRequest.id_item = this.listItemsRequestShow[i].id_item;
+      console.log("ide item: "+this.listItemsRequestShow[i].id_item)
         itemRequest.quantity = this.listItemsRequestShow[i].quantity;
         itemRequest.total_cost = this.listItemsRequestShow[i].total_cost;
+        console.log(itemRequest);
         this.serviceRequestQuote.registerItemRequestQuotation(itemRequest).subscribe((data) => {
           if(data.res){
               console.log("El item fue registrado con exito");
