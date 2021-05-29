@@ -120,7 +120,8 @@ const routes: Routes = [
   },
   {
     path:'list-quotes',
-    component: ListQuotesComponent
+    component: ListQuotesComponent,
+    canActivate: [AuthApproveGuard]
   },
   {
     path:'edit-user/:id',
@@ -130,7 +131,8 @@ const routes: Routes = [
 
   {
     path: 'comparative-quotes/:idR/:idQ/:entrusted',
-    component: ComparativeQuotesComponent
+    component: ComparativeQuotesComponent,
+    canActivate: [AuthApproveGuard]
   },
   {
     path: 'unit-edit/:id',
