@@ -67,7 +67,7 @@ export class DetailRequestService {
       const httpHeader = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
-      return this.httpClient.post<ResponseObtained>(`${environment.URI_API}update-status/${id}`, status, { headers: httpHeader });
+      return this.httpClient.put<ResponseObtained>(`${environment.URI_API}update-status/${id}`, status, { headers: httpHeader });
     }
     return failed;
   }

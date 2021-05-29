@@ -195,9 +195,9 @@ export class RequestQuotationComponent implements OnInit {
             res=data;
             if(res.res){
                 this.toastr.success("La solicitud de cotización fue registrada con éxito");
-                console.log("El id  nueva Solicitud: "+res.id)
                 this.registerAllItemsToRequest(res.id);
                 this.clearInput();
+                this.navigateTo('/request-quotation-list');
               }else{
                 this.toastr.error("Ocurrio un error al registrar intente nuevamente");
               }
