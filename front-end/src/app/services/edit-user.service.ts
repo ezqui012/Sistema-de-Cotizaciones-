@@ -11,13 +11,13 @@ export class EditUserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  updateData(id: any, user: updateUserData):Observable<Registeruser>{
+  updateData(id: any, user: updateUserData):Observable<Registeruser | any>{
     let failed: any;
     if (localStorage.getItem('quot-umss-tk')) {
       const httpHeader = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
-      return this.httpClient.put<Registeruser>(`${environment.URI_API}updateUser/${id}`, user ,{ headers: httpHeader });
+      return this.httpClient.put<Registeruser | any>(`${environment.URI_API}updateUser/${id}`, user ,{ headers: httpHeader });
     }
     return failed;
 
