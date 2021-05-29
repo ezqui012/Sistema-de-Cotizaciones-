@@ -83,3 +83,4 @@ Route::get('get-numberQuotes/{id_quotation}/{id_item}', 'QuoteDetailController@n
 
 Route::get('reason-rejected-request/{id}', 'RejectedController@getReason');
 Route::get('personal-quote-name/{id}', 'QuotationController@namePersonalQuote');
+Route::get('get-request-accepted/{id}', 'RequestDetailsController@requestApproved');

@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { RequestDetail, ListItemsRequest, ResponseObtained, RejectedRequest, PersonalQuote } from '../Model/request-detail';
 import { RegisterQuotation, ResponseQuotation } from '../Model/quotation';
+import { AcceptedQuote, ResponseAccepted } from '../Model/accepted-quote';
 
 @Injectable({
   providedIn: 'root'
@@ -112,5 +113,16 @@ export class DetailRequestService {
     //   return this.httpClient.get<any>(`${environment.URI_API}personal-quote-name/${id}`, { headers: httpHeader });
     // }
     return this.httpClient.get<any>(`${environment.URI_API}personal-quote-name/${id}`);
+  }
+
+  getAprovedQuote(id: any): Observable<AcceptedQuote | any>{
+    let failed: any;
+    // if (localStorage.getItem('quot-umss-tk')) {
+    //   const httpHeader = new HttpHeaders({
+    //     'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    //   });
+    //   return this.httpClient.get<AcceptedQuote | ResponseAccepted>(`${environment.URI_API}get-request-accepted/${id}, { headers: httpHeader });
+    // }
+    return this.httpClient.get<AcceptedQuote>(`${environment.URI_API}get-request-accepted/${id}`);
   }
 }

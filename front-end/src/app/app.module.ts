@@ -51,6 +51,7 @@ import { HomeUserComponent } from './home-user/home-user.component';
 import { EditDetailQuotationComponent } from './edit-detail-quotation/edit-detail-quotation.component';
 import { RequestDetailRejectedComponent } from './request-detail-rejected/request-detail-rejected.component';
 import { RequestDetailQuoteComponent } from './request-detail-quote/request-detail-quote.component';
+import { RequestDetailApprovedComponent } from './request-detail-approved/request-detail-approved.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { RequestDetailQuoteComponent } from './request-detail-quote/request-deta
     HomeUserComponent,
     EditDetailQuotationComponent,
     RequestDetailRejectedComponent,
-    RequestDetailQuoteComponent
+    RequestDetailQuoteComponent,
+    RequestDetailApprovedComponent
   ],
   imports: [
     BrowserModule,

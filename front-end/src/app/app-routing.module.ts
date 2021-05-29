@@ -40,6 +40,7 @@ import { AuthRequestGuard } from './guards/auth-request.guard';
 
 import { RequestDetailRejectedComponent } from './request-detail-rejected/request-detail-rejected.component';
 import { RequestDetailQuoteComponent } from './request-detail-quote/request-detail-quote.component';
+import { RequestDetailApprovedComponent } from './request-detail-approved/request-detail-approved.component';
 
 const routes: Routes = [
   {
@@ -189,6 +190,10 @@ const routes: Routes = [
   {
     path: 'info-request-quote/:id',
     component: RequestDetailQuoteComponent
+  },
+  {
+    path: 'info-request-approved/:id',
+    component: RequestDetailApprovedComponent
   }
 
 ];

@@ -54,6 +54,8 @@ export class RequestQuotationListComponent implements OnInit {
       this.router.navigate(['/info-request-rejected/'+id]);
     }else if(status === 'Cotización'){
       this.router.navigate(['/info-request-quote/'+id]);
+    }else if(status === 'Aceptado'){
+      this.router.navigate(['/info-request-approved/'+id]);
     }
   }
 
