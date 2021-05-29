@@ -209,7 +209,7 @@ export class EditUserComponent implements OnInit {
   updateDataUser(){
     this.updateForm.controls['address'].setValue(this.updateForm.get('address')?.value.trim())
     this.updateForm.controls['name'].setValue(this.updateForm.get('name')?.value.trim())
-    this.updateForm.controls['password'].setValue(this.updateForm.get('password')?.value.trim())
+
     this.updateForm.controls['email'].setValue(this.updateForm.get('email')?.value.trim())
 
     if(this.updateForm.invalid){
