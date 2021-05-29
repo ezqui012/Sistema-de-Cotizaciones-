@@ -17,29 +17,20 @@ body{
 background-color:#2f82ff !important;
 color: white;
 }
-.btn-one {
+.btn-one{
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
   width: 200px;
-  margin-left: 10px;
+  margin-left: 20px;
 }
-.btn-ver{
+.btn-save{
   color: white;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
-  background-color: #1C2331;
-  margin-left: 10px;
-  width: 80px;
-}
-.btn-edit{
-  color: white;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
   width: 80px;
 }
 .btn-add{
   color: white;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#128D4B;
   width: 80px;
 }
@@ -57,33 +48,7 @@ color: white;
   background-color: #fafafa;
 }
 /*estilos Modal*/
-.contentModal{
-  background-color: #F0F0F8 !important;
-}
-.modal-title{
-  color: #003b72 !important;
- }
-.colorModal .modal-content{
-  color: #003b72;
-  background-color: #F0F0F8 !important;
-}
 
-.close{
-  color: rgb(7, 7, 7);
-}
-.close:hover{
-  color: #003b72;
-}
-.dateInfo{
-  font-weight: bold;
-  display: flex;
-  color: #003b72 !important;
-}
-.dateInfoValue{
-  font-weight: normal;
-  color: #1C2331;
-  margin-left: 10px;
-}
 /*Estilos de tabla*/
 .newBodyTable{
   color:#0000 ;
@@ -91,7 +56,7 @@ color: white;
   overflow-y: auto;
   padding-left: 0.2%;
   padding-right: 0.2%;
-  height: 300px;
+  height: 230px;
 }
 .newHeadTable{
   background-color: #003b72;
@@ -102,10 +67,10 @@ color: white;
   width: 100%;
 }
 .numHead{
-  width: 8%;
+  width: 5%;
 }
 .nomHead{
-  width: 30%;
+  width: 34%;
 
 }
 .dateHead{
@@ -113,13 +78,13 @@ color: white;
 
 }
 .undHead{
-  width: 12%;
+  width: 9%;
 }
 .uniHead{
-  width: 12%;
+  width: 10%;
 }
 .totalHead{
-  width: 19%;
+  width: 22%;
 }
 
 .btn-cancel {
@@ -137,16 +102,18 @@ color: white;
 }
 
 .containerBtn{
+  margin-top: 5px;
   text-align: center;
 }
 /*estilo agregados*/
 .titleQoute{
   width: 50%;
   font-size: 1rem;
+  display: flex;
 
 }
 .contentFormItem{
-  height: 90px;
+  height: 85px;
   width: 100%;
   background-color: #f8f8f8;
   border-radius: 10px;
@@ -170,7 +137,11 @@ color: white;
   padding-top: 10px;
 
 }
-
+.contentValueSelect{
+  width: 100%;
+  font-size: 1rem;
+  padding-top: 30px;
+}
 .contentButton{
   display: block;
   /* background-color: aqua; */
@@ -189,6 +160,10 @@ color: white;
 .contentBtnPlus{
   padding: 20px;
   margin-right: 3%;
+}
+.contentBtnSave{
+  padding-top: 10px;
+  margin-left: 5%;
 }
 .btnPlus{
 
@@ -210,10 +185,10 @@ color: white;
   padding: 5px;
   margin-right: 5%;
 	text-align:center;
-	border:1px solid #007095;
+	/* border:1px solid #007095; */
 	border-radius:5px;
 	cursor:pointer;
-  background-color:#f1f1f1;
+  /* background-color:#f1f1f1; */
 
 }
 .btnAction:hover{

@@ -36,7 +36,35 @@ class RequestDetailsController extends Controller
 
     public function show($id)
     {
-        //
+        try {
+            $quotes = DB::select('SELECT business_name
+            FROM request_quotation
+            where id_request=? ', [$id]);
+
+            return $quotes;
+        } catch (Exception $ex) {
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
+    public function updateRequestName($id, $request)
+    {
+        try {
+            DB::update('UPDATE request_quotation
+            SET business_name = ?
+            WHERE id_request = ?', [$request, $id]);
+            return response()->json([
+                'res' => true,
+                'message' => 'Update name of Request'
+            ], 200);
+        } catch (Exception $ex) {
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function update(UpdateRequestDetailsRequest $request, $id)

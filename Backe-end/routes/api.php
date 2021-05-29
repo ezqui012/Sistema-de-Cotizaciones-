@@ -61,6 +61,7 @@ Route::apiResource('insertQuote', 'QuoteDetailController');
 Route::get('list-request','RequestQuotationController@listRequestQuot');
 Route::apiResource('request-quotation', 'RequestQuotationController');
 Route::get('items-request/{id}', 'RequestDetailsController@detailItem');
+Route::put('request_up/{id}/{request}', 'RequestDetailsController@updateRequestName');
 Route::apiResource('detail-request', 'RequestDetailsController');
 Route::apiResource('expense-item', 'ExpenseItemController');
 Route::get('request','RequestQuotationController@getListRequest');
