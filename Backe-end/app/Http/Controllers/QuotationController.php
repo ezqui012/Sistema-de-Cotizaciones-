@@ -95,4 +95,20 @@ class QuotationController extends Controller
         }
     }
 
+    public function namePersonalQuote($id){
+        try{
+            $name = DB::table('quotation')
+                        ->join('users', 'quotation.id', '=', 'users.id')
+                        ->select('users.name')
+                        ->where('quotation.id_request', '=', $id)
+                        ->get();
+            return json_decode($name, true)[0];
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
+
 }

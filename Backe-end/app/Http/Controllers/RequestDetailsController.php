@@ -119,4 +119,30 @@ class RequestDetailsController extends Controller
             ], 404);
         }
     }
+
+    public function requestApproved($id){
+        try{
+            $res = DB::table('accepted')
+                        ->join('request_quotation', 'accepted.id_request', '=', 'request_quotation.id_request')
+                        ->join('quote_detail', 'accepted.id_qd', '=', 'quote_detail.id_qd')
+                        ->join('expense_item', 'quote_detail.id_item', '=', 'expense_item.id_item')
+                        ->join('enterprise', 'quote_detail.id_enterprise', '=', 'enterprise.id_enterprise')
+                        ->select('quote_detail.quantity', 'expense_item.unit_item', 'expense_item.name_item', 'enterprise.name_enterprise', 'quote_detail.unit_cost')
+                        ->where('accepted.id_request', '=', $id)
+                        ->get();
+            if($res[0]){
+                return $res;
+            }else{
+                return response()->json([
+                    'res' => false,
+                    'message' => 'Falided request'
+                ], 404);
+            }
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
 }

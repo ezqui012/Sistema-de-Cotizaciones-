@@ -18,12 +18,29 @@ font-size: 1rem;
 display: block;
 }
 .infoHead{
-  display: flex;
+  /*display: flex;*/
   padding: 5px;
 }
 .nameRequest{
   width: 85%;
 }
+
+.title-opt{
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: 0px;
+  color: #003b72;
+  font-weight: bolder;
+}
+
+.label-reason{
+  width: 85%;
+}
+
+.color-label{
+  color: #DD3333;
+}
+
 .nameAttedant{
   width: 100%;
   padding: 5px;
@@ -44,35 +61,7 @@ color: white;
   color:#0000 ;
   background-color: #fafafa;
 }
-/*estilos Modal*/
-.contentModal{
-  background-color: #F0F0F8 !important;
-}
-.modal-title{
-  color: #003b72 !important;
- }
-.colorModal .modal-content{
-  color: #003b72;
-  background-color: #F0F0F8 !important;
-}
 
-.close{
-  color: rgb(7, 7, 7);
-}
-.close:hover{
-  color: #003b72;
-}
-.dateInfo{
-  font-weight: bold;
-  display: flex;
-  color: #003b72 !important;
-}
-.dateInfoValue{
-  font-weight: normal;
-  color: #1C2331;
-  margin-left: 10px;
-}
-/*Estilos de tabla*/
 .newBodyTable{
   color:#0000 ;
   background-color: #fafafa;
@@ -107,41 +96,12 @@ color: white;
   width: 15%;
 }
 
-
-.btn-aceptar{
-  color: white;
-  background-color: #128D4B;
-  margin-right: 20px;
-  width: 150px;
-}
-.btn-aceptar:hover{
-  background-color: #04ca60 !important;
-}
-.btn-cancelar{
-  color: white;
-  background-color: #1C2331;
-  margin-right: 20px;
-  width: 150px;
-}
-.btn-cancelar:hover{
-  background-color: #1C2331 !important;
-}
-.btn-rechazar{
-  color: white;
-  background-color:#DD3333;
-  margin-right: 20px;
-  width: 150px;
-}
-.btn-rechazar:hover{
-  background-color: #e40808 !important;
-}
 .btn-reporte{
   color: white;
   background-color:#003b72;
   /* margin-right: 20px; */
   width: 150px;
 }
-
 
 .containerBtn{
   text-align: center;
@@ -211,7 +171,6 @@ color: white;
   background-color:#0463A7;
 }
 .btnAction{
-
   align-items: center;
 	width:40px;
 	height:40px;
@@ -222,54 +181,15 @@ color: white;
 	border-radius:5px;
 	cursor:pointer;
   background-color:#f1f1f1;
-
-}
-.btnAction:hover{
-  background-color: #ffffff !important;
-}
-/*estilos Modal*/
-.contentModal{
-  background-color: #F0F0F8 !important;
-}
-.modal-title{
-  color: #003b72 !important;
- }
-.colorModal .modal-content{
-  color: #003b72;
-  background-color: #F0F0F8 !important;
 }
 
-.close{
-  color: rgb(7, 7, 7);
-}
-.close:hover{
-  color: #003b72;
-}
-.dateInfo{
-  font-weight: bold;
-  display: flex;
-  color: #003b72 !important;
-}
-.dateInfoValue{
-  font-weight: normal;
-  color: #1C2331;
-  margin-left: 10px;
-}
-.contentMotive{
-  width: 100%;
-  text-align: center;
+.total-tag{
+  float: right;
+  margin-right: 3%;
 }
 
 .btn-list-z{
   background-color: #003b72;
   color: #ffffff;
   margin-left: 7px;
-}
-
-.title-opt{
-  display: flex;
-  box-sizing: border-box;
-  margin-bottom: 0px;
-  color: #003b72;
-  font-weight: bolder;
 }

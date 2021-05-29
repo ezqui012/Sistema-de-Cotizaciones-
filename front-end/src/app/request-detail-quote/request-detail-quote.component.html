@@ -1,0 +1,78 @@
+<app-nav-user></app-nav-user>
+
+<div class="containerBody">
+  <div class="title-opt">
+    <div class="containertop">
+      <h1><b>Detalles de Solicitud</b></h1>
+    </div>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-list-z" (click)="navigateTo('/request-quotation-list')">Lista de solicitudes</button>
+    </div>
+  </div>
+<div class="contentInfo">
+  <div class="infoHead">
+    <div class="nameRequest">
+      <b>Razon social: </b>
+      {{business}}
+    </div>
+    <div class="dateRequest">
+      <b>Fecha: </b>
+      {{dateRequest}}
+    </div>
+  </div>
+  <div class="nameAttedant">
+    <b>Encargado de solicitud: </b>
+    {{userName}}
+  </div>
+  <div class="nameAttedant">
+    <b>Encargado de cotización: </b>
+    {{personalQuote}}
+  </div>
+</div>
+  <!--Tabla-->
+
+  <div class="containerTable">
+    <div class="newHeadTable">
+      <div class="numHead"><b>Nº</b></div>
+      <div class="dateHead"><b>Cantidad</b></div>
+      <div class="undHead"><b>Unidad</b></div>
+      <div class="nomHead"><b>Detalle</b></div>
+      <div class="uniHead"><b>Unitario</b></div>
+      <div class="totalHead"><b>Total</b></div>
+    </div>
+    <div class="newBodyTable">
+      <table class="table">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-faculty" *ngFor="let list of items ; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{list.quantity}}</td>
+            <td>{{list.unit_item}}</td>
+            <td>{{list.name_item}}</td>
+            <td>{{list.unit_cost}}</td>
+            <td>{{list.total_cost}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+    <div class="total-tag">
+      <label><b>TOTAL: </b>
+      {{totalCost}}</label>
+    </div>
+
+  <div class="containerBtn">
+    <div>
+      <button class="btn btn-reporte" *ngIf="false">Reporte PDF</button>
+    </div>
+  </div>
+
+</div>
