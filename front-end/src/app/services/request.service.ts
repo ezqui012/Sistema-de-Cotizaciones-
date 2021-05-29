@@ -57,4 +57,56 @@ registerItemRequestQuotation(requestItem: ItemRequest):Observable<RegisterReques
   }
   return failed;
 }
+
+getNameRequest(id:any):Observable<RegisterRequestResponse | any>{
+  let failed: any;
+  if (localStorage.getItem('quot-umss-tk')){
+    const httpHeader = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    });
+    return this.httpClient.get<RegisterRequestResponse>(`${environment.URI_API}detail-request/${id}`, { headers: httpHeader });
+  }
+  return failed;
+}
+updateNameRequest(id:any, request:any):Observable<RegisterRequestResponse | any>{
+  let failed: any;
+
+  if(localStorage.getItem('quot-umss-tk')){
+    const httpHeader = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    });
+
+    return this.httpClient.put<RegisterRequestResponse>(`${environment.URI_API}request_up/${id}/${request}`, {headers: httpHeader});
+  }
+  return failed;
+}
+
+recoverListItemRequest(id:any):Observable<RegisterRequestResponse | any>{
+  let failed: any;
+
+  if(localStorage.getItem('quot-umss-tk')){
+    const httpHeader = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    });
+
+    return this.httpClient.get<RegisterRequestResponse>(`${environment.URI_API}items-request/${id}`, {headers: httpHeader});
+  }
+  return failed;
+}
+
+removerListItemRequest(id:any):Observable<RegisterRequestResponse | any>{
+  let failed: any;
+
+  if(localStorage.getItem('quot-umss-tk')){
+    const httpHeader = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    });
+
+    return this.httpClient.get<RegisterRequestResponse>(`${environment.URI_API}detail-request/${id}`, {headers: httpHeader});
+  }
+  return failed;
+}
+
+
+
 }

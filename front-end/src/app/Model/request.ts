@@ -15,6 +15,14 @@ export class ItemRequest{
   quantity: any;
   total_cost: any;
 }
+export class NameRequest{
+  id_request: any;
+  id:any;
+  business_name: any;
+  date: any;
+  status:any;
+
+}
 export class RegisterRequestResponse{
   res: any;
   message: any;

@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DateExpenseItem, RequestItem } from '../Model/expenseItem';
 import { RequestQuoteService } from '../services/request.service';
 import {NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
-import { ItemRequest, RegisterRequestResponse, } from '../Model/request';
+import { ItemRequest, NameRequest, RegisterRequestResponse, } from '../Model/request';
 
 
 @Component({
@@ -19,6 +19,7 @@ export class RequestQuotationEditComponent implements OnInit {
   items: Array<DateExpenseItem> = [];
   listItemsRequest: Array<RequestItem> = [];
   listItemsRequestShow: Array<RequestItem> = [];
+  namesRequests:Array<NameRequest> = [];
   idItem: any;
   indexItem: any;
   showEdit: boolean = false;
@@ -26,6 +27,8 @@ export class RequestQuotationEditComponent implements OnInit {
   enableSelect = true;
   valueSelectItem:string='';
   idRequest:any;
+  nameR:any;
+  public nameRequest:any
 
   //private patternNumber = /^[0-9]+(\.?[0-9]+)?$/;
   //private patternName = /^[a-zA-Z-z0-9-zñÑ\u00E0-\u00FC ]*$/
@@ -54,6 +57,9 @@ export class RequestQuotationEditComponent implements OnInit {
   ngOnInit(): void {
     this.getAllItem();
     this.idRequest = this.route.snapshot.params.id;
+    console.log("el id: "+this.idRequest);
+    this.getNameRequest();
+    this.recoverListItem();
   }
 
   navigateTo(path: String) {
@@ -64,7 +70,42 @@ export class RequestQuotationEditComponent implements OnInit {
       this.items = item;
     });
   }
+  getNameRequest() {
+    this.serviceRequestQuote.getNameRequest(this.idRequest).subscribe((date) => {
+      this.nameRequest = date;
+      console.log(date);
+      this.setNameReques();
+    });
+  }
+  setNameReques(){
+    this.requestForm.controls['business_name'].setValue(this.nameRequest.business_name);
+  }
+  recoverListItem(){
+    this.serviceRequestQuote.recoverListItemRequest(this.idRequest).subscribe((date) => {
+      this.listItemsRequest = date;
+      this.getListItemsShow();
+    });
+  }
+  updateNemaRequest(){
+    if(this.requestForm.invalid){
+      return;
+    }
+    let res:RegisterRequestResponse
+    this.serviceRequestQuote.updateNameRequest(this.idRequest, this.requestForm.get('business_name')?.value).subscribe(
+      (data) => {
+        res = data;
+        if(res.res){
+          console.log("seguardo los cambios con exito")
 
+        }else{
+          console.log("error al actualizar el estado intente de nuevo")
+        }
+      },
+      (error) => {
+        console.log("error al actualizar el estado")
+      }
+    );
+  }
   addItemRequest() {
     if (this.existsIdItem() === false) {
       this.addItem(this.indexItem);
@@ -186,30 +227,33 @@ export class RequestQuotationEditComponent implements OnInit {
     }
     return message;
   }
+  clearItemDetail(){
 
-  registerRequestQuotation(){
+    let res: RegisterRequestResponse;
+    this.serviceRequestQuote.removerListItemRequest(this.idRequest).subscribe(
+      (data) => {
+        res = data;
+        if (res.res) {
+
+        } else {
+          console.log('Ocurrio un error');
+        }
+      },
+      (error) => {
+        console.log(error.message);
+      }
+    );
+  }
+  registerNewRequestQuotation(){
     if(this.requestForm.valid){
       if(this.listItemsRequestShow.length !== 0){
-         let res:RegisterRequestResponse;
-          this.serviceRequestQuote.registerRequestQuotation(this.requestForm.value).subscribe((data) => {
-            res=data;
-            if(res.res){
-                this.toastr.success("La solicitud de cotización fue registrada con éxito");
-                console.log("El id  nueva Solicitud: "+res.id)
-                this.registerAllItemsToRequest(res.id);
-                this.clearInput();
-              }else{
-                this.toastr.error("Ocurrio un error al registrar intente nuevamente");
-              }
-            },
-            (error) => {
-              console.log(error);
-              this.toastr.error(`Error: ${error} intente nuevamente`);
-              this.isValidQuantityForm();
-                return;
-              }
+        this.clearItemDetail();
 
-          );
+                this.toastr.success("Los cambios de guardaron con exito");
+                //console.log("El id  nueva Solicitud: "+res.id)
+                this.registerAllItemsToRequest(this.idRequest);
+                this.clearInput();
+
 
       }else{
         this.toastr.error("Debe añadir al menos un Ítem en la solicitud de cotización");
