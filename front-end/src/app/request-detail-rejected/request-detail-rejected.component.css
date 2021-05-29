@@ -18,7 +18,7 @@ font-size: 1rem;
 display: block;
 }
 .infoHead{
-  /*display: flex;*/
+  display: flex;
   padding: 5px;
 }
 .nameRequest{
