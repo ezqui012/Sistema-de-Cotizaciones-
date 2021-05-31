@@ -10,14 +10,14 @@
   </div>
 
   <div>
-    <form class="form-newRol" >
+    <form class="form-newRol" [formGroup]="itemRegisterForm">
       <div class="formOne">
         <div class="formTwoCol1">
           <mat-form-field class="date-info">
             <mat-label>Nombre de Item</mat-label>
-            <input matInput placeholder="Ingrese el nombre del item"  >
-            <mat-error >
-
+            <input matInput placeholder="Ingrese el nombre del item" formControlName="name_item" >
+            <mat-error *ngIf="isValid('name_item')">
+              {{ getErrorMessage('name_item') }}
             </mat-error>
           </mat-form-field>
           <mat-form-field class="date-info">
@@ -25,7 +25,7 @@
             <input type="text"
               matInput
               placeholder="Ingrese la unidad"
-              [formControl]="myControl2"
+              formControlName="unit_item"
               [matAutocomplete]="unitItem"
             >
             <mat-autocomplete autoActiveFirstOption #unitItem="matAutocomplete" >
@@ -33,8 +33,8 @@
                 {{optionU}}
               </mat-option>
             </mat-autocomplete>
-            <mat-error >
-
+            <mat-error *ngIf="isValid('unit_item')">
+              {{ getErrorMessage('unit_item') }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -44,7 +44,7 @@
             <input type="text"
               matInput
               placeholder="Ingrese el tipo de item"
-              [formControl]="myControl"
+              formControlName="type_item"
               [matAutocomplete]="typeitem"
             >
             <mat-autocomplete autoActiveFirstOption #typeitem="matAutocomplete" >
@@ -52,12 +52,15 @@
                 {{option}}
               </mat-option>
             </mat-autocomplete>
+            <mat-error *ngIf="isValid('type_item')">
+              {{ getErrorMessage('type_item') }}
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="date-info">
             <mat-label>Precio</mat-label>
-            <input type="text" matInput placeholder="Ingrese el precio unitario" >
-            <mat-error >
-
+            <input type="text" matInput placeholder="Ingrese el precio unitario" formControlName="unit_cost">
+            <mat-error *ngIf="isValid('unit_cost')">
+              {{ getErrorMessage('unit_cost') }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -65,9 +68,9 @@
       <div class="contentAdress">
         <mat-form-field class="date-info-full-width">
           <mat-label>Descripción</mat-label>
-          <input matInput placeholder="Ingrese la descripción del item" >
-          <mat-error >
-
+          <input matInput placeholder="Ingrese la descripción del item" formControlName="description_item">
+          <mat-error *ngIf="isValid('description_item')">
+            {{ getErrorMessage('description_item') }}
           </mat-error>
         </mat-form-field>
       </div>
@@ -76,8 +79,8 @@
       <br>
       <div class="containerBtn">
         <div>
-          <button class="btn btn-cancel" (click)="navigateTo('/item-list')">Cancelar</button>
-          <button class="btn btn-register" >Registrar</button>
+          <button class="btn btn-cancel" type="button" (click)="navigateTo('/item-list')">Cancelar</button>
+          <button class="btn btn-register" type="button" (click)="registerItem()">Registrar</button>
         </div>
       </div>
     </form>
