@@ -1,1 +1,123 @@
-<p>company-list works!</p>
+<!--Barra de navegacion-->
+<app-nav-user></app-nav-user>
+<!--Modal Roles-->
+<ng-template #content let-modal>
+
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="dateInfo">
+      <h3><b>Nombre Empresa: </b></h3>
+      <div class="dateInfoValue">
+        <h3>Milcar</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Rubro: </b></h3>
+      <div class="dateInfoValue">
+        <h3>Papeleria</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>NIT: </b></h3>
+      <div class="dateInfoValue">
+        <h3>201256320222</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Representante legal: </b></h3>
+      <div class="dateInfoValue">
+        <h3>Carlos Merida Vaca</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Teléfono: </b></h3>
+      <div class="dateInfoValue">
+        <h3>79841233</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Correo: </b></h3>
+      <div class="dateInfoValue">
+        <h3>milcar@gmail.com</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Direción: </b></h3>
+      <div class="dateInfoValue">
+        <h3>Av. Petrolera km 6 esquina calle molles</h3>
+      </div>
+    </div>
+
+  </div>
+
+
+
+</ng-template>
+
+
+<!--header-->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Lista de Empresas</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/company-register')">Registrar Empresas</button>
+
+    </div>
+  </div>
+
+  <!--Tabla-->
+  <div class="containerTable">
+    <div class="newHeadTable">
+      <div class="numHead"><b>Nº</b></div>
+      <div class="nomHead"><b>Empresa</b></div>
+      <div class="rugHead"><b>Rugro</b></div>
+      <div class="telHead"><b>Teléfono</b></div>
+      <th scope="accHead">Acciones</th>
+    </div>
+    <div class="newBodyTable">
+      <table class="table table-hover">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-request">
+            <th style="padding-top: 20px" scope="row">1</th>
+            <td style="padding-top: 20px; width: 40%; padding-left: 5%">
+              Milcar
+            </td>
+            <td style="padding-top: 20px; width: 30%">
+              Papeleria
+            </td>
+            <td style="padding-top: 20px; width: 10%">
+              70908030
+            </td>
+
+            <td style="width: 20%">
+              <div class="row justify-content-end" style="padding-right: 20%">
+
+                <button type="button" class="btn btnAction" (click)="navigateTo('/company-edit')" ngbPopover="Editar">
+                  <img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25" />
+                </button>
+
+                <button type="button" class="btn btnAction" (click)="openModal(content)" ngbPopover="Ver detalle">
+                  <img src="../../assets/icon-quote/file-text.png" alt="" width="25" height="25" />
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>

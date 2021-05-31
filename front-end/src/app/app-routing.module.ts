@@ -41,6 +41,9 @@ import { AuthRequestGuard } from './guards/auth-request.guard';
 import { RequestDetailRejectedComponent } from './request-detail-rejected/request-detail-rejected.component';
 import { RequestDetailQuoteComponent } from './request-detail-quote/request-detail-quote.component';
 import { RequestDetailApprovedComponent } from './request-detail-approved/request-detail-approved.component';
+import { CompanyRegisterComponent } from './company-register/company-register.component';
+import { CompanyEditComponent } from './company-edit/company-edit.component';
+import { CompanyListComponent } from './company-list/company-list.component';
 
 const routes: Routes = [
   {
@@ -203,6 +206,21 @@ const routes: Routes = [
     path: 'info-request-approved/:id',
     component: RequestDetailApprovedComponent,
     canActivate: [AuthRequestGuard]
+  },
+  {
+    path: 'company-register',
+    component: CompanyRegisterComponent,
+
+  },
+  {
+    path: 'company-edit',
+    component: CompanyEditComponent,
+
+  },
+  {
+    path: 'company-list',
+    component: CompanyListComponent,
+
   }
 
 ];

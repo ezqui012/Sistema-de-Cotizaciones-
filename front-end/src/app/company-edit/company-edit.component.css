@@ -1,0 +1,103 @@
+.containerBody{
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 20px;
+}
+body{
+  background-color: #F0F0F8;
+}
+.containertop{
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  color: #003b72;
+  font-weight: bolder;
+}
+
+.btn-one,
+.btn-one:hover,
+.btn-one:active {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 200px;
+  margin-left: 20px;
+}
+.btn-cancel,
+.btn-cancel:hover,
+.btn-cancel:active {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color: #1C2331;
+  margin-right: 20px;
+  width: 120px;
+}
+.btn-register,
+.btn-register:hover,
+.btn-register:active{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 120px;
+}
+.btn:hover{
+  background-color: #2f82ff !important;
+}
+/*Formulario*/
+.formOne{
+  width: 100%;
+  display: flex;
+  flex: 1;
+
+}
+.formTwoCol1{
+  width: 50%;
+  flex: 1;
+  padding-right: 5%;
+}
+.formTwoCol2{
+  width: 50%;
+  flex: 1;
+  padding-left: 5%;
+
+}
+.date-info{
+  width: 100%;
+}
+.date-info-full-width{
+  width: 100%;
+}
+.containerBtn{
+  text-align: center;
+}
+
+.failed-register{
+  padding-top: 10px;
+  /*margin-bottom: 0px;*/
+  font-size: 1rem;
+  text-align: center;
+  color: red;
+}
+
+@media(max-width:650px){
+  .containerBody{
+    text-align: center;
+  }
+  .containertop{
+    text-align: left;
+  }
+  .formTwoCol1,.formTwoCol2{
+    width: 100%;
+    padding: 0;
+  }
+  .formOne{
+    width: 100%;
+    display:block;
+
+  }
+  .date-info-full-width{
+    width: 100%;
+  }
+}
+
+
