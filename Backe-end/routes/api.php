@@ -84,3 +84,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('updateUser/{id}', 'UserController@updateUser');
 });
 
+//Route::apiResource('expense-item', 'ExpenseItemController');
+Route::get('get-unit-item', 'ExpenseItemController@getUnit');
+Route::get('get-type-item', 'ExpenseItemController@getType');

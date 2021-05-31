@@ -26,7 +26,7 @@ export class ItemRegisterComponent implements OnInit {
 
   itemRegisterForm = this.fb.group({
     name_item: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(75)]],
-    type_item: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
+    type_item: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     unit_item: ['', [Validators.required, Validators.maxLength(10)]],
     unit_cost: ['', [Validators.required, Validators.min(1), Validators.pattern(this.patternDecimal)]],
     description_item: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]]
