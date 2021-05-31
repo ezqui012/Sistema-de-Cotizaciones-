@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-
+import { ItemsService } from '../services/items.service';
+// import { TypesItem } from '../Model/expense-item';
 
 @Component({
   selector: 'app-item-register',
@@ -16,10 +17,10 @@ import {map, startWith} from 'rxjs/operators';
 
 export class ItemRegisterComponent implements OnInit {
 
-  options: string[] = ['One', 'Two', 'Three'];
+  options: string[] = ['Sin tipo'];
   filteredOptions: Observable<string[]> | undefined;
 
-  typeUnit: string[] = ['Cant', 'Cm', 'Ltrs'];
+  typeUnit: string[] = ['Sin unidad'];
   filteredUnit: Observable<string[]> | undefined;
 
   private patternDecimal = /^[0-9]+(\.?[0-9]+)?$/;
@@ -36,19 +37,52 @@ export class ItemRegisterComponent implements OnInit {
     private router:Router,
     private fb: FormBuilder,
     public toastr: ToastrService,
-    private titlePage: Title
+    private titlePage: Title,
+    private service: ItemsService
   ) {
     this.titlePage.setTitle('Registro de Items - QUOT-UMSS');
   }
 
   ngOnInit(): void {
-    this.filteredOptions = this.itemRegisterForm.controls['type_item'].valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterType(value))
+    this.loadTypeItems();
+    this.loadUnitItems();
+  }
+
+  loadTypeItems(){
+    this.service.getAllTypesItems().subscribe(
+      (data) => {
+        let i:number = 0;
+        for(let value of data){
+          this.options[i] = value.type_item;
+          i++;
+        }
+        this.filteredOptions = this.itemRegisterForm.controls['type_item'].valueChanges.pipe(
+          startWith(''),
+          map(value => this._filterType(value))
+        );
+      },
+      (error) => {
+        this.toastr.error(`ERROR: ${error} Recargue la pagina`);
+      }
     );
-    this.filteredUnit = this.itemRegisterForm.controls['unit_item'].valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterUnit(value))
+  }
+
+  loadUnitItems(){
+    this.service.getAllUnitsItems().subscribe(
+      (data) => {
+        let i:number = 0;
+        for(let value of data){
+          this.typeUnit[i] = value.unit_item;
+          i++;
+        }
+        this.filteredUnit = this.itemRegisterForm.controls['unit_item'].valueChanges.pipe(
+          startWith(''),
+          map(value => this._filterUnit(value))
+        );
+      },
+      (error) => {
+        this.toastr.error(`ERROR: ${error} Recargue la pagina`);
+      }
     );
   }
 
