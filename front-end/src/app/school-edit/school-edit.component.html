@@ -16,7 +16,7 @@
 
     <form class="form-newRol" [formGroup]="facultyRegisterForm">
       <div class="formOne">
-        <div class="formTwo">
+        <div class="formTwoCol1">
           <mat-form-field class="date-info">
             <mat-label>Nombre</mat-label>
             <input matInput placeholder="Ingrese el nombre de la facultad" formControlName="name_faculty" (keypress)="onKeyPress()">
@@ -32,7 +32,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="formTwo">
+        <div class="formTwoCol2">
           <mat-form-field class="date-info">
             <mat-label>Decano</mat-label>
             <input matInput placeholder="Ingrese el nombre del decano" formControlName="dean_faculty" (keypress)="onKeyPress()">

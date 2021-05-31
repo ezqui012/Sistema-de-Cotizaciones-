@@ -23,15 +23,6 @@ body{
   width: 200px;
   margin-left: 20px;
 }
-.btn-two,
-.btn-two:hover,
-.btn-two:active {
-  color: white;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
-  background-color:#1C2331;
-  width: 200px;
-  margin-left: 20px;
-}
 .btn-cancel,
 .btn-cancel:hover,
 .btn-cancel:active {
@@ -50,22 +41,31 @@ body{
   width: 120px;
 }
 .btn:hover{
-  background-color: #2226fa;
+  background-color: #2f82ff !important;
 }
 /*Formulario*/
 .formOne{
   width: 100%;
   display: flex;
+  flex: 1;
 
 }
-.formTwo{
+.formTwoCol1{
   width: 50%;
+  flex: 1;
+  padding-right: 5%;
+}
+.formTwoCol2{
+  width: 50%;
+  flex: 1;
+  padding-left: 5%;
+
 }
 .date-info{
-  width: 80%;
+  width: 100%;
 }
 .date-info-full-width{
-  width: 90%;
+  width: 100%;
 }
 .containerBtn{
   text-align: center;
@@ -86,8 +86,9 @@ body{
   .containertop{
     text-align: left;
   }
-  .formTwo{
+  .formTwoCol1,.formTwoCol2{
     width: 100%;
+    padding: 0;
   }
   .formOne{
     width: 100%;
@@ -95,6 +96,8 @@ body{
 
   }
   .date-info-full-width{
-    width: 80%;
+    width: 100%;
   }
 }
+
+
