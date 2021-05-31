@@ -49,9 +49,8 @@ export class EditUserComponent implements OnInit {
     ci: ['', [Validators.required, Validators.maxLength(9),
               Validators.minLength(7), Validators.pattern('[0-9]*')]],
     address: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(30)]],
-    email: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(8), Validators.pattern(/\S+@\S+\.\S+/)]],
-    pass1: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(32), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]],
-    pass2: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(32), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]]
+    email: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(8), Validators.pattern(/\S+@\S+\.\S+/)]]
+
   });
   getName(){
     return this.updateForm.get('name')?.value;
@@ -109,7 +108,7 @@ export class EditUserComponent implements OnInit {
     let message;
 
     if (this.updateForm.get(field)?.errors?.required) {
-      message = `El campo ${field} es obligatorio`;
+      message = `El campo correo es obligatorio`;
     } else if (this.updateForm.get(field)?.hasError('minlength')) {
       message = "Ingrese minimo 8 caracteres";
     } else if (this.updateForm.get(field)?.hasError('maxlength')) {
@@ -122,7 +121,7 @@ export class EditUserComponent implements OnInit {
   verifyPasswordMessage(field:string){
     let message;
     if (this.updatePassForm.get(field)?.errors?.required) {
-      message = `El campo ${field} es obligatorio`;
+      message = `El campo Ingresar nueva contraseña es obligatorio`;
     } else if (this.updatePassForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 8 caracteres";
     } else if (this.updatePassForm.get(field)?.hasError('maxlength')) {
@@ -138,7 +137,7 @@ export class EditUserComponent implements OnInit {
   getErrorMessageName(field: string) {
     let message;
     if (this.updateForm.get(field)?.errors?.required) {
-      message = `El campo ${field} es obligatorio`;
+      message = `El campo Nombre Completo es obligatorio`;
     } else if (this.updateForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 15 caracteres";
     } else if (this.updateForm.get(field)?.hasError('maxlength')) {
@@ -151,7 +150,7 @@ export class EditUserComponent implements OnInit {
   getErrorMessageCi(field: string) {
     let message;
     if (this.updateForm.get(field)?.errors?.required) {
-      message = `El campo ${field} es obligatorio`;
+      message = `El campo Ci es obligatorio`;
     } else if (this.updateForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 7 dígitos";
     }else if (this.updateForm.get(field)?.hasError('maxlength')) {
@@ -165,7 +164,7 @@ export class EditUserComponent implements OnInit {
   getErrorMessageAddress(field: string) {
     let message;
     if (this.updateForm.get(field)?.errors?.required) {
-      message = `El campo ${field} es obligatorio`;
+      message = `El campo dirección es obligatorio`;
     } else if (this.updateForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 30 caracteres";
     } else if (this.updateForm.get(field)?.hasError('maxlength')) {
@@ -177,7 +176,7 @@ export class EditUserComponent implements OnInit {
   getErrorMessagePhone(field: string) {
     let message;
     if (this.updateForm.get(field)?.errors?.required) {
-      message = `El campo ${field} es obligatorio`;
+      message = `El campo teléfono es obligatorio`;
     } else if (this.updateForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 7 dígitos";
     } else if (this.updateForm.get(field)?.hasError('maxlength')) {
@@ -198,6 +197,7 @@ export class EditUserComponent implements OnInit {
       //console.log(this.dataToUpdate);
       this.RegisterUser = this.dataToUpdate;
      // this.updateForm.controls['ci'].setValue(this.RegisterUser.ci);
+      console.log(this.RegisterUser.id_role +"HOLA")
       this.updateForm.controls['id_role'].setValue(this.RegisterUser.id_role);
       this.updateForm.controls['id_unit'].setValue(this.RegisterUser.id_unit);
       this.upPassword = this.dataToUpdate;
@@ -207,8 +207,19 @@ export class EditUserComponent implements OnInit {
     })
   }
   updateDataUser(){
-    this.updateService.updateData(this.id, this.RegisterUser).subscribe(res=>{
+
+    console.log(this.updateForm.get('id_role')?.value)
+    this.updateForm.controls['address'].setValue(this.updateForm.get('address')?.value.trim())
+    this.updateForm.controls['name'].setValue(this.updateForm.get('name')?.value.trim())
+
+    this.updateForm.controls['email'].setValue(this.updateForm.get('email')?.value.trim())
+
+    if(this.updateForm.invalid){
+      return
+    }
+    this.updateService.updateData(this.id, this.updateForm.value).subscribe(res=>{
       this.showToastSuccess();
+      console.log(this.updateForm.get('id_role')?.value)
       },
       (error: any)=>{
          let message= error;
@@ -310,15 +321,6 @@ export class EditUserComponent implements OnInit {
       // invalid character, prevent input
     }
   }
-  public inputValidatorCi(event: any){
-    const pattern = /^[0-9]\d*$/;
-    // let inputChar = String.fromCharCode(event.charCode)
-    if (!pattern.test(event.target.value)) {
-      event.target.value = event.target.value.replace(/^[0-9]\d*$/);
-      // invalid character, prevent input
-    }
-  }
-
 
   getErrorMessagePassword(field: string) {
     let message;
@@ -368,14 +370,14 @@ export class EditUserComponent implements OnInit {
     return message;
   }
 
-onlyNumber(evt: any) {
-  evt = (evt) ? evt : window.event;
-  var charCode = (evt.which) ? evt.which : evt.keyCode;
-  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-      return false;
-  }
-  return true;
-}
+// onlyNumber(evt: any) {
+//   evt = (evt) ? evt : window.event;
+//   var charCode = (evt.which) ? evt.which : evt.keyCode;
+//   if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+//       return false;
+//   }
+//   return true;
+// }
 
 
 

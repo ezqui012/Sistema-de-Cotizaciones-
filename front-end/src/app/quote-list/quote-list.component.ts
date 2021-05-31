@@ -32,6 +32,7 @@ export class QuoteListComponent implements OnInit {
     this.services.getListQuotes(id).subscribe(
       (data) => {
         this.quotes = data;
+        console.log(this.quotes);
       },
       (error) => {
         console.log(error);
