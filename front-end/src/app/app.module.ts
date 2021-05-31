@@ -30,6 +30,28 @@ import { MatCardModule } from '@angular/material/card';
 import { UserListComponent } from './user-list/user-list.component';
 import { AdministrativasComponent } from './administrativas/administrativas.component';
 import { EditarComponent } from './editar/editar.component';
+import { ListQuotesComponent } from './list-quotes/list-quotes.component';
+import { ComparativeQuotesComponent } from './comparative-quotes/comparative-quotes.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { PasswordComponent } from './PopUp/password/password.component';
+import { EditUnitComponent } from './edit-unit/edit-unit.component';
+import { QuoteListProcessComponent } from './quote-list-process/quote-list-process.component';
+import { QuoteListFinalizedComponent } from './quote-list-finalized/quote-list-finalized.component';
+import { QuoteFormComponent } from './quote-form/quote-form.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { RequestQuotationComponent } from './request-quotation/request-quotation.component';
+import { RequestQuotationListComponent } from './request-quotation-list/request-quotation-list.component';
+import { RequestQuotationEditComponent } from './request-quotation-edit/request-quotation-edit.component';
+import { RequestDetailComponent } from './request-detail/request-detail.component';
+import { QuoteListComponent } from './quote-list/quote-list.component';
+import { NavUserComponent } from './nav-user/nav-user.component';
+import { HomeUserComponent } from './home-user/home-user.component';
+import { EditDetailQuotationComponent } from './edit-detail-quotation/edit-detail-quotation.component';
+import { RequestDetailRejectedComponent } from './request-detail-rejected/request-detail-rejected.component';
+import { RequestDetailQuoteComponent } from './request-detail-quote/request-detail-quote.component';
+import { RequestDetailApprovedComponent } from './request-detail-approved/request-detail-approved.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +73,27 @@ import { EditarComponent } from './editar/editar.component';
     SchoolEditComponent,
     UserListComponent,
     AdministrativasComponent,
-    EditarComponent
+    EditarComponent,
+    EditUnitComponent,
+    QuoteFormComponent,
+    ListQuotesComponent,
+    ComparativeQuotesComponent,
+    EditUserComponent,
+    PasswordComponent,
+    EditUnitComponent,
+    QuoteListProcessComponent,
+    QuoteListFinalizedComponent,
+    RequestQuotationComponent,
+    RequestQuotationListComponent,
+    RequestQuotationEditComponent,
+    RequestDetailComponent,
+    QuoteListComponent,
+    NavUserComponent,
+    HomeUserComponent,
+    EditDetailQuotationComponent,
+    RequestDetailRejectedComponent,
+    RequestDetailQuoteComponent,
+    RequestDetailApprovedComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +112,10 @@ import { EditarComponent } from './editar/editar.component';
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

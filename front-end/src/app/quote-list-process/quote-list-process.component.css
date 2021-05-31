@@ -1,0 +1,152 @@
+.containerBody{
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 20px;
+}
+body{
+  background-color: #F0F0F8;
+}
+.containertop{
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  color: #003b72;
+  font-weight: bolder;
+}
+.btn:hover{
+background-color:#2f82ff !important;
+color: white;
+}
+.btn-one {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 200px;
+  margin-left: 10px;
+}
+.btn-ver{
+  color: white;
+
+  background-color: none;
+  margin-left: 5px;
+  width: px;
+}
+.btn-edit{
+  color: #FFFFFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color: none;
+
+  width: 50px;
+}
+
+.headTable{
+  background-color: #003b72;
+  color: white;
+  display: none;
+}
+.containerTable{
+  color:#0000 ;
+  background-color: #fafafa;
+}
+/*estilos Modal*/
+.contentModal{
+  background-color: #F0F0F8 !important;
+}
+
+.colorModal .modal-content{
+  color: #003b72 !important;
+  background-color: #F0F0F8;
+}
+.modal-title{
+ color: #003b72 !important;
+}
+.close{
+  color: rgb(7, 7, 7);
+}
+.close:hover{
+  color: #003b72;
+}
+.dateInfo{
+  font-weight: bold;
+  display: flex;
+  color:#003b72 !important;
+}
+.dateInfoValue{
+  font-weight: normal;
+  color: #1C2331;
+  margin-left: 10px;
+}
+/*Estilos de tabla*/
+.newBodyTable{
+  color:#0000 ;
+  background-color: #fafafa;
+  overflow-y: auto;
+  padding-left: 0.2%;
+  padding-right: 0.2%;
+  height: 420px;
+}
+.newHeadTable{
+  background-color: #003b72;
+  color: white;
+  font-size: 1rem;
+  display: flex;
+  padding: 12px;
+  width: 100%;
+}
+.numHead{width: 5%;}
+.nomHead{width: 72%;}
+.cantHead{width: 10%;}
+.unHead{width: 10%;}
+.detHead{width: 18%;}
+.emHead{ width: 17%;}
+.peHead{ width: 9%;}
+.unitHead{ width: 10%;}
+.totalHead{ width: 12%;}
+.accHead{ width: 10%;}
+
+.tdNum{width: 6%; padding-top: 20px;}
+.tdquan{width: 10%;padding-top: 20px;}
+.tdunit{width:9%;padding-top: 20px;}
+.tdbname{width: 18%;padding-top: 20px;}
+.tdenter{width: 18%;padding-top: 20px;}
+.tddel{width: 8%;padding-top: 20px;}
+.tdcost{width: 10%;padding-top: 20px;}
+
+.reason{
+  width: 89%;
+  font-weight: bold;
+}
+.state{
+  font-weight: bold;
+  width: 11%;
+}
+.button{
+  width: 50;
+}
+.btnAction{
+
+  align-items: center;
+	width:40px;
+	height:40px;
+  padding: 5px;
+  margin-right: 5%;
+	text-align:center;
+	/* border:1px solid #007095; */
+	border-radius:5px;
+	cursor:pointer;
+  /* background-color:#dedede; */
+
+}
+.btnAction:hover{
+  background-color: #ffffff !important;
+}
+
+#btn-listq{
+  background-color: #1C2331;
+}
+
+#btn-listq:hover{
+  background-color: #2f82ff;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}

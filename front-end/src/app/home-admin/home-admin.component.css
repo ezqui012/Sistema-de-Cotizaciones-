@@ -2,33 +2,40 @@ body{
   margin: 0;
   background-color: #f0f0f8;
 }
+.bodyOption{
+  padding: 20px;
+  display:block;
+  text-align: center;
+}
 
 .contentOption{
-
-  padding-top: 50px;
+  width: 100%;
   display: flex;
+  flex: 1;
 }
 
 .username{
-  padding-top: 20px;
+
   padding-left: 30px;
   font-size: 1.5rem;
   color: #1C2331;
+  padding: 40px;
 
 }
 .option{
   margin: 2%;
-
-}
-.option{
   list-style: none;
   font-size: 1rem;
   padding: 5px;
+  flex: 1;
+  cursor: pointer;
+
 }
 .optBtn{
   width: 100%;
-  transition: all 0.9s;
+  transition: all 1s;
 }
 .option:hover{
+  border-radius: 6px;
   background-color: rgb(102, 137, 252);
   }

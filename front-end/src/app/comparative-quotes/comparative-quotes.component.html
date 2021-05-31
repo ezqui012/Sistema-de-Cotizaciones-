@@ -1,0 +1,163 @@
+<!--Barra de navegacion-->
+<app-nav-user></app-nav-user>
+<!--Modal-Rechazo-->
+<ng-template #contentR let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Formulario de rechazo</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup]="rejectedForm">
+    <div class="modal-body">
+      <div class="contentMotive">
+        <mat-form-field class="date-info">
+          <mat-label>Motivo de Rechazo</mat-label>
+          <input matInput placeholder="Ingrese el motivo de rechazo" formControlName="reason">
+          <mat-error *ngIf="isValidRejectedForm()">
+            {{ getErrorMessageRejected() }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="containerBtn">
+        <div>
+          <button class="btn btn-cancelar" type="button" (click)="modal.dismiss()">Cancelar</button>
+          <button class="btn btn-reporte" type="button" (click)="registerRejectedForm()">Guardar</button>
+        </div>
+      </div>
+    </div>
+</form>
+</ng-template>
+<!-- Modal Confirm -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Confirmar Elección</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="contentMotive">
+      <p><b>Esta eligiendo la cotizacion:</b></p>
+      <p>Item: {{itemsQuotes[pos].name_item}}</p>
+      <p>Total: Bs. <b>{{itemsQuotes[pos].unit_cost*itemsQuotes[pos].quantity}}</b></p>
+      <p>Empresa: {{itemsQuotes[pos].name_enterprise}} </p>
+
+      <br>
+      <p style="color: brown;">La elección será permanente.</p>
+      <p>Para continuar haga "Click" en "OK"</p>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="containerBtn">
+      <div>
+        <button class="btn btn-cancelar" (click)="modal.dismiss()">Cancelar</button>
+        <button class="btn btn-ok" (click)="elegirItem(itemsQuotes[pos].unit_cost*itemsQuotes[pos].quantity)">OK</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!--header-->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Cuadro comparativo de cotizaciones</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/list-quotes')">Lista de Cotizaciones</button>
+
+    </div>
+  </div>
+
+  <div class="contentQuoteDate">
+    <div class="contentQuote">
+      <b>Encargado de cotizacion: </b>
+      {{ entrusted }}
+    </div>
+    <div class="contentSelect">
+      <mat-form-field class="selectItem-full-width" id="select-item">
+        <mat-label>Seleccione Item</mat-label>
+        <mat-select #mySelect (selectionChange)="showItems(mySelect.value)">
+          <mat-option *ngFor="let item of items" [value]="item.id_item">
+            {{ item.name_item }}
+          </mat-option>
+        </mat-select>
+        <mat-error> </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!--Tabla de lista de cotizaciones realizadas-->
+  <div class="conteinerTable">
+    <div class="newHeadTable">
+      <div class="numHeadC"><b>Nº</b></div>
+      <div class="canHeadC"><b>Cantidad</b></div>
+      <div class="uniHeadC"><b>Unidad</b></div>
+      <div class="detHeadC"><b>Detalle</b></div>
+      <div class="empHeadC"><b>Empresa</b></div>
+      <div class="perHeadC"><b>Periodo</b></div>
+      <div class="unitHeadC"><b>Unitario</b></div>
+      <div class="totHeadC"><b>Total</b></div>
+      <div class="selHead"><b>Seleccion</b></div>
+    </div>
+    <div class="newBodyTable">
+      <table class="table table-hover">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">N°</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Unidad</th>
+            <th scope="col">Detalle</th>
+            <th scope="col">Empresa</th>
+            <th scope="col">Periodo</th>
+            <th scope="col">Unitario</th>
+            <th scope="col">Total</th>
+            <th scope="col">Seleccion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="rowQoute"
+            *ngFor="let itemQuote of itemsQuotes; let i = index"
+          >
+            <th style="padding-top:20px;" scope="row">{{ i + 1}}</th>
+            <td style="width:8%; padding-left: 2%; padding-top:20px;">{{itemQuote.quantity}}</td>
+            <td style="width:7%; padding-top:20px;">{{itemQuote.unit_item}}</td>
+            <td style="width:28%; padding-top:20px;">{{itemQuote.name_item}}</td>
+            <td style="width:26%; padding-top:20px;">{{itemQuote.name_enterprise}}</td>
+            <td style="width:7%; padding-top:20px;">{{itemQuote.delivery_days}}</td>
+            <td style="width:8%; padding-top:20px;">{{itemQuote.unit_cost}}</td>
+            <td style="width:8%; padding-top:20px;">{{itemQuote.unit_cost * itemQuote.quantity }}</td>
+            <td style="width:8%">
+              <div>
+                <button class="btn btn-edit" *ngIf="showBtn" (click)="openModal(content, itemQuote.id_qd, i, true)">
+                  Elegir
+                </button>
+                <button class="btn btn-edit" *ngIf="!showBtn" disabled >
+                  Elegir
+                </button>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="infoHead">
+      <div class="nameRequest">
+        <b>Moto disponible de la Unidad: </b>
+        {{actualAmount}}
+      </div>
+      <div class="dateRequest">
+        <b>TOTAL: </b>
+        {{totalCost}}
+      </div>
+    </div>
+    <div class="containerBtn">
+      <div>
+        <button class="btn btn-reject" (click)="openModalRejected(contentR)">Rechazar</button>
+        <button class="btn btn-register" (click)="registerQuoteAccepted()">Registrar</button>
+      </div>
+    </div>
+  </div>
+</div>

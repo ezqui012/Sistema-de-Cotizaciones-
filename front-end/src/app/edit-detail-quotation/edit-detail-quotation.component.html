@@ -1,0 +1,93 @@
+<app-nav-user></app-nav-user>
+<div class="containerBody">
+
+  <div class="containertop">
+    <h1 class="title-page"><b>Editar cotización</b></h1>
+    <div class="btnCreate">
+      <button type="button" id="btn-List" class="btn btn-one" (click)="navigateTo('/quote-list-process/' + business_name + '/' + idquotation)">Detalle de cotización</button>
+    </div>
+  </div>
+
+  <div class="container-subTitle">
+    <label class="title-quote"><b>Razon social:</b> {{business_name}}</label>
+    <label class="title-quote" id="subtitle-margin"><b>Estado:</b> {{statusQuot}}</label>
+  </div>
+
+  <div class="container-form">
+    <form class="form-quote" [formGroup]="registerForm">
+      <mat-form-field class="form-camp-full-width" id="input-large">
+        <mat-label>Empresa</mat-label>
+        <mat-select formControlName="id_enterprise">
+          <mat-option *ngFor="let option of enterprises" [value]="option.id_enterprise">
+            {{option.name_enterprise}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="isValid('id_enterprise')">
+          {{ getErrorMessage('id_enterprise') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-camp-full-width" id="input-large">
+        <mat-label>Detalle o Item de gasto</mat-label>
+        <mat-select formControlName="id_item">
+          <mat-option *ngFor="let itemOption of items" [value]="itemOption.id_item">
+            {{itemOption.name_item}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="isValid('id_item')">
+          {{ getErrorMessage('id_item') }}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="inputs-f1">
+        <mat-form-field class="form-camp-full-width" >
+          <mat-label>Cantidad</mat-label>
+          <input matInput placeholder="Ingrese la cantidad" formControlName="quantity">
+          <mat-error *ngIf="isValid('quantity')">
+            {{ getErrorMessage('quantity') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-camp-full-width">
+          <mat-label>Costo unitario</mat-label>
+          <input matInput placeholder="Ingrese el costo unitario" formControlName="unit_cost">
+          <mat-error *ngIf="isValid('unit_cost')">
+            {{ getErrorMessage('unit_cost') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="inputs-f1">
+        <mat-form-field class="form-camp-full-width">
+          <mat-label>Fecha</mat-label>
+          <input matInput [matDatepicker]="picker" placeholder="Ingrese fecha de cotización" [formControl]="dateControl" readonly>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="isValidDate()">
+            {{ dateErrorMessage }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-camp-full-width">
+          <mat-label>Dias de entrega</mat-label>
+          <input matInput placeholder="Ingrese el tiempo de entrega en dias" formControlName="delivery_days">
+          <mat-error *ngIf="isValid('delivery_days')">
+            {{ getErrorMessage('delivery_days') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <br>
+      <br>
+
+      <div class="containerBtn">
+        <div>
+          <button class="btn btn-cancel" type="button" (click)="navigateTo('/quote-list')">Cancelar</button>
+          <button class="btn btn-register" type="button" (click)="updateQuote()">Guardar</button>
+        </div>
+      </div>
+      <br>
+    </form>
+  </div>
+
+</div>

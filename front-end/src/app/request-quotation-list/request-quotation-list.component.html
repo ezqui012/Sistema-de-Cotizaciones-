@@ -1,0 +1,149 @@
+<app-nav-user></app-nav-user>
+
+<!--header-->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Solicitud de cotización</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/request-quotation')">Registrar Solicitud</button>
+    </div>
+  </div>
+  <!--Tabla-->
+  <div class="containerTable">
+    <div class="newHeadTable">
+      <div class="numHead"><b>Nº</b></div>
+      <div class="nomHead"><b>Razon social</b></div>
+      <div class="totalHead"><b>Encargdo de solicitud</b></div>
+      <div class="statusHead"><b>Estado</b></div>
+      <div class="accHead"><b>Acciones</b></div>
+    </div>
+    <div class="newBodyTable">
+      <table class="table table-hover">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="row-request"
+            *ngFor="let request of request_quotation; let i = index"
+          >
+            <th style="padding-top: 20px" scope="row">{{ i + 1 }}</th>
+            <td style="padding-top: 20px; width: 40%; padding-left: 5%">
+              {{ request.business_name }}
+            </td>
+            <td style="padding-top: 20px; width: 20%">{{ request.name }}</td>
+            <td style="padding-top: 20px; width: 15%">
+              <div>{{ setStatus(request.status) }}</div>
+              <div [ngSwitch]="status">
+                <div
+                  class="contentStatusP"
+                  *ngSwitchCase="statusRequest.process"
+                >
+                  Proceso
+                </div>
+                <div
+                  class="contentStatusA"
+                  *ngSwitchCase="statusRequest.accepted"
+                >
+                  Aceptado
+                </div>
+                <div
+                  class="contentStatusR"
+                  *ngSwitchCase="statusRequest.rejected"
+                >
+                  Rechazado
+                </div>
+                <div class="contentStatusC" *ngSwitchCase="statusRequest.quote">
+                  Cotización
+                </div>
+              </div>
+            </td>
+            <td style="width: 25%">
+              <div
+                [ngSwitch]="status"
+                class="row justify-content-end"
+                style="padding-right: 20%"
+              >
+                <button
+                  *ngSwitchCase="statusRequest.accepted"
+                  disabled
+                  type="button"
+                  class="btn btnAction"
+                  ngbPopover="Deshabilitado"
+                >
+                  <img
+                    src="../../assets/icon-quote/pencilNulo.png"
+                    alt=""
+                    width="25"
+                    height="25"
+                  />
+                </button>
+
+                <button
+                  *ngSwitchCase="statusRequest.rejected"
+                  disabled
+                  type="button"
+                  class="btn btnAction"
+                  ngbPopover="Deshabilitado"
+                >
+                  <img
+                    src="../../assets/icon-quote/pencilNulo.png"
+                    alt=""
+                    width="25"
+                    height="25"
+                  />
+                </button>
+                <button
+                  *ngSwitchCase="statusRequest.quote"
+                  disabled
+                  type="button"
+                  class="btn btnAction"
+                  ngbPopover="Deshabilitado"
+                >
+                  <img
+                    src="../../assets/icon-quote/pencilNulo.png"
+                    alt=""
+                    width="25"
+                    height="25"
+                  />
+                </button>
+                <button
+                  *ngSwitchCase="statusRequest.process"
+                  type="button"
+                  class="btn btnAction"
+                  (click)="navigateToPage('request-quotation-edit', request.id_request)"
+                  ngbPopover="Editar"
+                >
+                  <img
+                    src="../../assets/icon-quote/pencil.png"
+                    alt=""
+                    width="25"
+                    height="25"
+                  />
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btnAction"
+                  (click)="navigateToPageDetail(request.id_request, request.status)"
+                  ngbPopover="Ver detalle"
+                >
+                  <img
+                    src="../../assets/icon-quote/file-text.png"
+                    alt=""
+                    width="25"
+                    height="25"
+                  />
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

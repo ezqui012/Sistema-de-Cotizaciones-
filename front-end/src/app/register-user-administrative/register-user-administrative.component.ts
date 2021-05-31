@@ -9,6 +9,7 @@ import { RolDropdownService } from '../services/rol-dropdown.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-register-user-administrative',
@@ -45,32 +46,33 @@ export class RegisterUserAdministrativeComponent implements OnInit {
       this.titlePage.setTitle('Registro de personal - QUOT-UMSS');
     }
   showToastrErrorEmail(){
-    this.toastr.error('El email ya está en uso','Campo Inválido');
+    this.toastr.error('El correo ya está en uso','Campo Inválido');
   }
   showToastrErrorCi(){
     this.toastr.error('El ci ya está en uso');
   }
   showToastSuccess(){
-    this.toastr.success('Se registraron los datos con exito');
+    this.toastr.success('Se registraron los datos con éxito');
   }
+
   getErrorMessageEmail(field: string) {
     let message;
 
     if (this.registerForm.get(field)?.errors?.required) {
-      message = `El campo ${field} es obligatorio`;
+      message = `El campo correo es obligatorio`;
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       message = "Ingrese minimo 8 caracteres";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
       message = "Ingrese maximo 100 caracteres";
     }  else if (this.registerForm.get(field)?.hasError('pattern')) {
-      message = "Ingrese un email valido, ejemplo: Carlos@gmail.com";
+      message = "Ingrese un correo valido, ejemplo: Carlos@gmail.com";
     }
     return message;
   }
   getErrorMessageName(field: string) {
     let message;
     if (this.registerForm.get(field)?.errors?.required) {
-      message = `El campo ${field} es obligatorio`;
+      message = `El campo Nombre Completo es obligatorio`;
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 15 caracteres";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
@@ -83,7 +85,7 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   getErrorMessageCi(field: string) {
     let message;
     if (this.registerForm.get(field)?.errors?.required) {
-      message = `El campo ${field} es obligatorio`;
+      message = `El campo Ci es obligatorio`;
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 7 dígitos";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
@@ -97,7 +99,7 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   getErrorMessageAddress(field: string) {
     let message;
     if (this.registerForm.get(field)?.errors?.required) {
-      message = `El campo ${field} es obligatorio`;
+      message = `El campo dirección es obligatorio`;
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 30 caracteres";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
@@ -109,7 +111,7 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   getErrorMessagePhone(field: string) {
     let message;
     if (this.registerForm.get(field)?.errors?.required) {
-      message = `El campo ${field} es obligatorio`;
+      message = `El campo Teléfono es obligatorio`;
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 7 dígitos";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
@@ -126,7 +128,7 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     let message;
 
     if (this.registerForm.get(field)?.errors?.required) {
-      message = `El campo ${field} es obligatorio`;
+      message = `El campo contraseña es obligatorio`;
     } else if (this.registerForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 8 caracteres";
     } else if (this.registerForm.get(field)?.hasError('maxlength')) {
@@ -139,6 +141,13 @@ export class RegisterUserAdministrativeComponent implements OnInit {
 
   }
   insertData() {
+    this.registerForm.controls['address'].setValue(this.registerForm.get('address')?.value.trim())
+    this.registerForm.controls['name'].setValue(this.registerForm.get('name')?.value.trim())
+    this.registerForm.controls['password'].setValue(this.registerForm.get('password')?.value.trim())
+    this.registerForm.controls['email'].setValue(this.registerForm.get('email')?.value.trim())
+    if(this.registerForm.invalid){
+      return
+    }
     this.getEmail();
   }
   //load Unit DropDown
@@ -154,6 +163,9 @@ export class RegisterUserAdministrativeComponent implements OnInit {
       this.ci = res;
       this.compare();
     })
+  }
+
+  splitData(){
 
   }
   compare(){
@@ -220,13 +232,24 @@ export class RegisterUserAdministrativeComponent implements OnInit {
     }
   }
   // Validar campos solo numeros
-  // onKeyPress(event: any) {
-  //   const regexpNumber = /[0-9\+\-\ ]/;
-  //   let inputCharacter = String.fromCharCode(event.charCode);
-  //   if (event.keyCode != 8 && !regexpNumber.test(inputCharacter)) {
-  //     event.preventDefault();
-  //   }
-  // }
+//   onKeyPress(event: any) {
+//     const regexpNumber = /[0-9\+\-\ ]/;
+//     let inputCharacter = String.fromCharCode(event.charCode);
+//     if (event.keyCode != 8 && !regexpNumber.test(inputCharacter)) {
+//       event.preventDefault();
+//     }
+//   }
+
+//   _keyUp(event: any) {
+//     const pattern = /[0-9\+\-\ ]/;
+//     let inputChar = String.fromCharCode(event.charCode);
+
+//     if (!pattern.test(inputChar)) {
+//       // invalid character, prevent input
+//       event.preventDefault();
+//     }
+// }
+
 
 
 }

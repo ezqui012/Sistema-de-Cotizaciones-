@@ -1,0 +1,124 @@
+<main>
+  <app-navbar></app-navbar>
+  <!-- <ng-template #content let-modal>
+
+    <div class="modal-header">
+      <h1 class="modal-title" id="modal-basic-title"><b>Cambio de contraseña</b></h1>
+      <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" >
+      <div class="dateInfo">
+        <mat-form-field>
+          <mat-label>Ingresar nueva contraseña</mat-label>
+          <input class="form-control" matInput [(ngModel)]="upPassword.pass1">
+          <mat-error *ngIf="isValid('pass1')" >
+            {{verifyPasswordMessage('pass1')}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <mat-label>Ingresar nueva contraseña</mat-label>
+        <input matInput [(ngModel)]="upPassword.pass2">
+      </mat-form-field>
+      <div class="containerButton">
+        <button class="btn btn-danger"  (click)="modal.dismiss()">
+          Cancelar
+        </button>
+        <button class="btn btn-primary" (clic)= "getDataModal()">
+          Guardar
+        </button>
+      </div>
+    </div>
+</ng-template> -->
+
+
+
+
+
+  <div>
+    <div class="containerTop">
+      <h1><b> Editar Personal</b></h1>
+      <div class="btnCreate">
+        <button type="button" class="btn btn-one" (click)="navigateTo('/user-list')"> Ver Lista</button>
+      </div>
+    </div>
+  </div>
+  <form class="form-container" [formGroup]="updateForm" (ngSubmit)="updateDataUser()">
+    <div class="leftDiv">
+      <mat-form-field>
+        <input class="fieldRegister" formControlName="email" matInput placeholder="Titulo" type="email"
+          placeholder="Ingrese Correo"  [(ngModel)]="RegisterUser.email">
+        <mat-error *ngIf="isValid('email')">
+          {{getErrorMessageEmail('email')}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input class="fieldRegister" formControlName="name" matInput placeholder="Titulo" type="text"
+          placeholder="Ingrese Nombre Completo"  [(ngModel)]="RegisterUser.name"
+          (input)="inputValidator($event)" >
+        <mat-error *ngIf="isValid('name')">
+          {{getErrorMessageName('name')}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input class="fieldRegister" formControlName="ci" matInput placeholder="Titulo" type="text"
+          placeholder="Ingrese CI" [(ngModel)]="RegisterUser.ci"
+           >
+        <mat-error *ngIf="isValid('ci')">
+          {{getErrorMessageCi('ci')}}
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="matformLeft">
+        <input input class="fieldRegister" formControlName="address" matInput placeholder="Titulo" type="text"
+          placeholder="Ingrese Dirección"  [(ngModel)]="RegisterUser.address">
+        <mat-error *ngIf="isValid('address')">
+          {{getErrorMessageAddress('address')}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="rightDiv">
+      <mat-form-field class=leftCol>
+        <mat-select placeholder="Seleccione rol" formControlName="id_role" >
+          <mat-option *ngFor="let rol of roles" [value]="rol.id_role">
+            {{rol.name_role}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class=leftCol>
+        <mat-select placeholder="Seleccione Unidad" #unidad formControlName="id_unit">
+          <mat-option *ngFor="let unit of units" [value]="unit.id_unit">
+            {{unit.name_unit}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input class="fieldRegister" formControlName="phone" matInput placeholder="Titulo" type="text"
+          placeholder="Ingrese Teléfono" [(ngModel)]="RegisterUser.phone"
+          >
+        <mat-error *ngIf="isValid('phone')">
+          {{getErrorMessagePhone('phone')}}
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+        <button class="btn btn-password" type="button" (click)="editPassword()">
+          Cambiar contraseña
+        </button>
+
+    </div>
+    <div class="containerButton">
+      <button class="btn btn-danger"  (click)="navigateTo('/user-list')">
+        Cancelar
+      </button>
+      <button class="btn btn-primary">
+        Guardar
+      </button>
+    </div>
+  </form>
+</main>

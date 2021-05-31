@@ -5,6 +5,8 @@ import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
+import { AssignedPermitService }  from '../services/assignedPermit.service';
+import { FacultyService } from '../services/faculty.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +30,9 @@ export class LoginComponent implements OnInit {
     private service: LoginService,
     private router:Router,
     public toastr: ToastrService,
-    private titlePage: Title
+    private titlePage: Title,
+    private servicePermission: AssignedPermitService,
+    private serviceFaculty: FacultyService
   ) {
     this.titlePage.setTitle('Inicio de sesión - QUOT-UMSS');
   }
@@ -84,9 +88,15 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('quot-umss-tk', res.token);
           localStorage.setItem('quot-user', res.name);
           localStorage.setItem('quot-umss-p', res.role);
+          localStorage.setItem('quot-umss-u', res.unit);
           this.router.navigate(['']);
         }else if(res.res){
-          this.toastr.info('Por el momento solo el Administrador tiene acceso al sistema intente mas tarde');
+          localStorage.setItem('quot-umss-tk', res.token);
+          localStorage.setItem('quot-user', res.name);
+          localStorage.setItem('quot-umss-p', res.role);
+          localStorage.setItem('quot-umss-u', res.unit);
+          localStorage.setItem('quot-umss-usr', res.id);
+          this.permissionUser();
         }
       }, (error: any) => {
         console.log(error.message);
@@ -94,6 +104,29 @@ export class LoginComponent implements OnInit {
         this.messageLoginFailed = 'El correo o la contraseña son incorrectos';
       }
     )
+  }
+
+  permissionUser(){
+    let permission: string = '';
+    this.servicePermission.allPermitOfRole(localStorage.getItem('quot-umss-p')).subscribe(
+      (data) => {
+        for(let idP of data){
+          permission = permission + idP.id_permission + ', ';
+        }
+        permission = permission + '0'
+        localStorage.setItem('quot-umss-pa', permission);
+        this.getFacultyId();
+      }
+    );
+  }
+
+  getFacultyId(){
+    this.serviceFaculty.getIdFaculty(localStorage.getItem('quot-umss-u')).subscribe(
+      (data) => {
+        localStorage.setItem('quot-umss-f', data.id_faculty);
+        this.router.navigate(['/home-user']);
+      }
+    );
   }
 
 }

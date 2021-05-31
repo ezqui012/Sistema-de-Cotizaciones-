@@ -87,7 +87,19 @@ class AssignedPermitController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $input = $request->all();
+            DB::table('assinged_permissions')->where('id_role', $id)->update($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'Successfully upgraded faculty'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     /**
@@ -98,6 +110,19 @@ class AssignedPermitController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+
+            DB::table('assigned_permissions')->where('id_role', $id)->delete();
+
+            return response()->json([
+                'res' => true,
+                'message' => 'Successfully deete Permit assigned'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 }

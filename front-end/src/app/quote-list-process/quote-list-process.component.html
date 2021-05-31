@@ -1,0 +1,77 @@
+<!--Navbar-->
+<app-nav-user></app-nav-user>
+<!--header-->
+<div class="containerBody">
+  <div class="containertop">
+    <h2><b>Detalle de cotizaciones</b></h2>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/quote-form/' + quoteId)">Registro de Cotización</button>
+    </div>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" id="btn-listq" (click)="navigateTo('/quote-list')">Lista de cotizaciones</button>
+    </div>
+  </div>
+
+  <!--Tabla-->
+
+    <div class="labeldiv">
+      <label class="reason">Razón social: {{business}}</label>
+      <label class="state">Estado: Proceso</label>
+    </div>
+  <div class="containerTable">
+    <div class="newHeadTable">
+      <div class="numHead"><b>Nº</b></div>
+      <div class="cantHead"><b>Cantidad</b></div>
+      <div class="unHead"><b>Unidad</b></div>
+      <div class="detHead"><b>Detalle</b></div>
+      <div class="emHead"><b>Empresa</b></div>
+      <div class="peHead"><b>Periodo</b></div>
+      <div class="unitHead"><b>Unitario</b></div>
+      <div class="totalHead"><b>Total</b></div>
+      <div class="accHead"><b>Acciones</b></div>
+    </div>
+    <div class="newBodyTable">
+      <table class="table table-hover">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Unidad</th>
+            <th scope="col">Detalle</th>
+            <th scope="col">Periodo</th>
+            <th scope="col">Unitario</th>
+            <th scope="col">Total</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-faculty" *ngFor="let quote of quotes; let i = index">
+            <th scope="row" class="tdNum">{{i+1}}</th>
+            <td class="tdquan">{{quote.quantity}}</td>
+            <td class="tdunit">{{quote.unit_item}}</td>
+            <td class="tdbname">{{quote.name_item}}</td>
+            <td class="tdenter">{{quote.name_enterprise}}</td>
+            <td class="tddel">{{quote.delivery_days}}</td>
+            <td class="tdcost">{{quote.unit_cost}}</td>
+            <td class="tdcost">{{quote.unit_cost*quote.quantity}}</td>
+            <td class="button">
+              <div class="row justify-content-end" style="padding-right: 20%;">
+                <button type="button" class="btn btnAction" ngbPopover="Editar" (click)="navigateToEdit('/edit-detail-quotation/'+quoteId+'/'+quote.id_qd)">
+                  <img src="../../assets/img-outsite/pencil.png" width="25" height="25">
+                </button>
+                <button id="verRol" type="button" class="btn btnAction" ngbPopover="Eliminar" (click)="deleteQuoteProcess(quote.id_qd)" >
+                  <img src="../../assets/img-outsite/trash.png" width="25" height="25">
+                </button>
+
+              </div>
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>

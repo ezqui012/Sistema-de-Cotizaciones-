@@ -80,7 +80,7 @@
             <td>{{faculty.name_faculty}}</td>
             <td>
               <div class="row justify-content-end" style="padding-right: 20%;">
-                <button type="button" class="btn btn-edit">Editar</button>
+                <button type="button" class="btn btn-edit" (click)="navigateTo('/school-edit/'+faculty.id_faculty)">Editar</button>
                 <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content, i)">Ver</button>
               </div>
             </td>

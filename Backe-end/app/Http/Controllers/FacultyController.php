@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Faculty;
 use App\Http\Requests\CreateFacultyRequest;
+use App\Http\Requests\UpdateFacultyRequest;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class FacultyController extends Controller
 {
@@ -57,14 +59,42 @@ class FacultyController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(UpdateFacultyRequest $request, $id)
     {
-        //
+        try{
+            $input = $request->all();
+            DB::table('faculties')->where('id_faculty', $id)->update($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'Successfully upgraded faculty'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
 
     public function destroy($id)
     {
         //
+    }
+
+    public function getIdFaculty($id){
+        try{
+            $res = DB::table('faculties')
+                        ->join('units', 'faculties.id_faculty', '=',  'units.id_faculty')
+                        ->select('faculties.id_faculty')
+                        ->where('units.id_unit', '=', $id)
+                        ->get();
+            return json_decode($res, true)[0];
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 }
