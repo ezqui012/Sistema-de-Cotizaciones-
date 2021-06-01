@@ -6,7 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { ItemsService } from '../services/items.service';
-// import { TypesItem } from '../Model/expense-item';
 
 @Component({
   selector: 'app-item-register',
@@ -22,6 +21,9 @@ export class ItemRegisterComponent implements OnInit {
 
   typeUnit: string[] = ['Sin unidad'];
   filteredUnit: Observable<string[]> | undefined;
+
+  indexType: number = 0;
+  indexUnit: number = 0;
 
   private patternDecimal = /^[0-9]+(\.?[0-9]+)?$/;
 
@@ -132,7 +134,31 @@ export class ItemRegisterComponent implements OnInit {
       this.toastr.error('Existem campos incorrectos');
       return;
     }
-    console.log(this.itemRegisterForm.value);
+    this.service.insertItem(this.itemRegisterForm.value).subscribe(
+      (data) => {
+        if(data.res){
+          this.toastr.success('El registro del ítem se realizo con éxito');
+          this.loadTypeItems();
+          this.loadUnitItems();
+          this.clearInputs();
+        }
+      },
+      (error) => {
+        try {
+          if(error.error.errors.name_item[0]){
+            this.toastr.error(error.error.errors.name_item[0]);
+          }
+        } catch (error) {
+          this.toastr.error(`ERROR: ${error} Recargue la pagina`);
+        }
+      }
+    );
+  }
+
+  private clearInputs(){
+    this.itemRegisterForm.get('name_item')?.reset();
+    this.itemRegisterForm.get('unit_cost')?.reset();
+    this.itemRegisterForm.get('description_item')?.reset();
   }
 
   private translate(field: string): string|void{

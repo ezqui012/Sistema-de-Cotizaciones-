@@ -31,4 +31,11 @@ class CreateExpenseItemRequest extends FormRequest
             'description_item' => 'required|min:10|max:100'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name_item.unique'=> 'El nombre que desea asignar al item ya se encuentra registrado, escriba otro nombre para el item.'
+        ];
+    }
 }
