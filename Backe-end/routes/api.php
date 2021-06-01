@@ -82,6 +82,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('get-request-accepted/{id}', 'RequestDetailsController@requestApproved');
 
     Route::put('updateUser/{id}', 'UserController@updateUser');
+
+    Route::get('get-unit-item', 'ExpenseItemController@getUnit');
+    Route::get('get-type-item', 'ExpenseItemController@getType');
+    Route::get('companyList', 'FacultyController@allListCompany');
 });
 
-Route::get('companyList', 'FacultyController@allListCompany');

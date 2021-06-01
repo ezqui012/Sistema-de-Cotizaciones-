@@ -1,0 +1,88 @@
+<!--Barra de navegacion-->
+<!-- <app-nav-user></app-nav-user> -->
+<!-- cuerpo de la pagina -->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Editar Item</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/item-list')">Lista de Items</button>
+    </div>
+  </div>
+
+  <div>
+    <form class="form-newRol" [formGroup]="itemRegisterForm">
+      <div class="formOne">
+        <div class="formTwoCol1">
+          <mat-form-field class="date-info">
+            <mat-label>Nombre de Item</mat-label>
+            <input matInput placeholder="Ingrese el nombre del item" formControlName="name_item" >
+            <mat-error *ngIf="isValid('name_item')">
+              {{ getErrorMessage('name_item') }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="date-info">
+            <mat-label>Unidad</mat-label>
+            <input type="text"
+              matInput
+              placeholder="Ingrese la unidad"
+              formControlName="unit_item"
+              [matAutocomplete]="unitItem"
+            >
+            <mat-autocomplete autoActiveFirstOption #unitItem="matAutocomplete" >
+              <mat-option *ngFor="let optionU of filteredUnit | async" [value]="optionU">
+                {{optionU}}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="isValid('unit_item')">
+              {{ getErrorMessage('unit_item') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="formTwoCol2">
+          <mat-form-field class="date-info">
+            <mat-label>Tipo</mat-label>
+            <input type="text"
+              matInput
+              placeholder="Ingrese el tipo de item"
+              formControlName="type_item"
+              [matAutocomplete]="typeitem"
+            >
+            <mat-autocomplete autoActiveFirstOption #typeitem="matAutocomplete" >
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="isValid('type_item')">
+              {{ getErrorMessage('type_item') }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="date-info">
+            <mat-label>Precio</mat-label>
+            <input type="text" matInput placeholder="Ingrese el precio unitario" formControlName="unit_cost">
+            <mat-error *ngIf="isValid('unit_cost')">
+              {{ getErrorMessage('unit_cost') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="contentAdress">
+        <mat-form-field class="date-info-full-width">
+          <mat-label>Descripción</mat-label>
+          <input matInput placeholder="Ingrese la descripción del item" formControlName="description_item">
+          <mat-error *ngIf="isValid('description_item')">
+            {{ getErrorMessage('description_item') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div class="containerBtn">
+        <div>
+          <button class="btn btn-cancel" type="button" (click)="navigateTo('/item-list')">Cancelar</button>
+          <button class="btn btn-register" type="button" (click)="updateItem()">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -44,6 +44,9 @@ import { RequestDetailApprovedComponent } from './request-detail-approved/reques
 import { CompanyRegisterComponent } from './company-register/company-register.component';
 import { CompanyEditComponent } from './company-edit/company-edit.component';
 import { CompanyListComponent } from './company-list/company-list.component';
+import { ItemListComponent } from './item-list/item-list.component';
+import { ItemRegisterComponent } from './item-register/item-register.component';
+import { ItemEditComponent } from './item-edit/item-edit.component';
 
 const routes: Routes = [
   {
@@ -221,6 +224,18 @@ const routes: Routes = [
     path: 'company-list',
     component: CompanyListComponent,
 
+  },
+  {
+    path: 'item-list',
+    component: ItemListComponent
+  },
+  {
+    path: 'item-register-form',
+    component: ItemRegisterComponent
+  },
+  {
+    path: 'item-edit/:id',
+    component: ItemEditComponent
   }
 
 ];
