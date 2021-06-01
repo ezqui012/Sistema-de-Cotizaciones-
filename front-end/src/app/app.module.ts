@@ -55,6 +55,8 @@ import { RequestDetailApprovedComponent } from './request-detail-approved/reques
 import { CompanyListComponent } from './company-list/company-list.component';
 import { CompanyRegisterComponent } from './company-register/company-register.component';
 import { CompanyEditComponent } from './company-edit/company-edit.component';
+import { ItemListComponent } from './item-list/item-list.component';
+import { ItemRegisterComponent } from './item-register/item-register.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +101,9 @@ import { CompanyEditComponent } from './company-edit/company-edit.component';
     RequestDetailApprovedComponent,
     CompanyListComponent,
     CompanyRegisterComponent,
-    CompanyEditComponent
+    CompanyEditComponent,
+    ItemListComponent,
+    ItemRegisterComponent
   ],
   imports: [
     BrowserModule,
