@@ -5,4 +5,5 @@ export class Company{
     legal_representative: any
     phone_enterprise: any
     address_enterprise: any
+    email_enterprise: any
 }
