@@ -90,13 +90,14 @@ export class RequestQuotationEditComponent implements OnInit {
     if(this.requestForm.invalid){
       return;
     }
+
     let res:RegisterRequestResponse
     this.serviceRequestQuote.updateNameRequest(this.idRequest, this.requestForm.get('business_name')?.value).subscribe(
       (data) => {
         res = data;
         if(res.res){
           //console.log("seguardo los cambios con exito")
-          this.toastr.success("La Razón social se modifico con éxito")
+          this.toastr.success("La Razón social se modificó con éxito")
 
         }else{
           console.log("error al actualizar el estado intente de nuevo")
@@ -203,11 +204,11 @@ export class RequestQuotationEditComponent implements OnInit {
   getErrorMessageRequest() {
     let message;
     if (this.requestForm.get('business_name')?.errors?.required) {
-      message = 'El campo Razon social es obligatorio';
+      message = 'El campo Razón social es obligatorio';
     } else if (this.requestForm.get('business_name')?.hasError('minlength')) {
-      message = 'El campo Razon social requiere como mínimo 10 caracteres';
+      message = 'El campo Razón social requiere como mínimo 10 caracteres';
     } else if (this.requestForm.get('business_name')?.hasError('mmaxlength')) {
-      message = 'El campo Razon social requiere como maximo 100 caracteres';
+      message = 'El campo Razón social requiere como máximo 100 caracteres';
     }
     return message;
   }
@@ -252,7 +253,7 @@ export class RequestQuotationEditComponent implements OnInit {
                 this.clearItemDetail();
                 this.registerAllItemsToRequest(this.idRequest);
 
-                this.toastr.success("Los cambios de guardaron con exito");
+                this.toastr.success("Los cambios se guardaron con éxito");
                 //console.log("El id  nueva Solicitud: "+res.id)
                 this.clearInput();
                 this.navigateTo("/request-quotation-list");

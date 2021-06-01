@@ -83,4 +83,3 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::put('updateUser/{id}', 'UserController@updateUser');
 });
-
