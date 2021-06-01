@@ -208,30 +208,30 @@ const routes: Routes = [
     path: 'info-request-approved/:id',
     component: RequestDetailApprovedComponent,
     canActivate: [AuthRequestGuard]
+  },
+  {
+    path: 'company-register',
+    component: CompanyRegisterComponent,
+
+  },
+  {
+    path: 'company-edit',
+    component: CompanyEditComponent,
+
+  },
+  {
+    path: 'company-list',
+    component: CompanyListComponent,
+
+  },
+  {
+    path: 'item-list',
+    component: ItemListComponent
+  },
+  {
+    path: 'item-register-form',
+    component: ItemRegisterComponent
   }
-  // {
-  //   path: 'company-register',
-  //   component: CompanyRegisterComponent,
-
-  // },
-  // {
-  //   path: 'company-edit',
-  //   component: CompanyEditComponent,
-
-  // },
-  // {
-  //   path: 'company-list',
-  //   component: CompanyListComponent,
-
-  // },
-  // {
-  //   path: 'item-list',
-  //   component: ItemListComponent
-  // },
-  // {
-  //   path: 'item-register-form',
-  //   component: ItemRegisterComponent
-  // }
 
 ];
 
