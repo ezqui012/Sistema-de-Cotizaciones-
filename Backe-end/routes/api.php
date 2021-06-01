@@ -83,3 +83,5 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::put('updateUser/{id}', 'UserController@updateUser');
 });
+
+Route::get('companyList', 'FacultyController@allListCompany');
