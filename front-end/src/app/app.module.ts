@@ -57,6 +57,7 @@ import { CompanyRegisterComponent } from './company-register/company-register.co
 import { CompanyEditComponent } from './company-edit/company-edit.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { ItemRegisterComponent } from './item-register/item-register.component';
+import { ItemEditComponent } from './item-edit/item-edit.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import { ItemRegisterComponent } from './item-register/item-register.component';
     CompanyRegisterComponent,
     CompanyEditComponent,
     ItemListComponent,
-    ItemRegisterComponent
+    ItemRegisterComponent,
+    ItemEditComponent
   ],
   imports: [
     BrowserModule,

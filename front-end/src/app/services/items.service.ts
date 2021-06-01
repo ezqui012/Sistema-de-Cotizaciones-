@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { RegisterItemModel, ResponseItem } from '../Model/expense-item';
+import { RegisterItemModel, ResponseItem, ExpenseItem } from '../Model/expense-item';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +43,17 @@ export class ItemsService {
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
       return this.httpClient.post<ResponseItem>(`${environment.URI_API}expense-item`, item, { headers: httpHeader });
+    }
+    return failed;
+  }
+
+  getInfoItem(id: any): Observable<ExpenseItem | any> {
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<ExpenseItem>(`${environment.URI_API}expense-item/${id}`, { headers: httpHeader });
     }
     return failed;
   }
