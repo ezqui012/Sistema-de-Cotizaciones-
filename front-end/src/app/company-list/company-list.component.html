@@ -13,31 +13,31 @@
     <div class="dateInfo">
       <h3><b>Nombre Empresa: </b></h3>
       <div class="dateInfoValue">
-        <h3>Milcar</h3>
+        <h3>{{listCompany[pos].name_enterprise}}</h3>
       </div>
     </div>
     <div class="dateInfo">
       <h3><b>Rubro: </b></h3>
       <div class="dateInfoValue">
-        <h3>Papeleria</h3>
+        <h3>{{listCompany[pos].sector_enterprise}}</h3>
       </div>
     </div>
     <div class="dateInfo">
       <h3><b>NIT: </b></h3>
       <div class="dateInfoValue">
-        <h3>201256320222</h3>
+        <h3>{{listCompany[pos].nit_enterprise}}</h3>
       </div>
     </div>
     <div class="dateInfo">
       <h3><b>Representante legal: </b></h3>
       <div class="dateInfoValue">
-        <h3>Carlos Merida Vaca</h3>
+        <h3>{{listCompany[pos].legal_representative}}</h3>
       </div>
     </div>
     <div class="dateInfo">
       <h3><b>Teléfono: </b></h3>
       <div class="dateInfoValue">
-        <h3>79841233</h3>
+        <h3>{{listCompany[pos].phone_enterprise}}</h3>
       </div>
     </div>
     <div class="dateInfo">
@@ -49,7 +49,7 @@
     <div class="dateInfo">
       <h3><b>Direción: </b></h3>
       <div class="dateInfoValue">
-        <h3>Av. Petrolera km 6 esquina calle molles</h3>
+        <h3>{{listCompany[pos].address_enterprise}}</h3>
       </div>
     </div>
 
@@ -89,16 +89,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="row-request">
-            <th style="padding-top: 20px" scope="row">1</th>
+          <tr class="row-request" *ngFor="let company of listCompany; let i = index">
+            <th style="padding-top: 20px" scope="row">{{i+1}}</th>
             <td style="padding-top: 20px; width: 40%; padding-left: 5%">
-              Milcar
+              {{company.name_enterprise}}
             </td>
             <td style="padding-top: 20px; width: 30%">
-              Papeleria
+              {{company.sector_enterprise}}
             </td>
             <td style="padding-top: 20px; width: 10%">
-              70908030
+              {{company.phone_enterprise}}
             </td>
 
             <td style="width: 20%">
@@ -108,7 +108,7 @@
                   <img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25" />
                 </button>
 
-                <button type="button" class="btn btnAction" (click)="openModal(content)" ngbPopover="Ver detalle">
+                <button type="button" class="btn btnAction" (click)="openModal(content, i)" ngbPopover="Ver detalle">
                   <img src="../../assets/icon-quote/file-text.png" alt="" width="25" height="25" />
                 </button>
               </div>
