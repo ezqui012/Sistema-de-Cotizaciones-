@@ -83,4 +83,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::put('updateUser/{id}', 'UserController@updateUser');
 });
+Route::post('enterprise', 'CompanyController@addDataEnterprise');
+Route::get('getEnterprises', 'CompanyController@getListEnterprise');
+Route::get('getSectorEnterprise','CompanyController@getSectorEnterprise');
 
