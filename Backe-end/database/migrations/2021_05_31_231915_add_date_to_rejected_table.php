@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddEmailToEnterpriseTable extends Migration
+class AddDateToRejectedTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddEmailToEnterpriseTable extends Migration
      */
     public function up()
     {
-        Schema::table('enterprise', function (Blueprint $table) {
-            $table->string('email_enterprise', 32)->default('micorreo@gmail.com');
+        Schema::table('rejected', function (Blueprint $table) {
+            $table->string('date_rejected')->default('2020-05-17');
         });
     }
 
@@ -25,8 +25,8 @@ class AddEmailToEnterpriseTable extends Migration
      */
     public function down()
     {
-        Schema::table('enterprise', function (Blueprint $table) {
-            $table->dropColumn('email_enterprise');
+        Schema::table('rejected', function (Blueprint $table) {
+            $table->dropColumn('date_rejected');
         });
     }
 }
