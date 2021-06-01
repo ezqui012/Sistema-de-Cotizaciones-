@@ -87,4 +87,3 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('get-type-item', 'ExpenseItemController@getType');
 });
 
-//Route::apiResource('expense-item', 'ExpenseItemController');
