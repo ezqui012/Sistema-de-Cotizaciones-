@@ -210,6 +210,14 @@ export class QuoteFormComponent implements OnInit {
     );
   }
 
+  showQuantity(){
+    for(let data of this.items){
+      if(data.id_item === this.registerForm.get('id_item')?.value){
+        this.registerForm.controls['quantity'].setValue(data.quantity);
+      }
+    }
+  }
+
   private translate(field: string):string|void{
     if(field === 'id_enterprise'){
       return 'Empresa';
