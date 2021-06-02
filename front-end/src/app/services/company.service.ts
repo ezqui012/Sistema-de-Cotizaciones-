@@ -12,8 +12,15 @@ export class CompanyService {
   insertData(data: Company): Observable<Company>{
     return this.httpClient.post<Company>('http://127.0.0.1:8000/api/enterprise', data);
   }
-  getSectorEnterprise(){
-    return this.httpClient.get<Company>('http://127.0.0.1:8000/api/getSectorEnterprise');
+  getSectorEnterprise():Observable<any> {
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/getSectorEnterprise');
   }
+  getEnterpriseList():Observable<any>{
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/getEnterprises');
+  }
+  getAllSectors():Observable<any>{
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/sector-enterprise');
+  }
+
 
 }

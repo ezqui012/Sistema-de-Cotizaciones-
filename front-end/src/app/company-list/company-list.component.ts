@@ -1,3 +1,5 @@
+import { CompanyService } from './../services/company.service';
+import { Company } from './../Model/company';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -12,13 +14,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./company-list.component.css']
 })
 export class CompanyListComponent implements OnInit {
-
+  companies: Array<Company>=[];
+  pos =0;
   constructor(
     private router:Router,
     public toastr: ToastrService,
     private titlePage: Title,
     private modal: NgbModal,
-    public config: NgbPopoverConfig
+    public config: NgbPopoverConfig,
+    private companyDataService: CompanyService
 
   ) {
     this.titlePage.setTitle('Lista de Empresas - QUOT-UMSS');
@@ -27,13 +31,19 @@ export class CompanyListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getEnterpriseList();
   }
   navigateTo(path: String){
     this.router.navigate([path]);
   }
-  openModal(content: any){
+  getEnterpriseList(){
+     this.companyDataService.getEnterpriseList().subscribe(res=>{
+      return this.companies=res
+    })
+  }
+  openModal(content: any, pos:any){
     this.modal.open(content,{ windowClass:"colorModal"});
-    //this.pos = pos;
+    this.pos = pos;
   }
 
 }

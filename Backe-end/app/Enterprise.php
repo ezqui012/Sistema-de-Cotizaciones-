@@ -18,7 +18,8 @@ class Enterprise extends Model
         'nit_enterprise',
         'legal_representative',
         'phone_enterprise',
-        'address_enterprise'
+        'address_enterprise',
+        'email_enterprise'
     ];
 
     protected $hidden = [
