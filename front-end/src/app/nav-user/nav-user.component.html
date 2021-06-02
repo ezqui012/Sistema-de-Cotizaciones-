@@ -22,7 +22,7 @@
         <div class="link"  (click)="navigateTo('/company-list')">
           <b>Empresas</b>
         </div>
-        <div class="link"  (click)="navigateTo('/item-list')">
+        <div class="link" *ngIf="showItem" (click)="navigateTo('/item-list')">
           <b>Items</b>
         </div>
         <div class="link" (click)="logout()">
@@ -43,8 +43,8 @@
       <li class="option" *ngIf="showRequest" (click)="navigateTo('/request-quotation-list')">Solicitud</li>
       <li class="option" *ngIf="showQuote" (click)="navigateTo('/quote-list')">Cotización</li>
       <li class="option" *ngIf="showAccept" (click)="navigateTo('/list-quotes')">Aprobar cotización</li>
-      <li class="option"  (click)="navigateTo('/company-list')">Empresas</li>
-      <li class="option"  (click)="navigateTo('/item-list')">Items</li>
+      <li class="option" *ngIf="true" (click)="navigateTo('/company-list')">Empresas</li>
+      <li class="option" *ngIf="showItem" (click)="navigateTo('/item-list')">Items</li>
       <li class="option" (click)="logout()">Salir</li>
     </div>
   </div>

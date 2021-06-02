@@ -48,6 +48,9 @@ import { ItemListComponent } from './item-list/item-list.component';
 import { ItemRegisterComponent } from './item-register/item-register.component';
 import { ItemEditComponent } from './item-edit/item-edit.component';
 
+import { AuthEnterpriseGuard } from './guards/auth-enterprise.guard';
+import { AuthItemGuard } from './guards/auth-item.guard';
+
 const routes: Routes = [
   {
     path:'',
@@ -227,15 +230,18 @@ const routes: Routes = [
   },
   {
     path: 'item-list',
-    component: ItemListComponent
+    component: ItemListComponent,
+    canActivate: [AuthItemGuard]
   },
   {
     path: 'item-register-form',
-    component: ItemRegisterComponent
+    component: ItemRegisterComponent,
+    canActivate: [AuthItemGuard]
   },
   {
     path: 'item-edit/:id',
-    component: ItemEditComponent
+    component: ItemEditComponent,
+    canActivate: [AuthItemGuard]
   }
 
 ];

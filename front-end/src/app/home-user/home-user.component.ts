@@ -15,6 +15,8 @@ export class HomeUserComponent implements OnInit {
   showQuote: boolean = false;
   showRequest: boolean = false;
   showAccept: boolean = false;
+  showItem: boolean = false;
+  showEnterprise: boolean = false;
 
   permission: number[] | any;
 
@@ -43,6 +45,12 @@ export class HomeUserComponent implements OnInit {
     }
     if(this.permission.includes(3)){
       this.showAccept = true;
+    }
+    if(this.permission.includes(7)){
+      this.showItem = true;
+    }
+    if(this.permission.includes(8)){
+      this.showEnterprise = true;
     }
   }
 
