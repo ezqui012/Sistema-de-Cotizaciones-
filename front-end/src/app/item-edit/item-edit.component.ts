@@ -152,32 +152,18 @@ export class ItemEditComponent implements OnInit {
       this.toastr.error('Existem campos incorrectos');
       return;
     }
-    console.log(this.itemRegisterForm.value);
-    // this.service.insertItem(this.itemRegisterForm.value).subscribe(
-    //   (data) => {
-    //     if(data.res){
-    //       this.toastr.success('El registro del ítem se realizo con éxito');
-    //       this.loadTypeItems();
-    //       this.loadUnitItems();
-    //       this.clearInputs();
-    //     }
-    //   },
-    //   (error) => {
-    //     try {
-    //       if(error.error.errors.name_item[0]){
-    //         this.toastr.error(error.error.errors.name_item[0]);
-    //       }
-    //     } catch (error) {
-    //       this.toastr.error(`ERROR: ${error} Recargue la pagina`);
-    //     }
-    //   }
-    // );
-  }
 
-  private clearInputs(){
-    this.itemRegisterForm.get('name_item')?.reset();
-    this.itemRegisterForm.get('unit_cost')?.reset();
-    this.itemRegisterForm.get('description_item')?.reset();
+    this.service.updateItem(this.route.snapshot.params.id, this.itemRegisterForm.value).subscribe(
+      (data) => {
+        if(data.res){
+          this.navigateTo('/item-list');
+          this.toastr.success('Los cambios fueron realizados con éxito');
+        }
+      },
+      (error) => {
+        this.toastr.error('El nombre de item ingresado ya se encuentra en uso, ingrese otro.');
+      }
+    );
   }
 
   private translate(field: string): string|void{

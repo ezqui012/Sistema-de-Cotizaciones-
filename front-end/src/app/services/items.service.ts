@@ -58,4 +58,15 @@ export class ItemsService {
     return failed;
   }
 
+  updateItem(id: any, item: RegisterItemModel):Observable<ResponseItem | any>{
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.put<ResponseItem>(`${environment.URI_API}expense-item/${id}`, item, { headers: httpHeader });
+    }
+    return failed;
+  }
+
 }
