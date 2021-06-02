@@ -25,6 +25,7 @@ export class SchoolListComponent implements OnInit {
     private titlePage: Title
   ) {
     this.titlePage.setTitle('Lista de facultades - QUOT-UMSS');
+
   }
 
   ngOnInit(): void {

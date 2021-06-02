@@ -64,7 +64,7 @@ export class QuoteService {
       const httpHeader = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
-      return this.httpClient.put<ResponseQuote>(`${environment.URI_API}updateStatusQ/${idQuote}/${status}`, {headers: httpHeader});
+      return this.httpClient.put<ResponseQuote>(`${environment.URI_API}updateStatusQ/${idQuote}/${status}`,{}, {headers: httpHeader});
     }
     return failed;
   }
@@ -74,7 +74,7 @@ export class QuoteService {
       const httpHeader = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
-      return this.httpClient.put<ResponseQuote>(`${environment.URI_API}updateStatusR/${idRequest}/${status}`, {headers: httpHeader});
+      return this.httpClient.put<ResponseQuote>(`${environment.URI_API}updateStatusR/${idRequest}/${status}`,{}, {headers: httpHeader});
     }
     return failed;
   }

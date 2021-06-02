@@ -41,6 +41,15 @@ import { AuthRequestGuard } from './guards/auth-request.guard';
 import { RequestDetailRejectedComponent } from './request-detail-rejected/request-detail-rejected.component';
 import { RequestDetailQuoteComponent } from './request-detail-quote/request-detail-quote.component';
 import { RequestDetailApprovedComponent } from './request-detail-approved/request-detail-approved.component';
+import { CompanyRegisterComponent } from './company-register/company-register.component';
+import { CompanyEditComponent } from './company-edit/company-edit.component';
+import { CompanyListComponent } from './company-list/company-list.component';
+import { ItemListComponent } from './item-list/item-list.component';
+import { ItemRegisterComponent } from './item-register/item-register.component';
+import { ItemEditComponent } from './item-edit/item-edit.component';
+
+import { AuthEnterpriseGuard } from './guards/auth-enterprise.guard';
+import { AuthItemGuard } from './guards/auth-item.guard';
 
 const routes: Routes = [
   {
@@ -203,6 +212,36 @@ const routes: Routes = [
     path: 'info-request-approved/:id',
     component: RequestDetailApprovedComponent,
     canActivate: [AuthRequestGuard]
+  },
+  {
+    path: 'company-register',
+    component: CompanyRegisterComponent,
+
+  },
+  {
+    path: 'company-edit',
+    component: CompanyEditComponent,
+
+  },
+  {
+    path: 'company-list',
+    component: CompanyListComponent,
+
+  },
+  {
+    path: 'item-list',
+    component: ItemListComponent,
+    canActivate: [AuthItemGuard]
+  },
+  {
+    path: 'item-register-form',
+    component: ItemRegisterComponent,
+    canActivate: [AuthItemGuard]
+  },
+  {
+    path: 'item-edit/:id',
+    component: ItemEditComponent,
+    canActivate: [AuthItemGuard]
   }
 
 ];

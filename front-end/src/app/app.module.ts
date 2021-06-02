@@ -52,6 +52,12 @@ import { EditDetailQuotationComponent } from './edit-detail-quotation/edit-detai
 import { RequestDetailRejectedComponent } from './request-detail-rejected/request-detail-rejected.component';
 import { RequestDetailQuoteComponent } from './request-detail-quote/request-detail-quote.component';
 import { RequestDetailApprovedComponent } from './request-detail-approved/request-detail-approved.component';
+import { CompanyListComponent } from './company-list/company-list.component';
+import { CompanyRegisterComponent } from './company-register/company-register.component';
+import { CompanyEditComponent } from './company-edit/company-edit.component';
+import { ItemListComponent } from './item-list/item-list.component';
+import { ItemRegisterComponent } from './item-register/item-register.component';
+import { ItemEditComponent } from './item-edit/item-edit.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +99,13 @@ import { RequestDetailApprovedComponent } from './request-detail-approved/reques
     EditDetailQuotationComponent,
     RequestDetailRejectedComponent,
     RequestDetailQuoteComponent,
-    RequestDetailApprovedComponent
+    RequestDetailApprovedComponent,
+    CompanyListComponent,
+    CompanyRegisterComponent,
+    CompanyEditComponent,
+    ItemListComponent,
+    ItemRegisterComponent,
+    ItemEditComponent
   ],
   imports: [
     BrowserModule,

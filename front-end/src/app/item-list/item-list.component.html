@@ -1,0 +1,100 @@
+<!--Barra de navegacion-->
+<app-nav-user></app-nav-user>
+<!--Modal Roles-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Detalle de Item</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="dateInfo">
+      <h3><b>Nombre: </b></h3>
+      <div class="dateInfoValue">
+        <h3>{{itemList[pos].name_item}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Tipo: </b></h3>
+      <div class="dateInfoValue">
+        <h3>{{itemList[pos].type_item}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>costo: </b></h3>
+      <div class="dateInfoValue">
+        <h3>{{itemList[pos].unit_cost}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Unidad: </b></h3>
+      <div class="dateInfoValue">
+        <h3>{{itemList[pos].unit_item}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Descripción: </b></h3>
+      <div class="dateInfoValue">
+        <h3>{{itemList[pos].description_item}}</h3>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<!--header-->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Lista de Items</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/item-register-form')">Registrar Item</button>
+    </div>
+  </div>
+
+  <!--Tabla-->
+  <div class="containerTable">
+    <div class="newHeadTable">
+      <div class="numHead"><b>Nº</b></div>
+      <div class="nomHead"><b>Nombre</b></div>
+      <div class="typeHead"><b>Tipo</b></div>
+      <th scope="accHead">Acciones</th>
+    </div>
+    <div class="newBodyTable">
+      <table class="table table-hover">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-request" *ngFor=" let item of itemList; let i = index">
+            <th style="padding-top: 20px" scope="row">{{i+1}}</th>
+            <td style="padding-top: 20px; width: 50%; padding-left: 5%">
+              {{item.name_item}}
+            </td>
+            <td style="padding-top: 20px; width: 30%">
+              {{item.type_item}}
+            </td>
+            <td style="width: 20%">
+              <div class="row justify-content-end" style="padding-right: 20%">
+
+                <button type="button" class="btn btnAction" (click)="navigateTo('/item-edit/'+item.id_item)" ngbPopover="Editar">
+                  <img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25" />
+                </button>
+
+                <button type="button" class="btn btnAction" (click)="openModal(content, i)" ngbPopover="Ver detalle">
+                  <img src="../../assets/icon-quote/file-text.png" alt="" width="25" height="25" />
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,97 @@
+<!--Barra de navegacion-->
+<app-nav-user></app-nav-user>
+<!-- cuerpo de la pagina -->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Editar Empresa</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/company-list')">Lista de Empresas</button>
+
+    </div>
+  </div>
+
+  <div>
+
+    <form class="form-newRol" >
+      <div class="formOne">
+        <div class="formTwoCol1">
+          <mat-form-field class="date-info">
+            <mat-label>Nombre de Empresa</mat-label>
+            <input matInput placeholder="Ingrese el nombre de la empresa"  >
+            <mat-error >
+
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="date-info">
+            <mat-label>Nombre del representante lega</mat-label>
+            <input matInput placeholder="Ingrese nombre del representante lega" >
+            <mat-error >
+
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="date-info">
+            <mat-label>NIT</mat-label>
+            <input matInput placeholder="Ingrese NIT" >
+            <mat-error >
+
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="formTwoCol2">
+          <mat-form-field class="date-info">
+            <mat-label>Rubro de la empresa</mat-label>
+            <input type="text" matInput placeholder="Ingrese rubro de la empresa">
+            <mat-autocomplete #auto="matAutocomplete" >
+              <mat-option >
+
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field class="date-info">
+            <mat-label>Correo</mat-label>
+            <input matInput placeholder="Ingrese correo electrónico" >
+            <mat-error >
+
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="date-info">
+            <mat-label>Teléfono</mat-label>
+            <input matInput placeholder="Ingrese número de teléfono" >
+            <mat-error >
+
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+
+      <div class="contentAdress">
+        <mat-form-field class="date-info-full-width">
+          <mat-label>Dirección</mat-label>
+          <input matInput placeholder="Ingrese dirección de la empresa" >
+          <mat-error >
+
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <div class="containerBtn">
+        <div>
+          <button class="btn btn-cancel" (click)="navigateTo('/company-list')">Cancelar</button>
+          <button class="btn btn-register" >Guardar</button>
+        </div>
+        <p >
+          //mensaje "Existen campos incorrectos"
+        </p>
+      </div>
+    </form>
+
+  </div>
+
+</div>
