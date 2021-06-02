@@ -5,6 +5,8 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgbModal, NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { CompanyList } from '../Model/companyList';
+import { CompanyListService } from '../services/company-list.service';
 
 @Component({
   selector: 'app-company-list',
@@ -14,15 +16,16 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./company-list.component.css']
 })
 export class CompanyListComponent implements OnInit {
-  companies: Array<Company>=[];
-  pos =0;
+
+  listCompany: Array<CompanyList>=[];
+  pos:number = 0;
   constructor(
     private router:Router,
     public toastr: ToastrService,
     private titlePage: Title,
     private modal: NgbModal,
-    public config: NgbPopoverConfig,
-    private companyDataService: CompanyService
+    private serviceCompany: CompanyListService,
+    public config: NgbPopoverConfig
 
   ) {
     this.titlePage.setTitle('Lista de Empresas - QUOT-UMSS');
@@ -31,19 +34,24 @@ export class CompanyListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getEnterpriseList();
+    this.getListCompany();
   }
   navigateTo(path: String){
     this.router.navigate([path]);
   }
-  getEnterpriseList(){
-     this.companyDataService.getEnterpriseList().subscribe(res=>{
-      return this.companies=res
-    })
-  }
-  openModal(content: any, pos:any){
+  openModal(content: any, i:any){
     this.modal.open(content,{ windowClass:"colorModal"});
-    this.pos = pos;
+    this.pos = i;
+  }
+  getListCompany(){
+    this.serviceCompany.allListCompany().subscribe((data) => {
+      this.listCompany = data;
+
+      },
+      (error:any) => {
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
   }
 
 }

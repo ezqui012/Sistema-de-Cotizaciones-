@@ -160,11 +160,11 @@ export class RequestQuotationComponent implements OnInit {
   getErrorMessageRequest() {
     let message;
     if (this.requestForm.get('business_name')?.errors?.required) {
-      message = 'El campo Razon social es obligatorio';
+      message = 'El campo Razón social es obligatorio';
     } else if (this.requestForm.get('business_name')?.hasError('minlength')) {
-      message = 'El campo Razon social requiere como mínimo 10 caracteres';
+      message = 'El campo Razón social requiere como mínimo 10 caracteres';
     } else if (this.requestForm.get('business_name')?.hasError('mmaxlength')) {
-      message = 'El campo Razon social requiere como maximo 100 caracteres';
+      message = 'El campo Razón social requiere como máximo 100 caracteres';
     }
     return message;
   }

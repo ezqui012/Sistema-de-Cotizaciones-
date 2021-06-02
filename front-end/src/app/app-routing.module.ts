@@ -46,6 +46,7 @@ import { CompanyEditComponent } from './company-edit/company-edit.component';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { ItemRegisterComponent } from './item-register/item-register.component';
+import { ItemEditComponent } from './item-edit/item-edit.component';
 
 const routes: Routes = [
   {
@@ -231,6 +232,10 @@ const routes: Routes = [
   {
     path: 'item-register-form',
     component: ItemRegisterComponent
+  },
+  {
+    path: 'item-edit/:id',
+    component: ItemEditComponent
   }
 
 ];

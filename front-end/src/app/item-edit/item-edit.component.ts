@@ -1,20 +1,20 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { ItemsService } from '../services/items.service';
 
 @Component({
-  selector: 'app-item-register',
-  templateUrl: './item-register.component.html',
-  styleUrls: ['./item-register.component.css'],
+  selector: 'app-item-edit',
+  templateUrl: './item-edit.component.html',
+  styleUrls: ['./item-edit.component.css'],
   encapsulation: ViewEncapsulation.Emulated
 })
 
-export class ItemRegisterComponent implements OnInit {
+export class ItemEditComponent implements OnInit {
 
   options: string[] = ['Sin tipo'];
   filteredOptions: Observable<string[]> | undefined;
@@ -40,14 +40,16 @@ export class ItemRegisterComponent implements OnInit {
     private fb: FormBuilder,
     public toastr: ToastrService,
     private titlePage: Title,
-    private service: ItemsService
+    private service: ItemsService,
+    private route: ActivatedRoute
   ) {
-    this.titlePage.setTitle('Registro de Items - QUOT-UMSS');
+    this.titlePage.setTitle('Editar Item - QUOT-UMSS');
   }
 
   ngOnInit(): void {
     this.loadTypeItems();
     this.loadUnitItems();
+    this.loadInfoItem();
   }
 
   loadTypeItems(){
@@ -84,6 +86,22 @@ export class ItemRegisterComponent implements OnInit {
       },
       (error) => {
         this.toastr.error(`ERROR: ${error} Recargue la pagina`);
+      }
+    );
+  }
+
+  loadInfoItem(){
+    this.service.getInfoItem(this.route.snapshot.params.id).subscribe(
+      (data) => {
+        this.itemRegisterForm.controls['name_item'].setValue(data.name_item);
+        this.itemRegisterForm.controls['type_item'].setValue(data.type_item);
+        this.itemRegisterForm.controls['unit_item'].setValue(data.unit_item);
+        this.itemRegisterForm.controls['unit_cost'].setValue(data.unit_cost);
+        this.itemRegisterForm.controls['description_item'].setValue(data.description_item);
+      },
+      (error) => {
+        this.navigateTo('/item-list');
+        this.toastr.error(`ERROR: ${error} Intente de nuevo`);
       }
     );
   }
@@ -129,30 +147,31 @@ export class ItemRegisterComponent implements OnInit {
     return message;
   }
 
-  registerItem(){
+  updateItem(){
     if(this.itemRegisterForm.invalid){
       this.toastr.error('Existem campos incorrectos');
       return;
     }
-    this.service.insertItem(this.itemRegisterForm.value).subscribe(
-      (data) => {
-        if(data.res){
-          this.toastr.success('El registro del ítem se realizo con éxito');
-          this.loadTypeItems();
-          this.loadUnitItems();
-          this.clearInputs();
-        }
-      },
-      (error) => {
-        try {
-          if(error.error.errors.name_item[0]){
-            this.toastr.error(error.error.errors.name_item[0]);
-          }
-        } catch (error) {
-          this.toastr.error(`ERROR: ${error} Recargue la pagina`);
-        }
-      }
-    );
+    console.log(this.itemRegisterForm.value);
+    // this.service.insertItem(this.itemRegisterForm.value).subscribe(
+    //   (data) => {
+    //     if(data.res){
+    //       this.toastr.success('El registro del ítem se realizo con éxito');
+    //       this.loadTypeItems();
+    //       this.loadUnitItems();
+    //       this.clearInputs();
+    //     }
+    //   },
+    //   (error) => {
+    //     try {
+    //       if(error.error.errors.name_item[0]){
+    //         this.toastr.error(error.error.errors.name_item[0]);
+    //       }
+    //     } catch (error) {
+    //       this.toastr.error(`ERROR: ${error} Recargue la pagina`);
+    //     }
+    //   }
+    // );
   }
 
   private clearInputs(){

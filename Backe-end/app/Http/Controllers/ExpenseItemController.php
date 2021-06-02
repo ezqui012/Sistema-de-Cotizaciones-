@@ -43,7 +43,15 @@ class ExpenseItemController extends Controller
 
     public function show($id)
     {
-        //
+        try{
+            $item = ExpensiveItem::where('id_item', '=', $id)->first();
+            return $item;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function update(Request $request, $id)
