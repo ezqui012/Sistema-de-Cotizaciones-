@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Exception;
 use App\ExpensiveItem;
 use App\Http\Requests\CreateExpenseItemRequest;
+use App\Http\Requests\UpdateExpenseItemRequest;
 
 class ExpenseItemController extends Controller
 {
@@ -54,9 +55,21 @@ class ExpenseItemController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateExpenseItemRequest $request, $id)
     {
-        //
+        try{
+            $data = $request->all();
+            DB::table('expense_item')->where('id_item', $id)->update($data);
+            return response()->json([
+                'res' => true,
+                'message' => 'Successfully upgraded item'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 
     public function destroy($id)
