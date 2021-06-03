@@ -86,10 +86,10 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('get-unit-item', 'ExpenseItemController@getUnit');
     Route::get('get-type-item', 'ExpenseItemController@getType');
     Route::get('companyList', 'FacultyController@allListCompany');
+    Route::get('sector-enterprise', 'CompanyController@getSector');
+    Route::post('enterprise', 'CompanyController@addDataEnterprise');
+    Route::get('enterprises/{id}','CompanyController@getEnterpriseById');
+    Route::put('updateEnterprise/{id_enterprise}', 'CompanyController@updateEnterprise');
 });
 
-Route::get('sector-enterprise', 'CompanyController@getSector');
-Route::post('enterprise', 'CompanyController@addDataEnterprise');
-Route::get('getEnterprises', 'CompanyController@getListEnterprise');
-Route::get('list-enterprise/{id}','CompanyController@getEnterpriseById');
 //Route::apiResource('expense-item', 'ExpenseItemController');

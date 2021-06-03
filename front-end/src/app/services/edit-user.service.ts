@@ -20,7 +20,6 @@ export class EditUserService {
       return this.httpClient.put<Registeruser | any>(`${environment.URI_API}updateUser/${id}`, user ,{ headers: httpHeader });
     }
     return failed;
-
     //return this.httpClient.put<Registeruser>('http://127.0.0.1:8000/api/updateUser/'+id, user);
   }
   changePassword(id: any, password: any):Observable<UpdatePassword>{

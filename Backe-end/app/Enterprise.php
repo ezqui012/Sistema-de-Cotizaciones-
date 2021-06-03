@@ -10,7 +10,7 @@ class Enterprise extends Model
 
     public $updated_at = null;
     public $created_at = null;
-
+    protected $primaryKey ='id_enterprise';
     protected $fillable = [
         'id_enterprise',
         'name_enterprise',

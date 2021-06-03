@@ -2,7 +2,7 @@ import { CompanyService } from './../services/company.service';
 import { Company } from './../Model/company';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CompanyList } from '../Model/companyList';
@@ -16,7 +16,7 @@ import { CompanyListService } from '../services/company-list.service';
   styleUrls: ['./company-list.component.css']
 })
 export class CompanyListComponent implements OnInit {
-
+  id_ent:any;
   listCompany: Array<CompanyList>=[];
   pos:number = 0;
   constructor(
@@ -25,7 +25,8 @@ export class CompanyListComponent implements OnInit {
     private titlePage: Title,
     private modal: NgbModal,
     private serviceCompany: CompanyListService,
-    public config: NgbPopoverConfig
+    public config: NgbPopoverConfig,
+    private route : ActivatedRoute
 
   ) {
     this.titlePage.setTitle('Lista de Empresas - QUOT-UMSS');
@@ -35,8 +36,13 @@ export class CompanyListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListCompany();
+    this.id_ent=this.route.snapshot.params.id;
   }
   navigateTo(path: String){
+
+    this.router.navigate([path]);
+  }
+  navigateToEdit(path: String){
     this.router.navigate([path]);
   }
   openModal(content: any, i:any){
@@ -46,7 +52,6 @@ export class CompanyListComponent implements OnInit {
   getListCompany(){
     this.serviceCompany.allListCompany().subscribe((data) => {
       this.listCompany = data;
-
       },
       (error:any) => {
         this.toastr.error(`Error: ${error}. Recargue la página`);
