@@ -58,7 +58,12 @@ import { CompanyEditComponent } from './company-edit/company-edit.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { ItemRegisterComponent } from './item-register/item-register.component';
 import { ItemEditComponent } from './item-edit/item-edit.component';
+import { PdfMakeWrapper } from 'pdfmake-wrapper';
+//import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
+// Set the fonts to use
+PdfMakeWrapper.setFonts(pdfFonts);
 @NgModule({
   declarations: [
     AppComponent,
