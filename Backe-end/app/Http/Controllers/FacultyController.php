@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use App\Faculty;
 use App\Http\Requests\CreateFacultyRequest;
 use App\Http\Requests\UpdateFacultyRequest;
@@ -16,6 +17,19 @@ class FacultyController extends Controller
     {
         try{
             $res = Faculty::orderBy('name_faculty')->get();
+            return $res;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'error' => $ex,
+                'message' => 'There is been a problem'
+            ], 404);
+        }
+    }
+    public function allListCompany()
+    {
+        try{
+            $res = Company::orderBy('name_enterprise')->get();
             return $res;
         }catch(Exception $ex){
             return response()->json([
