@@ -59,6 +59,8 @@ import { ItemListComponent } from './item-list/item-list.component';
 import { ItemRegisterComponent } from './item-register/item-register.component';
 import { ItemEditComponent } from './item-edit/item-edit.component';
 
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -127,7 +129,8 @@ import { ItemEditComponent } from './item-edit/item-edit.component';
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    NgxDropzoneModule
   ],
   providers: [],
   bootstrap: [AppComponent]

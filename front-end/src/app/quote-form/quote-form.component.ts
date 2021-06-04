@@ -26,6 +26,8 @@ export class QuoteFormComponent implements OnInit {
   private numbQT: number = 0;
   private lenght: number = 0;
 
+  files: File[] = [];
+
   idquotation: number | any;
 
   enterprises: Enterprise[] | undefined;
@@ -236,6 +238,21 @@ export class QuoteFormComponent implements OnInit {
 
   navigateTo(path: String){
     this.router.navigate([path]);
+  }
+
+  onSelect(event: any) {
+    if(this.files.length < 1){
+      console.log(event);
+      this.files.push(...event.addedFiles);
+    }else{
+      this.toastr.error('Solo se puede subir 1 archivo por cada registro de cotización');
+    }
+
+  }
+
+  onRemove(event: any) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
   }
 
 }

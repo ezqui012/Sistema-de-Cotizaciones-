@@ -95,7 +95,7 @@ body{
 
 .form-quote{
   width: 100%;
-  font-size: 1.1rem;
+  /* font-size: 0.8rem; */
   padding-bottom: 0%;
 }
 
@@ -116,7 +116,19 @@ body{
   text-align: center;
 }
 
+.attachment-zone{
+  text-align: center;
+  align-items: center;
+  height: 160px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 10px;
+}
+
 .containerBtn-2{
+  display: flex;
+  flex-flow: column;
   text-align: center;
   margin-top: 2%;
 }
