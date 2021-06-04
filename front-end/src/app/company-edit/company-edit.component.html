@@ -12,53 +12,56 @@
 
   <div>
 
-    <form class="form-newRol" >
+    <form class="form-newRol" [formGroup]="enterpriseForm" (ngSubmit)="updateEnterprise()">
       <div class="formOne">
         <div class="formTwoCol1">
           <mat-form-field class="date-info">
             <mat-label>Nombre de Empresa</mat-label>
-            <input matInput placeholder="Ingrese el nombre de la empresa"  >
-            <mat-error >
-
+            <input matInput placeholder="Ingrese el nombre de la empresa"  formControlName="name_enterprise">
+            <mat-error *ngIf="isValid('name_enterprise')">
+              {{ getErrorMessageEnterprise('name_enterprise') }}
             </mat-error>
           </mat-form-field>
           <mat-form-field class="date-info">
             <mat-label>Nombre del representante lega</mat-label>
-            <input matInput placeholder="Ingrese nombre del representante lega" >
-            <mat-error >
-
+            <input matInput placeholder="Ingrese nombre del representante legal" formControlName="legal_representative" >
+            <mat-error *ngIf="isValid('legal_representative')">
+              {{ getErrorMessageLR('legal_representative') }}
             </mat-error>
           </mat-form-field>
           <mat-form-field class="date-info">
             <mat-label>NIT</mat-label>
-            <input matInput placeholder="Ingrese NIT" >
-            <mat-error >
-
+            <input matInput placeholder="Ingrese NIT" formControlName="nit_enterprise">
+            <mat-error *ngIf="isValid('nit_enterprise')">
+              {{ getErrorMessageNit('nit_enterprise') }}
             </mat-error>
           </mat-form-field>
         </div>
         <div class="formTwoCol2">
           <mat-form-field class="date-info">
             <mat-label>Rubro de la empresa</mat-label>
-            <input type="text" matInput placeholder="Ingrese rubro de la empresa">
-            <mat-autocomplete #auto="matAutocomplete" >
-              <mat-option >
-
+            <input type="text" matInput placeholder="Ingrese rubro de la empresa" formControlName="sector_enterprise" [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
               </mat-option>
             </mat-autocomplete>
+            <mat-error *ngIf="isValid('sector_enterprise')">
+              {{ getErrorMessageSE('sector_enterprise') }}
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="date-info">
             <mat-label>Correo</mat-label>
-            <input matInput placeholder="Ingrese correo electrónico" >
-            <mat-error >
-
+            <input matInput placeholder="Ingrese correo electrónico" formControlName="email_enterprise">
+            <mat-error *ngIf="isValid('email_enterprise')">
+              {{ getErrorMessageEmail('email_enterprise') }}
             </mat-error>
           </mat-form-field>
           <mat-form-field class="date-info">
             <mat-label>Teléfono</mat-label>
-            <input matInput placeholder="Ingrese número de teléfono" >
-            <mat-error >
-
+            <input matInput placeholder="Ingrese número de teléfono" formControlName="phone_enterprise">
+            <mat-error *ngIf="isValid('phone_enterprise')">
+              {{ getErrorMessagePhone('phone_enterprise') }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -69,9 +72,9 @@
       <div class="contentAdress">
         <mat-form-field class="date-info-full-width">
           <mat-label>Dirección</mat-label>
-          <input matInput placeholder="Ingrese dirección de la empresa" >
-          <mat-error >
-
+          <input matInput placeholder="Ingrese dirección de la empresa" formControlName="address_enterprise">
+          <mat-error *ngIf="isValid('address_enterprise')">
+            {{ getErrorMessageAddress('address_enterprise') }}
           </mat-error>
         </mat-form-field>
 
@@ -86,9 +89,7 @@
           <button class="btn btn-cancel" (click)="navigateTo('/company-list')">Cancelar</button>
           <button class="btn btn-register" >Guardar</button>
         </div>
-        <p >
-          //mensaje "Existen campos incorrectos"
-        </p>
+
       </div>
     </form>
 

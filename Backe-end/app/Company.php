@@ -4,15 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Enterprise extends Model
+class Company extends Model
 {
     protected $table = 'enterprise';
 
     public $updated_at = null;
     public $created_at = null;
-    protected $primaryKey ='id_enterprise';
+
     protected $fillable = [
-        'id_enterprise',
         'name_enterprise',
         'sector_enterprise',
         'nit_enterprise',

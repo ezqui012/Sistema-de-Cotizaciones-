@@ -216,17 +216,17 @@ const routes: Routes = [
   {
     path: 'company-register',
     component: CompanyRegisterComponent,
-
+    canActivate:[AuthEnterpriseGuard]
   },
   {
-    path: 'company-edit',
+    path: 'company-edit/:id',
     component: CompanyEditComponent,
-
+    canActivate:[AuthEnterpriseGuard]
   },
   {
     path: 'company-list',
     component: CompanyListComponent,
-
+    canActivate:[AuthEnterpriseGuard]
   },
   {
     path: 'item-list',

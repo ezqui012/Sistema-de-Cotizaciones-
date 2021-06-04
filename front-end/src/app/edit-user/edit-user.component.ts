@@ -197,7 +197,6 @@ export class EditUserComponent implements OnInit {
       //console.log(this.dataToUpdate);
       this.RegisterUser = this.dataToUpdate;
      // this.updateForm.controls['ci'].setValue(this.RegisterUser.ci);
-      console.log(this.RegisterUser.id_role +"HOLA")
       this.updateForm.controls['id_role'].setValue(this.RegisterUser.id_role);
       this.updateForm.controls['id_unit'].setValue(this.RegisterUser.id_unit);
       this.upPassword = this.dataToUpdate;
