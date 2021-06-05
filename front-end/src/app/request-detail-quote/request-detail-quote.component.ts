@@ -4,6 +4,7 @@ import { ListItemsRequest } from '../Model/request-detail';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ReportRequest } from '../reports/reportRequest';
 
 @Component({
   selector: 'app-request-detail-quote',
@@ -25,6 +26,7 @@ export class RequestDetailQuoteComponent implements OnInit {
   totalCost: number = 0;
 
   actualAmount: number | any;
+  report: ReportRequest = new ReportRequest;
 
   constructor(
     public toastr: ToastrService,
@@ -94,5 +96,8 @@ export class RequestDetailQuoteComponent implements OnInit {
     }
     this.totalCost = price;
   }
-
+  //methodo report
+  generatePdf(){
+    this.report.generateRequestQuotePdf(this.totalCost, this.business, this.userName, this.personalQuote, this.dateRequest, this.items)
+  }
 }

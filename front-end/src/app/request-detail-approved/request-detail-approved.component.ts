@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AcceptedQuote } from '../Model/accepted-quote';
+import { ReportRequest } from '../reports/reportRequest';
 
 @Component({
   selector: 'app-request-detail-approved',
@@ -26,6 +27,7 @@ export class RequestDetailApprovedComponent implements OnInit {
   totalCost: number = 0;
 
   actualAmount: number | any;
+  report: ReportRequest = new ReportRequest;
 
   constructor(
     public toastr: ToastrService,
@@ -103,5 +105,8 @@ export class RequestDetailApprovedComponent implements OnInit {
     let cost: number = cant * price;
     return cost;
   }
-
+  //methodo report
+  generatePdf(){
+    this.report.generateQuotePerformedPdf(this.totalCost, this.business, this.userName, this.personalQuote, this.dateRequest, this.items)
+  }
 }

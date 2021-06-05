@@ -4,6 +4,7 @@ import { ListItemsRequest } from '../Model/request-detail';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ReportRequest } from '../reports/reportRequest';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class RequestDetailRejectedComponent implements OnInit {
   reason: string | any;
 
   actualAmount: number | any;
+  report: ReportRequest = new ReportRequest;
 
   constructor(
     public toastr: ToastrService,
@@ -95,5 +97,8 @@ export class RequestDetailRejectedComponent implements OnInit {
     }
     this.totalCost = price;
   }
-
+  //methodo report
+  generatePdf(){
+    this.report.generateRequestRejectedPdf(this.totalCost, this.business, this.userName, this.reason, this.dateRequest, this.items)
+  }
 }

@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { RequestList } from '../Model/request';
 import { RequestQuoteService } from '../services/request.service';
 import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
-import { PdfMakeWrapper } from 'pdfmake-wrapper';
 
 
 
@@ -37,13 +36,6 @@ export class RequestQuotationListComponent implements OnInit {
     this.getListRequestQuote();
   }
 
-  negeratePdf() {
-    const pdf = new PdfMakeWrapper();
-
-    pdf.add('Registro de Solicitud de Cotizacion');
-
-    pdf.create().open();
-  }
   navigateTo(path: String) {
     this.router.navigate([path]);
   }
