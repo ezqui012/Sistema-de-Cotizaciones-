@@ -72,7 +72,6 @@ export class QuoteListProcessComponent implements OnInit {
 
   deleteQuoteProcess(id:any){
     this.quoteProcessService.deleteProcess(id).subscribe(data=>{
-      console.log(id)
       this.getQuoteProcess();
     })
   }
