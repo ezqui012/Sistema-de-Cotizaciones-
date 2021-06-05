@@ -150,7 +150,7 @@ export class QuoteFormComponent implements OnInit {
         this.insertAttachemtnApi(newAttachemt);
       },
       (error) => {
-        this.toastr.success('Se registro la cotizacion con exito');
+        this.toastr.success('Se registro la cotización con éxito');
         this.finishQuote();
         this.toastr.error(`ERROR: ${error} El archivo adjunbto no pudo ser registrado por problemas con el servidor`);
       }
@@ -161,12 +161,12 @@ export class QuoteFormComponent implements OnInit {
     this.serviceQuote.storeAttachmentBackend(attchmentInfo).subscribe(
       (data) => {
         if(data.res){
-          this.toastr.success('Se registro la cotizacion con exito');
+          this.toastr.success('Se registro la cotización con éxito');
           this.finishQuote();
         }
       },
       (error) => {
-        this.toastr.success('Se registro la cotizacion con exito');
+        this.toastr.success('Se registro la cotización con éxito');
         this.finishQuote();
         this.toastr.error(`ERROR: ${error} el archivo no se registro por problemas en el servidor`);
       }
