@@ -20,10 +20,11 @@ class QuoteDetailController extends Controller
     {
         try{
             $input = $request->all();
-            QuoteDetail::create($input);
+            $data = QuoteDetail::create($input);
             return response()->json([
                 'res' => true,
-                'message' => 'Registered quote'
+                'message' => 'Registered quote',
+                'id' => $data->id
             ], 200);
         }catch(Exception $ex){
             return response()->json([

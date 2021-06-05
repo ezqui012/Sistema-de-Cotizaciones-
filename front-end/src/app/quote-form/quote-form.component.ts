@@ -117,13 +117,58 @@ export class QuoteFormComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
-          this.toastr.success('Se registro la cotizacion con exito');
-          this.finishQuote();
+          if(this.files.length > 0){
+            this.registerAttachment(res.id);
+          }else{
+            this.toastr.success('Se registro la cotizacion con exito');
+            this.finishQuote();
+          }
         }
       },
       (error) => {
         console.log(error);
         this.toastr.error('Ocurrio un problema, intente nuevamente');
+      }
+    );
+  }
+
+  registerAttachment(id: number){
+    //console.log(id);
+    const fileData = this.files[0];
+    const data = new FormData;
+    data.append('file', fileData);
+    data.append('upload_preset', 'quoteUMSS');
+    data.append('cloud_name', 'dmdp1bbnt');
+
+    this.serviceQuote.storeAttachmentCloud(data).subscribe(
+      (response) => {
+        //console.log(response.secure_url);
+        let newAttachemt = {
+          id_qd: id,
+          file_route: response.secure_url
+        }
+        this.insertAttachemtnApi(newAttachemt);
+      },
+      (error) => {
+        this.toastr.success('Se registro la cotizacion con exito');
+        this.finishQuote();
+        this.toastr.error(`ERROR: ${error} El archivo adjunbto no pudo ser registrado por problemas con el servidor`);
+      }
+    );
+  }
+
+  insertAttachemtnApi(attchmentInfo: any){
+    this.serviceQuote.storeAttachmentBackend(attchmentInfo).subscribe(
+      (data) => {
+        if(data.res){
+          this.toastr.success('Se registro la cotizacion con exito');
+          this.finishQuote();
+        }
+      },
+      (error) => {
+        this.toastr.success('Se registro la cotizacion con exito');
+        this.finishQuote();
+        this.toastr.error(`ERROR: ${error} el archivo no se registro por problemas en el servidor`);
       }
     );
   }
@@ -242,16 +287,13 @@ export class QuoteFormComponent implements OnInit {
 
   onSelect(event: any) {
     if(this.files.length < 1){
-      console.log(event);
       this.files.push(...event.addedFiles);
     }else{
       this.toastr.error('Solo se puede subir 1 archivo por cada registro de cotización');
     }
-
   }
 
   onRemove(event: any) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
 
