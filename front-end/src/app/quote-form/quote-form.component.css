@@ -32,11 +32,13 @@ body{
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  margin: auto;
+  width: 90%;
 }
 
-#subtitle-margin{
+/* #subtitle-margin{
   margin-right: 6%;
-}
+} */
 
 /* #input-large{
   width: 93%;
@@ -83,7 +85,7 @@ body{
 
 .container-form{
   width: 95%;
-  margin: 0;
+  margin: auto;
   background-color: #ffffff !important;
   justify-items: center !important;
   border-radius: 7px;
@@ -128,8 +130,8 @@ body{
 .attachment-zone{
   text-align: center;
   align-items: center;
-  height: 170px;
-  width: 25%;
+  height: 190px;
+  width: 220px;
   margin-top: 10px;
   margin-left: 5%;
   margin-right: 5%;
@@ -178,8 +180,9 @@ body{
   }
 
   .attachment-zone{
-    margin-left: 40%;
-    margin-right: 40%;
+    margin: auto;
+    /* margin-left: 19%;
+    margin-right: 19%; */
   }
 }
 
