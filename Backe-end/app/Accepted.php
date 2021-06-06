@@ -14,7 +14,8 @@ class Accepted extends Model
     protected $fillable = [
         'id_request',
         'id_qd',
-        'date'
+        'date',
+        'id'
     ];
 
     protected $hidden = [

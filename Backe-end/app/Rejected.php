@@ -15,7 +15,8 @@ class Rejected extends Model
         'id_rejected',
         'id_request',
         'reason',
-        'date_rejected'
+        'date_rejected',
+        'id'
     ];
 
     protected $hidden = [

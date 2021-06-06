@@ -30,7 +30,8 @@ export class RequestDetailComponent implements OnInit {
 
   rejectedForm = this.fb.group({
     id_request: [this.route.snapshot.params.id, [Validators.required]],
-    reason: ['', [Validators.required, Validators.minLength(10)]]
+    reason: ['', [Validators.required, Validators.minLength(10)]],
+    id: [localStorage.getItem('quot-umss-usr'), [Validators.required]]
   });
 
   registerQuotForm = this.fb.group({

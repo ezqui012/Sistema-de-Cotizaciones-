@@ -21,6 +21,7 @@ export class ResponseObtained{
 export class RejectedRequest{
   id_request: any;
   reason: any;
+  id: any;
 }
 
 export class PersonalQuote{
