@@ -94,6 +94,16 @@ export class DetailRequestService {
     return failed;
   }
 
+  getFaculty(id: any): Observable<any>{
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<any>(`${environment.URI_API}school/${id}`, { headers: httpHeader });
+    }
+    return failed;
+  }
   getReasonRejected(id: any): Observable<any>{
     let failed: any;
     if (localStorage.getItem('quot-umss-tk')) {

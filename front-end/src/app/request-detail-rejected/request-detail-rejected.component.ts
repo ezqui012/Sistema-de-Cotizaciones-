@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ReportRequest } from '../reports/reportRequest';
+import { Faculty } from '../Model/faculty';
 
 
 @Component({
@@ -28,6 +29,8 @@ export class RequestDetailRejectedComponent implements OnInit {
 
   actualAmount: number | any;
   report: ReportRequest = new ReportRequest;
+  faculty: Faculty = new Faculty;
+  nameFaculty:any
 
   constructor(
     public toastr: ToastrService,
@@ -41,8 +44,20 @@ export class RequestDetailRejectedComponent implements OnInit {
 
   ngOnInit(): void {
     this.getInfoRequestById(this.route.snapshot.params.id);
+    this.getFaculty();
   }
-
+  getFaculty(){
+    this.service.getFaculty(localStorage.getItem('quot-umss-f')).subscribe(
+      (data) => {
+        this.faculty = data;
+        this.nameFaculty = data.name_faculty;
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
+  }
   getInfoRequestById(id: any){
     this.service.getInfoRequest(id).subscribe(
       (data) => {
@@ -99,6 +114,6 @@ export class RequestDetailRejectedComponent implements OnInit {
   }
   //methodo report
   generatePdf(){
-    this.report.generateRequestRejectedPdf(this.totalCost, this.business, this.userName, this.reason, this.dateRequest, this.items)
+    this.report.generateRequestRejectedPdf(this.totalCost, this.business, this.userName, this.reason, this.dateRequest, this.nameFaculty, this.items)
   }
 }

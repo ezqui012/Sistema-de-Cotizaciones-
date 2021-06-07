@@ -8,6 +8,7 @@ import { DetailRequestService } from '../services/detail-request.service';
 import { ListItemsRequest, PersonalQuote } from '../Model/request-detail';
 
 import {ReportRequest} from '../reports/reportRequest';
+import { Faculty } from '../Model/faculty';
 
 @Component({
   selector: 'app-request-detail',
@@ -22,7 +23,8 @@ export class RequestDetailComponent implements OnInit {
   dateRequest: any;
   userName: any;
   idReq: any;
-
+  faculty: Faculty = new Faculty;
+  nameFaculty:any
   items: ListItemsRequest | any;
   personal: PersonalQuote[] | any;
 
@@ -55,8 +57,21 @@ export class RequestDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getInfoRequestById(this.route.snapshot.params.id);
+    this.getFaculty();
   }
+  getFaculty(){
+    this.service.getFaculty(localStorage.getItem('quot-umss-f')).subscribe(
+      (data) => {
+        this.faculty = data;
+        this.nameFaculty = data.name_faculty;
 
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
+  }
   openModal(content: any) {
     this.modal.open(content, { windowClass: "colorModal" });
   }
@@ -222,7 +237,7 @@ export class RequestDetailComponent implements OnInit {
   }
   //metodo reporte
   generatePdf(){
-    this.report.generateRequestPdf(this.totalCost, this.business, this.userName, this.dateRequest, this.items)
+    this.report.generateRequestPdf(this.totalCost, this.business, this.userName, this.dateRequest, this.nameFaculty, this.items)
   }
 
 }

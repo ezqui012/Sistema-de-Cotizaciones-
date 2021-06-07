@@ -12,10 +12,10 @@ interface ListItems {
 
 type TableRow = [number, number, string, string, number, number];
 type TableRowQP = [number, number, string, string, string, number, number];
-//type TableRow = [number, number, string, string, number, number];
 const tiempo = Date.now();
 const hoy = new Date(tiempo);
-hoy.toLocaleDateString();
+//hoy.toLocaleDateString();
+
 export class ReportRequest {
   constructor(){
 
@@ -26,18 +26,18 @@ export class ReportRequest {
     business: string,
     userName: string,
     dateRequest: string,
+    nameFaculty: string,
     items: ListItems[],
 
   ): void {
     const pdf = new PdfMakeWrapper();
     const title = new Txt('SOLICITUD DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
-    const totalDate = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
-    const businessDate = new Txt(`Razón social: ${business}`).fontSize(11).alignment('left').end
-    const userDate = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
-    const dateRequestDate = new Txt(`Fecha de la solicitud: ${dateRequest}`).fontSize(11).alignment('right').end
+    const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
+    const userData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
+    const textDate = new Txt(`Agradecemos a Uds. cotizamos, los articulos que a continuación se detallan. Luego este formulario debe devolverse en sobre cerrado debidamente firmado  y sellado.`).fontSize(9).end
 
-    pdf.add(this.tableHeader());
+    pdf.add(this.tableHeader(nameFaculty));
     pdf.add(pdf.ln(2))
 
     pdf.add(title)
@@ -46,15 +46,18 @@ export class ReportRequest {
       fontSize: 11
     });
 
-    pdf.add(businessDate);
-    pdf.add(userDate);
-    pdf.add(dateRequestDate);
+    //pdf.add(businessDate);
+    pdf.add(this.tableBusinessData(business, dateRequest));
+    pdf.add(userData);
+    //pdf.add(dateRequestDate);
+    pdf.add(pdf.ln(1))
+    pdf.add(textDate);
     pdf.add(pdf.ln(2));
     pdf.add(titleList);
     pdf.add(this.crateTable(items));
     pdf.add(pdf.ln(1))
-    pdf.add(totalDate);
-    pdf.create().print();
+    pdf.add(totalData);
+    pdf.create().open();
   }
   public generateQuotePerformedPdf(
     totalCost: number,
@@ -62,19 +65,18 @@ export class ReportRequest {
     userName: string,
     personalQuote:string,
     dateRequest: string,
+    nameFaculty: string,
     items: AcceptedQuote[],
 
   ): void {
     const pdf = new PdfMakeWrapper();
     const title = new Txt('SOLICITUD DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
-    const totalDate = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
-    const businessDate = new Txt(`Razón social: ${business}`).fontSize(11).alignment('left').end
-    const userDate = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
-    const personalDate = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
-    const dateRequestDate = new Txt(`Fecha de la solicitud: ${dateRequest}`).fontSize(11).alignment('right').end
+    const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
+    const userData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
+    const personalData = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
 
-    pdf.add(this.tableHeader());
+    pdf.add(this.tableHeader(nameFaculty));
     pdf.add(pdf.ln(2))
 
     pdf.add(title)
@@ -83,111 +85,41 @@ export class ReportRequest {
       fontSize: 11
     });
 
-    pdf.add(businessDate);
-    pdf.add(userDate);
-    pdf.add(personalDate);
-    pdf.add(dateRequestDate);
+    pdf.add(this.tableBusinessData(business, dateRequest));
+    pdf.add(userData);
+    pdf.add(personalData);
     pdf.add(pdf.ln(2));
     pdf.add(titleList);
     pdf.add(this.crateTableP(items));
     pdf.add(pdf.ln(1))
-    pdf.add(totalDate);
+    pdf.add(totalData);
     pdf.create().open();
   }
 
 
-
-  public generateRequestRejectedPdf(
-    totalCost: number,
-    business: string,
-    userName: string,
-    //personalQuote:string,
-    reason:string,
-    dateRequest: string,
-    items: ListItems[],
-
-  ): void {
-    const pdf = new PdfMakeWrapper();
-    const title = new Txt('SOLICITUD DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
-    const totalDate = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
-    const businessDate = new Txt(`Razón social: ${business}`).fontSize(11).alignment('left').end
-    const userDate = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
-    const reasonDate = new Txt(`Motivo de rechazo: ${reason}`).fontSize(11).alignment('left').end
-    const dateRequestDate = new Txt(`Fecha de la solicitud: ${dateRequest}`).fontSize(11).alignment('right').end
-    const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
-
-    pdf.add(this.tableHeader());
-    pdf.add(pdf.ln(2))
-
-    pdf.add(title)
-    pdf.add(pdf.ln(1))
-    pdf.defaultStyle({
-      fontSize: 11
-    });
-
-    pdf.add(businessDate);
-    pdf.add(userDate);
-    pdf.add(reasonDate);
-    pdf.add(dateRequestDate);
-    pdf.add(pdf.ln(2));
-    pdf.add(titleList);
-    pdf.add(this.crateTable(items));
-    pdf.add(pdf.ln(1))
-    pdf.add(totalDate);
-    pdf.create().open();
-  }
-
-
-  public generateRequestQuotePdf(
-    totalCost: number,
-    business: string,
-    userName: string,
-    personalQuote:string,
-    dateRequest: string,
-    items: ListItems[],
-
-  ): void {
-    const pdf = new PdfMakeWrapper();
-    const title = new Txt('SOLICITUD DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
-    const totalDate = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
-    const businessDate = new Txt(`Razón social: ${business}`).fontSize(11).alignment('left').end
-    const userDate = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
-    const personalDate = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
-    const dateRequestDate = new Txt(`Fecha de la solicitud: ${dateRequest}`).fontSize(11).alignment('right').end
-    const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
-
-    pdf.add(this.tableHeader());
-    pdf.add(pdf.ln(2))
-
-    pdf.add(title)
-    pdf.add(pdf.ln(1))
-    pdf.defaultStyle({
-      fontSize: 11
-    });
-
-    pdf.add(businessDate);
-    pdf.add(userDate);
-    pdf.add(personalDate);
-    pdf.add(dateRequestDate);
-    pdf.add(pdf.ln(2));
-    pdf.add(titleList);
-    pdf.add(this.crateTable(items));
-    pdf.add(pdf.ln(1))
-    pdf.add(totalDate);
-    pdf.create().print();
-  }
-  private tableHeader(): ITable {
+  private tableBusinessData(business:string, dateRequest:string): ITable {
     [{}]
     return new Table([
-      ['Universidad Mayor de San Simón', 'fecha: '+hoy.toLocaleDateString()],
-      ['Sección Adquisiciones', 'Cochabamba-Bolivia']
+      [new Txt(`Razón social: ${business}`).fontSize(11).alignment('left').end
+      , new Txt(`Fecha: ${dateRequest}`).fontSize(11).alignment('right').end]
+    ])
+      .widths([380, 110])
+      .layout('noBorders')
+      .alignment('center').margin([0,0,0,0])
+      .end
+  }
+  private tableHeader(nameFaculty:string): ITable {
+    [{}]
+    return new Table([
+      [ new Txt('Universidad Mayor de San Simón').alignment('left').end , new Txt('fecha: '+hoy.toLocaleDateString()).alignment('right').end],
+      [new Txt(nameFaculty).alignment('left').end, new Txt('Cochabamba-Bolivia').alignment('right').end],
+      [new Txt('Sección Adquisiciones').alignment('left').end, '']
     ])
       .widths([300, 200])
       .layout('noBorders')
       .alignment('center').margin([0,0,0,0])
       .end
   }
-
   private crateTable(data: ListItems[]): ITable {
     [{}]
     return new Table([
@@ -206,6 +138,92 @@ export class ReportRequest {
     let i = 1;
     return data.map(row => [(i++), row.quantity, row.unit_item, row.name_item, row.unit_cost, row.total_cost]);
   }
+
+
+
+  public generateRequestRejectedPdf(
+    totalCost: number,
+    business: string,
+    userName: string,
+    //personalQuote:string,
+    reason:string,
+    dateRequest: string,
+    nameFaculty: string,
+    items: ListItems[],
+
+  ): void {
+    const pdf = new PdfMakeWrapper();
+    const title = new Txt('SOLICITUD DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
+    const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
+    const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
+    const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
+    const statusRequestData = new Txt(`Estado: Aqui el estado`).fontSize(11).alignment('left').end
+    const userRequestData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
+    const userRejectedData = new Txt(`Rechazado por: ${userName}`).fontSize(11).alignment('left').end
+    const reasonDate = new Txt(`Motivo de rechazo: ${reason}`).fontSize(11).alignment('left').end
+
+    pdf.add(this.tableHeader(nameFaculty));
+    pdf.add(pdf.ln(2))
+
+    pdf.add(title)
+    pdf.add(pdf.ln(1))
+    pdf.defaultStyle({
+      fontSize: 11
+    });
+
+    pdf.add(this.tableBusinessData(business, dateRequest));
+    pdf.add(pdf.ln(2));
+
+    pdf.add(titleList);
+    pdf.add(this.crateTable(items));
+    pdf.add(pdf.ln(1))
+    pdf.add(totalData);
+    pdf.add(pdf.ln(2));
+
+    pdf.add(infoRequest);
+    pdf.add(userRequestData);
+    pdf.add(statusRequestData);
+    pdf.add(userRejectedData);
+    pdf.add(reasonDate);
+    pdf.create().open();
+  }
+
+
+  public generateRequestQuotePdf(
+    totalCost: number,
+    business: string,
+    userName: string,
+    personalQuote:string,
+    dateRequest: string,
+    nameFaculty: string,
+    items: ListItems[],
+
+  ): void {
+    const pdf = new PdfMakeWrapper();
+    const title = new Txt('SOLICITUD DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
+    const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
+    const personalData = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
+    const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
+
+    pdf.add(this.tableHeader(nameFaculty));
+    pdf.add(pdf.ln(2))
+
+    pdf.add(title)
+    pdf.add(pdf.ln(1))
+    pdf.defaultStyle({
+      fontSize: 11
+    });
+
+    pdf.add(this.tableBusinessData(business, dateRequest));
+    pdf.add(personalData);
+    pdf.add(pdf.ln(2));
+    pdf.add(titleList);
+    pdf.add(this.crateTable(items));
+    pdf.add(pdf.ln(1))
+    pdf.add(totalData);
+    pdf.create().open();
+  }
+
   private crateTableP(data: AcceptedQuote[]): ITable {
     [{}]
     return new Table([
