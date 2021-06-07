@@ -33,10 +33,11 @@ export class ReportRequest {
     const pdf = new PdfMakeWrapper();
     const title = new Txt('SOLICITUD DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
     const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
-    const userData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
     const textDate = new Txt(`Agradecemos a Uds. cotizamos, los articulos que a continuación se detallan. Luego este formulario debe devolverse en sobre cerrado debidamente firmado  y sellado.`).fontSize(9).end
-
+    const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
+    const statusRequestData = new Txt(`Estado: Proceso`).fontSize(11).alignment('left').end
+    const userRequestData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
     pdf.add(this.tableHeader(nameFaculty));
     pdf.add(pdf.ln(2))
 
@@ -48,7 +49,6 @@ export class ReportRequest {
 
     //pdf.add(businessDate);
     pdf.add(this.tableBusinessData(business, dateRequest));
-    pdf.add(userData);
     //pdf.add(dateRequestDate);
     pdf.add(pdf.ln(1))
     pdf.add(textDate);
@@ -57,42 +57,11 @@ export class ReportRequest {
     pdf.add(this.crateTable(items));
     pdf.add(pdf.ln(1))
     pdf.add(totalData);
-    pdf.create().open();
-  }
-  public generateQuotePerformedPdf(
-    totalCost: number,
-    business: string,
-    userName: string,
-    personalQuote:string,
-    dateRequest: string,
-    nameFaculty: string,
-    items: AcceptedQuote[],
+    pdf.add(pdf.ln(1));
 
-  ): void {
-    const pdf = new PdfMakeWrapper();
-    const title = new Txt('SOLICITUD DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
-    const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
-    const userData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
-    const personalData = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
-    const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
-
-    pdf.add(this.tableHeader(nameFaculty));
-    pdf.add(pdf.ln(2))
-
-    pdf.add(title)
-    pdf.add(pdf.ln(1))
-    pdf.defaultStyle({
-      fontSize: 11
-    });
-
-    pdf.add(this.tableBusinessData(business, dateRequest));
-    pdf.add(userData);
-    pdf.add(personalData);
-    pdf.add(pdf.ln(2));
-    pdf.add(titleList);
-    pdf.add(this.crateTableP(items));
-    pdf.add(pdf.ln(1))
-    pdf.add(totalData);
+    pdf.add(infoRequest);
+    pdf.add(userRequestData);
+    pdf.add(statusRequestData);
     pdf.create().open();
   }
 
@@ -140,6 +109,71 @@ export class ReportRequest {
   }
 
 
+  public generateQuotePerformedPdf(
+    totalCost: number,
+    business: string,
+    userName: string,
+    personalQuote:string,
+    dateRequest: string,
+    nameFaculty: string,
+    items: AcceptedQuote[],
+
+  ): void {
+    const pdf = new PdfMakeWrapper();
+    const title = new Txt('SOLICITUD DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
+    const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
+    const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
+    const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
+    const statusRequestData = new Txt(`Estado: Aceptado`).fontSize(11).alignment('left').end
+    const userRequestData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
+    const userAceptedData = new Txt(`La Solicitud fue aceptada por: ${userName}`).fontSize(11).alignment('left').end
+    const personalData = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
+
+    pdf.add(this.tableHeader(nameFaculty));
+    pdf.add(pdf.ln(2))
+
+    pdf.add(title)
+    pdf.add(pdf.ln(1))
+    pdf.defaultStyle({
+      fontSize: 11
+    });
+
+    pdf.add(this.tableBusinessData(business, dateRequest));
+    pdf.add(pdf.ln(2));
+    pdf.add(titleList);
+    pdf.add(this.crateTableP(items));
+    pdf.add(pdf.ln(1))
+    pdf.add(totalData);
+    pdf.add(pdf.ln(1));
+
+    pdf.add(infoRequest);
+    pdf.add(userRequestData);
+    pdf.add(statusRequestData);
+    pdf.add(userAceptedData);
+    pdf.add(personalData);
+    pdf.create().open();
+  }
+
+
+  private crateTableP(data: AcceptedQuote[]): ITable {
+    [{}]
+    return new Table([
+      ['Nº', 'Cantidad', 'Unidad', 'Decripción','Empresa', 'Unitario', 'Total'],
+      ...this.extractDataP(data)
+    ])
+      .widths([15, 45,40, 120, 120, 40, 40])
+      /*.layout({fillColor:(rowIndex: any, node: any , columnIndex: any) => {return rowIndex === 0 ? '#D6FCF6' : '';}}
+
+      )*/
+      .layout('lightHorizontalLines')
+      //.layout({hLineWidth:()=>0.5})
+      .end;
+  }
+  private extractDataP(data: AcceptedQuote[]): TableRowQP[] {
+    let i = 1;
+    return data.map(row => [(i++), row.quantity, row.unit_item, row.name_item, row.name_enterprise, row.unit_cost, (row.quantity*row.unit_cost)]);
+  }
+
 
   public generateRequestRejectedPdf(
     totalCost: number,
@@ -157,7 +191,7 @@ export class ReportRequest {
     const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
-    const statusRequestData = new Txt(`Estado: Aqui el estado`).fontSize(11).alignment('left').end
+    const statusRequestData = new Txt(`Estado: Rechazado`).fontSize(11).alignment('left').end
     const userRequestData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
     const userRejectedData = new Txt(`Rechazado por: ${userName}`).fontSize(11).alignment('left').end
     const reasonDate = new Txt(`Motivo de rechazo: ${reason}`).fontSize(11).alignment('left').end
@@ -178,7 +212,7 @@ export class ReportRequest {
     pdf.add(this.crateTable(items));
     pdf.add(pdf.ln(1))
     pdf.add(totalData);
-    pdf.add(pdf.ln(2));
+    pdf.add(pdf.ln(1));
 
     pdf.add(infoRequest);
     pdf.add(userRequestData);
@@ -202,8 +236,12 @@ export class ReportRequest {
     const pdf = new PdfMakeWrapper();
     const title = new Txt('SOLICITUD DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
     const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
-    const personalData = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
+    const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
+    const statusRequestData = new Txt(`Estado: Cotización`).fontSize(11).alignment('left').end
+    const userRequestData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
+    const userAceptedData = new Txt(`La Solicitud fue aceptada por: ${userName}`).fontSize(11).alignment('left').end
+    const personalData = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
 
     pdf.add(this.tableHeader(nameFaculty));
     pdf.add(pdf.ln(2))
@@ -221,26 +259,14 @@ export class ReportRequest {
     pdf.add(this.crateTable(items));
     pdf.add(pdf.ln(1))
     pdf.add(totalData);
+    pdf.add(pdf.ln(1));
+
+    pdf.add(infoRequest);
+    pdf.add(userRequestData);
+    pdf.add(statusRequestData);
+    pdf.add(userAceptedData);
     pdf.create().open();
   }
 
-  private crateTableP(data: AcceptedQuote[]): ITable {
-    [{}]
-    return new Table([
-      ['Nº', 'Cantidad', 'Unidad', 'Decripción','Empresa', 'Unitario', 'Total'],
-      ...this.extractDataP(data)
-    ])
-      .widths([15, 45,40, 120, 120, 40, 40])
-      /*.layout({fillColor:(rowIndex: any, node: any , columnIndex: any) => {return rowIndex === 0 ? '#D6FCF6' : '';}}
-
-      )*/
-      .layout('lightHorizontalLines')
-      //.layout({hLineWidth:()=>0.5})
-      .end;
-  }
-  private extractDataP(data: AcceptedQuote[]): TableRowQP[] {
-    let i = 1;
-    return data.map(row => [(i++), row.quantity, row.unit_item, row.name_item, row.name_enterprise, row.unit_cost, (row.quantity*row.unit_cost)]);
-  }
 
 }
