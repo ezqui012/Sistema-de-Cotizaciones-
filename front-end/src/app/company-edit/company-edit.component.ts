@@ -73,7 +73,7 @@ export class CompanyEditComponent implements OnInit {
     } else if (this.enterpriseForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 4 caracteres";
     } else if (this.enterpriseForm.get(field)?.hasError('maxlength')) {
-      message = "Máximo de 75 caracteres";
+      message = "Máximo de 30 caracteres";
     }
     return message;
   }

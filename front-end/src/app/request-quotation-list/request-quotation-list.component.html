@@ -6,6 +6,7 @@
     <h1><b>Solicitud de cotización</b></h1>
     <div class="btnCreate">
       <button type="button" class="btn btn-one" (click)="navigateTo('/request-quotation')">Registrar Solicitud</button>
+      <input type="text" class="form-control" name="filterRequest" placeholder="Buscar..."[(ngModel)]="filterRequest">
     </div>
   </div>
   <!--Tabla-->
@@ -15,6 +16,7 @@
       <div class="nomHead"><b>Razón social</b></div>
       <div class="totalHead"><b>Encargado de solicitud</b></div>
       <div class="statusHead"><b>Estado</b></div>
+      <div class="dateHead"> <b>Fecha</b> </div>
       <div class="accHead"><b>Acciones</b></div>
     </div>
     <div class="newBodyTable">
@@ -29,14 +31,14 @@
         <tbody>
           <tr
             class="row-request"
-            *ngFor="let request of request_quotation; let i = index"
+            *ngFor="let request of request_quotation | filter:filterRequest; let i = index"
           >
             <th style="padding-top: 20px" scope="row">{{ i + 1 }}</th>
             <td style="padding-top: 20px; width: 40%; padding-left: 5%">
               {{ request.business_name }}
             </td>
             <td style="padding-top: 20px; width: 20%">{{ request.name }}</td>
-            <td style="padding-top: 20px; width: 15%">
+            <td style="padding-top: 20px; width: 20%">
               <div>{{ setStatus(request.status) }}</div>
               <div [ngSwitch]="status">
                 <div
@@ -62,6 +64,8 @@
                 </div>
               </div>
             </td>
+            <td style="padding-top: 20px; width: 20%">{{ request.date }}</td>
+            <td style="padding-top: 20px; width: 20%">
             <td style="width: 25%">
               <div
                 [ngSwitch]="status"

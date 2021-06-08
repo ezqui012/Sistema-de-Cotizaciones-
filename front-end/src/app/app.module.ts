@@ -66,6 +66,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 PdfMakeWrapper.setFonts(pdfFonts);
 import { NgxDropzoneModule } from 'ngx-dropzone';
 
+import { FilterPipe } from './pipes/filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -112,7 +113,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     CompanyEditComponent,
     ItemListComponent,
     ItemRegisterComponent,
-    ItemEditComponent
+    ItemEditComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
