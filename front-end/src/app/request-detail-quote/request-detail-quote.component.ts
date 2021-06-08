@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DetailRequestService } from '../services/detail-request.service';
-import { ListItemsRequest } from '../Model/request-detail';
+import { ListItemsRequest, ReportRequestAccepted } from '../Model/request-detail';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -30,6 +30,7 @@ export class RequestDetailQuoteComponent implements OnInit {
   report: ReportRequest = new ReportRequest;
   faculty: Faculty = new Faculty;
   nameFaculty:any
+  dataAccepted: Array<ReportRequestAccepted>=[]
 
   constructor(
     public toastr: ToastrService,
@@ -44,6 +45,20 @@ export class RequestDetailQuoteComponent implements OnInit {
   ngOnInit(): void {
     this.getInfoRequestById(this.route.snapshot.params.id);
     this.getFaculty();
+    this.getRequestAccepted();
+  }
+  getRequestAccepted(){
+    this.service.getRequestAccepted(this.route.snapshot.params.id).subscribe(
+      (data) => {
+        this.dataAccepted = data;
+
+
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
   }
   getFaculty(){
     this.service.getFaculty(localStorage.getItem('quot-umss-f')).subscribe(

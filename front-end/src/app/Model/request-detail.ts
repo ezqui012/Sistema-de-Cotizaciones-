@@ -24,6 +24,15 @@ export class RejectedRequest{
   id: any;
 }
 
+export class ReportRequestAccepted{
+  name:any;
+  date:any
+}
+export class ReportRequestRejected{
+  name:any;
+  date_rejected:any
+}
+
 export class PersonalQuote{
   id: any;
   name: any;

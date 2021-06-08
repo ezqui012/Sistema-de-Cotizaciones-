@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AcceptedQuote } from '../Model/accepted-quote';
 import { ReportRequest } from '../reports/reportRequest';
 import { Faculty } from '../Model/faculty';
+import { ReportRequestAccepted } from '../Model/request-detail';
 
 @Component({
   selector: 'app-request-detail-approved',
@@ -31,6 +32,7 @@ export class RequestDetailApprovedComponent implements OnInit {
   report: ReportRequest = new ReportRequest;
   faculty: Faculty = new Faculty;
   nameFaculty:any
+  dataAccepted: Array<ReportRequestAccepted> | any;
 
   constructor(
     public toastr: ToastrService,
@@ -45,6 +47,19 @@ export class RequestDetailApprovedComponent implements OnInit {
   ngOnInit(): void {
     this.getInfoRequestById(this.route.snapshot.params.id);
     this.getFaculty();
+    this.getRequestAccepted();
+  }
+  getRequestAccepted(){
+    this.service.getRequestAccepted(this.route.snapshot.params.id).subscribe(
+      (data) => {
+        this.dataAccepted = data;
+
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
   }
   getFaculty(){
     this.service.getFaculty(localStorage.getItem('quot-umss-f')).subscribe(
@@ -123,6 +138,6 @@ export class RequestDetailApprovedComponent implements OnInit {
   }
   //methodo report
   generatePdf(){
-    this.report.generateQuotePerformedPdf(this.totalCost, this.business, this.userName, this.personalQuote, this.dateRequest, this.nameFaculty, this.items)
+    this.report.generateQuotePerformedPdf(this.totalCost, this.business, this.userName, this.personalQuote, this.dataAccepted[0].name, this.dataAccepted[0].date, this.dateRequest, this.nameFaculty, this.items)
   }
 }

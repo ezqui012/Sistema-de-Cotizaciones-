@@ -80,7 +80,7 @@ export class ReportRequest {
   private tableHeader(nameFaculty:string): ITable {
     [{}]
     return new Table([
-      [ new Txt('Universidad Mayor de San Simón').alignment('left').end , new Txt('fecha: '+hoy.toLocaleDateString()).alignment('right').end],
+      [ new Txt('Universidad Mayor de San Simón').alignment('left').end , new Txt('Fecha: '+hoy.toLocaleDateString()).alignment('right').end],
       [new Txt(nameFaculty).alignment('left').end, new Txt('Cochabamba-Bolivia').alignment('right').end],
       [new Txt('Sección Adquisiciones').alignment('left').end, '']
     ])
@@ -114,6 +114,8 @@ export class ReportRequest {
     business: string,
     userName: string,
     personalQuote:string,
+    nameAccepted: string,
+    dateAccepted: string,
     dateRequest: string,
     nameFaculty: string,
     items: AcceptedQuote[],
@@ -126,7 +128,7 @@ export class ReportRequest {
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
     const statusRequestData = new Txt(`Estado: Aceptado`).fontSize(11).alignment('left').end
     const userRequestData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
-    const userAceptedData = new Txt(`La Solicitud fue aceptada por: ${userName}`).fontSize(11).alignment('left').end
+    const userAceptedData = new Txt(`La Solicitud fue aceptada por: ${nameAccepted}  en fecha: ${dateAccepted}`).fontSize(11).alignment('left').end
     const personalData = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
 
     pdf.add(this.tableHeader(nameFaculty));
@@ -135,7 +137,7 @@ export class ReportRequest {
     pdf.add(title)
     pdf.add(pdf.ln(1))
     pdf.defaultStyle({
-      fontSize: 11
+      fontSize: 10
     });
 
     pdf.add(this.tableBusinessData(business, dateRequest));
@@ -148,9 +150,9 @@ export class ReportRequest {
 
     pdf.add(infoRequest);
     pdf.add(userRequestData);
+    pdf.add(personalData);
     pdf.add(statusRequestData);
     pdf.add(userAceptedData);
-    pdf.add(personalData);
     pdf.create().open();
   }
 
@@ -179,7 +181,8 @@ export class ReportRequest {
     totalCost: number,
     business: string,
     userName: string,
-    //personalQuote:string,
+    nameRejected:string,
+    dateRejected:string,
     reason:string,
     dateRequest: string,
     nameFaculty: string,
@@ -193,7 +196,7 @@ export class ReportRequest {
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
     const statusRequestData = new Txt(`Estado: Rechazado`).fontSize(11).alignment('left').end
     const userRequestData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
-    const userRejectedData = new Txt(`Rechazado por: ${userName}`).fontSize(11).alignment('left').end
+    const userRejectedData = new Txt(`La solicitud fue Rechazada por: ${nameRejected}  en fecha: ${dateRejected}`).fontSize(11).alignment('left').end
     const reasonDate = new Txt(`Motivo de rechazo: ${reason}`).fontSize(11).alignment('left').end
 
     pdf.add(this.tableHeader(nameFaculty));
@@ -240,7 +243,6 @@ export class ReportRequest {
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
     const statusRequestData = new Txt(`Estado: Cotización`).fontSize(11).alignment('left').end
     const userRequestData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
-    const userAceptedData = new Txt(`La Solicitud fue aceptada por: ${userName}`).fontSize(11).alignment('left').end
     const personalData = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
 
     pdf.add(this.tableHeader(nameFaculty));
@@ -253,7 +255,6 @@ export class ReportRequest {
     });
 
     pdf.add(this.tableBusinessData(business, dateRequest));
-    pdf.add(personalData);
     pdf.add(pdf.ln(2));
     pdf.add(titleList);
     pdf.add(this.crateTable(items));
@@ -264,7 +265,7 @@ export class ReportRequest {
     pdf.add(infoRequest);
     pdf.add(userRequestData);
     pdf.add(statusRequestData);
-    pdf.add(userAceptedData);
+    pdf.add(personalData);
     pdf.create().open();
   }
 

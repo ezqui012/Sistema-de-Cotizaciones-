@@ -76,14 +76,14 @@ export class QuoteListFinalizedComponent implements OnInit {
   getFinalizedQuote(){
     this.quoteProcessService.getQuoteFinalized(this.quoteId).subscribe((res)=>{
     this.quotes = res
-
+    console.log(res)
     this.business = this.quotes[0].business_name
     this.quoteUnitecost = this.quotes[0].unit_cost
     this.quantity = this.quotes[0].quantity
     this.total = this.quantity * this.quoteUnitecost
     this.quotes[0].Total = this.total
     this.status = this.quotes[0].status_quotation
-
+    console.log(this.quotes[0].Total)
     })
   }
   generatePdf() {
