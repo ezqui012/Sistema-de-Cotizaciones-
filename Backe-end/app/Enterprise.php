@@ -10,7 +10,7 @@ class Enterprise extends Model
 
     public $updated_at = null;
     public $created_at = null;
-
+    protected $primaryKey ='id_enterprise';
     protected $fillable = [
         'id_enterprise',
         'name_enterprise',
@@ -18,7 +18,8 @@ class Enterprise extends Model
         'nit_enterprise',
         'legal_representative',
         'phone_enterprise',
-        'address_enterprise'
+        'address_enterprise',
+        'email_enterprise'
     ];
 
     protected $hidden = [

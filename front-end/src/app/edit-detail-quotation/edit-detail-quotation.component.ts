@@ -200,7 +200,14 @@ export class EditDetailQuotationComponent implements OnInit {
         this.toastr.error(`Error: ${error} Intente de nuevo`);
       }
     );
+  }
 
+  showQuantity(){
+    for(let data of this.items){
+      if(data.id_item === this.registerForm.get('id_item')?.value){
+        this.registerForm.controls['quantity'].setValue(data.quantity);
+      }
+    }
   }
 
 }

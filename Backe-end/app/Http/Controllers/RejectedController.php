@@ -7,7 +7,7 @@ use App\Rejected;
 use App\Http\Requests\CreateRejectedRequest;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use PhpParser\JsonDecoder;
+use Illuminate\Support\Carbon;
 
 class RejectedController extends Controller
 {
@@ -19,7 +19,9 @@ class RejectedController extends Controller
     public function store(CreateRejectedRequest $request)
     {
         try{
+            $now = Carbon::now();
             $input = $request->all();
+            $input['date_rejected'] = $now->format('Y-m-d');
             Rejected::create($input);
             return response()->json([
                 'res' => true,

@@ -88,5 +88,11 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('get-type-item', 'ExpenseItemController@getType');
     Route::get('companyList', 'FacultyController@allListCompany');
     Route::apiResource('school', 'FacultyController');
+    Route::get('sector-enterprise', 'CompanyController@getSector');
+    Route::post('enterprise', 'CompanyController@addDataEnterprise');
+    Route::get('enterprises/{id}','CompanyController@getEnterpriseById');
+    Route::put('updateEnterprise/{id_enterprise}', 'CompanyController@updateEnterprise');
+
+    Route::apiResource('attachment-routes', 'AttachmentController');
 });
 

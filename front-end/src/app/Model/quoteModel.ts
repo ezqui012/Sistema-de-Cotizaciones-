@@ -58,6 +58,7 @@ export class SelectControlItem{
 export class ItemQuoteAcepted{
   id_request: any;
   id_qd:any;
+  id: any;
 }
 
 export class ResponseQuote{

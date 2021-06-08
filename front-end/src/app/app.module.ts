@@ -64,6 +64,8 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
 // Set the fonts to use
 PdfMakeWrapper.setFonts(pdfFonts);
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -132,7 +134,8 @@ PdfMakeWrapper.setFonts(pdfFonts);
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    NgxDropzoneModule
   ],
   providers: [],
   bootstrap: [AppComponent]
