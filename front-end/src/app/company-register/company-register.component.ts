@@ -77,9 +77,11 @@ export class CompanyRegisterComponent implements OnInit {
     if (this.enterpriseForm.get(field)?.errors?.required) {
       message = `El campo NIT es obligatorio`;
     } else if (this.enterpriseForm.get(field)?.hasError('minlength')) {
-      message = "Mínimo 10 caracteres";
+      message = "Mínimo 10 dígitos";
     } else if (this.enterpriseForm.get(field)?.hasError('maxlength')) {
-      message = "Máximo de 15 caracteres";
+      message = "Máximo de 15 dígitos";
+    }else if(this.enterpriseForm.get(field)?.hasError('pattern')){
+      message = "El campo solo admite dígitos"
     }
     return message;
   }
@@ -91,6 +93,8 @@ export class CompanyRegisterComponent implements OnInit {
       message = "Mínimo 7 dígitos";
     } else if (this.enterpriseForm.get(field)?.hasError('maxlength')) {
       message = "Máximo de 8 dígitos";
+    }else if(this.enterpriseForm.get(field)?.hasError('pattern')){
+      message = "El campo solo admite dígitos"
     }
     return message;
   }
@@ -125,7 +129,9 @@ export class CompanyRegisterComponent implements OnInit {
   }
 
   registerEnterprise() {
-    console.log(this.enterpriseForm.value);
+    if(this.enterpriseForm.invalid){
+      return
+    }
     this.companyDataService.insertData(this.enterpriseForm.value).subscribe(res => {
       this.showToastSuccess();
       this.loadSectors();
@@ -219,6 +225,18 @@ export class CompanyRegisterComponent implements OnInit {
   private _filterSector(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+
+  public inputValidator(event: any) {
+    // console.log(event.target.value);
+    const pattern = /^[a-zA-Z ]*$/;
+    // let inputChar = String.fromCharCode(event.charCode)
+    if (!pattern.test(event.target.value)) {
+      event.target.value = event.target.value.replace(/[^a-zA-Z ]/g, '');
+      // invalid character, prevent input
+
+    }
   }
   ngOnInit(): void {
     this.loadSectors();
