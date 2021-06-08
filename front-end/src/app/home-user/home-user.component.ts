@@ -40,7 +40,7 @@ export class HomeUserComponent implements OnInit {
     if(this.permission.includes(1) &&  this.permission.includes(2)){
       this.showQuote = true;
     }
-    if(this.permission.includes(4)  &&  this.permission.includes(5) &&  this.permission.includes(6)){
+    if(this.permission.includes(6)){
       this.showRequest = true;
     }
     if(this.permission.includes(3)){
