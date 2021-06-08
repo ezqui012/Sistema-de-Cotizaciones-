@@ -58,7 +58,7 @@ import { CompanyEditComponent } from './company-edit/company-edit.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { ItemRegisterComponent } from './item-register/item-register.component';
 import { ItemEditComponent } from './item-edit/item-edit.component';
-
+import { FilterPipe } from './pipes/filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -105,7 +105,8 @@ import { ItemEditComponent } from './item-edit/item-edit.component';
     CompanyEditComponent,
     ItemListComponent,
     ItemRegisterComponent,
-    ItemEditComponent
+    ItemEditComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

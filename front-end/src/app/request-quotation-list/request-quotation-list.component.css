@@ -20,6 +20,12 @@ body{
   width: 200px;
   margin-left: 20px;
 }
+.form-control{
+  margin-top: 2px;
+  margin-left: 20px;
+  width: 200px;
+  margin-bottom: 2px;
+}
 .btn:hover{
 background-color:#2f82ff !important;
 color: white;
@@ -55,16 +61,18 @@ color: white;
   width: 7%;
 }
 .nomHead{
-  width: 35%;
+  width: 30%;
 
 }
 .statusHead{
-  width: 26%;
+  width: 15%;
 }
 .totalHead{
   width: 20%;
 }
-
+.dateHead{
+  width: 10%;
+}
 
 
 .containerBtn{

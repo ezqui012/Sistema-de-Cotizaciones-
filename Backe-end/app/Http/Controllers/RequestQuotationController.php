@@ -99,7 +99,7 @@ class RequestQuotationController extends Controller
     {
         try{
 
-            $personals = DB::select('SELECT rq.id_request, rq.business_name, u.name, rq.status
+            $personals = DB::select('SELECT rq.id_request, rq.business_name, u.name, rq.status, rq.date
             FROM request_quotation rq, users u
             WHERE rq.id = u.id
             ORDER BY rq.date DESC');

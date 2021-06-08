@@ -28,7 +28,7 @@ class UpdateEnterpriseRequest extends FormRequest
                 'sector_enterprise'=>'required|min:4|max:30',
                 'legal_representative'=>'required|min:10|max:100',
                 'phone_enterprise' => 'required|min:7|max:8',
-                'nit_enterprise' => 'required|min:7|max:9|unique:enterprise,nit_enterprise, ' . $this->route()->id_enterprise . ',id_enterprise',
+                'nit_enterprise' => 'required|min:7|max:15|unique:enterprise,nit_enterprise, ' . $this->route()->id_enterprise . ',id_enterprise',
                 'address_enterprise'=>'required|min:10|max:100',
                 'email_enterprise' => 'required|min:8|max:32|unique:enterprise,email_enterprise,' . $this->route()->id_enterprise . ',id_enterprise'
                 //
