@@ -31,7 +31,7 @@ export class CompanyRegisterComponent implements OnInit {
     sector_enterprise: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(4)]],
     nit_enterprise: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(1),
     Validators.pattern('^-?[0-9 ]\\d*(\\.\\d{1,2})?$')]],
-    legal_representative: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(10)]],
+    legal_representative: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(10)]],
     phone_enterprise: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(7), Validators.pattern('^-?[0-9 ]\\d*(\\.\\d{1,2})?$')]],
     address_enterprise: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(10)]],
     email_enterprise: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(8), Validators.pattern(/\S+@\S+\.\S+/)]]
