@@ -23,7 +23,7 @@ export class RequestQuotationListComponent implements OnInit {
     quote: 'Cotización'
 
   }
-  filterRequest= '';
+  searchRequest!: any;
   constructor(
     public serviceRequestQuote: RequestQuoteService,
     private router: Router,
