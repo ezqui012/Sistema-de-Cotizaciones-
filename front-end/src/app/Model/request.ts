@@ -6,6 +6,7 @@ export class RequestList{
   status: any;
   quantity: any;
   total_cost: any;
+  date: any;
 }
 
 export class RequestQuotation{

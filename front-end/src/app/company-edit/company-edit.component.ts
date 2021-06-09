@@ -36,7 +36,7 @@ export class CompanyEditComponent implements OnInit {
     sector_enterprise: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(4)]],
     nit_enterprise: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(1),
                           Validators.pattern('^-?[0-9 ]\\d*(\\.\\d{1,2})?$')]],
-    legal_representative: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(10)]],
+    legal_representative: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(10)]],
     phone_enterprise: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(7), Validators.pattern('^-?[0-9 ]\\d*(\\.\\d{1,2})?$')]],
     address_enterprise: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(10)]],
     email_enterprise: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(8), Validators.pattern(/\S+@\S+\.\S+/)]]
@@ -73,7 +73,7 @@ export class CompanyEditComponent implements OnInit {
     } else if (this.enterpriseForm.get(field)?.hasError('minlength')) {
       message = "Mínimo 4 caracteres";
     } else if (this.enterpriseForm.get(field)?.hasError('maxlength')) {
-      message = "Máximo de 75 caracteres";
+      message = "Máximo de 30 caracteres";
     }
     return message;
   }
@@ -82,9 +82,11 @@ export class CompanyEditComponent implements OnInit {
     if (this.enterpriseForm.get(field)?.errors?.required) {
       message = `El campo NIT es obligatorio`;
     } else if (this.enterpriseForm.get(field)?.hasError('minlength')) {
-      message = "Mínimo 10 caracteres";
+      message = "Mínimo 10 dígitos";
     } else if (this.enterpriseForm.get(field)?.hasError('maxlength')) {
-      message = "Máximo de 15 caracteres";
+      message = "Máximo de 15 dígitos";
+    }else if(this.enterpriseForm.get(field)?.hasError('pattern')){
+      message = "El campo solo admite dígitos"
     }
     return message;
   }
@@ -96,6 +98,8 @@ export class CompanyEditComponent implements OnInit {
       message = "Mínimo 7 dígitos";
     } else if (this.enterpriseForm.get(field)?.hasError('maxlength')) {
       message = "Máximo de 8 dígitos";
+    }else if(this.enterpriseForm.get(field)?.hasError('pattern')){
+      message = "El campo solo admite dígitos"
     }
     return message;
   }
@@ -126,7 +130,7 @@ export class CompanyEditComponent implements OnInit {
   }
 
   showToastSuccess(){
-    this.toastr.success('Se registró la empresa exitosamente');
+    this.toastr.success('Se guardaron los cambios exitosamente');
   }
 
   registerEnterprise(){
@@ -248,7 +252,16 @@ export class CompanyEditComponent implements OnInit {
 
     }
   }
+  public inputValidator(event: any) {
+    // console.log(event.target.value);
+    const pattern = /^[a-zA-Z ]*$/;
+    // let inputChar = String.fromCharCode(event.charCode)
+    if (!pattern.test(event.target.value)) {
+      event.target.value = event.target.value.replace(/[^a-zA-Z ]/g, '');
+      // invalid character, prevent input
 
+    }
+  }
 
 
 

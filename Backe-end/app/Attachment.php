@@ -4,18 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Accepted extends Model
+class Attachment extends Model
 {
-    protected $table = 'accepted';
+    protected $table = 'attachment';
 
     public $updated_at = null;
     public $created_at = null;
 
     protected $fillable = [
-        'id_request',
+        'id_attachment',
         'id_qd',
-        'date',
-        'id'
+        'file_route',
     ];
 
     protected $hidden = [

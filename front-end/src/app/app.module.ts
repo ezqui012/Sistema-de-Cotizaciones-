@@ -58,7 +58,15 @@ import { CompanyEditComponent } from './company-edit/company-edit.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { ItemRegisterComponent } from './item-register/item-register.component';
 import { ItemEditComponent } from './item-edit/item-edit.component';
+import { PdfMakeWrapper } from 'pdfmake-wrapper';
+//import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
+// Set the fonts to use
+PdfMakeWrapper.setFonts(pdfFonts);
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
+import { FilterPipe } from './pipes/filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -105,7 +113,8 @@ import { ItemEditComponent } from './item-edit/item-edit.component';
     CompanyEditComponent,
     ItemListComponent,
     ItemRegisterComponent,
-    ItemEditComponent
+    ItemEditComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -127,7 +136,8 @@ import { ItemEditComponent } from './item-edit/item-edit.component';
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    NgxDropzoneModule
   ],
   providers: [],
   bootstrap: [AppComponent]

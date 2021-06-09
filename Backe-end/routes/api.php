@@ -74,6 +74,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::apiResource('quotation','QuotationController');
     /* ID de facultad */
     Route::get('get-facultyId/{id}', 'FacultyController@getIdFaculty');
+    //Route::get('school/{id}', 'FacultyController');
 
     Route::get('get-numberQuotes/{id_quotation}/{id_item}', 'QuoteDetailController@numberQuotes');
 
@@ -86,8 +87,14 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('get-unit-item', 'ExpenseItemController@getUnit');
     Route::get('get-type-item', 'ExpenseItemController@getType');
     Route::get('companyList', 'FacultyController@allListCompany');
+    Route::apiResource('school', 'FacultyController');
     Route::get('sector-enterprise', 'CompanyController@getSector');
     Route::post('enterprise', 'CompanyController@addDataEnterprise');
     Route::get('enterprises/{id}','CompanyController@getEnterpriseById');
     Route::put('updateEnterprise/{id_enterprise}', 'CompanyController@updateEnterprise');
+    Route::get('requestAccepted/{id}', 'RequestDetailsController@getUserAccepted');
+    Route::get('requestRejected/{id}', 'RequestDetailsController@getUserRejected');
+
+    Route::apiResource('attachment-routes', 'AttachmentController');
 });
+

@@ -29,7 +29,7 @@
 
       <mat-form-field class="form-camp-full-width" id="input-large">
         <mat-label>Detalle o Item de gasto</mat-label>
-        <mat-select formControlName="id_item">
+        <mat-select formControlName="id_item" (selectionChange)="showQuantity()">
           <mat-option *ngFor="let itemOption of items" [value]="itemOption.id_item">
             {{itemOption.name_item}}
           </mat-option>
@@ -42,7 +42,7 @@
       <div class="inputs-f1">
         <mat-form-field class="form-camp-full-width" >
           <mat-label>Cantidad</mat-label>
-          <input matInput placeholder="Ingrese la cantidad" formControlName="quantity">
+          <input matInput placeholder="Ingrese la cantidad" formControlName="quantity" readonly>
           <mat-error *ngIf="isValid('quantity')">
             {{ getErrorMessage('quantity') }}
           </mat-error>

@@ -32,13 +32,13 @@ export class QuoteProcessService {
     return failed;
   }
 
-  deleteProcess(id:any):Observable<Quote>{
+  deleteProcess(id:any):Observable<any>{
     let failed: any;
     if (localStorage.getItem('quot-umss-tk')) {
       const httpHeader = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
-      return this.httpClient.delete<Quote>(`${environment.URI_API}processQuoteDelete/${id}`, { headers: httpHeader });
+      return this.httpClient.delete<any>(`${environment.URI_API}processQuoteDelete/${id}`, { headers: httpHeader });
     }
     return failed;
    }

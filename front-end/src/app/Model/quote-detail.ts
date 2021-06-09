@@ -14,4 +14,10 @@ export class RegisterQuoteDetail{
 export class ResponseRegisterQuote{
   res:any;
   message: any;
+  id: any;
+}
+
+export class AttachmentStore{
+  id_qd: any;
+  file_route: any;
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class AuthApproveGuard implements CanActivate {
 
   constructor(
-    private router:Router
+    private router:Router,
+    public toastr: ToastrService,
   ){}
 
   canActivate(
@@ -21,6 +23,7 @@ export class AuthApproveGuard implements CanActivate {
         return true;
       }else{
         this.router.navigate(['/home-user']);
+        this.toastr.error('Usted no cuenta con permisos para aceptar o rechazar solicitudes');
         return false;
       }
   }

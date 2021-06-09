@@ -37,7 +37,8 @@ export class ComparativeQuotesComponent implements OnInit {
   actualAmount: number | any;
   rejectedForm = this.fb.group({
     id_request: [ this.route.snapshot.paramMap.get('idR'), [Validators.required]],
-    reason: ['', [Validators.required, Validators.minLength(10)]]
+    reason: ['', [Validators.required, Validators.minLength(10)]],
+    id: [localStorage.getItem('quot-umss-usr'), [Validators.required]]
   });
 
   constructor(
@@ -142,8 +143,9 @@ export class ComparativeQuotesComponent implements OnInit {
   registerSelectItem(idDq:number){
 
     let register:ItemQuoteAcepted = new ItemQuoteAcepted
-    register.id_qd = idDq
-    register.id_request = this.id
+    register.id_qd = idDq;
+    register.id_request = this.id;
+    register.id = localStorage.getItem('quot-umss-usr');
     let res: ResponseQuote;
     this.serviceQuote.registerItemQuoteAccepted(register).subscribe(
       (data) => {

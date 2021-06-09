@@ -106,7 +106,7 @@ color: white;
 .containerBtn{
   text-align: center;
   margin-top: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   width: 100%;
 }
 /*estilo agregados*/
