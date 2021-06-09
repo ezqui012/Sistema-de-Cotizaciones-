@@ -49,6 +49,42 @@ class RequestDetailsController extends Controller
             ], 404);
         }
     }
+    public function getUserAccepted($id)
+    {
+        try {
+            $request = DB::table('accepted')
+            ->join('users', 'accepted.id', '=', 'users.id')
+            ->select('users.name', 'accepted.date')
+            ->where('accepted.id_request', '=', $id)
+            ->get();
+        return $request;
+
+
+        } catch (Exception $ex) {
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
+    public function getUserRejected($id)
+    {
+        try {
+            $request = DB::table('rejected')
+            ->join('users', 'rejected.id', '=', 'users.id')
+            ->select('users.name', 'rejected.date_rejected')
+            ->where('rejected.id_request', '=', $id)
+            ->get();
+        return $request;
+
+
+        } catch (Exception $ex) {
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
     public function updateRequestName($id, $request)
     {
         try {

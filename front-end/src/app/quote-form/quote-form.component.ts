@@ -26,6 +26,8 @@ export class QuoteFormComponent implements OnInit {
   private numbQT: number = 0;
   private lenght: number = 0;
 
+  files: File[] = [];
+
   idquotation: number | any;
 
   enterprises: Enterprise[] | undefined;
@@ -115,13 +117,58 @@ export class QuoteFormComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
-          this.toastr.success('Se registro la cotizacion con exito');
-          this.finishQuote();
+          if(this.files.length > 0){
+            this.registerAttachment(res.id);
+          }else{
+            this.toastr.success('Se registro la cotizacion con exito');
+            this.finishQuote();
+          }
         }
       },
       (error) => {
         console.log(error);
         this.toastr.error('Ocurrio un problema, intente nuevamente');
+      }
+    );
+  }
+
+  registerAttachment(id: number){
+    //console.log(id);
+    const fileData = this.files[0];
+    const data = new FormData;
+    data.append('file', fileData);
+    data.append('upload_preset', 'quoteUMSS');
+    data.append('cloud_name', 'dmdp1bbnt');
+
+    this.serviceQuote.storeAttachmentCloud(data).subscribe(
+      (response) => {
+        //console.log(response.secure_url);
+        let newAttachemt = {
+          id_qd: id,
+          file_route: response.secure_url
+        }
+        this.insertAttachemtnApi(newAttachemt);
+      },
+      (error) => {
+        this.toastr.success('Se registro la cotización con éxito');
+        this.finishQuote();
+        this.toastr.error(`ERROR: ${error} El archivo adjunbto no pudo ser registrado por problemas con el servidor`);
+      }
+    );
+  }
+
+  insertAttachemtnApi(attchmentInfo: any){
+    this.serviceQuote.storeAttachmentBackend(attchmentInfo).subscribe(
+      (data) => {
+        if(data.res){
+          this.toastr.success('Se registro la cotización con éxito');
+          this.finishQuote();
+        }
+      },
+      (error) => {
+        this.toastr.success('Se registro la cotización con éxito');
+        this.finishQuote();
+        this.toastr.error(`ERROR: ${error} el archivo no se registro por problemas en el servidor`);
       }
     );
   }
@@ -210,6 +257,14 @@ export class QuoteFormComponent implements OnInit {
     );
   }
 
+  showQuantity(){
+    for(let data of this.items){
+      if(data.id_item === this.registerForm.get('id_item')?.value){
+        this.registerForm.controls['quantity'].setValue(data.quantity);
+      }
+    }
+  }
+
   private translate(field: string):string|void{
     if(field === 'id_enterprise'){
       return 'Empresa';
@@ -228,6 +283,18 @@ export class QuoteFormComponent implements OnInit {
 
   navigateTo(path: String){
     this.router.navigate([path]);
+  }
+
+  onSelect(event: any) {
+    if(this.files.length < 1){
+      this.files.push(...event.addedFiles);
+    }else{
+      this.toastr.error('Solo se puede subir 1 archivo por cada registro de cotización');
+    }
+  }
+
+  onRemove(event: any) {
+    this.files.splice(this.files.indexOf(event), 1);
   }
 
 }

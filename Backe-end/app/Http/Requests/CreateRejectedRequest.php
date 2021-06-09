@@ -25,7 +25,8 @@ class CreateRejectedRequest extends FormRequest
     {
         return [
             'id_request' => 'required',
-            'reason' => 'required|min:10'
+            'reason' => 'required|min:10',
+            'id' => 'required'
         ];
     }
 }

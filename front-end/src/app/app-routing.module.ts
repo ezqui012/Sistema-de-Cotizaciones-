@@ -181,7 +181,7 @@ const routes: Routes = [
   {
     path: 'request-detail/:id',
     component: RequestDetailComponent,
-    canActivate: [AuthRequestGuard]
+    canActivate: [AuthApproveGuard]
   },
   {
     path: 'quote-list',

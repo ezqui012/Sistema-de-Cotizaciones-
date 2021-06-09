@@ -4,6 +4,9 @@ import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AcceptedQuote } from '../Model/accepted-quote';
+import { ReportRequest } from '../reports/reportRequest';
+import { Faculty } from '../Model/faculty';
+import { ReportRequestAccepted } from '../Model/request-detail';
 
 @Component({
   selector: 'app-request-detail-approved',
@@ -26,6 +29,10 @@ export class RequestDetailApprovedComponent implements OnInit {
   totalCost: number = 0;
 
   actualAmount: number | any;
+  report: ReportRequest = new ReportRequest;
+  faculty: Faculty = new Faculty;
+  nameFaculty:any
+  dataAccepted: Array<ReportRequestAccepted> | any;
 
   constructor(
     public toastr: ToastrService,
@@ -39,8 +46,34 @@ export class RequestDetailApprovedComponent implements OnInit {
 
   ngOnInit(): void {
     this.getInfoRequestById(this.route.snapshot.params.id);
+    this.getFaculty();
+    this.getRequestAccepted();
   }
+  getRequestAccepted(){
+    this.service.getRequestAccepted(this.route.snapshot.params.id).subscribe(
+      (data) => {
+        this.dataAccepted = data;
 
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
+  }
+  getFaculty(){
+    this.service.getFaculty(localStorage.getItem('quot-umss-f')).subscribe(
+      (data) => {
+        this.faculty = data;
+        this.nameFaculty = data.name_faculty;
+
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
+  }
   getInfoRequestById(id: any){
     this.service.getInfoRequest(id).subscribe(
       (data) => {
@@ -103,5 +136,8 @@ export class RequestDetailApprovedComponent implements OnInit {
     let cost: number = cant * price;
     return cost;
   }
-
+  //methodo report
+  generatePdf(){
+    this.report.generateQuotePerformedPdf(this.totalCost, this.business, this.userName, this.personalQuote, this.dataAccepted[0].name, this.dataAccepted[0].date, this.dateRequest, this.nameFaculty, this.items)
+  }
 }

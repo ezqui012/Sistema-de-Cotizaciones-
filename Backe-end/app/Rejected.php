@@ -14,7 +14,9 @@ class Rejected extends Model
     protected $fillable = [
         'id_rejected',
         'id_request',
-        'reason'
+        'reason',
+        'date_rejected',
+        'id'
     ];
 
     protected $hidden = [

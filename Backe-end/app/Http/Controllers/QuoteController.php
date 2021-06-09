@@ -149,7 +149,8 @@ class QuoteController extends Controller
     public function deleteProcessQuote($id)
     {
         try {
-            DB::table('quote_detail')->where('id_qd', $id)->delete();
+            DB::table('attachment')->where('id_qd', '=',$id)->delete();
+            DB::table('quote_detail')->where('id_qd', '=',$id)->delete();
             return response()->json([
                 'res' => true,
                 'message' => 'Detalle eliminado'

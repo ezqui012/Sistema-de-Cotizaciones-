@@ -62,7 +62,7 @@ class FacultyController extends Controller
     public function show($id)
     {
         try{
-            $faculty = Faculty::where('id_faculty', '=', $id)->first();
+            $faculty = Faculty::where('id_faculty', '=', $id)->get()->first();
             return $faculty;
         }catch(Exception $ex){
             return response()->json([

@@ -133,4 +133,16 @@ color: white;
   color: #ffffff;
   border: 1px solid #ffffff;
 }
+.btn-reporte{
+  color: white;
+  background-color:#003b72;
+  /* margin-right: 20px; */
+  width: 150px;
+}
 
+.containerBtn{
+  text-align: center;
+  margin-top: 10px;
+  /* margin-bottom: 10px; */
+  width: 100%;
+}
