@@ -146,7 +146,10 @@ body{
   margin-top: 2%;
 }
 
-
+.img-quote{
+  height: 185px;
+  width: 215px;
+}
 
 @media(max-width:970px){
   .title-page{

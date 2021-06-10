@@ -83,11 +83,19 @@
           </mat-form-field>
         </div>
 
-        <ngx-dropzone class="attachment-zone" (change)="onSelect($event)">
-          <ngx-dropzone-label>Arrastra aquí el archivo</ngx-dropzone-label>
-          <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"
+        <div class="attachment-zone" *ngIf="imgPrev" >
+          <button type="button" class="close" aria-label="close" (click)="showDropZone()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            <a [href]="urlImage" target="_blank"><img [src]="urlImage" alt="Archivo adjunto" class="img-quote"></a>
+        </div>
+
+
+        <ngx-dropzone class="attachment-zone" *ngIf="imgNew" (change)="onSelect($event)">
+          <ngx-dropzone-label >Arrastra aquí el archivo</ngx-dropzone-label>
+          <ngx-dropzone-image-preview  ngProjectAs="ngx-dropzone-preview"  *ngFor="let f of files" [file]="f"
             [removable]="true" (removed)="onRemove(f)">
-            <ngx-dropzone-label> ({{ f.type }}) </ngx-dropzone-label>
+            <ngx-dropzone-label > ({{ f.type }}) </ngx-dropzone-label>
           </ngx-dropzone-image-preview>
         </ngx-dropzone>
       </div>

@@ -29,6 +29,10 @@ export class EditDetailQuotationComponent implements OnInit {
 
   items: ItemRequest[] | any;
 
+  urlImage: string = 'https://i.pinimg.com/736x/10/17/44/101744215b2289935d611a9b09fac4bd.jpg';
+  imgPrev: boolean = true;
+  imgNew: boolean = false;
+
   dateControl = new FormControl(Validators.required);
   dateErrorMessage:string = 'El campo Fecha es de caracter obligatorio';
 
@@ -223,6 +227,11 @@ export class EditDetailQuotationComponent implements OnInit {
 
   onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  showDropZone(){
+    this.imgNew = true;
+    this.imgPrev = false;
   }
 
 }
