@@ -21,6 +21,8 @@ export class EditDetailQuotationComponent implements OnInit {
   business_name:any;
   statusQuot:any;
 
+  files: File[] = [];
+
   idquotation: number | any;
 
   enterprises: Enterprise[] | undefined;
@@ -208,6 +210,19 @@ export class EditDetailQuotationComponent implements OnInit {
         this.registerForm.controls['quantity'].setValue(data.quantity);
       }
     }
+  }
+
+  onSelect(event: any) {
+    if(this.files.length < 1){
+      this.files.push(...event.addedFiles);
+
+    }else{
+      this.toastr.error('Solo se puede subir 1 archivo por cada registro de cotización');
+    }
+  }
+
+  onRemove(event: any) {
+    this.files.splice(this.files.indexOf(event), 1);
   }
 
 }
