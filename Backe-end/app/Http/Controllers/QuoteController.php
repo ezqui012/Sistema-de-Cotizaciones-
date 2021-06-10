@@ -18,15 +18,15 @@ class QuoteController extends Controller
     public function index()
     {
         try {
-            $status = 'Finalizado';
-            $personals = DB::select('SELECT q.id_quotation, rq.id_request, rq.business_name, us.name, q.status_quotation
+            $statusP = 'Proceso';
+            $quotes = DB::select('SELECT q.id_quotation, rq.id_request, rq.business_name, us.name, q.status_quotation
             FROM quotation q, request_quotation rq, users us
             WHERE q.id = us.id
             AND q.id_request = rq.id_request
-            AND q.status_quotation = ?
-            ORDER BY us.name', [$status]);
+            AND q.status_quotation <> ?
+            ORDER BY us.name',[$statusP]);
 
-            return $personals;
+            return $quotes;
         } catch (Exception $ex) {
             return response()->json([
                 'res' => false,
@@ -244,6 +244,19 @@ class QuoteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+
+            DB::table('accepted')->where('id_request', $id)->delete();
+
+            return response()->json([
+                'res' => true,
+                'message' => 'Successfully delete Detail Request register accepted'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 }

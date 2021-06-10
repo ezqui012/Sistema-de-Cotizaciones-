@@ -34,6 +34,16 @@ export class QuoteService {
     }
     return failed;
   }
+  deleteItmesQuoteAccepted(idRequest:any): Observable<ResponseQuote | any>{
+    let failed: any;
+    if(localStorage.getItem('quot-umss-tk')){
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.delete<ResponseQuote>(`${environment.URI_API}quote/${idRequest}`, {headers: httpHeader});
+    }
+    return failed;
+  }
 
   getItemsQuotes(idQuote:any, idItem:any): Observable<ItemQuotes | any>{
     let failed: any;

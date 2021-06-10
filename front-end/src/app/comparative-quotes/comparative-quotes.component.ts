@@ -124,6 +124,8 @@ export class ComparativeQuotesComponent implements OnInit {
   registerQuoteAccepted(){
     if(this.items.length === this.itemsSelect.length && this.items.length !== 0){
       if(this.actualAmount >= this.totalCost){
+        //elimiar
+        this.clearItemQuoteAccepted();
         for(let i=0; i<this.itemsSelect.length; i++){
           this.registerSelectItem(this.itemsSelect[i].id_qd);
         }
@@ -162,7 +164,23 @@ export class ComparativeQuotesComponent implements OnInit {
       }
     );
   }
+  clearItemQuoteAccepted(){
 
+    let res: ResponseQuote;
+    this.serviceQuote.deleteItmesQuoteAccepted(this.id).subscribe(
+      (data) => {
+        res = data;
+        if (res.res) {
+
+        } else {
+          console.log('Ocurrio un error');
+        }
+      },
+      (error) => {
+        console.log(error.message);
+      }
+    );
+  }
   updateStateAccepted(){
     let res:ResponseQuote
     this.serviceQuote.putStateQuote(this.idQuote,'Aceptado').subscribe(
