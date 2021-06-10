@@ -101,7 +101,7 @@ color: white;
   padding: 12px;
   width: 100%;
 }
-.numHead{width: 6%;}
+/* .numHead{width: 6%;}
 .nomHead{width: 72%;}
 .cantHead{width: 10%;}
 .unHead{width: 10%;}
@@ -118,7 +118,26 @@ color: white;
 .tdbname{width: 18%;}
 .tdenter{width: 15%;}
 .tddel{width: 10%;}
-.tdcost{width: 8%;}
+.tdcost{width: 8%;} */
+
+.numHead{width: 5%;}
+.nomHead{width: 72%;}
+.cantHead{width: 10%;}
+.unHead{width: 10%;}
+.detHead{width: 18%;}
+.emHead{ width: 15%;}
+.peHead{ width: 9%;}
+.unitHead{ width: 10%;}
+.totalHead{ width: 14%;}
+.accHead{ width: 10%;}
+
+.tdNum{width: 6%; padding-top: 20px;}
+.tdquan{width: 8%;padding-top: 20px;}
+.tdunit{width:7%;padding-top: 20px;}
+.tdbname{width: 18%;padding-top: 20px;}
+.tdenter{width: 18%;padding-top: 20px;}
+.tddel{width: 8%;padding-top: 20px;}
+.tdcost{width: 10%;padding-top: 20px;}
 
 .reason{
   width: 89%;
@@ -126,6 +145,11 @@ color: white;
 
 .state{
   width: 11%;
+}
+
+.btnAction:hover{
+  background-color:#ffffff !important;
+  border: 1px solid #2f82ff;
 }
 
 .btn-one:hover{
