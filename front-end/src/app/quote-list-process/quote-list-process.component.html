@@ -45,7 +45,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="row-faculty" *ngFor="let quote of quotes; let i = index">
+          <tr class="row-faculty" *ngFor="let quote of newList; let i = index">
             <th scope="row" class="tdNum">{{i+1}}</th>
             <td class="tdquan">{{quote.quantity}}</td>
             <td class="tdunit">{{quote.unit_item}}</td>
@@ -62,7 +62,9 @@
                 <button id="verRol" type="button" class="btn btnAction" ngbPopover="Eliminar" (click)="deleteQuoteProcess(quote.id_qd)" >
                   <img src="../../assets/img-outsite/trash.png" width="25" height="25">
                 </button>
-
+                <button type="button" class="btn btnAction" ngbPopover="Adjunto" *ngIf="quote.isImg" (click)="openAttachment(quote.routeFile)">
+                  <img src="../../assets/icon-quote/icon-attachment.svg" width="25" height="25">
+                </button>
               </div>
             </td>
 

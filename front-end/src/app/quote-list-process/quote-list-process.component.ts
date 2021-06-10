@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PersonalUserService } from '../services/PersonalUser.service';
 import { ToastrService } from 'ngx-toastr';
 import {NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
+import { QuoteDetailService } from '../services/quote-detail.service';
 
 
 @Component({
@@ -31,6 +32,8 @@ export class QuoteListProcessComponent implements OnInit {
   pos = 0;
   chkAproveSol:boolean = false;
 
+  newList: any;
+
   constructor(
     private modal: NgbModal,
     private router: Router,
@@ -39,8 +42,8 @@ export class QuoteListProcessComponent implements OnInit {
     public quoteProcessService:QuoteProcessService,
     private route: ActivatedRoute,
     public toastr: ToastrService,
-    public config: NgbPopoverConfig
-
+    public config: NgbPopoverConfig,
+    public serviceQuote: QuoteDetailService
   ) {
     this.titlePage.setTitle('Detalle de cotización - QUOT-UMSS');
     config.placement = 'left';
@@ -51,7 +54,6 @@ export class QuoteListProcessComponent implements OnInit {
     this.business = this.route.snapshot.params.business;
     this.quoteId = this.route.snapshot.params.id;
     this.getQuoteProcess();
-
   }
   navigateTo(path: String){
     this.router.navigate([path]);
@@ -64,10 +66,30 @@ export class QuoteListProcessComponent implements OnInit {
 
   }
 
-  getQuoteProcess(){
+  async getQuoteProcess(){
     this.quoteProcessService.getQuoteProcess(this.quoteId).subscribe((res)=>{
-      this.quotes = res;
+      this.newList = res;
+      this.loadAttachment();
     })
+  }
+
+  loadAttachment(){
+    for(let _i=0; _i<this.newList.length; _i++){
+      this.newList[_i].isImg = false;
+      this.newList[_i].routeFile = 'empty';
+      this.serviceQuote.getAttachment(this.newList[_i].id_qd).subscribe(
+        (data: any) => {
+          if(data !== null){
+            this.newList[_i].isImg = true;
+            this.newList[_i].routeFile = data.file_route;
+          }
+        }
+      );
+    }
+  }
+
+  openAttachment(uriAttachment: any){
+    window.open(uriAttachment, '_blank');
   }
 
   deleteQuoteProcess(id:any){

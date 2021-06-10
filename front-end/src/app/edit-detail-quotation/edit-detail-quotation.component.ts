@@ -145,7 +145,7 @@ export class EditDetailQuotationComponent implements OnInit {
         if(data !== null){
           this.urlImage = data.file_route;
           this.imgPrev = true;
-          this,this.imgNew = false;
+          this.imgNew = false;
         }
       },
       (error) => {
