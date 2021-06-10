@@ -21,3 +21,9 @@ export class AttachmentStore{
   id_qd: any;
   file_route: any;
 }
+
+export class Attachment{
+  id_attachment: any;
+  id_qd: any;
+  file_route: any;
+}

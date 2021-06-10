@@ -29,9 +29,10 @@ export class EditDetailQuotationComponent implements OnInit {
 
   items: ItemRequest[] | any;
 
-  urlImage: string = 'https://i.pinimg.com/736x/10/17/44/101744215b2289935d611a9b09fac4bd.jpg';
-  imgPrev: boolean = true;
-  imgNew: boolean = false;
+  urlImage: string = 'https://gamery.cl/static/img/not-found-image.jpg';
+  imgPrev: boolean = false;
+  imgNew: boolean = true;
+  private updateIMG: boolean = false;
 
   dateControl = new FormControl(Validators.required);
   dateErrorMessage:string = 'El campo Fecha es de caracter obligatorio';
@@ -66,6 +67,7 @@ export class EditDetailQuotationComponent implements OnInit {
     this.getEnterprises();
     this.getItemsRequest(this.route.snapshot.params.id);
     this.getQuotInfo(this.route.snapshot.params.id);
+    this.getAttachmentFile();
   }
 
   isValid(field:string){
@@ -137,6 +139,21 @@ export class EditDetailQuotationComponent implements OnInit {
     );
   }
 
+  getAttachmentFile(){
+    this.serviceQuote.getAttachment(this.route.snapshot.params.idqd).subscribe(
+      (data) => {
+        if(data !== null){
+          this.urlImage = data.file_route;
+          this.imgPrev = true;
+          this,this.imgNew = false;
+        }
+      },
+      (error) => {
+        this.toastr.error(`ERROR: ${error} Recargue la pagina`);
+      }
+    );
+  }
+
   showDetailUpdate(){
     this.serviceQuote.showDetailQuote(this.route.snapshot.params.idqd).subscribe(
       (data) => {
@@ -196,14 +213,113 @@ export class EditDetailQuotationComponent implements OnInit {
     this.serviceQuote.updateDetailQuote(this.route.snapshot.params.idqd, this.registerForm.value).subscribe(
       (data) => {
         if(data.res){
-          this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
-          this.toastr.success('Cotización actualizada con exito');
+          if(this.updateIMG){
+            this.updateAttachmentQuot(this.route.snapshot.params.idqd);
+          }else if(this.files.length > 0){
+            this.registerAttachment(this.route.snapshot.params.idqd);
+          }else{
+            this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
+            this.toastr.success('Cotización actualizada con exito');
+          }
         }else{
           this.toastr.error('Ocurrio un error de conexión intente de nuevo');
         }
       },
       (error) => {
         this.toastr.error(`Error: ${error} Intente de nuevo`);
+      }
+    );
+  }
+
+  updateAttachmentQuot(id: any){
+    if(this.files.length > 0){
+      const fileData = this.files[0];
+      const data = new FormData;
+      data.append('file', fileData);
+      data.append('upload_preset', 'quoteUMSS');
+      data.append('cloud_name', 'dmdp1bbnt');
+
+      this.serviceQuote.storeAttachmentCloud(data).subscribe(
+        (response) => {
+          let newFile = {
+            file_route: response.secure_url
+          }
+          this.updateRouteFile(newFile);
+        },
+        (error) => {
+          this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
+          this.toastr.success('Cotización actualizada con exito');
+          this.toastr.error(`ERROR: ${error} El archivo adjunbto no pudo ser registrado por problemas con el servidor`);
+        }
+      );
+    }else{
+      this.serviceQuote.deleteAttachment(this.route.snapshot.params.idqd).subscribe(
+        (data) => {
+          if(data.res){
+            this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
+            this.toastr.success('Cotización actualizada con exito');
+          }
+        },
+        (error) => {
+          this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
+          this.toastr.success('Cotización actualizada con exito');
+          this.toastr.error(`ERROR: ${error} El archivo adjunbto no pudo ser registrado por problemas con el servidor`);
+        }
+      );
+    }
+  }
+
+  updateRouteFile(newRoute: any){
+    this.serviceQuote.updateAttachment(this.route.snapshot.params.idqd, newRoute).subscribe(
+      (data) => {
+        if(data.res){
+          this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
+          this.toastr.success('Cotización actualizada con exito');
+        }
+      },
+      (error) => {
+        this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
+        this.toastr.success('Cotización actualizada con exito');
+        this.toastr.error(`ERROR: ${error} El archivo adjunbto no pudo ser registrado por problemas con el servidor`);
+      }
+    );
+  }
+
+  registerAttachment(id: number){
+    const fileData = this.files[0];
+    const data = new FormData;
+    data.append('file', fileData);
+    data.append('upload_preset', 'quoteUMSS');
+    data.append('cloud_name', 'dmdp1bbnt');
+
+    this.serviceQuote.storeAttachmentCloud(data).subscribe(
+      (response) => {
+        let newAttachemt = {
+          id_qd: id,
+          file_route: response.secure_url
+        }
+        this.insertAttachemtnApi(newAttachemt);
+      },
+      (error) => {
+        this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
+        this.toastr.success('Cotización actualizada con exito');
+        this.toastr.error(`ERROR: ${error} El archivo adjunbto no pudo ser registrado por problemas con el servidor`);
+      }
+    );
+  }
+
+  insertAttachemtnApi(attchmentInfo: any){
+    this.serviceQuote.storeAttachmentBackend(attchmentInfo).subscribe(
+      (data) => {
+        if(data.res){
+          this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
+          this.toastr.success('Cotización actualizada con exito');
+        }
+      },
+      (error) => {
+        this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
+        this.toastr.success('Cotización actualizada con exito');
+        this.toastr.error(`ERROR: ${error} el archivo no se registro por problemas en el servidor`);
       }
     );
   }
@@ -232,6 +348,7 @@ export class EditDetailQuotationComponent implements OnInit {
   showDropZone(){
     this.imgNew = true;
     this.imgPrev = false;
+    this.updateIMG = true;
   }
 
 }

@@ -64,6 +64,17 @@ class AttachmentController extends Controller
 
     public function destroy($id)
     {
-        //
+        try{
+            DB::table('attachment')->where('id_qd', '=', $id)->delete();
+            return response()->json([
+                'res' => true,
+                'message' => 'Successfully delete attachment'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 }
