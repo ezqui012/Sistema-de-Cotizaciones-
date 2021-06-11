@@ -13,7 +13,7 @@
     </div>
     <div class="contentFilter justify-content-rigth" >
 
-        <input type="text" class="form-control justify-content-rigth" name="filterRequest" placeholder="Buscar..." [(ngModel)]="filterRequest" />
+        <input type="text" class="form-control justify-content-rigth" name="searchRequest" placeholder="Buscar..." [(ngModel)]="searchRequest" />
 
     </div>
   </div>
@@ -38,7 +38,7 @@
         </thead>
         <tbody>
           <tr class="row-request" *ngFor="
-              let request of request_quotation | filter: filterRequest; let i = index">
+              let request of request_quotation | filter: searchRequest; let i = index">
             <th style="padding-top: 20px; width: 5%;" scope="row">{{ i + 1 }}</th>
             <td style="padding-top: 20px; width: 30%">{{ request.business_name }}</td>
             <td style="padding-top: 20px; width: 20%">{{ request.name }}</td>
