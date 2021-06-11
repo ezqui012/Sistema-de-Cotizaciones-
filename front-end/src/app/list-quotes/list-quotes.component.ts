@@ -254,15 +254,16 @@ export class ListQuotesComponent implements OnInit {
 
 
     //let myUrl:DomSanitizer | any;
-    pdf.create().getDataUrl((dataUrl:any)=>{
+    /*pdf.create().getDataUrl((dataUrl:any)=>{
       //let myUrl:DomSanitizer
       this.myUrl.bypassSecurityTrustResourceUrl(dataUrl);
       console.log(this.myUrl)
-    });
+    });*/
     //this.fileUrl = file.getDataUrl()
     //console.log(pdf);
     //window.open(file.getDataUrl();
     pdf.create().open();
+    //window.open(pdf.permissions(),'_blank')
   }
   setList(itemsQuotes:ItemQuotes[]){
     console.log("lo actualizo")
