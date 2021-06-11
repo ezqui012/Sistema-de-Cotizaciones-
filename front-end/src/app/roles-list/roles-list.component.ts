@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Roles } from '../Model/roles';
 import { RolesService } from '../services/roles.service';
 import { Permit } from '../Model/permit';
@@ -13,6 +13,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-roles-list',
   encapsulation: ViewEncapsulation.Emulated,
+  providers: [NgbPopoverConfig],
   templateUrl: './roles-list.component.html',
   styleUrls: ['./roles-list.component.css']
 })
@@ -31,9 +32,12 @@ export class RolesListComponent implements OnInit {
     public _roleService: RolesService,
     public _assignedPermitService: AssignedPermitService,
     public _permitService: PermitService,
+    public config: NgbPopoverConfig,
     private titlePage: Title
   ) {
     this.titlePage.setTitle('Lista de roles - QUOT-UMSS');
+    config.placement = 'left';
+    config.triggers = 'hover';
   }
 
   ngOnInit(): void {

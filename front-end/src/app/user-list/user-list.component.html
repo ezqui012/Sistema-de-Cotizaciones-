@@ -92,8 +92,12 @@
             <td>{{user.name}}</td>
             <td>
               <div class="row justify-content-end" style="padding-right: 20%;">
-                <button type="button" class="btn btn-edit" routerLink="/edit-user/{{user.id}}">Editar</button>
-                <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content, i)">Ver</button>
+                <button type="button" class="btn btnAction" routerLink="/edit-user/{{user.id}}" ngbPopover="Editar">
+                  <img src="../../assets/icon-quote/pencil.png" alt="" width="30" height="30" />
+                </button>
+                <button id="verRol" type="button" class="btn btnAction" (click)="openModal(content, i)" ngbPopover="Ver detalle">
+                  <img src="../../assets/icon-quote/file-text.png" alt="" width="30" height="30" />
+                </button>
               </div>
             </td>
 

@@ -96,7 +96,26 @@ color: white;
   width: 8%;
 }
 .nomHead{
-  width: 72%;
+  width: 81%;
 
 }
 
+.btnAction {
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 2px;
+  margin-left: 3%;
+  margin-right: 3%;
+
+  justify-content: center;
+  /* text-align: center; */
+
+  /* border:1px solid #007095; */
+  border-radius: 5px;
+  cursor: pointer;
+  /* background-color:#dedede; */
+}
+.btnAction:hover {
+  background-color: #ffffff !important;
+}

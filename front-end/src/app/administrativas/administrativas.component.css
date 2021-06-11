@@ -92,19 +92,39 @@ color: white;
   width: 100%;
 }
 .numHead{
-  width: 8%;
+  width: 9%;
 }
 .nomHead{
-  width: 72%;
+  width: 79%;
 }
 
 .numHeadG{
-  width: 6%;
+  width: 7%;
 }
 .nomHeadG{
-  width: 49%;
+  width: 60%;
 }
 .monHeadG{
-  width: 28%;
+  width: 24%;
+}
+
+.btnAction {
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 2px;
+  margin-left: 3%;
+  margin-right: 3%;
+
+  justify-content: center;
+  /* text-align: center; */
+
+  /* border:1px solid #007095; */
+  border-radius: 5px;
+  cursor: pointer;
+  /* background-color:#dedede; */
+}
+.btnAction:hover {
+  background-color: #ffffff !important;
 }
 

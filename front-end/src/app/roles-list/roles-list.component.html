@@ -69,8 +69,12 @@
 
             <td>
               <div class="row justify-content-end" style="padding-right: 20%;">
-                <button type="button" class="btn btn-edit" (click)="navigateToEdit('/roles-edit', role.id_role)">Editar</button>
-                <button id="verRol" type="button" class="btn btn-ver" (click)="openModal(content,i, role.id_role)">Ver</button>
+                <button type="button" class="btn btnAction" ngbPopover="Editar" (click)="navigateToEdit('/roles-edit', role.id_role)">
+                  <img src="../../assets/icon-quote/pencil.png" alt="" width="30" height="30" />
+                </button>
+                <button id="verRol" type="button" class="btn btnAction" ngbPopover="Ver detalle" (click)="openModal(content,i, role.id_role)">
+                  <img src="../../assets/icon-quote/file-text.png" alt="" width="30" height="30" />
+                </button>
               </div>
             </td>
 
