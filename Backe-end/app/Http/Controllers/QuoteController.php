@@ -100,7 +100,7 @@ class QuoteController extends Controller
     {
 
         try {
-            $quotes = DB::select('SELECT qd.quantity, ex.unit_item,ex.name_item,rq.business_name, e.name_enterprise, qd.delivery_days, qd.unit_cost, q.status_quotation
+            $quotes = DB::select('SELECT qd.id_qd, qd.quantity, ex.unit_item,ex.name_item,rq.business_name, e.name_enterprise, qd.delivery_days, qd.unit_cost, q.status_quotation
             FROM quotation as q,`request_quotation` as rq, quote_detail as qd,enterprise e , expense_item ex
             where q.id_quotation=qd.id_quotation AND q.id_request = rq.id_request AND qd.id_enterprise=e.id_enterprise AND ex.id_item =qd.id_item And q.id_quotation=? ', [$id]);
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { PdfMakeWrapper, Txt, Table } from 'pdfmake-wrapper';
@@ -23,6 +23,7 @@ import { __await } from 'tslib';
 import { QuoteProcessService } from '../services/quote-process.service';
 
 
+
 @Component({
   selector: 'app-list-quotes',
   templateUrl: './list-quotes.component.html',
@@ -43,6 +44,7 @@ export class ListQuotesComponent implements OnInit {
   listaItems: any;
   listaItemsQuote: any;
   //report: ReportComparative = new ReportComparative;
+  fileUrl:any;
   statusQuote: any = {
     //process: 'Proceso',
     rejected: 'Rechazado',
@@ -58,6 +60,7 @@ export class ListQuotesComponent implements OnInit {
     public config: NgbPopoverConfig,
     private service: DetailRequestService,
     public quoteProcessService:QuoteProcessService,
+    public myUrl:DomSanitizer
     //public report: ReportComparative
   ) {
     this.titlePage.setTitle('Lista de Cotizaciones - QUOT-UMSS');
@@ -150,7 +153,7 @@ export class ListQuotesComponent implements OnInit {
      this.listaItems = await this.serviceQuote.getItemsRequestSync(idRequest).toPromise();
 
      this.generateQuotePerformedPdf(business, userName, userName, this.nameFaculty, 'Proceso', idQuote, this.listaItems)
-     console.log(this.listaItems)
+     //console.log(this.listaItems)
    }
   ////
   private tableBusinessData(business: string, dateRequest: string): ITable {
@@ -248,6 +251,17 @@ export class ListQuotesComponent implements OnInit {
     pdf.add(infoRequest);
     pdf.add(personalData);
     pdf.add(statusRequestData);
+
+
+    //let myUrl:DomSanitizer | any;
+    pdf.create().getDataUrl((dataUrl:any)=>{
+      //let myUrl:DomSanitizer
+      this.myUrl.bypassSecurityTrustResourceUrl(dataUrl);
+      console.log(this.myUrl)
+    });
+    //this.fileUrl = file.getDataUrl()
+    //console.log(pdf);
+    //window.open(file.getDataUrl();
     pdf.create().open();
   }
   setList(itemsQuotes:ItemQuotes[]){

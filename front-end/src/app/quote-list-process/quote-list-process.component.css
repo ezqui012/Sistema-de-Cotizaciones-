@@ -98,15 +98,15 @@ color: white;
 .cantHead{width: 10%;}
 .unHead{width: 10%;}
 .detHead{width: 18%;}
-.emHead{ width: 17%;}
+.emHead{ width: 15%;}
 .peHead{ width: 9%;}
 .unitHead{ width: 10%;}
-.totalHead{ width: 12%;}
+.totalHead{ width: 14%;}
 .accHead{ width: 10%;}
 
 .tdNum{width: 6%; padding-top: 20px;}
-.tdquan{width: 10%;padding-top: 20px;}
-.tdunit{width:9%;padding-top: 20px;}
+.tdquan{width: 8%;padding-top: 20px;}
+.tdunit{width:7%;padding-top: 20px;}
 .tdbname{width: 18%;padding-top: 20px;}
 .tdenter{width: 18%;padding-top: 20px;}
 .tddel{width: 8%;padding-top: 20px;}
@@ -121,7 +121,7 @@ color: white;
   width: 11%;
 }
 .button{
-  width: 50;
+  width: 75px;
 }
 .btnAction{
 

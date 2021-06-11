@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { RegisterQuoteDetail, ResponseRegisterQuote, AttachmentStore } from '../Model/quote-detail';
+import { RegisterQuoteDetail, ResponseRegisterQuote, AttachmentStore, Attachment } from '../Model/quote-detail';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +59,39 @@ export class QuoteDetailService {
   storeAttachmentCloud(imgData: any):Observable<any>{
     let data = imgData;
     return this.httpClient.post<any>('https://api.cloudinary.com/v1_1/dmdp1bbnt/raw/upload', data);
+  }
+
+  getAttachment(id: any):Observable<Attachment | any>{
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<Attachment>(`${environment.URI_API}attachment-routes/${id}`, { headers: httpHeader });
+    }
+    return failed;
+  }
+
+  updateAttachment(id: any, newRoute:any):Observable<Attachment | any>{
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.put<Attachment>(`${environment.URI_API}attachment-routes/${id}`, newRoute, { headers: httpHeader });
+    }
+    return failed;
+  }
+
+  deleteAttachment(id: any):Observable<any>{
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.delete<Attachment>(`${environment.URI_API}attachment-routes/${id}`, { headers: httpHeader });
+    }
+    return failed;
   }
 
 }

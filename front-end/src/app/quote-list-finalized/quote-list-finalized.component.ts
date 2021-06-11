@@ -8,15 +8,18 @@ import { ReportQuotes } from '../reports/reportQuotes';
 import { DetailRequestService } from '../services/detail-request.service';
 import { PersonalUserService } from '../services/PersonalUser.service';
 import { QuoteProcessService } from '../services/quote-process.service';
-import { Quote } from './../Model/quoteModel';
+import { QuoteDetailService } from '../services/quote-detail.service';
+import {NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
+import { Quote } from '../Model/quoteModel';
+
 @Component({
   selector: 'app-quote-list-finalized',
   templateUrl: './quote-list-finalized.component.html',
   styleUrls: ['./quote-list-finalized.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
+  providers: [NgbPopoverConfig],
 })
 export class QuoteListFinalizedComponent implements OnInit {
-  quotes: Array<Quote>=[];
 
   pos = 0;
   business:any;
@@ -31,18 +34,23 @@ export class QuoteListFinalizedComponent implements OnInit {
   faculty: Faculty = new Faculty;
   nameFaculty:any
   userName:any;
+  quotes: Array<Quote>=[];
+  newList: any;
+
   constructor(
-    private modal: NgbModal,
     private router: Router,
     public _personalUserService: PersonalUserService,
     private titlePage: Title,
     public quoteProcessService:QuoteProcessService,
     private route: ActivatedRoute,
     public toastr: ToastrService,
-    private service: DetailRequestService
-
+    private service: DetailRequestService,
+    public serviceQuote: QuoteDetailService,
+    public config: NgbPopoverConfig,
   ) {
     this.titlePage.setTitle('Detalle de cotización - QUOT-UMSS');
+    config.placement = 'left';
+    config.triggers = 'hover';
   }
 
   ngOnInit(): void {
@@ -65,26 +73,47 @@ export class QuoteListFinalizedComponent implements OnInit {
       }
     );
   }
+
   navigateTo(path: String){
     this.router.navigate([path]);
   }
-  openModal(content: any, pos:any){
-    this.modal.open(content,{ windowClass:"colorModal"});
-    this.pos = pos;
-  }
 
-  getFinalizedQuote(){
+  async getFinalizedQuote(){
     this.quoteProcessService.getQuoteFinalized(this.quoteId).subscribe((res)=>{
     this.quotes = res
-    console.log(res)
     this.business = this.quotes[0].business_name
     this.quoteUnitecost = this.quotes[0].unit_cost
     this.quantity = this.quotes[0].quantity
     this.total = this.quantity * this.quoteUnitecost
     this.quotes[0].Total = this.total
     this.status = this.quotes[0].status_quotation
-    console.log(this.quotes[0].Total)
+
+    this.newList = res;
+
+    this.loadAttachment();
     })
+
+
+
+  }
+
+  loadAttachment(){
+    for(let _i=0; _i<this.newList.length; _i++){
+      this.newList[_i].isImg = false;
+      this.newList[_i].routeFile = 'empty';
+      this.serviceQuote.getAttachment(this.newList[_i].id_qd).subscribe(
+        (data: any) => {
+          if(data !== null){
+            this.newList[_i].isImg = true;
+            this.newList[_i].routeFile = data.file_route;
+          }
+        }
+      );
+    }
+  }
+
+  openAttachment(uriAttachment: any){
+    window.open(uriAttachment, '_blank');
   }
   generatePdf() {
     this.report.generateQuotePerformedPdf(this.business, this.userName, this.userName, this.nameFaculty, 'Finalizado', this.quotes)

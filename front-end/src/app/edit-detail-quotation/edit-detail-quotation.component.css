@@ -32,11 +32,13 @@ body{
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  margin: auto;
+  width: 90%;
 }
 
-#subtitle-margin{
+/* #subtitle-margin{
   margin-right: 6%;
-}
+} */
 
 .btn-one{
   color: white;
@@ -83,7 +85,7 @@ body{
 
 .container-form{
   width: 95%;
-  margin: 0;
+  margin: auto;
   background-color: #ffffff !important;
   justify-items: center !important;
   border-radius: 7px;
@@ -91,7 +93,7 @@ body{
 
 .form-quote{
   width: 100%;
-  font-size: 1.1rem;
+  /* font-size: 1.1rem; */
   padding-bottom: 0%;
 }
 
@@ -99,6 +101,7 @@ body{
   width: 100%;
   display: flex;
   flex-flow: row;
+  margin-bottom: 10px;
 }
 
 .form-camp-full-width{
@@ -108,17 +111,44 @@ body{
   margin-top: 1%;
 }
 
-#input-large{
+/* #input-large{
   width: 93%;
+} */
+
+.input-colum{
+  width: 60%;
+  display: flex;
+  flex-flow: column;
+}
+
+#large-row-input{
+  width: 73%;
+  margin-left: 5%;
+  margin-bottom: 10px;
 }
 
 .containerBtn{
   text-align: center;
 }
 
+.attachment-zone{
+  text-align: center;
+  align-items: center;
+  height: 190px;
+  width: 220px;
+  margin-top: 10px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
 .containerBtn-2{
   text-align: center;
   margin-top: 2%;
+}
+
+.img-quote{
+  height: 185px;
+  width: 215px;
 }
 
 @media(max-width:970px){
@@ -139,6 +169,21 @@ body{
     width: 90%;
     margin-left: 2%;
     margin-right: 2%;
+  }
+
+  .input-colum{
+    width: 100%;
+  }
+
+  #large-row-input{
+    width: 90%;
+    margin-left: 3%;
+  }
+
+  .attachment-zone{
+    margin: auto;
+    /* margin-left: 19%;
+    margin-right: 19%; */
   }
 
   .container-subTitle{
