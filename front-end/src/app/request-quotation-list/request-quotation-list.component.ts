@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
+
 import { RequestList } from '../Model/request';
 import { RequestQuoteService } from '../services/request.service';
-import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -27,8 +29,11 @@ export class RequestQuotationListComponent implements OnInit {
   constructor(
     public serviceRequestQuote: RequestQuoteService,
     private router: Router,
+    private titlePage: Title,
     public config: NgbPopoverConfig
   ) {
+
+    this.titlePage.setTitle('Lista de solicitud - QUOT-UMSS');
     config.placement = 'left';
     config.triggers = 'hover';
   }

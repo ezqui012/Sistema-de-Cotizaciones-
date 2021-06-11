@@ -18,15 +18,15 @@ class QuoteController extends Controller
     public function index()
     {
         try {
-            $status = 'Finalizado';
-            $personals = DB::select('SELECT q.id_quotation, rq.id_request, rq.business_name, us.name, q.status_quotation
+            $statusP = 'Proceso';
+            $quotes = DB::select('SELECT q.id_quotation, rq.id_request, rq.business_name, us.name, q.status_quotation
             FROM quotation q, request_quotation rq, users us
             WHERE q.id = us.id
             AND q.id_request = rq.id_request
-            AND q.status_quotation = ?
-            ORDER BY us.name', [$status]);
+            AND q.status_quotation <> ?
+            ORDER BY us.name',[$statusP]);
 
-            return $personals;
+            return $quotes;
         } catch (Exception $ex) {
             return response()->json([
                 'res' => false,
@@ -100,7 +100,7 @@ class QuoteController extends Controller
     {
 
         try {
-            $quotes = DB::select('SELECT qd.quantity, ex.unit_item,ex.name_item,rq.business_name, e.name_enterprise, qd.delivery_days, qd.unit_cost, q.status_quotation
+            $quotes = DB::select('SELECT qd.id_qd, qd.quantity, ex.unit_item,ex.name_item,rq.business_name, e.name_enterprise, qd.delivery_days, qd.unit_cost, q.status_quotation
             FROM quotation as q,`request_quotation` as rq, quote_detail as qd,enterprise e , expense_item ex
             where q.id_quotation=qd.id_quotation AND q.id_request = rq.id_request AND qd.id_enterprise=e.id_enterprise AND ex.id_item =qd.id_item And q.id_quotation=? ', [$id]);
 
@@ -244,6 +244,19 @@ class QuoteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+
+            DB::table('accepted')->where('id_request', $id)->delete();
+
+            return response()->json([
+                'res' => true,
+                'message' => 'Successfully delete Detail Request register accepted'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
     }
 }

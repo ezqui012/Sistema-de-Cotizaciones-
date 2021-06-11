@@ -5,12 +5,13 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { PersonalUserService } from '../services/PersonalUser.service';
 import { Faculty } from '../Model/faculty';
 import { DetailRequestService } from '../services/detail-request.service';
 import { ReportQuotes } from '../reports/reportQuotes';
+import {NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
+import { QuoteDetailService } from '../services/quote-detail.service';
 
 
 @Component({
@@ -39,6 +40,8 @@ export class QuoteListProcessComponent implements OnInit {
   nameFaculty:any
   userName:any;
 
+  newList: any;
+
   constructor(
     private modal: NgbModal,
     private router: Router,
@@ -48,8 +51,8 @@ export class QuoteListProcessComponent implements OnInit {
     private route: ActivatedRoute,
     public toastr: ToastrService,
     public config: NgbPopoverConfig,
-    private service: DetailRequestService
-
+    private service: DetailRequestService,
+    public serviceQuote: QuoteDetailService
   ) {
     this.titlePage.setTitle('Detalle de cotización - QUOT-UMSS');
     config.placement = 'left';
@@ -89,11 +92,30 @@ export class QuoteListProcessComponent implements OnInit {
 
   }
 
-  getQuoteProcess() {
-    this.quoteProcessService.getQuoteProcess(this.quoteId).subscribe((res) => {
-      this.quotes = res;
-      console.log(res)
+  async getQuoteProcess(){
+    this.quoteProcessService.getQuoteProcess(this.quoteId).subscribe((res)=>{
+      this.newList = res;
+      this.loadAttachment();
     })
+  }
+
+  loadAttachment(){
+    for(let _i=0; _i<this.newList.length; _i++){
+      this.newList[_i].isImg = false;
+      this.newList[_i].routeFile = 'empty';
+      this.serviceQuote.getAttachment(this.newList[_i].id_qd).subscribe(
+        (data: any) => {
+          if(data !== null){
+            this.newList[_i].isImg = true;
+            this.newList[_i].routeFile = data.file_route;
+          }
+        }
+      );
+    }
+  }
+
+  openAttachment(uriAttachment: any){
+    window.open(uriAttachment, '_blank');
   }
 
   deleteQuoteProcess(id:any){

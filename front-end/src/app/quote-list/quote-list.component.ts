@@ -1,14 +1,17 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { QuotationService } from '../services/quotation.service';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { ListAssignedQuotes } from '../Model/quotation';
+import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+
+import { QuotationService } from '../services/quotation.service';
+import { ListAssignedQuotes } from '../Model/quotation';
 
 @Component({
   selector: 'app-quote-list',
   templateUrl: './quote-list.component.html',
   styleUrls: ['./quote-list.component.css'],
+  providers: [NgbPopoverConfig],
   encapsulation:ViewEncapsulation.Emulated
 })
 export class QuoteListComponent implements OnInit {
@@ -19,9 +22,12 @@ export class QuoteListComponent implements OnInit {
     private services:QuotationService,
     private router:Router,
     private titlePage: Title,
+    public config: NgbPopoverConfig,
     public toastr: ToastrService
   ) {
     this.titlePage.setTitle('Lista de cotizaciones asignadas - QUOT-UMSS')
+    config.placement = 'left';
+    config.triggers = 'hover';
   }
 
   ngOnInit(): void {

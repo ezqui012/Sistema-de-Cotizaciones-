@@ -50,6 +50,7 @@ import { ItemEditComponent } from './item-edit/item-edit.component';
 
 import { AuthEnterpriseGuard } from './guards/auth-enterprise.guard';
 import { AuthItemGuard } from './guards/auth-item.guard';
+import { AutListRequestGuard } from './guards/aut-list-request.guard';
 
 const routes: Routes = [
   {
@@ -171,7 +172,7 @@ const routes: Routes = [
   {
     path: 'request-quotation-list',
     component: RequestQuotationListComponent,
-    canActivate: [AuthRequestGuard]
+    canActivate: [AutListRequestGuard]
   },
   {
     path: 'request-quotation-edit/:id',
