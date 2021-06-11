@@ -34,6 +34,36 @@ export class QuoteService {
     }
     return failed;
   }
+  getItemsQuotes(idQuote:any, idItem:any): Observable<ItemQuotes | any>{
+    let failed: any;
+    if(localStorage.getItem('quot-umss-tk')){
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<ItemQuotes>(`${environment.URI_API}itemQuotes/${idQuote}/${idItem}`, {headers: httpHeader});
+    }
+    return failed;
+  }
+  getItemsRequestSync(idRequest:any): Observable<ExpenseItems | any>{
+    let failed: any;
+    if(localStorage.getItem('quot-umss-tk')){
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<ExpenseItems>(`${environment.URI_API}quoteItem/${idRequest}`, {headers: httpHeader});
+    }
+    return failed;
+  }
+  getItemsQuotesSync(idQuote:any, idItem:any): Observable<ItemQuotes | any>{
+    let failed: any;
+    if(localStorage.getItem('quot-umss-tk')){
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<ItemQuotes>(`${environment.URI_API}itemQuotes/${idQuote}/${idItem}`, {headers: httpHeader});
+    }
+    return failed;
+  }
   deleteItmesQuoteAccepted(idRequest:any): Observable<ResponseQuote | any>{
     let failed: any;
     if(localStorage.getItem('quot-umss-tk')){
@@ -45,16 +75,7 @@ export class QuoteService {
     return failed;
   }
 
-  getItemsQuotes(idQuote:any, idItem:any): Observable<ItemQuotes | any>{
-    let failed: any;
-    if(localStorage.getItem('quot-umss-tk')){
-      const httpHeader = new HttpHeaders({
-        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
-      });
-      return this.httpClient.get<ItemQuotes>(`${environment.URI_API}itemQuotes/${idQuote}/${idItem}`, {headers: httpHeader});
-    }
-    return failed;
-  }
+
   registerItemQuoteAccepted(register:ItemQuoteAcepted):Observable<ResponseQuote|any>{
     let failed: any;
 

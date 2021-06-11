@@ -39,7 +39,7 @@
                             <img src="../../assets/icon-quote/registerMod.png" width="28" height="30" />
                           </button>
                           <button type="button" class="btn btnAction" *ngSwitchCase="statusQuote.accepted" ngbPopover="Reporte PDF"
-                          >
+                          (click)="generatePdf(quote.id_request, quote.id_quotation, quote.business_name, quote.name)">
                             <img src="../../assets/icon-quote/file-pdfAct.png" width="30" height="30" />
                           </button>
 
@@ -48,7 +48,7 @@
                             <img src="../../assets/icon-quote/clipboardDes.png" width="30" height="30" />
                           </button>
                           <button type="button" class="btn btnAction" *ngSwitchCase="statusQuote.rejected" ngbPopover="Reporte PDF"
-                          >
+                          (click)="generatePdf(quote.id_request, quote.id_quotation, quote.business_name, quote.name)">
                             <img src="../../assets/icon-quote/file-pdfAct.png" width="30" height="30" />
                           </button>
 
