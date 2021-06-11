@@ -26,6 +26,7 @@
     "bootstrap": "^4.5.0",
     "moment": "^2.29.1",
     "ngx-dropzone": "^3.0.0",
+    "ngx-spinner": "^11.0.2",
     "ngx-toastr": "^13.2.1",
     "pdfmake": "^0.1.71",
     "pdfmake-wrapper": "^2.1.1",

@@ -13,6 +13,7 @@ import { ReportQuotes } from '../reports/reportQuotes';
 import {NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
 import { QuoteDetailService } from '../services/quote-detail.service';
 
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-quote-list-process',
@@ -42,6 +43,9 @@ export class QuoteListProcessComponent implements OnInit {
 
   newList: any;
 
+  spinnerType: string | any;
+  spinnerName: string | any;
+
   constructor(
     private modal: NgbModal,
     private router: Router,
@@ -52,19 +56,22 @@ export class QuoteListProcessComponent implements OnInit {
     public toastr: ToastrService,
     public config: NgbPopoverConfig,
     private service: DetailRequestService,
-    public serviceQuote: QuoteDetailService
+    public serviceQuote: QuoteDetailService,
+    private spinner: NgxSpinnerService
   ) {
     this.titlePage.setTitle('Detalle de cotización - QUOT-UMSS');
     config.placement = 'left';
     config.triggers = 'hover';
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
   }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.business = this.route.snapshot.params.business;
     this.quoteId = this.route.snapshot.params.id;
     this.getQuoteProcess();
     this.getFaculty();
-
   }
   getFaculty(){
     this.service.getFaculty(localStorage.getItem('quot-umss-f')).subscribe(
@@ -112,6 +119,7 @@ export class QuoteListProcessComponent implements OnInit {
         }
       );
     }
+    this.spinner.hide(this.spinnerName);
   }
 
   openAttachment(uriAttachment: any){
