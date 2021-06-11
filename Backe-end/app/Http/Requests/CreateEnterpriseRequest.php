@@ -28,7 +28,7 @@ class CreateEnterpriseRequest extends FormRequest
                 'sector_enterprise'=>'required|min:4|max:30',
                 'legal_representative'=>'required|min:10|max:100',
                 'phone_enterprise' => 'required|min:7|max:8',
-                'nit_enterprise' => 'required|min:7|max:9|unique:enterprise',
+                'nit_enterprise' => 'required|min:7|max:15|unique:enterprise',
                 'address_enterprise'=>'required|min:10|max:100',
                 'email_enterprise' => 'required|min:8|max:32|unique:enterprise'
         ];
@@ -39,7 +39,12 @@ class CreateEnterpriseRequest extends FormRequest
         return [
             'nit_enterprise.unique'=> 'El Nit que pretende ingresar encuentra en uso',
             'email_enterprise.unique'=> 'El Correo que pretende ingresar se encuentra en uso',
-            'name_enterprise.unique'=> 'El Nombre que pretende ingresar se encuentra en uso'
+            'name_enterprise.unique'=> 'El Nombre que pretende ingresar se encuentra en uso',
+            'nit_enterprise.required'=> 'El campo Nit es obligatorio',
+            'email_enterprise.required'=> 'El campo Nit es obligatorio',
+            'name_enterprise.required'=> 'El campo Nit es obligatorio',
+            'nit_enterprise.max'=> 'El campo Nit tiene máximo de 15 dígitos',
+
         ];
     }
 }
