@@ -182,7 +182,7 @@ export class ListQuotesComponent implements OnInit {
   protected crateTable(data: ItemQuotes[]): ITable {
     [{}]
     return new Table([
-      ['Nº', 'Cantidad', 'Unidad', 'Decripción', 'Empresa', 'Periodo', 'Unitario', 'Total'],
+      ['Nº', 'Cantidad', 'Unidad', 'Detalle', 'Empresa', 'Periodo', 'Unitario', 'Total'],
       ...this.extractData(data)
     ])
       .widths([15, 38, 30, 110, 100, 35, 35, 35])
@@ -211,7 +211,7 @@ export class ListQuotesComponent implements OnInit {
 
   ) {
     const pdf = new PdfMakeWrapper();
-    const title = new Txt('CUADRO COMPATATIVO DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
+    const title = new Txt('CUADRO COMPARATIVO DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
     const businessData = new Txt('Razón social: ' + business).fontSize(11).alignment('left').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
