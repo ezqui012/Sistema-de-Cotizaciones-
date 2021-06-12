@@ -64,8 +64,8 @@ export class QuoteListFinalizedComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show(this.spinnerName);
     this.quoteId = this.route.snapshot.params.id;
-    this.getFinalizedQuote();
     this.getFaculty();
+    this.getFinalizedQuote();
   }
   getFaculty(){
     this.service.getFaculty(localStorage.getItem('quot-umss-f')).subscribe(
@@ -101,7 +101,7 @@ export class QuoteListFinalizedComponent implements OnInit {
     })
   }
 
-  loadAttachment(){
+  async loadAttachment(){
     for(let _i=0; _i<this.newList.length; _i++){
       this.newList[_i].isImg = false;
       this.newList[_i].routeFile = 'empty';

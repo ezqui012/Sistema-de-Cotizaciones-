@@ -70,8 +70,8 @@ export class QuoteListProcessComponent implements OnInit {
     this.spinner.show(this.spinnerName);
     this.business = this.route.snapshot.params.business;
     this.quoteId = this.route.snapshot.params.id;
-    this.getQuoteProcess();
     this.getFaculty();
+    this.getQuoteProcess();
   }
   getFaculty(){
     this.service.getFaculty(localStorage.getItem('quot-umss-f')).subscribe(
@@ -127,8 +127,12 @@ export class QuoteListProcessComponent implements OnInit {
   }
 
   deleteQuoteProcess(id:any){
+    this.spinner.show(this.spinnerName);
     this.quoteProcessService.deleteProcess(id).subscribe(data=>{
       this.getQuoteProcess();
+    },
+    (error) => {
+      this.spinner.hide(this.spinnerName);
     })
   }
   //methodo report
