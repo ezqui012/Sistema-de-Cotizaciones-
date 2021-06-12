@@ -10,6 +10,7 @@ import { Enterprise } from '../Model/enterprise';
 import { ItemRequest } from '../Model/expense-item';
 import { QuoteDetailService } from '../services/quote-detail.service';
 import { QuotationService } from '../services/quotation.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-quote-form',
@@ -42,6 +43,9 @@ export class QuoteFormComponent implements OnInit {
   private patternNumber = '^[0-9]+';
   private patternDecimal = /^[0-9]+(\.?[0-9]+)?$/;
 
+  spinnerType: string | any;
+  spinnerName: string | any;
+
   registerForm = this.fb.group({
     id_enterprise: ['', [Validators.required]],
     id_item: ['', [Validators.required]],
@@ -60,12 +64,16 @@ export class QuoteFormComponent implements OnInit {
     private service: EnterpriseService,
     private route: ActivatedRoute,
     private serviceQuote: QuoteDetailService,
-    private serviceQ: QuotationService
+    private serviceQ: QuotationService,
+    private spinner: NgxSpinnerService
   ) {
     this.titlePage.setTitle('Formulario de cotización - QUOT-UMSS');
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
   }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.idquotation = this.route.snapshot.params.id;
     this.getEnterprises();
     this.getItemsRequest(this.route.snapshot.params.id);
@@ -112,6 +120,8 @@ export class QuoteFormComponent implements OnInit {
       return;
     }
 
+    this.spinner.show(this.spinnerName);
+
     let res: any
     this.serviceQuote.insertQuote(this.registerForm.value).subscribe(
       (data) => {
@@ -126,7 +136,7 @@ export class QuoteFormComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(error);
+        this.spinner.hide(this.spinnerName);
         this.toastr.error('Ocurrio un problema, intente nuevamente');
       }
     );
@@ -216,6 +226,7 @@ export class QuoteFormComponent implements OnInit {
         }
       );
     }
+    this.spinner.hide(this.spinnerName);
   }
 
   endQuote(){
@@ -245,13 +256,15 @@ export class QuoteFormComponent implements OnInit {
         if(data[0].status_quotation === 'Proceso'){
           this.business_name = data[0].business_name;
           this.statusQuot = data[0].status_quotation;
+          this.spinner.hide(this.spinnerName);
         }else{
+          this.spinner.hide(this.spinnerName);
           this.navigateTo('/quote-list');
           this.toastr.info('Solo las cotizaciones que se encuentran en estado de Proceso son editables');
         }
       },
       (error) => {
-        console.log(`Error: ${error}`);
+        this.spinner.hide(this.spinnerName);
         this.toastr.error(`Error: ${error}. Recargue la página`);
       }
     );

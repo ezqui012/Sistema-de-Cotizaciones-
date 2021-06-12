@@ -10,6 +10,8 @@ import { Enterprise } from '../Model/enterprise';
 import { ItemRequest } from '../Model/expense-item';
 import { QuoteDetailService } from '../services/quote-detail.service';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-edit-detail-quotation',
   templateUrl: './edit-detail-quotation.component.html',
@@ -40,6 +42,9 @@ export class EditDetailQuotationComponent implements OnInit {
   private patternNumber = '^[0-9]+';
   private patternDecimal = /^[0-9]+(\.?[0-9]+)?$/;
 
+  spinnerType: string | any;
+  spinnerName: string | any;
+
   registerForm = this.fb.group({
     id_enterprise: ['', [Validators.required]],
     id_item: ['', [Validators.required]],
@@ -57,12 +62,16 @@ export class EditDetailQuotationComponent implements OnInit {
     private titlePage: Title,
     private service: EnterpriseService,
     private route: ActivatedRoute,
-    private serviceQuote: QuoteDetailService
+    private serviceQuote: QuoteDetailService,
+    private spinner: NgxSpinnerService
   ) {
     this.titlePage.setTitle('Editar cotización - QUOT-UMSS');
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
   }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.idquotation = this.route.snapshot.params.id;
     this.getEnterprises();
     this.getItemsRequest(this.route.snapshot.params.id);
@@ -146,9 +155,13 @@ export class EditDetailQuotationComponent implements OnInit {
           this.urlImage = data.file_route;
           this.imgPrev = true;
           this.imgNew = false;
+          this.spinner.hide(this.spinnerName);
+        }else{
+          this.spinner.hide(this.spinnerName);
         }
       },
       (error) => {
+        this.spinner.hide(this.spinnerName);
         this.toastr.error(`ERROR: ${error} Recargue la pagina`);
       }
     );
@@ -210,6 +223,8 @@ export class EditDetailQuotationComponent implements OnInit {
       return;
     }
 
+    this.spinner.show(this.spinnerName);
+
     this.serviceQuote.updateDetailQuote(this.route.snapshot.params.idqd, this.registerForm.value).subscribe(
       (data) => {
         if(data.res){
@@ -218,14 +233,17 @@ export class EditDetailQuotationComponent implements OnInit {
           }else if(this.files.length > 0){
             this.registerAttachment(this.route.snapshot.params.idqd);
           }else{
+            this.spinner.hide(this.spinnerName);
             this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
             this.toastr.success('Cotización actualizada con exito');
           }
         }else{
+          this.spinner.hide(this.spinnerName);
           this.toastr.error('Ocurrio un error de conexión intente de nuevo');
         }
       },
       (error) => {
+        this.spinner.hide(this.spinnerName);
         this.toastr.error(`Error: ${error} Intente de nuevo`);
       }
     );
@@ -247,6 +265,7 @@ export class EditDetailQuotationComponent implements OnInit {
           this.updateRouteFile(newFile);
         },
         (error) => {
+          this.spinner.hide(this.spinnerName);
           this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
           this.toastr.success('Cotización actualizada con exito');
           this.toastr.error(`ERROR: ${error} El archivo adjunbto no pudo ser registrado por problemas con el servidor`);
@@ -255,12 +274,14 @@ export class EditDetailQuotationComponent implements OnInit {
     }else{
       this.serviceQuote.deleteAttachment(this.route.snapshot.params.idqd).subscribe(
         (data) => {
+          this.spinner.hide(this.spinnerName);
           if(data.res){
             this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
             this.toastr.success('Cotización actualizada con exito');
           }
         },
         (error) => {
+          this.spinner.hide(this.spinnerName);
           this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
           this.toastr.success('Cotización actualizada con exito');
           this.toastr.error(`ERROR: ${error} El archivo adjunbto no pudo ser registrado por problemas con el servidor`);
@@ -272,12 +293,14 @@ export class EditDetailQuotationComponent implements OnInit {
   updateRouteFile(newRoute: any){
     this.serviceQuote.updateAttachment(this.route.snapshot.params.idqd, newRoute).subscribe(
       (data) => {
+        this.spinner.hide(this.spinnerName);
         if(data.res){
           this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
           this.toastr.success('Cotización actualizada con exito');
         }
       },
       (error) => {
+        this.spinner.hide(this.spinnerName);
         this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
         this.toastr.success('Cotización actualizada con exito');
         this.toastr.error(`ERROR: ${error} El archivo adjunbto no pudo ser registrado por problemas con el servidor`);
@@ -301,6 +324,7 @@ export class EditDetailQuotationComponent implements OnInit {
         this.insertAttachemtnApi(newAttachemt);
       },
       (error) => {
+        this.spinner.hide(this.spinnerName);
         this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
         this.toastr.success('Cotización actualizada con exito');
         this.toastr.error(`ERROR: ${error} El archivo adjunbto no pudo ser registrado por problemas con el servidor`);
@@ -311,12 +335,14 @@ export class EditDetailQuotationComponent implements OnInit {
   insertAttachemtnApi(attchmentInfo: any){
     this.serviceQuote.storeAttachmentBackend(attchmentInfo).subscribe(
       (data) => {
+        this.spinner.hide(this.spinnerName);
         if(data.res){
           this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
           this.toastr.success('Cotización actualizada con exito');
         }
       },
       (error) => {
+        this.spinner.hide(this.spinnerName);
         this.navigateTo(`/quote-list-process/${this.business_name}/${this.idquotation}`);
         this.toastr.success('Cotización actualizada con exito');
         this.toastr.error(`ERROR: ${error} el archivo no se registro por problemas en el servidor`);
