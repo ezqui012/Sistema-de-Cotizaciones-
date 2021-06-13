@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -67,6 +67,9 @@ PdfMakeWrapper.setFonts(pdfFonts);
 import { NgxDropzoneModule } from 'ngx-dropzone';
 
 import { FilterPipe } from './pipes/filter.pipe';
+
+import { NgxSpinnerModule } from "ngx-spinner";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -123,6 +126,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     ReactiveFormsModule,
     NgbModule,
     HttpClientModule,
+    NgxSpinnerModule,
     ToastrModule.forRoot({
       timeOut: 2000,
       progressBar: true,
@@ -140,6 +144,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     NgxDropzoneModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

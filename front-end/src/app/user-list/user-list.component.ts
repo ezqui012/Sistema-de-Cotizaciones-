@@ -5,7 +5,7 @@ import { PersonalUserService } from '../services/PersonalUser.service';
 import { FormControl } from '@angular/forms';
 import {PersonalUser} from '../Model/personalUser'
 import { Title } from '@angular/platform-browser';
-
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-user-list',
   encapsulation:ViewEncapsulation.Emulated,
@@ -19,21 +19,27 @@ export class UserListComponent implements OnInit {
   //description_faculty:FormControl = new FormControl('')
   personalUser: Array<PersonalUser>=[]
   pos = 0;
+  spinnerType: string | any;
+  spinnerName: string | any;
   chkAproveSol:boolean = false;
   constructor(
     private modal: NgbModal,
     private router: Router,
     public _personalUserService: PersonalUserService,
     public config: NgbPopoverConfig,
-    private titlePage: Title
+    private titlePage: Title,
+    private spinner: NgxSpinnerService
   ) {
     this.titlePage.setTitle('Lista de usuarios - QUOT-UMSS');
     config.placement = 'left';
     config.triggers = 'hover';
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
   }
 
   ngOnInit(): void {
     this.getPersonalUser();
+    this.spinner.show(this.spinnerName);
   }
   navigateTo(path: String){
     this.router.navigate([path]);
@@ -44,7 +50,9 @@ export class UserListComponent implements OnInit {
   }
   getPersonalUser(){
     this._personalUserService.allPersonal().subscribe((users)=> {
+      this.spinner.hide(this.spinnerName);
       return this.personalUser = users
+
 
     })
   }

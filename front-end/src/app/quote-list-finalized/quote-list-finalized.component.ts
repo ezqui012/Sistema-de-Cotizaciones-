@@ -12,6 +12,8 @@ import { QuoteDetailService } from '../services/quote-detail.service';
 import {NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
 import { Quote } from '../Model/quoteModel';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-quote-list-finalized',
   templateUrl: './quote-list-finalized.component.html',
@@ -37,6 +39,9 @@ export class QuoteListFinalizedComponent implements OnInit {
   quotes: Array<Quote>=[];
   newList: any;
 
+  spinnerType: string | any;
+  spinnerName: string | any;
+
   constructor(
     private router: Router,
     public _personalUserService: PersonalUserService,
@@ -47,16 +52,20 @@ export class QuoteListFinalizedComponent implements OnInit {
     private service: DetailRequestService,
     public serviceQuote: QuoteDetailService,
     public config: NgbPopoverConfig,
+    private spinner: NgxSpinnerService,
   ) {
     this.titlePage.setTitle('Detalle de cotización - QUOT-UMSS');
     config.placement = 'left';
     config.triggers = 'hover';
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
   }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.quoteId = this.route.snapshot.params.id;
-    this.getFinalizedQuote();
     this.getFaculty();
+    this.getFinalizedQuote();
   }
   getFaculty(){
     this.service.getFaculty(localStorage.getItem('quot-umss-f')).subscribe(
@@ -64,8 +73,6 @@ export class QuoteListFinalizedComponent implements OnInit {
         this.faculty = data;
         this.nameFaculty = data.name_faculty;
         this.userName = localStorage.getItem('quot-user');
-
-
       },
       (error) => {
         console.log(`Error: ${error}`);
@@ -92,12 +99,9 @@ export class QuoteListFinalizedComponent implements OnInit {
 
     this.loadAttachment();
     })
-
-
-
   }
 
-  loadAttachment(){
+  async loadAttachment(){
     for(let _i=0; _i<this.newList.length; _i++){
       this.newList[_i].isImg = false;
       this.newList[_i].routeFile = 'empty';
@@ -110,6 +114,7 @@ export class QuoteListFinalizedComponent implements OnInit {
         }
       );
     }
+    this.spinner.hide(this.spinnerName);
   }
 
   openAttachment(uriAttachment: any){

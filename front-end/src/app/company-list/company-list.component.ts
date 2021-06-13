@@ -7,6 +7,7 @@ import { NgbModal, NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CompanyList } from '../Model/companyList';
 import { CompanyListService } from '../services/company-list.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-company-list',
@@ -19,6 +20,8 @@ export class CompanyListComponent implements OnInit {
   id_ent:any;
   listCompany: Array<CompanyList>=[];
   pos:number = 0;
+  spinnerType: string | any;
+  spinnerName: string | any;
   constructor(
     private router:Router,
     public toastr: ToastrService,
@@ -26,17 +29,21 @@ export class CompanyListComponent implements OnInit {
     private modal: NgbModal,
     private serviceCompany: CompanyListService,
     public config: NgbPopoverConfig,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private spinner: NgxSpinnerService
 
   ) {
     this.titlePage.setTitle('Lista de Empresas - QUOT-UMSS');
     config.placement = 'left';
     config.triggers = 'hover';
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
   }
 
   ngOnInit(): void {
     this.getListCompany();
     this.id_ent=this.route.snapshot.params.id;
+    this.spinner.show(this.spinnerName);
   }
   navigateTo(path: String){
 
@@ -52,6 +59,7 @@ export class CompanyListComponent implements OnInit {
   getListCompany(){
     this.serviceCompany.allListCompany().subscribe((data) => {
       this.listCompany = data;
+      this.spinner.hide(this.spinnerName);
       },
       (error:any) => {
         this.toastr.error(`Error: ${error}. Recargue la página`);
