@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { ItemsService } from '../services/items.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-item-register',
@@ -25,6 +26,9 @@ export class ItemRegisterComponent implements OnInit {
   indexType: number = 0;
   indexUnit: number = 0;
 
+  spinnerType: string | any;
+  spinnerName: string | any;
+
   private patternDecimal = /^[0-9]+(\.?[0-9]+)?$/;
 
   itemRegisterForm = this.fb.group({
@@ -40,12 +44,16 @@ export class ItemRegisterComponent implements OnInit {
     private fb: FormBuilder,
     public toastr: ToastrService,
     private titlePage: Title,
-    private service: ItemsService
+    private service: ItemsService,
+    private spinner: NgxSpinnerService
   ) {
     this.titlePage.setTitle('Registro de Items - QUOT-UMSS');
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
   }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.loadTypeItems();
     this.loadUnitItems();
   }
@@ -86,6 +94,7 @@ export class ItemRegisterComponent implements OnInit {
         this.toastr.error(`ERROR: ${error} Recargue la pagina`);
       }
     );
+    this.spinner.hide(this.spinnerName);
   }
 
   navigateTo(path: String){
@@ -134,6 +143,7 @@ export class ItemRegisterComponent implements OnInit {
       this.toastr.error('Existem campos incorrectos');
       return;
     }
+    this.spinner.show(this.spinnerName);
     this.service.insertItem(this.itemRegisterForm.value).subscribe(
       (data) => {
         if(data.res){
@@ -144,6 +154,7 @@ export class ItemRegisterComponent implements OnInit {
         }
       },
       (error) => {
+        this.spinner.hide(this.spinnerName);
         try {
           if(error.error.errors.name_item[0]){
             this.toastr.error(error.error.errors.name_item[0]);
