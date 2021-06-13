@@ -7,6 +7,7 @@ import { AcceptedQuote } from '../Model/accepted-quote';
 import { ReportRequest } from '../reports/reportRequest';
 import { Faculty } from '../Model/faculty';
 import { ReportRequestAccepted } from '../Model/request-detail';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-request-detail-approved',
@@ -34,17 +35,24 @@ export class RequestDetailApprovedComponent implements OnInit {
   nameFaculty:any
   dataAccepted: Array<ReportRequestAccepted> | any;
 
+  spinnerType: string | any;
+  spinnerName: string | any;
+
   constructor(
     public toastr: ToastrService,
     private titlePage: Title,
     private route: ActivatedRoute,
     private router: Router,
-    private service: DetailRequestService
+    private service: DetailRequestService,
+    private spinner: NgxSpinnerService
   ) {
     this.titlePage.setTitle('Detalle de solicitud - QUOT-UMSS');
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
   }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.getInfoRequestById(this.route.snapshot.params.id);
     this.getFaculty();
     this.getRequestAccepted();
@@ -85,6 +93,7 @@ export class RequestDetailApprovedComponent implements OnInit {
         this.listItems(this.route.snapshot.params.id);
       },
       (error) => {
+        this.spinner.hide(this.spinnerName);
         console.log(`Error: ${error}`);
         this.toastr.error(`Error: ${error}. Recargue la página`);
       }
@@ -102,6 +111,7 @@ export class RequestDetailApprovedComponent implements OnInit {
       },
       (error) => {
         console.log(error);
+        this.spinner.hide(this.spinnerName);
         this.navigateTo('/request-quotation-list');
         this.toastr.error('La solicitud no se encuentra en cotización');
       }
@@ -112,11 +122,11 @@ export class RequestDetailApprovedComponent implements OnInit {
     this.service.getAprovedQuote(id).subscribe(
       (data) => {
         this.items = data;
-        console.log(data);
         this.getTotal();
       },
       (error) => {
         console.log(`Error: ${error}`);
+        this.spinner.hide(this.spinnerName);
         this.navigateTo('/request-quotation-list');
         this.toastr.error('La solicitud no se encuentra aceptada o en cotización');
       }
@@ -130,6 +140,7 @@ export class RequestDetailApprovedComponent implements OnInit {
       price += cost;
     }
     this.totalCost = price;
+    this.spinner.hide(this.spinnerName);
   }
 
   getTotalItem(cant: number, price:number){

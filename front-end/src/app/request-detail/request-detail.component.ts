@@ -10,6 +10,8 @@ import { ListItemsRequest, PersonalQuote } from '../Model/request-detail';
 import {ReportRequest} from '../reports/reportRequest';
 import { Faculty } from '../Model/faculty';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-request-detail',
   templateUrl: './request-detail.component.html',
@@ -33,6 +35,9 @@ export class RequestDetailComponent implements OnInit {
   actualAmount: number | any;
   report: ReportRequest = new ReportRequest;
 
+  spinnerType: string | any;
+  spinnerName: string | any;
+
   rejectedForm = this.fb.group({
     id_request: [this.route.snapshot.params.id, [Validators.required]],
     reason: ['', [Validators.required, Validators.minLength(10)]],
@@ -52,11 +57,15 @@ export class RequestDetailComponent implements OnInit {
     private router: Router,
     private service: DetailRequestService,
     private fb: FormBuilder,
+    private spinner: NgxSpinnerService
   ) {
     this.titlePage.setTitle('Detalle de solicitud - QUOT-UMSS');
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
   }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.getInfoRequestById(this.route.snapshot.params.id);
     this.getFaculty();
   }
@@ -96,6 +105,7 @@ export class RequestDetailComponent implements OnInit {
       },
       (error) => {
         console.log(`Error: ${error}`);
+        this.spinner.hide(this.spinnerName);
         this.toastr.error(`Error: ${error}. Recargue la página`);
       }
     );
@@ -109,6 +119,7 @@ export class RequestDetailComponent implements OnInit {
       },
       (error) => {
         console.log(`Error: ${error}`);
+        this.spinner.hide(this.spinnerName);
         this.toastr.error(`Error: ${error}. Recargue la página`);
       }
     );
@@ -140,9 +151,11 @@ export class RequestDetailComponent implements OnInit {
     this.service.getPersonalList(localStorage.getItem('quot-umss-f')).subscribe(
       (data) => {
         this.personal = data;
+        this.spinner.hide(this.spinnerName);
       },
       (error) => {
         console.log(`Error: ${error}`);
+        this.spinner.hide(this.spinnerName);
         this.toastr.error(`Error: ${error}. Recargue la página`);
       }
     );
@@ -178,16 +191,21 @@ export class RequestDetailComponent implements OnInit {
     if (this.rejectedForm.invalid) {
       return;
     }
+
+    this.spinner.show(this.spinnerName);
+
     this.service.registerRejected(this.rejectedForm.value).subscribe(
       (data) => {
         if (data.res) {
           this.changeStatus("Rechazado", "La solicitud a sido rechazada");
         } else {
+          this.spinner.hide(this.spinnerName);
           this.toastr.error("Ocurrio un error al registrar intente nuevamente");
         }
       },
       (error) => {
         console.log(error);
+        this.spinner.hide(this.spinnerName);
         this.toastr.error(`Error: ${error} intente nuevamente`);
       }
     );
@@ -201,14 +219,17 @@ export class RequestDetailComponent implements OnInit {
       (data) => {
         if (data.res) {
           this.modal.dismissAll();
+          this.spinner.hide(this.spinnerName);
           this.navigateTo('/request-quotation-list');
           this.toastr.success(messageToast);
         } else {
+          this.spinner.hide(this.spinnerName);
           this.toastr.error("Ocurrio un error al registrar intente nuevamente");
         }
       },
       (error) => {
         console.log(error);
+        this.spinner.hide(this.spinnerName);
         this.toastr.error(`Error: ${error} intente nuevamente`);
       }
     );
@@ -218,16 +239,21 @@ export class RequestDetailComponent implements OnInit {
     if (this.registerQuotForm.invalid) {
       return;
     }
+
+    this.spinner.show(this.spinnerName);
+
     this.service.registerQuotation(this.registerQuotForm.value).subscribe(
       (data) => {
         if (data.res) {
           this.changeStatus("Cotización", "La solicitud fue aceptada y se encuentra en etapa de cotización");
         } else {
+          this.spinner.hide(this.spinnerName);
           this.toastr.error('Ocurrio un error intente de nuevo');
         }
       },
       (error) => {
         console.log(error);
+        this.spinner.hide(this.spinnerName);
         this.toastr.error(`Error: ${error} intente nuevamente`);
       }
     );
