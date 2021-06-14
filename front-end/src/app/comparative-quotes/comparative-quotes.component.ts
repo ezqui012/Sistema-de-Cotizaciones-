@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from "ngx-spinner";
 
 import { ExpenseItems } from '../Model/expenseItem';
 import { ItemQuoteAcepted, ItemQuotes, ResponseQuote, SelectControlItem } from '../Model/quoteModel';
@@ -17,9 +18,8 @@ import { QuoteService } from '../services/quote.service';
   styleUrls: ['./comparative-quotes.component.css']
 })
 export class ComparativeQuotesComponent implements OnInit {
-  //indexSelect:boolean =true;
-  //isSelect:any
-  //selectItem:boolean =false
+  spinnerType: string | any;
+  spinnerName: string | any;
   id:any
   idQuote:any
   entrusted:any
@@ -50,15 +50,20 @@ export class ComparativeQuotesComponent implements OnInit {
     public serviceQuote: QuoteService,
     public toastr: ToastrService,
     private service: DetailRequestService,
+    private spinner: NgxSpinnerService,
     private fb: FormBuilder
 
-  ) { }
+  ) {
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('idR');
     this.idQuote = this.route.snapshot.paramMap.get('idQ');
     this.modifySelection = this.route.snapshot.paramMap.get('action');
     this.entrusted = this.route.snapshot.paramMap.get('entrusted');
+    this.spinner.show(this.spinnerName);
     this.getItems(this.id);
     if(this.modifySelection === 'save'){
       this.listItems(this.id);
@@ -84,7 +89,7 @@ export class ComparativeQuotesComponent implements OnInit {
   getItems(idRequest:any){
     this.serviceQuote.getItemsRequest(idRequest).subscribe((item)=> {
       this.items = item
-
+      this.spinner.hide(this.spinnerName);
     })
   }
   listItems(id: any){
@@ -142,6 +147,7 @@ export class ComparativeQuotesComponent implements OnInit {
     if(this.items.length === this.itemsSelect.length && this.items.length !== 0){
       if(this.actualAmount >= this.totalCost){
         //elimiar
+        this.spinner.show(this.spinnerName);
         this.clearItemQuoteAccepted();
         for(let i=0; i<this.itemsSelect.length; i++){
           this.registerSelectItem(this.itemsSelect[i].id_qd);
@@ -149,6 +155,7 @@ export class ComparativeQuotesComponent implements OnInit {
         this.toastr.success('Se registro las elecciones de la cotización con exito');
         this.updateStateAccepted();
         this.modifyActualAmount();
+        this.spinner.hide(this.spinnerName);
         this.navigateTo('/list-quotes')
 
       }else{
@@ -283,6 +290,7 @@ export class ComparativeQuotesComponent implements OnInit {
     if(this.rejectedForm.invalid){
       return;
     }
+    this.spinner.show(this.spinnerName);
     this.service.registerRejected(this.rejectedForm.value).subscribe(
       (data) => {
         if(data.res){
@@ -291,6 +299,7 @@ export class ComparativeQuotesComponent implements OnInit {
           this.updateStateRejected();
           this.modifyActualAmountRejected();
           this.modal.dismissAll();
+          this.spinner.hide(this.spinnerName);
           this.navigateTo('/list-quotes');
 
         }else{
@@ -308,7 +317,8 @@ export class ComparativeQuotesComponent implements OnInit {
     this.service.getActualAmount(localStorage.getItem('quot-umss-u')).subscribe(
       (data) => {
         this.actualAmount = data.amount;
-        //this.getPersonal();
+        this.spinner.hide(this.spinnerName);
+
       },
       (error) => {
         console.log(`Error: ${error}`);

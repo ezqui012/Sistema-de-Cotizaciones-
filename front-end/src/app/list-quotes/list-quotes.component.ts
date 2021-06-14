@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { DomSanitizer, Title } from '@angular/platform-browser';
 import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from "ngx-spinner";
 
 import { PdfMakeWrapper, Txt, Table } from 'pdfmake-wrapper';
 import { ITable } from 'pdfmake-wrapper/lib/interfaces';
@@ -32,6 +33,8 @@ import { ReportRequestAccepted, ReportRequestRejected, UserNameRequest } from '.
 })
 
 export class ListQuotesComponent implements OnInit {
+  spinnerType: string | any;
+  spinnerName: string | any;
   quotes: Array<QuoteList> = [];
   status: String = '';
   items: Array<ExpenseItems> = [];
@@ -62,14 +65,18 @@ export class ListQuotesComponent implements OnInit {
     public config: NgbPopoverConfig,
     private service: DetailRequestService,
     public quoteProcessService: QuoteProcessService,
+    private spinner: NgxSpinnerService,
     public myUrl: DomSanitizer
   ) {
     this.titlePage.setTitle('Lista de Cotizaciones - QUOT-UMSS');
     config.placement = 'left';
     config.triggers = 'hover';
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
   }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.getQoutesFinish();
     this.getFaculty();
   }
@@ -90,7 +97,7 @@ export class ListQuotesComponent implements OnInit {
   getQoutesFinish() {
     this.serviceQuote.getQuoteFinish().subscribe((quote) => {
       this.quotes = quote
-
+      this.spinner.hide(this.spinnerName);
     })
   }
   setStatusQuote(status: string): void {
@@ -134,7 +141,7 @@ export class ListQuotesComponent implements OnInit {
   }
   //methodosReport
   async generatePdf(idRequest: number, idQuote: number, business: string, userPersonal: string, statusReport: string) {
-
+    this.spinner.show(this.spinnerName);
     this.listaItemsQuote = await this.quoteProcessService.getQuoteProcess(idQuote).toPromise();
     this.userNameRequest = await this.service.getNameUserRequest(idRequest).toPromise();
     if (statusReport === 'Aceptado') {
@@ -142,11 +149,14 @@ export class ListQuotesComponent implements OnInit {
       this.getTotal();
       this.dataAccepted = await this.service.getRequestAccepted(idRequest).toPromise();
       this.generateQuotePerformedPdf(business, this.userNameRequest[0].name, userPersonal, this.dataAccepted[0].name, this.dataAccepted[0].date, 'noRechazado', this.nameFaculty, statusReport, idQuote, this.listaItems)
+      this.spinner.hide(this.spinnerName);
 
     } else if (statusReport === 'Rechazado') {
 
       this.dataRejected = await this.service.getRequestRejected(idRequest).toPromise();
       this.generateQuotePerformedPdf(business, this.userNameRequest[0].name, userPersonal, this.dataRejected[0].name, this.dataRejected[0].date_rejected, this.dataRejected[0].reason, this.nameFaculty, statusReport, idQuote, this.listaItems)
+      this.spinner.hide(this.spinnerName);
+
     }
   }
 
