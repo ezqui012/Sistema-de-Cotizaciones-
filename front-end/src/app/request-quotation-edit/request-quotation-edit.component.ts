@@ -195,13 +195,11 @@ export class RequestQuotationEditComponent implements OnInit {
       this.showAdd = true;
       this.enableSelect = true;
 
-      this.listItemsRequest[this.indexItem].quantity =
-        this.registerForm.get('quantity')?.value;
-      this.listItemsRequest[this.indexItem].total_cost =
-        this.listItemsRequest[this.indexItem].unit_cost *
-        this.registerForm.get('quantity')?.value;
-
+      this.listItemsRequest[this.indexItem].quantity = this.registerForm.get('quantity')?.value;
+      this.listItemsRequest[this.indexItem].total_cost = this.listItemsRequest[this.indexItem].unit_cost * this.registerForm.get('quantity')?.value;
       this.getListItemsShow();
+      this.registerForm.get('quantity')?.reset();
+      this.registerForm.get('index')?.reset();
     }else{
       this.toastr.error('La cantidad debe ser mayor a "0"')
     }

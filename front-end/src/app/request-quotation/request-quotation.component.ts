@@ -147,6 +147,8 @@ export class RequestQuotationComponent implements OnInit {
         this.registerForm.get('quantity')?.value;
 
       this.getListItemsShow();
+      this.registerForm.get('quantity')?.reset();
+      this.registerForm.get('index')?.reset();
     }else{
       this.toastr.error('La cantidad debe ser mayor a "0"')
     }
