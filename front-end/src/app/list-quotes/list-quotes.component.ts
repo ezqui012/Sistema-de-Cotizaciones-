@@ -44,7 +44,9 @@ export class ListQuotesComponent implements OnInit {
   business: any;
   userName: any;
   listaItems: any;
-  listaItemsQuote: any;
+  totalCost: any;
+  listaItemsQuote: Array<ItemQuotes> | any;
+  listaItemsQuoteSelected: Array<ItemQuotes> | any;
   statusQuote: any = {
     rejected: 'Rechazado',
     accepted: 'Aceptado',
@@ -58,8 +60,8 @@ export class ListQuotesComponent implements OnInit {
     private titlePage: Title,
     public config: NgbPopoverConfig,
     private service: DetailRequestService,
-    public quoteProcessService:QuoteProcessService,
-    public myUrl:DomSanitizer
+    public quoteProcessService: QuoteProcessService,
+    public myUrl: DomSanitizer
   ) {
     this.titlePage.setTitle('Lista de Cotizaciones - QUOT-UMSS');
     config.placement = 'left';
@@ -73,7 +75,7 @@ export class ListQuotesComponent implements OnInit {
   navigateTo(path: String, id: any, idQ: any, entrusted: any) {
     this.router.navigate([path, id, idQ, entrusted]);
   }
-  getRequestDataAccepted(idRequest: number){
+  getRequestDataAccepted(idRequest: number) {
     this.service.getRequestAccepted(idRequest).subscribe(
       (data) => {
         this.dataAccepted = data;
@@ -120,21 +122,33 @@ export class ListQuotesComponent implements OnInit {
       }
     );
   }
+  getTotal() {
+    let price: number = 0;
+    this.totalCost = 0;
+    for (let total of this.listaItemsQuoteSelected) {
+      let cost: number = parseInt(total.quantity) * parseFloat(total.unit_cost);
+      price += cost;
+    }
+    this.totalCost = price;
+  }
   //methodosReport
-  async generatePdf(idRequest: number, idQuote: number, business: string, userPersonal: string , statusReport:string) {
+  async generatePdf(idRequest: number, idQuote: number, business: string, userPersonal: string, statusReport: string) {
 
-     this.listaItems = await this.serviceQuote.getItemsRequestSync(idRequest).toPromise();
+    //this.listaItems = await this.serviceQuote.getItemsRequestSync(idRequest).toPromise();
+    this.listaItemsQuote = await this.quoteProcessService.getQuoteProcess(idQuote).toPromise();
+    this.listaItemsQuoteSelected = await this.service.getAprovedQuote(idRequest).toPromise();
+    console.log(this.listaItemsQuoteSelected)
+    this.getTotal();
+    if (statusReport === 'Aceptado') {
+      this.dataAccepted = await this.service.getRequestAccepted(idRequest).toPromise();
+      this.generateQuotePerformedPdf(business, userPersonal, this.dataAccepted[0].name, this.dataAccepted[0].date, 'noRechazado', this.nameFaculty, statusReport, idQuote, this.listaItems)
 
-     if(statusReport === 'Aceptado'){
-       this.dataAccepted = await this.service.getRequestAccepted(idRequest).toPromise();
-       this.generateQuotePerformedPdf(business, userPersonal, this.dataAccepted[0].name, this.dataAccepted[0].date ,'noRechazado', this.nameFaculty, statusReport, idQuote, this.listaItems)
+    } else if (statusReport === 'Rechazado') {
 
-      }else if(statusReport === 'Rechazado'){
-
-        this.dataRejected = await this.service.getRequestRejected(idRequest).toPromise();
-        this.generateQuotePerformedPdf(business, userPersonal, this.dataRejected[0].name, this.dataRejected[0].date_rejected, this.dataRejected[0].reason, this.nameFaculty, statusReport, idQuote, this.listaItems)
-     }
-   }
+      this.dataRejected = await this.service.getRequestRejected(idRequest).toPromise();
+      this.generateQuotePerformedPdf(business, userPersonal, this.dataRejected[0].name, this.dataRejected[0].date_rejected, this.dataRejected[0].reason, this.nameFaculty, statusReport, idQuote, this.listaItems)
+    }
+  }
 
   private tableBusinessData(business: string, dateRequest: string): ITable {
     [{}]
@@ -177,8 +191,9 @@ export class ListQuotesComponent implements OnInit {
 
   async generateQuotePerformedPdf(
     business: string,
+    //nameUserRequest:string,
     personalQuote: string,
-    reviewerBy:string,
+    reviewerBy: string,
     dateReviewer: string,
     reason: string,
     nameFaculty: string,
@@ -189,15 +204,17 @@ export class ListQuotesComponent implements OnInit {
   ) {
     const pdf = new PdfMakeWrapper();
     const title = new Txt('CUADRO COMPARATIVO DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
+    const titleTable = new Txt('SELECCIÓN DE COTIZACIÓN').bold().fontSize(12).alignment('center').end
     const businessData = new Txt('Razón social: ' + business).fontSize(11).alignment('left').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
     const statusRequestData = new Txt(`Estado: ${statusQ}`).fontSize(11).alignment('left').end
-    const userAceptedData = new Txt(`La Solicitud fue aceptada por: ${reviewerBy}  en fecha: ${dateReviewer}`).fontSize(11).alignment('left').end
-    const userRejectedData = new Txt(`La Solicitud fue rechazada por: ${reviewerBy}  en fecha: ${dateReviewer}`).fontSize(11).alignment('left').end
+    const userAceptedData = new Txt(`Aceptada por: ${reviewerBy}  en fecha: ${dateReviewer}`).fontSize(11).alignment('left').end
+    const userRejectedData = new Txt(`Rechazado por: ${reviewerBy}  en fecha: ${dateReviewer}`).fontSize(11).alignment('left').end
     const reasonRejectedData = new Txt(`Motivo de rechazo: ${reason}`).fontSize(11).alignment('left').end
     const personalData = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
-
+    const nameData = new Txt(`Encargado de la Solicitud: ${this.userName}`).fontSize(11).alignment('left').end
+    const totalData = new Txt(`TOTAL: ${this.totalCost}`).bold().fontSize(9).alignment('right').end
     pdf.add(this.tableHeader(nameFaculty));
     pdf.add(pdf.ln(2))
 
@@ -211,37 +228,43 @@ export class ListQuotesComponent implements OnInit {
     pdf.add(pdf.ln(2));
     pdf.add(titleList);
 
-    for (let i = 0; i < items.length; i++) {
+    /*for (let i = 0; i < items.length; i++) {
 
       this.listaItemsQuote = await this.serviceQuote.getItemsQuotesSync(idQuote, items[i].id_item).toPromise();
       pdf.add(this.crateTable(this.listaItemsQuote));
       pdf.add(pdf.ln(1));
-    }
+    }*/
+    pdf.add(this.crateTable(this.listaItemsQuote));
 
     pdf.add(pdf.ln(2));
 
-    pdf.add(infoRequest);
-    pdf.add(personalData);
-    pdf.add(statusRequestData);
-    if(statusQ === 'Aceptado'){
-      pdf.add(userAceptedData)
-    }else if(statusQ === 'Rechazado'){
+    if (statusQ === 'Aceptado') {
+      pdf.add(titleTable);
+      pdf.add(this.crateTable(this.listaItemsQuoteSelected));
+      pdf.add(totalData);
+      pdf.add(pdf.ln(1))
+      pdf.add(infoRequest);
+      pdf.add(nameData);
+      pdf.add(personalData);
+      pdf.add(statusRequestData);
+      pdf.add(userAceptedData);
+    } else if (statusQ === 'Rechazado') {
+
+      pdf.add(infoRequest);
+      pdf.add(nameData);
+      pdf.add(personalData);
+      pdf.add(statusRequestData);
       pdf.add(userRejectedData)
       pdf.add(reasonRejectedData)
     }
 
     /////////////////////////////
-    //pdf.create().getDataUrl(function(url) { pdf.create().open() });
-    const pdfDocGenerator = pdf.create();
+    pdf.create().open();
+    /*const pdfDocGenerator = pdf.create();
     var win = window.open('', '_blank');
-    (pdfDocGenerator as any).open({}, win);
+    (pdfDocGenerator as any).open({}, win);*/
 
 
-  }
-  setList(itemsQuotes:ItemQuotes[]){
-    console.log("lo actualizo")
-    this.itemsQuotes = itemsQuotes;
-    console.log(this.itemsQuotes)
   }
 
 

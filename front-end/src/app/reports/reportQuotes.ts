@@ -45,11 +45,8 @@ export class ReportQuotes {
       ...this.extractData(data)
     ])
       .widths([15, 38, 30, 110,100, 35, 35, 35])
-      /*.layout({fillColor:(rowIndex: any, node: any , columnIndex: any) => {return rowIndex === 0 ? '#D6FCF6' : '';}}
 
-      )*/
       .layout('lightHorizontalLines')
-      //.layout({hLineWidth:()=>0.5})
       .end;
   }
   private extractData(data: Quote[]): TableRow[] {

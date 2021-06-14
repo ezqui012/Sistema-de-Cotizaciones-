@@ -163,7 +163,7 @@ class RequestDetailsController extends Controller
                         ->join('quote_detail', 'accepted.id_qd', '=', 'quote_detail.id_qd')
                         ->join('expense_item', 'quote_detail.id_item', '=', 'expense_item.id_item')
                         ->join('enterprise', 'quote_detail.id_enterprise', '=', 'enterprise.id_enterprise')
-                        ->select('quote_detail.quantity', 'expense_item.unit_item', 'expense_item.name_item', 'enterprise.name_enterprise', 'quote_detail.unit_cost')
+                        ->select('quote_detail.quantity', 'expense_item.unit_item', 'expense_item.name_item', 'enterprise.name_enterprise','quote_detail.delivery_days', 'quote_detail.unit_cost')
                         ->where('accepted.id_request', '=', $id)
                         ->get();
             if($res[0]){
