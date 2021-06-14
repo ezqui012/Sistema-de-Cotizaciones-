@@ -49,6 +49,24 @@ class RequestDetailsController extends Controller
             ], 404);
         }
     }
+    public function getNameUserRequest($id)
+    {
+        try {
+            $request = DB::table('users')
+            ->join('request_quotation', 'users.id', '=', 'request_quotation.id')
+            ->select('users.name', 'request_quotation.date')
+            ->where('request_quotation.id_request', '=', $id)
+            ->get();
+        return $request;
+
+
+        } catch (Exception $ex) {
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
     public function getUserAccepted($id)
     {
         try {

@@ -94,6 +94,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('updateEnterprise/{id_enterprise}', 'CompanyController@updateEnterprise');
     Route::get('requestAccepted/{id}', 'RequestDetailsController@getUserAccepted');
     Route::get('requestRejected/{id}', 'RequestDetailsController@getUserRejected');
+    Route::get('nameUserRequest/{id}', 'RequestDetailsController@getNameUserRequest');
 
     Route::apiResource('attachment-routes', 'AttachmentController');
 });
