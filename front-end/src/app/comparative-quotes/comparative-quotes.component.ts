@@ -9,6 +9,7 @@ import { ExpenseItems } from '../Model/expenseItem';
 import { ItemQuoteAcepted, ItemQuotes, ResponseQuote, SelectControlItem } from '../Model/quoteModel';
 import { DetailRequestService } from '../services/detail-request.service';
 import { QuoteService } from '../services/quote.service';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -51,9 +52,11 @@ export class ComparativeQuotesComponent implements OnInit {
     public toastr: ToastrService,
     private service: DetailRequestService,
     private spinner: NgxSpinnerService,
+    private titlePage: Title,
     private fb: FormBuilder
 
   ) {
+    this.titlePage.setTitle('Cuadro Comparativo - QUOT-UMSS')
     this.spinnerName = 'sp3';
     this.spinnerType = 'ball-spin-clockwise';
   }

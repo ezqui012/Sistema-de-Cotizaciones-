@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from "ngx-spinner";
 
 import { RequestList } from '../Model/request';
 import { RequestQuoteService } from '../services/request.service';
@@ -16,6 +17,8 @@ import { RequestQuoteService } from '../services/request.service';
   styleUrls: ['./request-quotation-list.component.css']
 })
 export class RequestQuotationListComponent implements OnInit {
+  spinnerType: string | any;
+  spinnerName: string | any;
   request_quotation: Array<RequestList> = []
   status: String = ''
   statusRequest: any = {
@@ -30,15 +33,19 @@ export class RequestQuotationListComponent implements OnInit {
     public serviceRequestQuote: RequestQuoteService,
     private router: Router,
     private titlePage: Title,
+    private spinner: NgxSpinnerService,
     public config: NgbPopoverConfig
   ) {
 
     this.titlePage.setTitle('Lista de solicitud - QUOT-UMSS');
     config.placement = 'left';
     config.triggers = 'hover';
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
   }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.getListRequestQuote();
   }
 
@@ -47,7 +54,9 @@ export class RequestQuotationListComponent implements OnInit {
   }
   getListRequestQuote() {
     this.serviceRequestQuote.allRequestQuote().subscribe((date) => {
-      return this.request_quotation = date
+      this.request_quotation = date
+      this.spinner.hide(this.spinnerName);
+
     })
   }
 

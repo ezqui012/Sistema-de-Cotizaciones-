@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NgxSpinnerService } from "ngx-spinner";
 
 import { AssignedPermit, RegisterAssignedPermitResponse, PermitOfRole } from '../Model/assignedPermit';
 import { RolesService } from '../services/roles.service';
@@ -19,7 +20,8 @@ import {RegisterRolesResponse, Register_Role} from '../Model/roles';
   styleUrls: ['./edit-rol.component.css']
 })
 export class EditRolComponent implements OnInit {
-
+  spinnerType: string | any;
+  spinnerName: string | any;
   messageFail = false;
   messageRegisterFailed = '';
   id:any;
@@ -53,13 +55,16 @@ export class EditRolComponent implements OnInit {
     public _assignedPermit: AssignedPermitService,
     private fb: FormBuilder,
     public toastr: ToastrService,
+    private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
     private titlePage: Title) {
       this.titlePage.setTitle('Edición de roles - QUOT-UMSS');
+      this.spinnerName = 'sp3';
+      this.spinnerType = 'ball-spin-clockwise';
     }
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.id = this.route.snapshot.paramMap.get('id');
-
     this.getPermits(this.id);
     this.getRole(this.id);
   }
@@ -75,11 +80,13 @@ export class EditRolComponent implements OnInit {
 
       this.setPermisOfRole();
       this.setRoleData();
-
+      this.spinner.hide(this.spinnerName);
       },
       (error:any) => {
         console.log(`Error: ${error}`);
         this.toastr.error(`Error: ${error}. Recargue la página`);
+        this.spinner.hide(this.spinnerName);
+
       }
     );
   }
@@ -87,6 +94,8 @@ export class EditRolComponent implements OnInit {
     this._assignedPermit.allPermitOfRole(idRole).subscribe((permit) => {
       console.log(permit)
       this.permits = permit
+      this.spinner.hide(this.spinnerName);
+
     })
   }
   selectPermit(idPermit:any){

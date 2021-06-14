@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Faculty } from '../Model/faculty';
+import { NgxSpinnerService } from "ngx-spinner";
+
 import { FacultyService } from '../services/faculty.service';
 import { UnitService } from '../services/unit.service';
 import { RegisterUnitResponse } from '../Model/unit';
@@ -17,7 +19,8 @@ import { ListService } from '../services/list.service';
 })
 export class EditUnitComponent implements OnInit {
 
-
+  spinnerType: string | any;
+  spinnerName: string | any;
   faculties: Faculty[] | undefined;
   showAmount:boolean=false;
   messageFail = false;
@@ -43,12 +46,16 @@ export class EditUnitComponent implements OnInit {
     public toastr: ToastrService,
     private router:Router,
     private route: ActivatedRoute,
+    private spinner: NgxSpinnerService,
     private titlePage: Title
     ) {
       this.titlePage.setTitle('Registro de unidades - QUOT-UMSS');
+      this.spinnerName = 'sp3';
+      this.spinnerType = 'ball-spin-clockwise';
     }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.getFaculty();
     this.id = this.route.snapshot.paramMap.get('id');
     console.log("recupere el id: "+this.id);
@@ -62,14 +69,16 @@ export class EditUnitComponent implements OnInit {
       console.log(data);
 
       this.unit = data;
-
       this.setUnitData();
+      this.spinner.hide(this.spinnerName);
 
 
       },
       (error:any) => {
         console.log(`Error: ${error}`);
         this.toastr.error(`Error: ${error}. Recargue la página`);
+        this.spinner.hide(this.spinnerName);
+
       }
     );
   }
@@ -77,10 +86,13 @@ export class EditUnitComponent implements OnInit {
   getFaculty(){
     this.serviceFaculty.allFaculties().subscribe((data) => {
         this.faculties = data;
+        this.spinner.hide(this.spinnerName);
       },
       (error:any) => {
         console.log(`Error: ${error}`);
         this.toastr.error(`Error: ${error}. Recargue la página`);
+        this.spinner.hide(this.spinnerName);
+
       }
     );
   }

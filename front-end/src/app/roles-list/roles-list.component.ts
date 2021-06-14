@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal, NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from "ngx-spinner";
+
 import { Roles } from '../Model/roles';
 import { RolesService } from '../services/roles.service';
 import { Permit } from '../Model/permit';
@@ -18,7 +20,8 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./roles-list.component.css']
 })
 export class RolesListComponent implements OnInit {
-
+  spinnerType: string | any;
+  spinnerName: string | any;
   name_role: FormControl = new FormControl('')
   description_role: FormControl = new FormControl('')
   roles: Array<Roles> = [];
@@ -33,20 +36,25 @@ export class RolesListComponent implements OnInit {
     public _assignedPermitService: AssignedPermitService,
     public _permitService: PermitService,
     public config: NgbPopoverConfig,
+    private spinner: NgxSpinnerService,
     private titlePage: Title
   ) {
     this.titlePage.setTitle('Lista de roles - QUOT-UMSS');
     config.placement = 'left';
     config.triggers = 'hover';
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
   }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.getRole();
 
   }
   getRole() {
     this._roleService.allRoles().subscribe((role) => {
-      return this.roles = role
+      this.roles = role
+      this.spinner.hide(this.spinnerName);
     })
   }
   getPermits(idRole:any) {

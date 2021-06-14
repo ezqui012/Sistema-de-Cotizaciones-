@@ -1,3 +1,5 @@
+<ngx-spinner [name]="spinnerName" [type]="spinnerType"></ngx-spinner>
+
 <app-nav-user></app-nav-user>
 
 <!--header-->
@@ -61,8 +63,8 @@
     </div>
     <div class="contentButton">
       <div class="row justify-content-end" style="padding-right: 20%;">
-        <button *ngIf="showAdd" type="button" class="btn btn-add" (click)="addItemRequest()">Añadir</button>
-        <button *ngIf="showEdit" type="button" class="btn btn-save" (click)="saveChanges()">Guardar</button>
+        <button *ngIf="showAdd" type="button" class="btn btn-add" (click)="addItemRequest()">Añadir Ítem</button>
+        <button *ngIf="showEdit" type="button" class="btn btn-save" (click)="saveChanges()">Guardar Cambio</button>
       </div>
 
     </div>
