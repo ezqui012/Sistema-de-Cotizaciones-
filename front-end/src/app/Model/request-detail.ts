@@ -30,7 +30,12 @@ export class ReportRequestAccepted{
 }
 export class ReportRequestRejected{
   name:any;
-  date_rejected:any
+  date_rejected:any;
+  reason: any;
+}
+export class UserNameRequest{
+  name:any;
+  date:any;
 }
 
 export class PersonalQuote{

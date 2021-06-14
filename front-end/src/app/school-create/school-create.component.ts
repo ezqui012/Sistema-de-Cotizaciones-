@@ -5,6 +5,7 @@ import { FacultyService } from '../services/faculty.service';
 import { ResponseRegister } from '../Model/faculty';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-school-create',
@@ -30,14 +31,20 @@ export class SchoolCreateComponent implements OnInit {
     dean_faculty: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50), Validators.pattern(this.patternNameDean)]]
   });
 
+  spinnerType: string | any;
+  spinnerName: string | any;
+
   constructor(
     private router:Router,
     private fb: FormBuilder,
     private service: FacultyService,
     public toastr: ToastrService,
-    private titlePage: Title
+    private titlePage: Title,
+    private spinner: NgxSpinnerService
   ) {
     this.titlePage.setTitle('Registro de facultades - QUOT-UMSS');
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
    }
 
   navigateTo(path: String){
@@ -79,6 +86,9 @@ export class SchoolCreateComponent implements OnInit {
       this.messageRegisterFailed = 'Existen campos incorrectos';
       return;
     }
+
+    this.spinner.show(this.spinnerName);
+
     let res: ResponseRegister;
     this.service.registerFaculty(this.facultyRegisterForm.value).subscribe(
       (data) => {
@@ -86,12 +96,15 @@ export class SchoolCreateComponent implements OnInit {
         if(res.res){
           this.toastr.success('Facultad registrada con éxito');
           this.facultyRegisterForm.reset();
+          this.spinner.hide(this.spinnerName);
         }else{
           this.toastr.warning('Ocurrio un error intente de nuevo');
+          this.spinner.hide(this.spinnerName);
         }
       },
       (error) => {
         console.log(error.message);
+        this.spinner.hide(this.spinnerName);
         this.toastr.error('El nombre de la facultad ya se encuentra registrado');
       }
     );

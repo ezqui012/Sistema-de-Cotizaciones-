@@ -2,10 +2,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from "ngx-spinner";
+
 import { DateExpenseItem, RequestItem } from '../Model/expenseItem';
 import { RequestQuoteService } from '../services/request.service';
 import {NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
 import { ItemRequest, NameRequest, RegisterRequestResponse, } from '../Model/request';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -16,6 +19,8 @@ import { ItemRequest, NameRequest, RegisterRequestResponse, } from '../Model/req
   styleUrls: ['./request-quotation-edit.component.css'],
 })
 export class RequestQuotationEditComponent implements OnInit {
+  spinnerType: string | any;
+  spinnerName: string | any;
   items: Array<DateExpenseItem> = [];
   listItemsRequest: Array<RequestItem> = [];
   listItemsRequestShow: Array<RequestItem> = [];
@@ -48,13 +53,19 @@ export class RequestQuotationEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public toastr: ToastrService,
+    private spinner: NgxSpinnerService,
+    private titlePage: Title,
     public config: NgbPopoverConfig,
   ) {
+    this.titlePage.setTitle('Editar Solicitud - QUOT-UMSS')
     config.placement = 'left';
     config.triggers = 'hover';
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
   }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.getAllItem();
     this.idRequest = this.route.snapshot.params.id;
     console.log("el id: "+this.idRequest);
@@ -68,6 +79,8 @@ export class RequestQuotationEditComponent implements OnInit {
   getAllItem() {
     this.serviceRequestQuote.allItem().subscribe((item) => {
       this.items = item;
+      this.spinner.hide(this.spinnerName);
+
     });
   }
   getNameRequest() {
@@ -83,6 +96,7 @@ export class RequestQuotationEditComponent implements OnInit {
   recoverListItem(){
     this.serviceRequestQuote.recoverListItemRequest(this.idRequest).subscribe((date) => {
       this.listItemsRequest = date;
+      this.spinner.hide(this.spinnerName);
       this.getListItemsShow();
     });
   }
@@ -181,13 +195,11 @@ export class RequestQuotationEditComponent implements OnInit {
       this.showAdd = true;
       this.enableSelect = true;
 
-      this.listItemsRequest[this.indexItem].quantity =
-        this.registerForm.get('quantity')?.value;
-      this.listItemsRequest[this.indexItem].total_cost =
-        this.listItemsRequest[this.indexItem].unit_cost *
-        this.registerForm.get('quantity')?.value;
-
+      this.listItemsRequest[this.indexItem].quantity = this.registerForm.get('quantity')?.value;
+      this.listItemsRequest[this.indexItem].total_cost = this.listItemsRequest[this.indexItem].unit_cost * this.registerForm.get('quantity')?.value;
       this.getListItemsShow();
+      this.registerForm.get('quantity')?.reset();
+      this.registerForm.get('index')?.reset();
     }else{
       this.toastr.error('La cantidad debe ser mayor a "0"')
     }

@@ -102,6 +102,7 @@ export class QuoteListProcessComponent implements OnInit {
   async getQuoteProcess(){
     this.quoteProcessService.getQuoteProcess(this.quoteId).subscribe((res)=>{
       this.newList = res;
+      this.quotes = res;
       this.loadAttachment();
     })
   }

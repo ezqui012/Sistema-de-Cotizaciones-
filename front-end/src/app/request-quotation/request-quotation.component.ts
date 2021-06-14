@@ -6,6 +6,7 @@ import { DateExpenseItem, RequestItem } from '../Model/expenseItem';
 import { RequestQuoteService } from '../services/request.service';
 import {NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
 import { ItemRequest, RegisterRequestResponse, } from '../Model/request';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -45,9 +46,11 @@ export class RequestQuotationComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public toastr: ToastrService,
+    private titlePage: Title,
     public config: NgbPopoverConfig,
 
   ) {
+    this.titlePage.setTitle('Registrar Solicitud - QUOT-UMSS')
     config.placement = 'left';
     config.triggers = 'hover';
   }
@@ -144,6 +147,8 @@ export class RequestQuotationComponent implements OnInit {
         this.registerForm.get('quantity')?.value;
 
       this.getListItemsShow();
+      this.registerForm.get('quantity')?.reset();
+      this.registerForm.get('index')?.reset();
     }else{
       this.toastr.error('La cantidad debe ser mayor a "0"')
     }

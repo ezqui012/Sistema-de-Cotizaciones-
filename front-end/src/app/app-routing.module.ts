@@ -140,7 +140,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'comparative-quotes/:idR/:idQ/:entrusted',
+    path: 'comparative-quotes/:idR/:idQ/:entrusted/:action',
     component: ComparativeQuotesComponent,
     canActivate: [AuthApproveGuard]
   },

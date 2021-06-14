@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { ItemsService } from '../services/items.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-item-edit',
@@ -25,6 +26,9 @@ export class ItemEditComponent implements OnInit {
   indexType: number = 0;
   indexUnit: number = 0;
 
+  spinnerType: string | any;
+  spinnerName: string | any;
+
   private patternDecimal = /^[0-9]+(\.?[0-9]+)?$/;
 
   itemRegisterForm = this.fb.group({
@@ -41,12 +45,16 @@ export class ItemEditComponent implements OnInit {
     public toastr: ToastrService,
     private titlePage: Title,
     private service: ItemsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) {
     this.titlePage.setTitle('Editar Item - QUOT-UMSS');
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
   }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.loadTypeItems();
     this.loadUnitItems();
     this.loadInfoItem();
@@ -98,8 +106,10 @@ export class ItemEditComponent implements OnInit {
         this.itemRegisterForm.controls['unit_item'].setValue(data.unit_item);
         this.itemRegisterForm.controls['unit_cost'].setValue(data.unit_cost);
         this.itemRegisterForm.controls['description_item'].setValue(data.description_item);
+        this.spinner.hide(this.spinnerName);
       },
       (error) => {
+        this.spinner.hide(this.spinnerName);
         this.navigateTo('/item-list');
         this.toastr.error(`ERROR: ${error} Intente de nuevo`);
       }
@@ -153,14 +163,18 @@ export class ItemEditComponent implements OnInit {
       return;
     }
 
+    this.spinner.show(this.spinnerName);
+
     this.service.updateItem(this.route.snapshot.params.id, this.itemRegisterForm.value).subscribe(
       (data) => {
         if(data.res){
+          this.spinner.hide(this.spinnerName);
           this.navigateTo('/item-list');
           this.toastr.success('Los cambios fueron realizados con éxito');
         }
       },
       (error) => {
+        this.spinner.hide(this.spinnerName);
         this.toastr.error('El nombre de item ingresado ya se encuentra en uso, ingrese otro.');
       }
     );

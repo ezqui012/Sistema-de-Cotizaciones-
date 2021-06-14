@@ -49,6 +49,16 @@ export class DetailRequestService {
     }
     return failed;
   }
+  updateActualAmount(id: any, amount:any): Observable<any>{
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.put<any>(`${environment.URI_API}update-amount/${id}/${amount}`,{},{ headers: httpHeader });
+    }
+    return failed;
+  }
 
   registerRejected(data: RejectedRequest): Observable<ResponseObtained | any>{
     let failed: any;
@@ -153,6 +163,16 @@ export class DetailRequestService {
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
       return this.httpClient.get<AcceptedQuote>(`${environment.URI_API}get-request-accepted/${id}`, { headers: httpHeader });
+    }
+    return failed;
+  }
+  getNameUserRequest(id: any): Observable<any>{
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<AcceptedQuote>(`${environment.URI_API}nameUserRequest/${id}`, { headers: httpHeader });
     }
     return failed;
   }

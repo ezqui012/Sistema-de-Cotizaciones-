@@ -6,7 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ReportRequest } from '../reports/reportRequest';
 import { Faculty } from '../Model/faculty';
-
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-request-detail-rejected',
@@ -32,17 +32,25 @@ export class RequestDetailRejectedComponent implements OnInit {
   faculty: Faculty = new Faculty;
   nameFaculty:any
   dataRejected: Array<ReportRequestRejected>=[]
+
+  spinnerType: string | any;
+  spinnerName: string | any;
+
   constructor(
     public toastr: ToastrService,
     private titlePage: Title,
     private route: ActivatedRoute,
     private router: Router,
-    private service: DetailRequestService
+    private service: DetailRequestService,
+    private spinner: NgxSpinnerService
   ) {
     this.titlePage.setTitle('Detalle de solicitud - QUOT-UMSS');
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
    }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.getInfoRequestById(this.route.snapshot.params.id);
     this.getFaculty();
     this.getRequestRejected();
@@ -83,6 +91,7 @@ export class RequestDetailRejectedComponent implements OnInit {
       },
       (error) => {
         console.log(`Error: ${error}`);
+        this.spinner.hide(this.spinnerName);
         this.toastr.error(`Error: ${error}. Recargue la página`);
       }
     );
@@ -99,6 +108,7 @@ export class RequestDetailRejectedComponent implements OnInit {
       },
       (error) => {
         console.log(error);
+        this.spinner.hide(this.spinnerName);
         this.navigateTo('/request-quotation-list');
         this.toastr.error('La solicitud no se encuentra rechazada');
       }
@@ -113,6 +123,7 @@ export class RequestDetailRejectedComponent implements OnInit {
       },
       (error) => {
         console.log(`Error: ${error}`);
+        this.spinner.hide(this.spinnerName);
         this.toastr.error(`Error: ${error}. Recargue la página`);
       }
     );
@@ -124,6 +135,7 @@ export class RequestDetailRejectedComponent implements OnInit {
       price += parseFloat(total.total_cost);
     }
     this.totalCost = price;
+    this.spinner.hide(this.spinnerName);
   }
   //methodo report
   generatePdf(){

@@ -1,3 +1,5 @@
+<ngx-spinner [name]="spinnerName" [type]="spinnerType"></ngx-spinner>
+
 <!--Barra de navegacion-->
 <app-nav-user></app-nav-user>
 <!--header-->
@@ -35,11 +37,11 @@
                         <div [ngSwitch]="status" class="row justify-content-center" style="padding-right: 0%;">
 
                           <button type="button" class="btn btnAction" *ngSwitchCase="statusQuote.accepted" ngbPopover="Modificar Selección"
-                          (click)="navigateTo('/comparative-quotes', quote.id_request, quote.id_quotation, quote.name)">
+                          (click)="navigateTo('/comparative-quotes', quote.id_request, quote.id_quotation, quote.name, 'save')">
                             <img src="../../assets/icon-quote/registerMod.png" width="28" height="30" />
                           </button>
                           <button type="button" class="btn btnAction" *ngSwitchCase="statusQuote.accepted" ngbPopover="Reporte PDF"
-                          (click)="generatePdf(quote.id_request, quote.id_quotation, quote.business_name, quote.name)">
+                          (click)="generatePdf(quote.id_request, quote.id_quotation, quote.business_name, quote.name, quote.status_quotation)">
                             <img src="../../assets/icon-quote/file-pdfAct.png" width="30" height="30" />
                           </button>
 
@@ -48,12 +50,12 @@
                             <img src="../../assets/icon-quote/clipboardDes.png" width="30" height="30" />
                           </button>
                           <button type="button" class="btn btnAction" *ngSwitchCase="statusQuote.rejected" ngbPopover="Reporte PDF"
-                          (click)="generatePdf(quote.id_request, quote.id_quotation, quote.business_name, quote.name)">
+                          (click)="generatePdf(quote.id_request, quote.id_quotation, quote.business_name, quote.name, quote.status_quotation)">
                             <img src="../../assets/icon-quote/file-pdfAct.png" width="30" height="30" />
                           </button>
 
-                          <button type="button" class="btn btnAction" *ngSwitchCase="statusQuote.finalized" ngbPopover="Coparar Cotización"
-                          (click)="navigateTo('/comparative-quotes', quote.id_request, quote.id_quotation, quote.name)">
+                          <button type="button" class="btn btnAction" *ngSwitchCase="statusQuote.finalized" ngbPopover="Comparar Cotización"
+                          (click)="navigateTo('/comparative-quotes', quote.id_request, quote.id_quotation, quote.name, 'new')">
                             <img src="../../assets/icon-quote/clipboardAct.png" width="30" height="30" />
                           </button>
                           <button type="button" class="btn btnAction" *ngSwitchCase="statusQuote.finalized" disabled ngbPopover="Reporte PDF"

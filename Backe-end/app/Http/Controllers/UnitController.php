@@ -141,4 +141,21 @@ class UnitController extends Controller
         }
 
     }
+    public function updateAmount($id, $request){
+        try{
+            DB::update('UPDATE units
+            SET amount = ?
+            WHERE id_unit = ?', [$request, $id]);
+            return response()->json([
+                'res' => true,
+                'message' => 'Update unit of Request'
+            ], 200);
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+
+    }
 }

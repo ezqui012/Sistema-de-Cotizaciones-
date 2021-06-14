@@ -92,7 +92,7 @@ export class ReportRequest {
   private crateTable(data: ListItems[]): ITable {
     [{}]
     return new Table([
-      ['Nº', 'Cantidad', 'Unidad', 'Decripción', 'Unitario', 'Total'],
+      ['Nº', 'Cantidad', 'Unidad', 'Detalle', 'Unitario', 'Total'],
       ...this.extractData(data)
     ])
       .widths([20, 50, 40, 200, 60, 60])
@@ -160,7 +160,7 @@ export class ReportRequest {
   private crateTableP(data: AcceptedQuote[]): ITable {
     [{}]
     return new Table([
-      ['Nº', 'Cantidad', 'Unidad', 'Decripción','Empresa', 'Unitario', 'Total'],
+      ['Nº', 'Cantidad', 'Unidad', 'Detalle','Empresa', 'Unitario', 'Total'],
       ...this.extractDataP(data)
     ])
       .widths([15, 45,40, 120, 120, 40, 40])

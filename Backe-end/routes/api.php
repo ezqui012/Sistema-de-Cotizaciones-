@@ -68,6 +68,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('update-status/{id_request}','RequestQuotationController@changeStatus');
     Route::apiResource('rejected', 'RejectedController');
     Route::get('unit-amount/{id}', 'UnitController@getAmount');
+    Route::put('update-amount/{id}/{request}', 'UnitController@updateAmount');
 
     /* lista de cotizaciones asignadas a un usuario */
     Route::get('quot-assigned/{id}','QuotationController@getListQuoteUser');
@@ -94,7 +95,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('updateEnterprise/{id_enterprise}', 'CompanyController@updateEnterprise');
     Route::get('requestAccepted/{id}', 'RequestDetailsController@getUserAccepted');
     Route::get('requestRejected/{id}', 'RequestDetailsController@getUserRejected');
+    Route::get('nameUserRequest/{id}', 'RequestDetailsController@getNameUserRequest');
 
     Route::apiResource('attachment-routes', 'AttachmentController');
 });
-

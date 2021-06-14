@@ -49,6 +49,24 @@ class RequestDetailsController extends Controller
             ], 404);
         }
     }
+    public function getNameUserRequest($id)
+    {
+        try {
+            $request = DB::table('users')
+            ->join('request_quotation', 'users.id', '=', 'request_quotation.id')
+            ->select('users.name', 'request_quotation.date')
+            ->where('request_quotation.id_request', '=', $id)
+            ->get();
+        return $request;
+
+
+        } catch (Exception $ex) {
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
     public function getUserAccepted($id)
     {
         try {
@@ -72,7 +90,7 @@ class RequestDetailsController extends Controller
         try {
             $request = DB::table('rejected')
             ->join('users', 'rejected.id', '=', 'users.id')
-            ->select('users.name', 'rejected.date_rejected')
+            ->select('users.name', 'rejected.date_rejected', 'rejected.reason')
             ->where('rejected.id_request', '=', $id)
             ->get();
         return $request;
@@ -163,7 +181,7 @@ class RequestDetailsController extends Controller
                         ->join('quote_detail', 'accepted.id_qd', '=', 'quote_detail.id_qd')
                         ->join('expense_item', 'quote_detail.id_item', '=', 'expense_item.id_item')
                         ->join('enterprise', 'quote_detail.id_enterprise', '=', 'enterprise.id_enterprise')
-                        ->select('quote_detail.quantity', 'expense_item.unit_item', 'expense_item.name_item', 'enterprise.name_enterprise', 'quote_detail.unit_cost')
+                        ->select('quote_detail.quantity', 'expense_item.unit_item', 'expense_item.name_item', 'enterprise.name_enterprise','quote_detail.delivery_days', 'quote_detail.unit_cost')
                         ->where('accepted.id_request', '=', $id)
                         ->get();
             if($res[0]){

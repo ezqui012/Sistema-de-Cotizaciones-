@@ -96,6 +96,7 @@ export class QuoteListFinalizedComponent implements OnInit {
     this.status = this.quotes[0].status_quotation
 
     this.newList = res;
+    this.quotes = res;
 
     this.loadAttachment();
     })

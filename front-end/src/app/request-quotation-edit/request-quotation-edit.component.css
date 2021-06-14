@@ -27,12 +27,12 @@ color: white;
 .btn-save{
   color: white;
   background-color:#003b72;
-  width: 80px;
+  width: 150px;
 }
 .btn-add{
   color: white;
   background-color:#128D4B;
-  width: 80px;
+  width: 150px;
 }
 .btn-add:hover{
   background-color:#21aa61 !important;
@@ -120,6 +120,8 @@ color: white;
   margin-bottom: 10px;
   display: flex;
   padding: 5px;
+  box-shadow: 0 0 5px 0 #afaeae;
+
 }
 
 .contentSelect{
