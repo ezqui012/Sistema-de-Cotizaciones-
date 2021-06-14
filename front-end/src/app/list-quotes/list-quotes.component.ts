@@ -73,8 +73,8 @@ export class ListQuotesComponent implements OnInit {
     this.getQoutesFinish();
     this.getFaculty();
   }
-  navigateTo(path: String, id: any, idQ: any, entrusted: any) {
-    this.router.navigate([path, id, idQ, entrusted]);
+  navigateTo(path: String, id: any, idQ: any, entrusted: any, action: any) {
+    this.router.navigate([path, id, idQ, entrusted, action]);
   }
   getRequestDataAccepted(idRequest: number) {
     this.service.getRequestAccepted(idRequest).subscribe(
@@ -227,9 +227,7 @@ export class ListQuotesComponent implements OnInit {
     pdf.add(businessData)
     pdf.add(pdf.ln(2));
     pdf.add(titleList);
-
     pdf.add(this.crateTable(this.listaItemsQuote));
-
     pdf.add(pdf.ln(2));
 
     if (statusQ === 'Aceptado') {

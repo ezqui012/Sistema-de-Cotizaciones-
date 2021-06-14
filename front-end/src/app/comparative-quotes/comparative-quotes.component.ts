@@ -29,11 +29,13 @@ export class ComparativeQuotesComponent implements OnInit {
   items:Array<ExpenseItems>=[]
   itemsQuotes:Array<ItemQuotes>=[]
   itemsSelect:Array<SelectControlItem>=[]
-  //register:ItemQuoteAcepted = new ItemQuoteAcepted
-  //itemSelected:SelectControlItem = new SelectControlItem
+  listaItemsQuote: Array<ItemQuotes> | any;
+  modifySelection:any;
   showBtn:boolean=true
   totalCost: number = 0;
+  totalQuotation: any;
 
+  idAmount: number | any;
   actualAmount: number | any;
   rejectedForm = this.fb.group({
     id_request: [ this.route.snapshot.paramMap.get('idR'), [Validators.required]],
@@ -55,8 +57,12 @@ export class ComparativeQuotesComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('idR');
     this.idQuote = this.route.snapshot.paramMap.get('idQ');
+    this.modifySelection = this.route.snapshot.paramMap.get('action');
     this.entrusted = this.route.snapshot.paramMap.get('entrusted');
     this.getItems(this.id);
+    if(this.modifySelection === 'save'){
+      this.listItems(this.id);
+    }
 
     this.getAmount();
   }
@@ -81,7 +87,19 @@ export class ComparativeQuotesComponent implements OnInit {
 
     })
   }
-
+  listItems(id: any){
+    this.service.getAprovedQuote(id).subscribe(
+      (data) => {
+        this.listaItemsQuote = data;
+        this.getTotal();
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.navigateTo('/request-quotation-list');
+        this.toastr.error('La solicitud no se encuentra aceptada o en cotización');
+      }
+    );
+  }
   showItems(idItem:any){
     //console.log("llega el id: "+idItem)
     //console.log(this.idQuote)
@@ -102,7 +120,6 @@ export class ComparativeQuotesComponent implements OnInit {
     this.itemsSelect.push(itemSelected)
     this.showBtn=false
     this.modal.dismissAll()
-    console.log(this.itemsSelect)
     this.totalCost=this.totalCost+totalCost;
   }
   checkItemSelect(){
@@ -131,6 +148,7 @@ export class ComparativeQuotesComponent implements OnInit {
         }
         this.toastr.success('Se registro las elecciones de la cotización con exito');
         this.updateStateAccepted();
+        this.modifyActualAmount();
         this.navigateTo('/list-quotes')
 
       }else{
@@ -271,6 +289,7 @@ export class ComparativeQuotesComponent implements OnInit {
           //this.changeStatus("Rechazado", "La solicitud a sido rechazada");
           this.clearItemQuoteAccepted();
           this.updateStateRejected();
+          this.modifyActualAmountRejected();
           this.modal.dismissAll();
           this.navigateTo('/list-quotes');
 
@@ -285,14 +304,6 @@ export class ComparativeQuotesComponent implements OnInit {
     );
   }
 
-  //funcion de la comparacion pendiente*****************
-  openModalAccept(content: any){
-    if(this.actualAmount >= this.totalCost){
-      //this.modal.open(content,{ windowClass:"colorModal"});
-    }else{
-      this.toastr.error('El monto actual de la unidad es menor al solicitado');
-    }
-  }
   getAmount(){
     this.service.getActualAmount(localStorage.getItem('quot-umss-u')).subscribe(
       (data) => {
@@ -304,5 +315,40 @@ export class ComparativeQuotesComponent implements OnInit {
         this.toastr.error(`Error: ${error}. Recargue la página`);
       }
     );
+  }
+  getTotal() {
+    let price: number = 0;
+    this.totalQuotation = 0;
+    for (let total of this.listaItemsQuote) {
+      let cost: number = parseInt(total.quantity) * parseFloat(total.unit_cost);
+      price += cost;
+    }
+    this.totalQuotation = price;
+  }
+  updateAmount(amount:any){
+    this.service.updateActualAmount(localStorage.getItem('quot-umss-u'), amount).subscribe(
+      (data) => {
+
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
+  }
+  modifyActualAmount(){
+    if(this.modifySelection === 'save'){
+      let costTotal: number = parseFloat(this.actualAmount) + parseFloat(this.totalQuotation) - (this.totalCost);
+      this.updateAmount(costTotal);
+    }else if(this.modifySelection === 'new'){
+      let costTotal: number = parseFloat(this.actualAmount) - (this.totalCost);
+      this.updateAmount(costTotal);
+    }
+  }
+  modifyActualAmountRejected(){
+    if(this.modifySelection === 'save'){
+      let costTotal: number = parseFloat(this.actualAmount) + parseFloat(this.totalQuotation);
+      this.updateAmount(costTotal);
+    }
   }
 }

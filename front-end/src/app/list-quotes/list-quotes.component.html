@@ -35,7 +35,7 @@
                         <div [ngSwitch]="status" class="row justify-content-center" style="padding-right: 0%;">
 
                           <button type="button" class="btn btnAction" *ngSwitchCase="statusQuote.accepted" ngbPopover="Modificar Selección"
-                          (click)="navigateTo('/comparative-quotes', quote.id_request, quote.id_quotation, quote.name)">
+                          (click)="navigateTo('/comparative-quotes', quote.id_request, quote.id_quotation, quote.name, 'save')">
                             <img src="../../assets/icon-quote/registerMod.png" width="28" height="30" />
                           </button>
                           <button type="button" class="btn btnAction" *ngSwitchCase="statusQuote.accepted" ngbPopover="Reporte PDF"
@@ -53,7 +53,7 @@
                           </button>
 
                           <button type="button" class="btn btnAction" *ngSwitchCase="statusQuote.finalized" ngbPopover="Comparar Cotización"
-                          (click)="navigateTo('/comparative-quotes', quote.id_request, quote.id_quotation, quote.name)">
+                          (click)="navigateTo('/comparative-quotes', quote.id_request, quote.id_quotation, quote.name, 'new')">
                             <img src="../../assets/icon-quote/clipboardAct.png" width="30" height="30" />
                           </button>
                           <button type="button" class="btn btnAction" *ngSwitchCase="statusQuote.finalized" disabled ngbPopover="Reporte PDF"
