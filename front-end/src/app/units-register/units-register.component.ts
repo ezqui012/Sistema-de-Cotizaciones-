@@ -7,7 +7,7 @@ import { RegisterUnitResponse } from '../Model/unit';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-units-register',
@@ -21,6 +21,9 @@ export class UnitsRegisterComponent implements OnInit {
   showAmount:boolean=false;
   messageFail = false;
   messageRegisterFailed = '';
+
+  spinnerType: string | any;
+  spinnerName: string | any;
 
   private patternNumber = /^[0-9]+(\.?[0-9]+)?$/;
   private patternName = /^[a-zA-Z-z0-9-zñÑ\u00E0-\u00FC ]*$/
@@ -37,12 +40,16 @@ export class UnitsRegisterComponent implements OnInit {
     private serviceUnit: UnitService,
     public toastr: ToastrService,
     private router:Router,
-    private titlePage: Title
+    private titlePage: Title,
+    private spinner: NgxSpinnerService
     ) {
       this.titlePage.setTitle('Registro de unidades - QUOT-UMSS');
+      this.spinnerName = 'sp3';
+      this.spinnerType = 'ball-spin-clockwise';
     }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.getFaculties();
   }
 
@@ -50,9 +57,11 @@ export class UnitsRegisterComponent implements OnInit {
     this.service.allFaculties().subscribe(
       (data) => {
         this.faculties = data;
+        this.spinner.hide(this.spinnerName);
       },
       (error:any) => {
         console.log(`Error: ${error}`);
+        this.spinner.hide(this.spinnerName);
         this.toastr.error(`Error: ${error}. Recargue la página`);
       }
     );
@@ -109,19 +118,24 @@ export class UnitsRegisterComponent implements OnInit {
       this.messageRegisterFailed = 'Existen campos incorrectos';
       return;
     }
+
+    this.spinner.show(this.spinnerName);
     let res: RegisterUnitResponse;
     this.serviceUnit.registerUnit(this.registerForm.value).subscribe(
       (data) => {
         res = data;
         if(res.res){
+          this.spinner.hide(this.spinnerName);
           this.toastr.success('Unidad registrada con éxito');
           this.clearInput();
         }else{
+          this.spinner.hide(this.spinnerName);
           this.toastr.warning('Ocurrio un error intente de nuevo');
         }
       },
       (error) => {
         console.log(error.message);
+        this.spinner.hide(this.spinnerName);
         this.toastr.error('El nombre de la unidad ya se encuentra registrado');
       }
     );

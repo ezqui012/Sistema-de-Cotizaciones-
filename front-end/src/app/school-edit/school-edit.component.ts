@@ -5,6 +5,7 @@ import { FacultyService } from '../services/faculty.service';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { ResponseRegister } from '../Model/faculty';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-school-edit',
@@ -32,15 +33,21 @@ export class SchoolEditComponent implements OnInit {
   messageFail = false;
   messageRegisterFailed = '';
 
+  spinnerType: string | any;
+  spinnerName: string | any;
+
   constructor(
     private router:Router,
     private fb: FormBuilder,
     private service: FacultyService,
     public toastr: ToastrService,
     private titlePage: Title,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService
     ) {
       this.titlePage.setTitle('Editar facultad - QUOT-UMSS');
+      this.spinnerName = 'sp3';
+      this.spinnerType = 'ball-spin-clockwise';
      }
 
   navigateTo(path: String){
@@ -48,6 +55,7 @@ export class SchoolEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.spinner.show(this.spinnerName);
     this.infoFaculty(this.route.snapshot.params.id);
   }
 
@@ -58,6 +66,7 @@ export class SchoolEditComponent implements OnInit {
         this.loadValuesForm();
       },
       (error) => {
+        this.spinner.hide(this.spinnerName);
         this.toastr.error(`Falla en la conexion ${error}`);
         this.navigateTo('/school-list');
       }
@@ -70,6 +79,7 @@ export class SchoolEditComponent implements OnInit {
     this.facultyRegisterForm.controls['email_faculty'].setValue(this.dataFaculty.email_faculty);
     this.facultyRegisterForm.controls['address_faculty'].setValue(this.dataFaculty.address_faculty);
     this.facultyRegisterForm.controls['dean_faculty'].setValue(this.dataFaculty.dean_faculty);
+    this.spinner.hide(this.spinnerName);
   }
 
   isValid(field:string){
@@ -104,18 +114,23 @@ export class SchoolEditComponent implements OnInit {
       this.messageRegisterFailed = 'Existen campos incorrectos';
       return;
     }
+
+    this.spinner.show(this.spinnerName);
     let res: ResponseRegister;
     this.service.updateFaculty(this.route.snapshot.params.id, this.facultyRegisterForm.value).subscribe(
       (data) => {
         res = data;
         if(res.res){
+          this.spinner.hide(this.spinnerName);
           this.toastr.success('Se guardaron los cambios con éxito');
           this.navigateTo('/school-list')
         }else{
+          this.spinner.hide(this.spinnerName);
           this.toastr.warning('Ocurrio un error intente de nuevo');
         }
       },
       (error) => {
+        this.spinner.hide(this.spinnerName);
         this.toastr.error('El nombre de la facultad ya se encuentra registrado');
       }
     );
