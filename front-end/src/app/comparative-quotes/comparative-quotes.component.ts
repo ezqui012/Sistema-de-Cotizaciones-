@@ -269,6 +269,7 @@ export class ComparativeQuotesComponent implements OnInit {
       (data) => {
         if(data.res){
           //this.changeStatus("Rechazado", "La solicitud a sido rechazada");
+          this.clearItemQuoteAccepted();
           this.updateStateRejected();
           this.modal.dismissAll();
           this.navigateTo('/list-quotes');

@@ -72,7 +72,7 @@ class RequestDetailsController extends Controller
         try {
             $request = DB::table('rejected')
             ->join('users', 'rejected.id', '=', 'users.id')
-            ->select('users.name', 'rejected.date_rejected')
+            ->select('users.name', 'rejected.date_rejected', 'rejected.reason')
             ->where('rejected.id_request', '=', $id)
             ->get();
         return $request;
