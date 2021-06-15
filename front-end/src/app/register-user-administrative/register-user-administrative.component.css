@@ -1,36 +1,52 @@
-
-.form-container{
-  margin-left: 8%;
-  margin-right: 8%;
+.containerBody{
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 20px;
 }
-.leftDiv{
-  float: left;
-  width: 50%;
-}
-.rightDiv{
-  float: left;
-  width: 50%;
-}
-.fieldRegister{
-  margin-bottom: 1%;
+.form-container {
+  /* margin-left: 8%;
+  margin-right: 8%; */
+  padding-top: 10px;
   width: 100%;
-  border-radius: 5px ;
 }
-#register{
- text-align: left;
+.containerForm{
+  display: flex;
 }
-.containerButton{
-  clear: both;
+.leftDiv {
+    /* float: left; */
+  justify-items: left;
+  width: 50%;
+  padding-right: 5%;
+
+}
+.rightDiv {
+  /* float: left; */
+  justify-items: right;
+  width: 50%;
+  padding-left: 5%;
+
+}
+.fieldRegister {
+  /* margin-bottom: 1%; */
+  width: 100%;
+  /* border-radius: 5px; */
+}
+#register {
+  text-align: left;
+}
+.containerButton {
+  /* clear: both; */
+  margin-top:40px;
   text-align: center;
 }
-.alert-danger{
+.alert-danger {
   font-size: small;
   color: #721c24;
   border-radius: 3px;
-  background-color: #f5c6cb ;
+  background-color: #f5c6cb;
   width: 100%;
 }
-.containerTop{
+.containerTop {
   margin-left: 15%;
   display: flex;
   box-sizing: border-box;
@@ -39,54 +55,78 @@
   font-weight: bolder;
   margin-top: 2%;
 }
-.mat-form-field{
-  width: 80%;
+.mat-form-field {
+  width: 100%;
   border-bottom: #003b72;
 }
 ::ng-deep .mat-focused .mat-form-field-label {
   /*change color of label*/
   font-size: 1rem;
-  color: #1C2331 !important;
- }
-
- /* ::ng-deep.mat-form-field-underline {
-  /*change color of underline
-
-  background-color: #003b72 !important;
+  color: #1c2331 !important;
 }
-::ng-deep.mat-form-field-ripple {
- /*change color of underline when focused
- background-color: #003b72 !important;;
-}*/
-.btn-primary{
+
+.btn-primary {
   margin-top: 5%;
-  border-color: #003b72 ;
+  border-color: #003b72;
   background-color: #003b72;
   width: 20%;
   margin-left: 5%;
 }
-.btn-danger{
+.btn-danger {
   margin-top: 5%;
   margin-right: 5%;
-  border-color: #1C2331;
-  background-color: #1C2331;
+  border-color: #1c2331;
+  background-color: #1c2331;
   width: 20%;
 }
+.btn-one,
+.btn-one:hover,
+.btn-one:active {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color: #003b72;
+  width: 200px;
+  margin-left: 10px;
+}
+.btn-cancel {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color: #1C2331;
+  margin-right: 20px;
+  width: 120px;
+}
+.btn-register{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 120px;
+}
 .btn:hover{
-  background-color:#2f82ff !important;
+  color: white;
+  background-color: #2f82ff !important;
+}
+.containertop {
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  color: #003b72;
+  font-weight: bolder;
+}
+
+@media(max-width:650px){
+  .containerBody{
+    text-align: center;
   }
-  .btn-one,
-  .btn-one:hover,
-  .btn-one:active {
-    color: white;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
-    background-color:#003b72;
-    width: 200px;
-    margin-left: 10px;
+  .containerForm{
+    display: block;
+    justify-content: center;
+
   }
+  .rightDiv,.leftDiv{
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: center;
 
-
-
-
-
-
+  }
+}

@@ -1,26 +1,41 @@
 
-.form-container{
-  margin-left: 8%;
-  margin-right: 8%;
+.containerBody{
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 20px;
 }
-.leftDiv{
-  float: left;
-  width: 50%;
-}
-.rightDiv{
-  float: left;
-  width: 50%;
-}
-.fieldRegister{
-  margin-bottom: 1%;
+.form-container {
+  /* margin-left: 8%;
+  margin-right: 8%; */
+  padding-top: 10px;
   width: 100%;
-  border-radius: 5px ;
+  }
+.containerForm{
+  display: flex;
 }
-#register{
- text-align: left;
+.leftDiv {
+    /* float: left; */
+  justify-items: left;
+  width: 50%;
+  padding-right: 5%;
 }
-.containerButton{
-  clear: both;
+.rightDiv {
+  /* float: left; */
+  justify-items: right;
+  width: 50%;
+  padding-left: 5%;
+}
+.fieldRegister {
+  /* margin-bottom: 1%; */
+  width: 100%;
+  /* border-radius: 5px; */
+}
+#register {
+  text-align: left;
+}
+.containerButton {
+  /* clear: both; */
+  margin-top:40px;
   text-align: center;
 }
 .alert-danger{
@@ -40,7 +55,7 @@
   margin-top: 2%;
 }
 .mat-form-field{
-  width: 80%;
+  width: 100%;
   border-bottom: #003b72;
 }
 ::ng-deep .mat-focused .mat-form-field-label {
@@ -49,15 +64,6 @@
   color: #1C2331 !important;
  }
 
- /* ::ng-deep.mat-form-field-underline {
-  /*change color of underline
-
-  background-color: #003b72 !important;
-}
-::ng-deep.mat-form-field-ripple {
- /*change color of underline when focused
- background-color: #003b72 !important;;
-}*/
 .btn-primary{
   margin-top: 5%;
   border-color: #003b72 ;
@@ -98,3 +104,45 @@
   width: 80%;
 }
 
+.btn-cancel {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color: #1C2331;
+  margin-right: 20px;
+  width: 120px;
+}
+.btn-register{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 120px;
+}
+.btn:hover{
+  color: white;
+  background-color: #2f82ff !important;
+}
+.containertop {
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  color: #003b72;
+  font-weight: bolder;
+}
+
+@media(max-width:650px){
+  .containerBody{
+    text-align: center;
+  }
+  .containerForm{
+    display: block;
+    justify-content: center;
+
+  }
+  .rightDiv,.leftDiv{
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: center;
+
+  }
+}
