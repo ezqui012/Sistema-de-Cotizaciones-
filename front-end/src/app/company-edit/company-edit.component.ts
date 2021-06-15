@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CompanyService } from '../services/company.service';
-
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-company-edit',
   templateUrl: './company-edit.component.html',
@@ -20,15 +20,21 @@ export class CompanyEditComponent implements OnInit {
   public id = this.route.snapshot.params.id;
   dataToUpdate:any;
   dataCompany= new Company();
+  spinnerType: string | any;
+  spinnerName: string | any;
+
   constructor(
     private router:Router,
     private fb: FormBuilder,
     public toastr: ToastrService,
     private titlePage: Title,
     private companyDataService: CompanyService,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) {
     this.titlePage.setTitle('Edición de Empresas - QUOT-UMSS');
+    this.spinnerName = 'sp3';
+    this.spinnerType = 'ball-spin-clockwise';
 
   }
   enterpriseForm= this.fb.group({
@@ -177,7 +183,7 @@ export class CompanyEditComponent implements OnInit {
       this.enterpriseForm.controls['phone_enterprise'].setValue(this.dataCompany.phone_enterprise);
       this.enterpriseForm.controls['email_enterprise'].setValue(this.dataCompany.email_enterprise);
       this.enterpriseForm.controls['address_enterprise'].setValue(this.dataCompany.address_enterprise);
-
+      this.spinner.hide(this.spinnerName);
     })
   }
   updateEnterprise(){
@@ -269,6 +275,7 @@ export class CompanyEditComponent implements OnInit {
   ngOnInit(): void {
     this.loadSectors();
     this.getDataEnterprise();
+    this.spinner.show(this.spinnerName);
   }
   navigateTo(path: String){
     console.log(path)
