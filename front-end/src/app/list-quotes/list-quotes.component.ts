@@ -261,8 +261,6 @@ export class ListQuotesComponent implements OnInit {
     }
     pdf.create().open();
 
-
-
   }
 
 
