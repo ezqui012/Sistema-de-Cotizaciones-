@@ -13,6 +13,7 @@ import { RegisteruserService } from 'src/app/services/registeruser.service';
 import { RolDropdownService } from '../services/rol-dropdown.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
@@ -20,6 +21,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class EditUserComponent implements OnInit {
   public id= this.route.snapshot.params.id;
+  spinnerType: string | any;
+  spinnerName: string | any;
   dataToUpdate: any;
   user: any;
   units: Unit []|undefined;
@@ -71,15 +74,19 @@ export class EditUserComponent implements OnInit {
     private route : ActivatedRoute,
     private userDataService : PersonalUserService,
     private modal: NgbModal,
-    private passwordService : EditUserService
-    ) {}
+    private passwordService : EditUserService,
+    private spinner: NgxSpinnerService
+    ) {
+      this.spinnerName = 'sp3';
+      this.spinnerType = 'ball-spin-clockwise';
+    }
   ngOnInit(): void {
      // console.log(this.route.snapshot.params.id);
       this.id
       this.getDataUser();
       this.getUnits();
       this.getRoles();
-
+      this.spinner.show(this.spinnerName);
      // console.log(this.id);
 
     }
@@ -192,17 +199,14 @@ export class EditUserComponent implements OnInit {
 
   getDataUser(){
     this.userDataService.getDataUserByID(this.id).subscribe((res: any) =>{
-     // console.log(res);
       this.dataToUpdate = res;
-      //console.log(this.dataToUpdate);
       this.RegisterUser = this.dataToUpdate;
-     // this.updateForm.controls['ci'].setValue(this.RegisterUser.ci);
       this.updateForm.controls['id_role'].setValue(this.RegisterUser.id_role);
       this.updateForm.controls['id_unit'].setValue(this.RegisterUser.id_unit);
       this.upPassword = this.dataToUpdate;
       this.updateForm.controls['id'].setValue(this.upPassword.id);
-      console.log(this.upPassword.id);
-    //  console.log(this.upPassword.id);
+      this.spinner.hide(this.spinnerName);
+
     })
   }
   updateDataUser(){
@@ -218,7 +222,7 @@ export class EditUserComponent implements OnInit {
     }
     this.updateService.updateData(this.id, this.updateForm.value).subscribe(res=>{
       this.showToastSuccess();
-      console.log(this.updateForm.get('id_role')?.value)
+
       },
       (error: any)=>{
          let message= error;
