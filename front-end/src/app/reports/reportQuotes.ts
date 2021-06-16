@@ -69,11 +69,11 @@ export class ReportQuotes {
     const businessData = new Txt('Razón social: '+business).fontSize(11).alignment('left').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
-    const statusRequestData = new Txt(`Estado: ${statusQ}`).fontSize(11).alignment('left').end
+    const statusRequestData = new Txt(`Estado de la cotización: ${statusQ}`).fontSize(11).alignment('left').end
     const userRequestData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
     const userAceptedData = new Txt(`La Solicitud fue aceptada por: ${userName}`).fontSize(11).alignment('left').end
     const personalData = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
-    const userRejectedData = new Txt(`Rechazado por: ${userName}`).fontSize(11).alignment('left').end
+    //const userRejectedData = new Txt(`Rechazado por: ${userName}`).fontSize(11).alignment('left').end
 
     pdf.add(this.tableHeader(nameFaculty));
     pdf.add(pdf.ln(2))
