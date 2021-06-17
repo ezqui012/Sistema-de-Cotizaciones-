@@ -218,9 +218,9 @@ export class ListQuotesComponent implements OnInit {
     const businessData = new Txt('Razón social: ' + business).fontSize(11).alignment('left').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
-    const statusRequestData = new Txt(`Estado: ${statusQ}`).fontSize(11).alignment('left').end
-    const userAceptedData = new Txt(`Aceptada por: ${reviewerBy}  en fecha: ${dateReviewer}`).fontSize(11).alignment('left').end
-    const userRejectedData = new Txt(`Rechazado por: ${reviewerBy}  en fecha: ${dateReviewer}`).fontSize(11).alignment('left').end
+    const statusRequestData = new Txt(`Estado de solicitud cotizada: ${statusQ}`).fontSize(11).alignment('left').end
+    const userAceptedData = new Txt(`La solicitud cotizada fue aceptada por: ${reviewerBy}  en fecha: ${dateReviewer}`).fontSize(11).alignment('left').end
+    const userRejectedData = new Txt(`La solicitud cotizada fue rechazada por: ${reviewerBy}  en fecha: ${dateReviewer}`).fontSize(11).alignment('left').end
     const reasonRejectedData = new Txt(`Motivo de rechazo: ${reason}`).fontSize(11).alignment('left').end
     const personalData = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
     const nameData = new Txt(`Encargado de la Solicitud: ${nameUserRequest}`).fontSize(11).alignment('left').end

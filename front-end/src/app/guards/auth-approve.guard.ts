@@ -22,7 +22,7 @@ export class AuthApproveGuard implements CanActivate {
       if(localStorage.getItem('quot-umss-tk') && localStorage.getItem('quot-umss-p') !== '1' && permission.includes(3)){
         return true;
       }else{
-        this.router.navigate(['/home-user']);
+        //this.router.navigate(['/home-user']);
         this.toastr.error('Usted no cuenta con permisos para aceptar o rechazar solicitudes');
         return false;
       }
