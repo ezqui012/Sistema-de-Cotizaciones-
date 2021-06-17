@@ -89,8 +89,8 @@ color: white;
   color:#0000 ;
   background-color: #fafafa;
   overflow-y: auto;
-  padding-left: 0.2%;
-  padding-right: 0.2%;
+  padding-left: 0.4%;
+  padding-right: 0.4%;
   height: 420px;
 }
 .newHeadTable{
@@ -123,9 +123,9 @@ color: white;
 .numHead{width: 5%;}
 .nomHead{width: 72%;}
 .cantHead{width: 10%;}
-.unHead{width: 10%;}
-.detHead{width: 18%;}
-.emHead{ width: 15%;}
+.unHead{width: 7%;}
+.detHead{width: 19%;}
+.emHead{ width: 18%;}
 .peHead{ width: 9%;}
 .unitHead{ width: 10%;}
 .totalHead{ width: 14%;}
