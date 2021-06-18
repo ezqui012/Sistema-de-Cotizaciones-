@@ -116,6 +116,13 @@ class UnitController extends Controller
         try{
             $input = $request->all();
             DB::table('units')->where('id_unit', $id)->update($input);
+            if($request->amount){
+                $now = Carbon::now();
+                $history['id_unit'] = $id;
+                $history['management'] = $now->year;
+                $history['amount'] = $request->amount;
+                HistoryAmount::create($history);
+            }
             return response()->json([
                 'res' => true,
                 'message' => 'Successfully upgraded faculty'
