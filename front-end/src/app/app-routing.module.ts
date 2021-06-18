@@ -232,17 +232,17 @@ const routes: Routes = [
   {
     path: 'item-list',
     component: ItemListComponent,
-    canActivate: [AuthItemGuard]
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'item-register-form',
     component: ItemRegisterComponent,
-    canActivate: [AuthItemGuard]
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'item-edit/:id',
     component: ItemEditComponent,
-    canActivate: [AuthItemGuard]
+    canActivate: [AuthAdminGuard]
   }
 
 ];

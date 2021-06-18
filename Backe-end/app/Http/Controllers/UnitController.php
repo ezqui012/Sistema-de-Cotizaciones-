@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Unit;
+use App\HistoryAmount;
 use App\Http\Requests\CreateUnitRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -71,7 +72,13 @@ class UnitController extends Controller
             $now = Carbon::now();
             $input = $request->all();
             $input['creation_date'] = $now->format('Y-m-d');
-            Unit::create($input);
+            $data = Unit::create($input);
+            if($data->amount != null){
+                $history['id_unit'] = $data->id;
+                $history['management'] = $now->year;
+                $history['amount'] = $request->amount;
+                HistoryAmount::create($history);
+            }
             return response()->json([
                 'res' => true,
                 'message' => 'Registered unit'
@@ -109,6 +116,13 @@ class UnitController extends Controller
         try{
             $input = $request->all();
             DB::table('units')->where('id_unit', $id)->update($input);
+            if($request->amount){
+                $now = Carbon::now();
+                $history['id_unit'] = $id;
+                $history['management'] = $now->year;
+                $history['amount'] = $request->amount;
+                HistoryAmount::create($history);
+            }
             return response()->json([
                 'res' => true,
                 'message' => 'Successfully upgraded faculty'

@@ -36,7 +36,7 @@ export class ReportRequest {
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
     const textDate = new Txt(`Agradecemos a Uds. cotizamos, los articulos que a continuación se detallan. Luego este formulario debe devolverse en sobre cerrado debidamente firmado  y sellado.`).fontSize(9).end
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
-    const statusRequestData = new Txt(`Estado: Proceso`).fontSize(11).alignment('left').end
+    const statusRequestData = new Txt(`Estado de solicitud: Proceso`).fontSize(11).alignment('left').end
     const userRequestData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
     pdf.add(this.tableHeader(nameFaculty));
     pdf.add(pdf.ln(2))
@@ -126,7 +126,7 @@ export class ReportRequest {
     const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
-    const statusRequestData = new Txt(`Estado: Aceptado`).fontSize(11).alignment('left').end
+    const statusRequestData = new Txt(`Estado de solicitud: Aceptado`).fontSize(11).alignment('left').end
     const userRequestData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
     const userAceptedData = new Txt(`La Solicitud fue aceptada por: ${nameAccepted}  en fecha: ${dateAccepted}`).fontSize(11).alignment('left').end
     const personalData = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
@@ -194,7 +194,7 @@ export class ReportRequest {
     const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
-    const statusRequestData = new Txt(`Estado: Rechazado`).fontSize(11).alignment('left').end
+    const statusRequestData = new Txt(`Estado de solicitud: Rechazado`).fontSize(11).alignment('left').end
     const userRequestData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
     const userRejectedData = new Txt(`La solicitud fue Rechazada por: ${nameRejected}  en fecha: ${dateRejected}`).fontSize(11).alignment('left').end
     const reasonDate = new Txt(`Motivo de rechazo: ${reason}`).fontSize(11).alignment('left').end
@@ -241,7 +241,7 @@ export class ReportRequest {
     const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
-    const statusRequestData = new Txt(`Estado: Cotización`).fontSize(11).alignment('left').end
+    const statusRequestData = new Txt(`Estado de solicitud: Cotización`).fontSize(11).alignment('left').end
     const userRequestData = new Txt(`Encargado de la Solicitud: ${userName}`).fontSize(11).alignment('left').end
     const personalData = new Txt(`Encargado de la Cotización: ${personalQuote}`).fontSize(11).alignment('left').end
 

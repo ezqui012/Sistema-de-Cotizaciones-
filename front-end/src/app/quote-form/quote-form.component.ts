@@ -23,6 +23,7 @@ export class QuoteFormComponent implements OnInit {
 
   business_name:any;
   statusQuot:any;
+  dateQuote:any;
 
   private numbQT: number = 0;
   private lenght: number = 0;
@@ -107,15 +108,17 @@ export class QuoteFormComponent implements OnInit {
   }
 
   registerQuote(){
-    if(this.dateControl.invalid){
-      this.toastr.error('Existen campos incorrectos');
-      return;
-    }
+    // if(this.dateControl.invalid){
+    //   this.toastr.error('Existen campos incorrectos');
+    //   return;
+    // }
 
-    let newDate: moment.Moment = moment.utc(this.dateControl.value).local();
-    this.registerForm.controls['date'].setValue(newDate.format('YYYY-MM-DD'));
+    // let newDate: moment.Moment = moment.utc(this.dateControl.value).local();
+    // this.registerForm.controls['date'].setValue(newDate.format('YYYY-MM-DD'));
+
 
     if(this.registerForm.invalid ){
+      console.log(this.registerForm.value);
       this.toastr.error('Existen campos incorrectos');
       return;
     }
@@ -143,7 +146,6 @@ export class QuoteFormComponent implements OnInit {
   }
 
   registerAttachment(id: number){
-    //console.log(id);
     const fileData = this.files[0];
     const data = new FormData;
     data.append('file', fileData);
@@ -152,7 +154,6 @@ export class QuoteFormComponent implements OnInit {
 
     this.serviceQuote.storeAttachmentCloud(data).subscribe(
       (response) => {
-        //console.log(response.secure_url);
         let newAttachemt = {
           id_qd: id,
           file_route: response.secure_url
@@ -256,6 +257,9 @@ export class QuoteFormComponent implements OnInit {
         if(data[0].status_quotation === 'Proceso'){
           this.business_name = data[0].business_name;
           this.statusQuot = data[0].status_quotation;
+          console.log(data[0].date);
+          this.dateQuote = String(data[0].date)
+          this.registerForm.controls['date'].setValue(this.dateQuote);
           this.spinner.hide(this.spinnerName);
         }else{
           this.spinner.hide(this.spinnerName);

@@ -176,11 +176,11 @@ export class EditDetailQuotationComponent implements OnInit {
         this.registerForm.controls['date'].setValue(data.date);
         this.registerForm.controls['delivery_days'].setValue(data.delivery_days);
         this.registerForm.controls['unit_cost'].setValue(data.unit_cost);
-        let newDate: moment.Moment = moment.utc(data.date);
-        let dateShow: Date = new Date(newDate.format('YYYY-MM-DD'));
-        dateShow.setDate(dateShow.getDate() + 1);
-        this.dateControl.setValue(dateShow);
-        console.log(this.dateControl.value);
+        this.registerForm.controls['date'].setValue(data.date);
+        // let newDate: moment.Moment = moment.utc(data.date);
+        // let dateShow: Date = new Date(newDate.format('YYYY-MM-DD'));
+        // dateShow.setDate(dateShow.getDate() + 1);
+        // this.dateControl.setValue(dateShow);
       },
       (error) => {
         this.toastr.error(`Error: ${error} Recargue la pagina`);
@@ -210,13 +210,13 @@ export class EditDetailQuotationComponent implements OnInit {
 
   updateQuote(){
 
-    if(this.dateControl.invalid){
-      this.toastr.error('Existen campos incorrectos');
-      return;
-    }
+    // if(this.dateControl.invalid){
+    //   this.toastr.error('Existen campos incorrectos');
+    //   return;
+    // }
 
-    let newDate: moment.Moment = moment.utc(this.dateControl.value).local();
-    this.registerForm.controls['date'].setValue(newDate.format('YYYY-MM-DD'));
+    // let newDate: moment.Moment = moment.utc(this.dateControl.value).local();
+    // this.registerForm.controls['date'].setValue(newDate.format('YYYY-MM-DD'));
 
     if(this.registerForm.invalid ){
       this.toastr.error('Existen campos incorrectos');
