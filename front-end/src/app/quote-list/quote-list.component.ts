@@ -8,6 +8,11 @@ import { QuotationService } from '../services/quotation.service';
 import { ListAssignedQuotes } from '../Model/quotation';
 
 import { NgxSpinnerService } from "ngx-spinner";
+import { EnterpriseService } from '../services/enterprise.service';
+import { ItemRequest } from '../Model/expense-item';
+import { DetailRequestService } from '../services/detail-request.service';
+import { ReportRequest } from '../reports/reportRequest';
+import { ReportQuotes } from '../reports/reportQuotes';
 
 @Component({
   selector: 'app-quote-list',
@@ -22,6 +27,9 @@ export class QuoteListComponent implements OnInit {
 
   spinnerType: string | any;
   spinnerName: string | any;
+  items: ItemRequest[] | any;
+  nameFaculty:string ='';
+  report: ReportQuotes = new ReportQuotes;
 
   constructor(
     private services:QuotationService,
@@ -29,6 +37,8 @@ export class QuoteListComponent implements OnInit {
     private titlePage: Title,
     public config: NgbPopoverConfig,
     public toastr: ToastrService,
+    private service: EnterpriseService,
+    private serviceF:DetailRequestService,
     private spinner: NgxSpinnerService
   ) {
     this.titlePage.setTitle('Lista de cotizaciones asignadas - QUOT-UMSS')
@@ -41,6 +51,7 @@ export class QuoteListComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show(this.spinnerName);
     this.getList(localStorage.getItem('quot-umss-usr'));
+    this.getFaculty();
   }
 
   getList(id: any){
@@ -55,7 +66,31 @@ export class QuoteListComponent implements OnInit {
       }
     );
   }
+  getFaculty(){
+    this.serviceF.getFaculty(localStorage.getItem('quot-umss-f')).subscribe(
+      (data) => {
+        //this.faculty = data;
+        this.nameFaculty = data.name_faculty;
 
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
+  }
+  getReportQuoteEmpty(id:any){
+    this.service.getItems(id).subscribe(
+      (data) => {
+        this.items = data;
+        this.report.generateQuoteEmptyPdf(this.nameFaculty, this.items);
+      },
+      (error) => {
+        console.log(`Error: ${error}`);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
+  }
   detailRequest(status: string, business: string, id: number){
     if(status==='Proceso'){
       this.navigateTo(`/quote-list-process/${business}/${id}`)

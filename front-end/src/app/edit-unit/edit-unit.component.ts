@@ -58,27 +58,19 @@ export class EditUnitComponent implements OnInit {
     this.spinner.show(this.spinnerName);
     this.getFaculty();
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log("recupere el id: "+this.id);
-   // var unidad:ListUnit =
-   this.getUnit(this.id);
-    //console.log(this.unit);
+    this.getUnit(this.id);
   }
 
   getUnit(id:any){
     this.serviceUnitSelect.getUnitSelect(id).subscribe((data) => {
-      console.log(data);
-
       this.unit = data;
       this.setUnitData();
       this.spinner.hide(this.spinnerName);
-
-
       },
       (error:any) => {
         console.log(`Error: ${error}`);
         this.toastr.error(`Error: ${error}. Recargue la página`);
         this.spinner.hide(this.spinnerName);
-
       }
     );
   }

@@ -6,6 +6,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 import { RequestList } from '../Model/request';
 import { RequestQuoteService } from '../services/request.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -34,6 +35,7 @@ export class RequestQuotationListComponent implements OnInit {
     private router: Router,
     private titlePage: Title,
     private spinner: NgxSpinnerService,
+    public toastr: ToastrService,
     public config: NgbPopoverConfig
   ) {
 
@@ -78,5 +80,14 @@ export class RequestQuotationListComponent implements OnInit {
 
   setStatus(status: string): void {
     this.status = status
+  }
+
+  verifyUser(id:any, name:any){
+   if(name !== localStorage.getItem('quot-user')){
+      this.toastr.error('No cuentas con permisos para editar esta solocitud');
+      return;
+   }
+     this.navigateToPage('request-quotation-edit',id);
+
   }
 }

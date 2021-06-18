@@ -79,7 +79,7 @@ class ExpenseItemController extends Controller
 
     public function getItemRequest($id){
         try{
-            $items = DB::select('SELECT exi.id_item, exi.name_item, rd.quantity
+            $items = DB::select('SELECT exi.id_item, exi.name_item, rd.quantity, exi.unit_item
                                  FROM expense_item exi, request_details rd, request_quotation rq, quotation q
                                  WHERE q.id_request=rq.id_request AND rq.id_request=rd.id_request
                                  AND rd.id_item=exi.id_item AND q.id_quotation=?', [$id]);

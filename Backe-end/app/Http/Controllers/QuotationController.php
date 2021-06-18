@@ -50,7 +50,7 @@ class QuotationController extends Controller
 
     public function getInfo($id){
         try{
-            $quot = DB::select('SELECT q.status_quotation, rq.business_name
+            $quot = DB::select('SELECT q.status_quotation, rq.business_name, rq.date
                                  FROM request_quotation rq, quotation q
                                  WHERE q.id_request=rq.id_request AND q.id_quotation=?', [$id]);
             return $quot;
