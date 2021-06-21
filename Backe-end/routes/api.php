@@ -103,3 +103,4 @@ Route::group(['middleware' => 'auth:api'], function(){
 Route::apiResource('budget', 'HistoryAmountController');
 Route::get('budget-list/{year}', 'HistoryAmountController@listBudget');
 Route::get('budget-listA/{year}', 'HistoryAmountController@listNotAssigned');
+Route::get('budget-listH/{id}', 'HistoryAmountController@budgetHistory');

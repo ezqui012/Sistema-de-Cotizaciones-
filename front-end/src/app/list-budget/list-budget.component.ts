@@ -21,6 +21,9 @@ export class ListBudgetComponent implements OnInit {
   spinnerName: string | any;
 
   listbudget: any;
+  listbudgetH: any;
+
+  nameUnit: any;
 
   showAssigned: boolean = false;
 
@@ -104,6 +107,23 @@ export class ListBudgetComponent implements OnInit {
     this.assignedForm.controls['id_unit'].setValue(id);
     this.assignedForm.get('amount')?.reset();
     this.modal.open(content, { windowClass: "colorModal" });
+  }
+
+  openModalH(content: any, id: any, name:any) {
+    this.spinner.show(this.spinnerName);
+    this.nameUnit = name;
+    this.service.listHistory(id).subscribe(
+      (data) => {
+        this.listbudgetH = data;
+        this.modal.open(content, { windowClass: "colorModal" });
+        this.spinner.hide(this.spinnerName);
+      },
+      (error) => {
+        this.spinner.hide(this.spinnerName);
+        this.toastr.error(`Error: ${error}. Recargue la página`);
+      }
+    );
+
   }
 
   isValidForm() {

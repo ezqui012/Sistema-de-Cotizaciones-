@@ -119,6 +119,10 @@ color: white;
 .modal-title{
   color: #003b72 !important;
  }
+.nameUnit{
+   margin-left: auto;
+   margin-right: auto;
+}
 .colorModal .modal-content{
   color: #003b72;
   background-color: #F0F0F8 !important;
@@ -155,4 +159,16 @@ color: white;
   margin-top: 10px;
   margin-bottom: 10px;
   width: 100%;
+}
+
+.dateInfo{
+  font-weight: bold;
+  display: flex;
+  color: #003b72 !important;
+}
+
+.dateInfoValue{
+  font-weight: normal;
+  color: #1C2331;
+  margin-left: 10px;
 }

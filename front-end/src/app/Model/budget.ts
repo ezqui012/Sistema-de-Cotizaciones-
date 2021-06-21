@@ -18,3 +18,8 @@ export class RegisterBudget{
   id_unit: any;
   amount: any;
 }
+
+export class HistoryBudget{
+  management: any;
+  amount: any;
+}

@@ -3,6 +3,23 @@
 <app-navbar></app-navbar>
 
 <!--Modal historial-->
+<ng-template #contentH let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Historial de Presupuesto</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <h2 class="nameUnit">{{ nameUnit }}</h2>
+  <div class="modal-body" *ngFor="let info of listbudgetH">
+    <div class="dateInfo" >
+      <h3><b>Gestion: </b>{{ info.management }}</h3>
+      <div class="dateInfoValue">
+        <h3><b>Monto: </b> {{ info.amount }}</h3>
+      </div>
+    </div>
+  </div>
+</ng-template>
 
 <!--Modal asignar presupuesto-->
 <ng-template #contentA let-modal>
@@ -85,7 +102,7 @@
               <div class="row justify-content-end" style="padding-right: 20%">
 
                 <button type="button" class="btn btnAction" ngbPopover="Historial">
-                  <img src="../../assets/img-budget/historial-monto.svg" alt="" width="30" height="30" />
+                  <img src="../../assets/img-budget/historial-monto.svg" alt="" width="30" height="30" (click)="openModalH(contentH, budget.id_unit, budget.name_unit)" />
                 </button>
 
                 <button type="button" class="btn btnAction" ngbPopover="Asignar monto" *ngIf="showAssigned" (click)="openModal(contentA, budget.id_unit)">

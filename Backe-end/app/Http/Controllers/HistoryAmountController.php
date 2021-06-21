@@ -98,4 +98,20 @@ class HistoryAmountController extends Controller
             ], 404);
         }
     }
+
+    public function budgetHistory($id){
+        try{
+            $list = DB::table('history_amount')
+                        ->select('history_amount.management', 'history_amount.amount')
+                        ->where('history_amount.id_unit', '=', $id)
+                        ->orderBy('history_amount.management', 'desc')
+                        ->get();
+            return $list;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex,
+            ], 404);
+        }
+    }
 }
