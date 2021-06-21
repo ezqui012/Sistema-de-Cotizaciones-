@@ -11,6 +11,7 @@ export class DateExpenseItem{
   unit_item: any;
   unit_cost: any;
   description_item: any;
+  subtype_item: any;
 }
 export class RequestItemDetail{
   id_resquest: any;
