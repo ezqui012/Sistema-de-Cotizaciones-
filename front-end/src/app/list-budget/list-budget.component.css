@@ -111,3 +111,48 @@ color: white;
 .radioB1{
   margin-left: 20px !important;
 }
+
+/*estilos Modal*/
+.contentModal{
+  background-color: #F0F0F8 !important;
+}
+.modal-title{
+  color: #003b72 !important;
+ }
+.colorModal .modal-content{
+  color: #003b72;
+  background-color: #F0F0F8 !important;
+}
+
+.close{
+  color: rgb(7, 7, 7);
+}
+.close:hover{
+  color: #003b72;
+}
+.form-camp-full-width{
+  width: 90%;
+}
+.btn-cancelar{
+  color: white;
+  background-color: #1C2331;
+  margin-right: 20px;
+  width: 150px;
+}
+.btn-cancelar:hover{
+  background-color: #1C2331 !important;
+}
+.btn-reporte{
+  color: white;
+  background-color:#003b72;
+  width: 150px;
+}
+.btn-reporte:hover{
+  background-color: #1C2331 !important;
+}
+.containerBtn{
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}

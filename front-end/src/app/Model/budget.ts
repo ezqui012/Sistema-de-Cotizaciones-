@@ -13,3 +13,8 @@ export class ResponseBudget{
   res: any;
   message: any;
 }
+
+export class RegisterBudget{
+  id_unit: any;
+  amount: any;
+}

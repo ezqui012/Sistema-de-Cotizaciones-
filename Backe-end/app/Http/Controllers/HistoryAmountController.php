@@ -18,7 +18,7 @@ class HistoryAmountController extends Controller
                         ->join('units', 'history_amount.id_unit', '=', 'units.id_unit')
                         ->join('faculties' , 'units.id_faculty', '=', 'faculties.id_faculty')
                         ->select('units.name_unit', 'faculties.name_faculty', 'history_amount.management', 'history_amount.amount',  'history_amount.id_unit')
-                        ->orderBy('history_amount.amount', 'desc')
+                        ->orderBy('history_amount.management', 'desc')
                         ->get();
             return $list;
         }catch(Exception $ex){
@@ -36,6 +36,8 @@ class HistoryAmountController extends Controller
             $input = $request->all();
             $input['management'] = $now->year;
             HistoryAmount::create($input);
+            $inputU['amount'] = $request->amount;
+            DB::table('units')->where('id_unit', $request->id_unit)->update($inputU);
             return response()->json([
                 'res' => true,
                 'message' => 'Registered budget'
@@ -84,7 +86,7 @@ class HistoryAmountController extends Controller
         try{
             $list = DB::table('units')
                         ->join('faculties' , 'units.id_faculty', '=', 'faculties.id_faculty')
-                        ->select('units.name_unit', 'faculties.name_faculty', DB::raw('YEAR(CURRENT_TIMESTAMP) AS management'), 'units.amount', 'units.id_unit')
+                        ->select('units.name_unit', 'faculties.name_faculty', DB::raw('YEAR(CURRENT_TIMESTAMP) AS management'), DB::raw('0 AS amount'), 'units.id_unit')
                         ->where('units.amount', '<>', 'null')
                         ->whereNotIn('units.id_unit', DB::table('history_amount')->select('history_amount.id_unit')->where('history_amount.management', '=' ,$year))
                         ->get();

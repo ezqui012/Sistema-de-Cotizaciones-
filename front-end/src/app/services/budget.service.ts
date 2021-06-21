@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { ListBudget, ResponseBudget } from '../Model/budget';
+import { ListBudget, ResponseBudget, RegisterBudget } from '../Model/budget';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +45,17 @@ export class BudgetService {
     // }
     // return failed;
     return this.httpClient.get<ListBudget>(`${environment.URI_API}budget-listA/${year}`);
+  }
+
+  assignedBudget(dataB: RegisterBudget):Observable<ResponseBudget | any>{
+    // let failed: any;
+    // if (localStorage.getItem('quot-umss-tk')) {
+    //   const httpHeader = new HttpHeaders({
+    //     'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    //   });
+    //   return this.httpClient.post<ResponseBudget>(`${environment.URI_API}budget`, dataB, { headers: httpHeader });
+    // }
+    // return failed;
+    return this.httpClient.post<ResponseBudget>(`${environment.URI_API}budget`, dataB);
   }
 }
