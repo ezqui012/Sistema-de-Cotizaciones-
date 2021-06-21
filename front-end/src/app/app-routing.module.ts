@@ -52,6 +52,8 @@ import { AuthEnterpriseGuard } from './guards/auth-enterprise.guard';
 import { AuthItemGuard } from './guards/auth-item.guard';
 import { AutListRequestGuard } from './guards/aut-list-request.guard';
 
+import { ListBudgetComponent } from './list-budget/list-budget.component';
+
 const routes: Routes = [
   {
     path:'',
@@ -243,6 +245,10 @@ const routes: Routes = [
     path: 'item-edit/:id',
     component: ItemEditComponent,
     canActivate: [AuthAdminGuard]
+  },
+  {
+    path: 'list-budget',
+    component: ListBudgetComponent
   }
 
 ];

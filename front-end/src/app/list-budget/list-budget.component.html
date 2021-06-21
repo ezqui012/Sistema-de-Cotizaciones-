@@ -1,0 +1,75 @@
+<ngx-spinner [name]="spinnerName" [type]="spinnerType"></ngx-spinner>
+<!--Barra de navegacion-->
+<app-navbar></app-navbar>
+
+<!--Modal historial-->
+
+<!--Modal asignar presupuesto-->
+
+
+<!--presupuesto pagina-->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Asignacion de Presupuesto</b></h1>
+    <mat-radio-group aria-label="Tipo de unidad" class="imput-check">
+      <mat-radio-button value="1" (click)="actualListBudget()" checked>Gestion actual</mat-radio-button>
+      <mat-radio-button class="radioB1" value="2" (click)="assignedAmountList()">Asignar Monto</mat-radio-button>
+      <mat-radio-button class="radioB1" value="3" (click)="historyBudget()" >Historial</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <!--Tabla-->
+  <div class="containerTable">
+    <div class="newHeadTable">
+      <div class="numHead"><b>Nº</b></div>
+      <div class="nomHead"><b>Unidad</b></div>
+      <div class="rugHead"><b>Facultad</b></div>
+      <div class="telHead"><b>Gestion</b></div>
+      <div class="budgedHead"><b>Monto</b></div>
+      <th scope="accHead">Acciones</th>
+    </div>
+    <div class="newBodyTable">
+      <table class="table table-hover">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-request" *ngFor="let budget of listbudget; let i = index">
+            <th style="padding-top: 20px" scope="row">{{i+1}}</th>
+            <td style="padding-top: 20px; width: 30%; padding-left: 5%">
+              {{budget.name_unit}}
+            </td>
+            <td style="padding-top: 20px; width: 30%">
+              {{budget.name_faculty}}
+            </td>
+            <td style="padding-top: 20px; width: 10%">
+              {{budget.management}}
+            </td>
+            <td style="padding-top: 20px; width: 10%">
+              {{budget.amount}}
+            </td>
+
+            <td style="width: 20%">
+              <div class="row justify-content-end" style="padding-right: 20%">
+
+                <button type="button" class="btn btnAction" ngbPopover="Historial">
+                  <img src="../../assets/img-budget/historial-monto.svg" alt="" width="30" height="30" />
+                </button>
+
+                <button type="button" class="btn btnAction" ngbPopover="Asignar monto" *ngIf="showAssigned">
+                  <img src="../../assets/img-budget/register-amount1.svg" alt="" width="30" height="30" />
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>

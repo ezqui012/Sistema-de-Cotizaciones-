@@ -69,6 +69,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { FilterPipe } from './pipes/filter.pipe';
 
 import { NgxSpinnerModule } from "ngx-spinner";
+import { ListBudgetComponent } from './list-budget/list-budget.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ItemListComponent,
     ItemRegisterComponent,
     ItemEditComponent,
-    FilterPipe
+    FilterPipe,
+    ListBudgetComponent
   ],
   imports: [
     BrowserModule,
