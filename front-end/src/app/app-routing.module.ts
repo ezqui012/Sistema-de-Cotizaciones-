@@ -248,7 +248,8 @@ const routes: Routes = [
   },
   {
     path: 'list-budget',
-    component: ListBudgetComponent
+    component: ListBudgetComponent,
+    canActivate: [AuthAdminGuard]
   }
 
 ];

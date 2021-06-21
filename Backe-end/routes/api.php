@@ -98,9 +98,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('nameUserRequest/{id}', 'RequestDetailsController@getNameUserRequest');
 
     Route::apiResource('attachment-routes', 'AttachmentController');
-});
 
-Route::apiResource('budget', 'HistoryAmountController');
-Route::get('budget-list/{year}', 'HistoryAmountController@listBudget');
-Route::get('budget-listA/{year}', 'HistoryAmountController@listNotAssigned');
-Route::get('budget-listH/{id}', 'HistoryAmountController@budgetHistory');
+    Route::apiResource('budget', 'HistoryAmountController');
+    Route::get('budget-list/{year}', 'HistoryAmountController@listBudget');
+    Route::get('budget-listA/{year}', 'HistoryAmountController@listNotAssigned');
+    Route::get('budget-listH/{id}', 'HistoryAmountController@budgetHistory');
+});
