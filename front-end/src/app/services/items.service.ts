@@ -69,4 +69,15 @@ export class ItemsService {
     return failed;
   }
 
+  getSubTypesItems(type: any): Observable<any> {
+    let failed: any;
+    if (localStorage.getItem('quot-umss-tk')) {
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.get<any>(`${environment.URI_API}get-subtype-item/${type}`, { headers: httpHeader });
+    }
+    return failed;
+  }
+
 }

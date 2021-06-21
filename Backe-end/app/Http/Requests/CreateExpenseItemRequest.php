@@ -28,7 +28,8 @@ class CreateExpenseItemRequest extends FormRequest
             'type_item' => 'required|min:3|max:30',
             'unit_item' => 'required|max:10',
             'unit_cost' => 'required',
-            'description_item' => 'required|min:10|max:100'
+            'description_item' => 'required|min:10|max:100',
+            'subtype_item' => 'required|min:3|max:30'
         ];
     }
 

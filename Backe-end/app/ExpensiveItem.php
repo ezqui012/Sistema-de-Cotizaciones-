@@ -17,7 +17,8 @@ class ExpensiveItem extends Model
         'type_item',
         'unit_item',
         'unit_cost',
-        'description_item'
+        'description_item',
+        'subtype_item'
     ];
 
     protected $hidden = [

@@ -103,4 +103,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('budget-list/{year}', 'HistoryAmountController@listBudget');
     Route::get('budget-listA/{year}', 'HistoryAmountController@listNotAssigned');
     Route::get('budget-listH/{id}', 'HistoryAmountController@budgetHistory');
+
+    Route::get('get-subtype-item/{type}', 'ExpenseItemController@getSubtype');
 });
