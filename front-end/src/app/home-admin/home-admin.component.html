@@ -3,31 +3,36 @@
   <div class="username">
     <b>Bienvenido {{ this.nameUser }}</b>
   </div>
+
   <div class="bodyOption">
-
     <div class="contentOption">
-
-        <div class="option" (click)="navigateTo('/school-create')">
+        <div class="option" (click)="navigateTo('/school-list')">
           <img src="../../assets/img-outsite/Btn-AdminFacultades.svg" alt="" class="optBtn">
         </div>
-        <div class="option" (click)="navigateTo('/units-register')">
+        <div class="option" (click)="navigateTo('/unit-list')">
           <img src="../../assets/img-outsite/Btn-AdminUnidades.svg" alt="" class="optBtn">
         </div>
-        <div class="option" (click)="navigateTo('/register-user')">
+        <div class="option" (click)="navigateTo('/user-list')">
           <img src="../../assets/img-outsite/Btn-AdminUser.svg" alt="" class="optBtn">
         </div>
-        <div class="option" (click)="navigateTo('/roles-create')">
+        <div class="option" (click)="navigateTo('/roles-list')">
           <img src="../../assets/img-outsite/Btn-AdminRoles.svg" alt="" class="optBtn">
         </div>
-        <div class="option" (click)="navigateTo('/item-list')">
-          <img src="../../assets/img-user-home/Btn-Item.svg" class="optBtn">
-        </div>
-        <div class="option" (click)="navigateTo('/list-budget')">
-          <img src="../../assets/img-outsite/Btn-Presupuesto.svg" alt="" class="optBtn">
-        </div>
-
     </div>
 
+    <div class="contentOption">
+      <div class="option" (click)="navigateTo('/item-list')">
+        <img src="../../assets/img-user-home/Btn-Item.svg" class="optBtn">
+      </div>
+      <div class="option" (click)="navigateTo('/list-budget')">
+        <img src="../../assets/img-outsite/Btn-Presupuesto.svg" alt="" class="optBtn">
+      </div>
+      <div class="option" (click)="navigateTo('/list-binnacle')">
+        <img src="../../assets/img-outsite/Btn-Bitacora.svg" alt="" class="optBtn">
+      </div>
+      <div class="option" >
+        <img src="../../assets/img-outsite/Btn-Backup.svg" alt="" class="optBtn">
+      </div>
+    </div>
   </div>
-
 </div>
