@@ -5,6 +5,7 @@ export class ExpenseItem {
   unit_item: any;
   unit_cost: any;
   description_item: any;
+  subtype_item: any;
 }
 
 export class ItemRequest{
@@ -20,6 +21,7 @@ export class RegisterItemModel{
   unit_item: any;
   unit_cost: any;
   description_item: any;
+  subtype_item: any;
 }
 
 export class ResponseItem{

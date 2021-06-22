@@ -6,7 +6,6 @@ use App\Company;
 use App\Faculty;
 use App\Http\Requests\CreateFacultyRequest;
 use App\Http\Requests\UpdateFacultyRequest;
-use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\DB;
 

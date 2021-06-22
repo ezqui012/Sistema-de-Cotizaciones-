@@ -115,4 +115,17 @@ class ExpenseItemController extends Controller
             ], 404);
         }
     }
+
+    public function getSubtype($type){
+        try{
+            $types = ExpensiveItem::select('subtype_item')->where('type_item', '=', $type)->groupby('subtype_item')
+                        ->orderby('subtype_item')->get();
+            return $types;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
 }

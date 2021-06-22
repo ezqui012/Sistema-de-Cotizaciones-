@@ -1,0 +1,120 @@
+<ngx-spinner [name]="spinnerName" [type]="spinnerType"></ngx-spinner>
+<!--Barra de navegacion-->
+<app-navbar></app-navbar>
+
+<!--Modal historial-->
+<ng-template #contentH let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Historial de Presupuesto</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <h2 class="nameUnit">{{ nameUnit }}</h2>
+  <div class="modal-body" *ngFor="let info of listbudgetH">
+    <div class="dateInfo" >
+      <h3><b>Gestion: </b>{{ info.management }}</h3>
+      <div class="dateInfoValue">
+        <h3><b>Monto: </b> {{ info.amount }}</h3>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!--Modal asignar presupuesto-->
+<ng-template #contentA let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Asignar de Presupuesto</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup]="assignedForm">
+    <div class="modal-body">
+      <div class="contentMotive">
+        <mat-form-field class="form-camp-full-width">
+          <mat-label>Monto</mat-label>
+          <input matInput placeholder="Ingrese el monto" formControlName="amount">
+          <mat-error *ngIf="isValidForm()">
+            {{ getErrorMessage() }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="containerBtn">
+        <div>
+          <button class="btn btn-cancelar" type="button" (click)="modal.dismiss()">Cancelar</button>
+          <button class="btn btn-reporte" type="button" (click)="updateAmount()">Guardar</button>
+        </div>
+      </div>
+    </div>
+</form>
+</ng-template>
+
+<!--presupuesto pagina-->
+<div class="containerBody">
+  <div class="containertop">
+    <h1><b>Asignacion de Presupuesto</b></h1>
+    <mat-radio-group aria-label="Tipo de unidad" class="imput-check">
+      <mat-radio-button value="1" (click)="actualListBudget()" checked>Gestion actual</mat-radio-button>
+      <mat-radio-button class="radioB1" value="2" (click)="assignedAmountList()">Asignar Monto</mat-radio-button>
+      <mat-radio-button class="radioB1" value="3" (click)="historyBudget()" >Historial</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <!--Tabla-->
+  <div class="containerTable">
+    <div class="newHeadTable">
+      <div class="numHead"><b>Nº</b></div>
+      <div class="nomHead"><b>Unidad</b></div>
+      <div class="rugHead"><b>Facultad</b></div>
+      <div class="telHead"><b>Gestion</b></div>
+      <div class="budgedHead"><b>Monto</b></div>
+      <th scope="accHead">Acciones</th>
+    </div>
+    <div class="newBodyTable">
+      <table class="table table-hover">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-request" *ngFor="let budget of listbudget; let i = index">
+            <th style="padding-top: 20px" scope="row">{{i+1}}</th>
+            <td style="padding-top: 20px; width: 30%; padding-left: 5%">
+              {{budget.name_unit}}
+            </td>
+            <td style="padding-top: 20px; width: 30%">
+              {{budget.name_faculty}}
+            </td>
+            <td style="padding-top: 20px; width: 10%">
+              {{budget.management}}
+            </td>
+            <td style="padding-top: 20px; width: 10%">
+              {{budget.amount}}
+            </td>
+
+            <td style="width: 20%">
+              <div class="row justify-content-end" style="padding-right: 20%">
+
+                <button type="button" class="btn btnAction" ngbPopover="Historial">
+                  <img src="../../assets/img-budget/historial-monto.svg" alt="" width="30" height="30" (click)="openModalH(contentH, budget.id_unit, budget.name_unit)" />
+                </button>
+
+                <button type="button" class="btn btnAction" ngbPopover="Asignar monto" *ngIf="showAssigned" (click)="openModal(contentA, budget.id_unit)">
+                  <img src="../../assets/img-budget/register-amount1.svg" alt="" width="30" height="30" />
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>

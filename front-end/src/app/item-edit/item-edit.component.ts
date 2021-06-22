@@ -20,6 +20,9 @@ export class ItemEditComponent implements OnInit {
   options: string[] = ['Sin tipo'];
   filteredOptions: Observable<string[]> | undefined;
 
+  optionsS: string[] = ['Sin tipo'];
+  filteredOptionsS: Observable<string[]> | undefined;
+
   typeUnit: string[] = ['Sin unidad'];
   filteredUnit: Observable<string[]> | undefined;
 
@@ -36,7 +39,8 @@ export class ItemEditComponent implements OnInit {
     type_item: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     unit_item: ['', [Validators.required, Validators.maxLength(10)]],
     unit_cost: ['', [Validators.required, Validators.min(1), Validators.pattern(this.patternDecimal)]],
-    description_item: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]]
+    description_item: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
+    subtype_item: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]]
   });
 
   constructor(
@@ -106,6 +110,8 @@ export class ItemEditComponent implements OnInit {
         this.itemRegisterForm.controls['unit_item'].setValue(data.unit_item);
         this.itemRegisterForm.controls['unit_cost'].setValue(data.unit_cost);
         this.itemRegisterForm.controls['description_item'].setValue(data.description_item);
+        this.itemRegisterForm.controls['subtype_item'].setValue(data.subtype_item);
+        this.getSubType();
         this.spinner.hide(this.spinnerName);
       },
       (error) => {
@@ -192,6 +198,34 @@ export class ItemEditComponent implements OnInit {
     }else if(field === 'description_item'){
       return 'Descripción';
     }
+  }
+
+  getSubType(){
+    this.optionsS = [];
+    if(this.itemRegisterForm.get('type_item')?.value === ''){
+      return;
+    }
+    this.service.getSubTypesItems(this.itemRegisterForm.get('type_item')?.value).subscribe(
+      (data) => {
+        let i:number = 0;
+        for(let value of data){
+          this.optionsS[i] = value.subtype_item;
+          i++;
+        }
+        this.filteredOptionsS = this.itemRegisterForm.controls['subtype_item'].valueChanges.pipe(
+          startWith(''),
+          map(value => this._filterSubType(value))
+        );
+      },
+      (error) => {
+        //this.toastr.error(`ERROR: ${error} Recargue la pagina`);
+      }
+    );
+  }
+
+  private _filterSubType(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.optionsS.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
 }
