@@ -105,4 +105,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('budget-listH/{id}', 'HistoryAmountController@budgetHistory');
 
     Route::get('get-subtype-item/{type}', 'ExpenseItemController@getSubtype');
+
+    Route::apiResource('binnacle', 'BinnacleController');
 });

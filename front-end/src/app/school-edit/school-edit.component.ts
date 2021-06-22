@@ -5,7 +5,8 @@ import { FacultyService } from '../services/faculty.service';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { ResponseRegister } from '../Model/faculty';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BinnacleService } from '../services/binnacle.service';
 
 @Component({
   selector: 'app-school-edit',
@@ -21,6 +22,8 @@ export class SchoolEditComponent implements OnInit {
   private patternNameDean = /^[a-zA-Z-zñÑ\u00E0-\u00FC ]*$/;
 
   public dataFaculty: any
+
+  infoOld: any;
 
   facultyRegisterForm = this.fb.group({
     name_faculty: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.pattern(this.patternName)]],
@@ -43,7 +46,8 @@ export class SchoolEditComponent implements OnInit {
     public toastr: ToastrService,
     private titlePage: Title,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private serbiceB: BinnacleService
     ) {
       this.titlePage.setTitle('Editar facultad - QUOT-UMSS');
       this.spinnerName = 'sp3';
@@ -63,6 +67,7 @@ export class SchoolEditComponent implements OnInit {
     this.service.getInfoFaculty(id).subscribe(
       (data) => {
         this.dataFaculty = data;
+        this.infoOld = data;
         this.loadValuesForm();
       },
       (error) => {
@@ -121,9 +126,8 @@ export class SchoolEditComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
-          this.spinner.hide(this.spinnerName);
-          this.toastr.success('Se guardaron los cambios con éxito');
-          this.navigateTo('/school-list')
+          //
+          this.binnacle();
         }else{
           this.spinner.hide(this.spinnerName);
           this.toastr.warning('Ocurrio un error intente de nuevo');
@@ -132,6 +136,29 @@ export class SchoolEditComponent implements OnInit {
       (error) => {
         this.spinner.hide(this.spinnerName);
         this.toastr.error('El nombre de la facultad ya se encuentra registrado');
+      }
+    );
+  }
+
+  binnacle(){
+    let binData = {
+      table_name: 'faculties',
+      action: 'Edicion',
+      new_data: JSON.stringify(this.facultyRegisterForm.value),
+      old_data: JSON.stringify(this.infoOld)
+    }
+    this.serbiceB.storeBinnacle(binData).subscribe(
+      (data) => {
+        if(data.res){
+          this.spinner.hide(this.spinnerName);
+          this.toastr.success('Se guardaron los cambios con éxito');
+          this.navigateTo('/school-list')
+        }
+      },
+      (error) => {
+        this.spinner.hide(this.spinnerName);
+        this.toastr.error(`ERROR: ${error}`);
+        this.navigateTo('/school-list')
       }
     );
   }
