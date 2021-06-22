@@ -53,6 +53,7 @@ import { AuthItemGuard } from './guards/auth-item.guard';
 import { AutListRequestGuard } from './guards/aut-list-request.guard';
 
 import { ListBudgetComponent } from './list-budget/list-budget.component';
+import { ListBinnacleComponent } from './list-binnacle/list-binnacle.component';
 
 const routes: Routes = [
   {
@@ -249,6 +250,11 @@ const routes: Routes = [
   {
     path: 'list-budget',
     component: ListBudgetComponent,
+    canActivate: [AuthAdminGuard]
+  },
+  {
+    path: 'list-binnacle',
+    component: ListBinnacleComponent,
     canActivate: [AuthAdminGuard]
   }
 

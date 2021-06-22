@@ -1,0 +1,73 @@
+<ngx-spinner [name]="spinnerName" [type]="spinnerType"></ngx-spinner>
+
+<!--Modal-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <h2 class="nameUnit">Datos Nuevos</h2>
+  <div class="modal-body">
+    <div class="dateInfo"  *ngFor="let infoN of newInfo">
+      <div class="dateInfoValue">
+        <h3>{{ infoN }}</h3>
+      </div>
+    </div>
+  </div>
+  <h2 class="nameUnit" *ngIf="showOld">Datos Antiguos</h2>
+  <div class="modal-body" *ngIf="showOld" >
+    <div class="dateInfo" *ngFor="let info of oldInfo">
+      <div class="dateInfoValue">
+        <h3>{{ info }}</h3>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<app-navbar></app-navbar>
+
+<!--header-->
+<div class="containerBody">
+  <div class="containerTop">
+    <h1><b>Bitacoras</b></h1>
+  </div>
+  <!--Tabla de lista bitacoras realizadas-->
+  <div class="conteinerTable">
+    <div class="newHeadTable">
+      <div class="numHeadC"><b>Nº</b></div>
+      <div class="razHeadC"><b>Tabla</b></div>
+      <div class="encHeadC"><b>Acción</b></div>
+      <div class="statusHeadC"><b>Fecha</b></div>
+      <div class="accHead"><b>Acciones</b></div>
+    </div>
+    <div class="newBodyTable">
+      <table class="table table-hover">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">N°</th>
+            <th scope="col">Acción</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="rowQoute" *ngFor=" let binnacle of listBinnacle; let i = index">
+            <th scope="row" style="padding-top: 20px">{{i+1}}</th>
+            <td style="width: 35%; padding-left:0; padding-top: 20px;">{{binnacle.table_name}}</td>
+            <td style="width: 25%; padding-top: 20px">{{binnacle.action}}</td>
+            <td style="width: 20%; padding-top: 20px; ">{{binnacle.date}}</td>
+            <td style="width: 15%; ">
+              <div class="row justify-content-center" style="padding-right: 0%;">
+                <button type="button" class="btn btnAction" ngbPopover="Ver Detalle" (click)="openModal(content ,i)">
+                  <img src="../../assets/icon-quote/file-text.png" width="30" height="30" />
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

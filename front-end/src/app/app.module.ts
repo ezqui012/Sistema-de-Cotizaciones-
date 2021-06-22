@@ -70,6 +70,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ListBudgetComponent } from './list-budget/list-budget.component';
+import { ListBinnacleComponent } from './list-binnacle/list-binnacle.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +120,8 @@ import { ListBudgetComponent } from './list-budget/list-budget.component';
     ItemRegisterComponent,
     ItemEditComponent,
     FilterPipe,
-    ListBudgetComponent
+    ListBudgetComponent,
+    ListBinnacleComponent
   ],
   imports: [
     BrowserModule,
