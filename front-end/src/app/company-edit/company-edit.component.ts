@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CompanyService } from '../services/company.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { BinnacleService } from '../services/binnacle.service';
 @Component({
   selector: 'app-company-edit',
   templateUrl: './company-edit.component.html',
@@ -23,6 +24,9 @@ export class CompanyEditComponent implements OnInit {
   spinnerType: string | any;
   spinnerName: string | any;
 
+  newData: any;
+  oldData: any;
+
   constructor(
     private router:Router,
     private fb: FormBuilder,
@@ -30,7 +34,8 @@ export class CompanyEditComponent implements OnInit {
     private titlePage: Title,
     private companyDataService: CompanyService,
     private route : ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private serbiceB: BinnacleService
   ) {
     this.titlePage.setTitle('Edición de Empresas - QUOT-UMSS');
     this.spinnerName = 'sp3';
@@ -175,7 +180,7 @@ export class CompanyEditComponent implements OnInit {
     this.companyDataService.getDataEnterpriseByID(this.id).subscribe(res=>{
       this.dataToUpdate=res;
       this.dataCompany=this.dataToUpdate[0]
-      console.log(this.dataCompany.name_enterprise)
+      this.oldData=JSON.stringify(this.dataCompany);
       this.enterpriseForm.controls['name_enterprise'].setValue(this.dataCompany.name_enterprise);
       this.enterpriseForm.controls['sector_enterprise'].setValue(this.dataCompany.sector_enterprise);
       this.enterpriseForm.controls['nit_enterprise'].setValue(this.dataCompany.nit_enterprise);
@@ -193,6 +198,14 @@ export class CompanyEditComponent implements OnInit {
     }
     this.companyDataService.update(this.id, this.enterpriseForm.value).subscribe(res=>{
       this.showToastSuccess();
+      this.newData = JSON.stringify(this.enterpriseForm.value);
+      let binData = {
+        table_name: 'company',
+        action: 'Edición',
+        new_data: this.newData,
+        old_data: this.oldData
+      }
+      this.serbiceB.storeBinnacle(binData).subscribe();;
     },
     (error: any)=>{
        let message= error;

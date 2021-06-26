@@ -143,7 +143,7 @@ export class SchoolEditComponent implements OnInit {
   binnacle(){
     let binData = {
       table_name: 'faculties',
-      action: 'Edicion',
+      action: 'Edición',
       new_data: JSON.stringify(this.facultyRegisterForm.value),
       old_data: JSON.stringify(this.infoOld)
     }
