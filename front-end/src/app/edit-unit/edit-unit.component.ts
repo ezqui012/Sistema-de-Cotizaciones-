@@ -4,12 +4,11 @@ import { Faculty } from '../Model/faculty';
 import { NgxSpinnerService } from "ngx-spinner";
 
 import { FacultyService } from '../services/faculty.service';
-import { UnitService } from '../services/unit.service';
 import { RegisterUnitResponse } from '../Model/unit';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ListUnit } from '../Model/list';
+import { BinnacleService } from '../services/binnacle.service';
 import { ListService } from '../services/list.service';
 @Component({
   selector: 'app-edit-unit',
@@ -26,7 +25,9 @@ export class EditUnitComponent implements OnInit {
   messageFail = false;
   messageRegisterFailed = '';
   id:any = '';
-  actualAmount:any
+  actualAmount:any;
+
+  oldData: any;
 
   private patternNumber = /^[0-9]+(\.?[0-9]+)?$/;
   private patternName = /^[a-zA-Z-z0-9-zñÑ\u00E0-\u00FC ]*$/
@@ -38,16 +39,15 @@ export class EditUnitComponent implements OnInit {
   });
 
   constructor(
-    //private service: FacultyService,
     private fb: FormBuilder,
     private serviceUnitSelect: ListService,
-    private serviceUnit: UnitService,
     private serviceFaculty: FacultyService,
     public toastr: ToastrService,
     private router:Router,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private titlePage: Title
+    private titlePage: Title,
+    private serbiceB: BinnacleService
     ) {
       this.titlePage.setTitle('Registro de unidades - QUOT-UMSS');
       this.spinnerName = 'sp3';
@@ -64,6 +64,7 @@ export class EditUnitComponent implements OnInit {
   getUnit(id:any){
     this.serviceUnitSelect.getUnitSelect(id).subscribe((data) => {
       this.unit = data;
+      this.oldData = JSON.stringify(data);
       this.setUnitData();
       this.spinner.hide(this.spinnerName);
       },
@@ -158,6 +159,13 @@ export class EditUnitComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
+          let binData = {
+            table_name: 'units',
+            action: 'Edición',
+            new_data: JSON.stringify(this.registerForm.value),
+            old_data: this.oldData
+          }
+          this.serbiceB.storeBinnacle(binData).subscribe();
           this.toastr.success('Se guardaron los cambios con éxito');
           this.navigateTo('/unit-list')
 
