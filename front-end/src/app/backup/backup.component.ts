@@ -37,11 +37,14 @@ export class BackupComponent implements OnInit {
   restoreBackup(path:any){
     console.log(path+3);
     let route={
+
       routePath: path
     }
-
     this.backup_service.restoreBD(route).subscribe(res=>{
-      this.showToastSuccess();
+      if(res.res){ this.showToastSuccess();}
+
+    },(error)=>{
+      this.toastr.error("Error");
     })
   }
 

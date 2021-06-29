@@ -24,9 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('database:backup')
-        ->everyMinute()
-        ->sendOutputTo('Backe-end\storage\app\backups\backup.sql');
+        $schedule->command('database:backup');
     }
 
     /**
