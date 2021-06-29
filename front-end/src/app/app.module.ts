@@ -69,6 +69,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { FilterPipe } from './pipes/filter.pipe';
 
 import { NgxSpinnerModule } from "ngx-spinner";
+import { BackupComponent } from './backup/backup.component';
+import { BinnaclePipe } from './pipes/binnacle.pipe';
 
 @NgModule({
   declarations: [
@@ -117,7 +119,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ItemListComponent,
     ItemRegisterComponent,
     ItemEditComponent,
-    FilterPipe
+    FilterPipe,
+    BackupComponent,
+    BinnaclePipe
   ],
   imports: [
     BrowserModule,

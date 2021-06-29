@@ -1,3 +1,4 @@
+import { BackupComponent } from './backup/backup.component';
 import { QuoteListFinalizedComponent } from './quote-list-finalized/quote-list-finalized.component';
 import { QuoteListProcessComponent } from './quote-list-process/quote-list-process.component';
 import { RegisterUserAdministrativeComponent } from './register-user-administrative/register-user-administrative.component';
@@ -242,6 +243,11 @@ const routes: Routes = [
   {
     path: 'item-edit/:id',
     component: ItemEditComponent,
+    canActivate: [AuthAdminGuard]
+  },
+  {
+    path: 'backup-list',
+    component: BackupComponent,
     canActivate: [AuthAdminGuard]
   }
 

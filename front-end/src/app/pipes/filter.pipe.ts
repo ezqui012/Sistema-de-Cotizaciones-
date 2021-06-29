@@ -7,8 +7,6 @@ export class FilterPipe implements PipeTransform {
 
   transform(value: RequestList[], searchRequest: String): RequestList[] {
 
-    const resultRequest = [];
-    const res =[];
       if(!searchRequest||!value){return value;}
       return value.filter(requestList =>
         requestList.business_name.toLowerCase().indexOf(searchRequest.toLocaleLowerCase())!==-1 ||
