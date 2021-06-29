@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PersonalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('logout', 'UserController@logout');
     Route::ApiResource('faculties', 'FacultyController');
     Route::ApiResource('permit', 'PermitController');
-
     Route::ApiResource('unit', 'UnitController');
     Route::ApiResource('assignedPermit', 'AssignedPermitController');
     Route::get('unitDropdown','UnitController@getUnit');
@@ -40,7 +40,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::ApiResource('quote', 'QuoteController');
     Route::get('list-personal/{id}', 'UserController@getListPersonalQuote');
     Route::get('user/{id}', 'UserController@getUserById');
-
     Route::delete('processQuoteDelete/{id}', 'QuoteController@deleteProcessQuote');
     Route::put('updatePassword/{id}', 'UserController@updatePassword');
     Route::get('processQuote/{id}', 'QuoteController@getProcessQuote');
@@ -98,7 +97,17 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('nameUserRequest/{id}', 'RequestDetailsController@getNameUserRequest');
 
     Route::apiResource('attachment-routes', 'AttachmentController');
+
+    Route::apiResource('budget', 'HistoryAmountController');
+    Route::get('budget-list/{year}', 'HistoryAmountController@listBudget');
+    Route::get('budget-listA/{year}', 'HistoryAmountController@listNotAssigned');
+    Route::get('budget-listH/{id}', 'HistoryAmountController@budgetHistory');
+
+    Route::get('get-subtype-item/{type}', 'ExpenseItemController@getSubtype');
+
+    Route::apiResource('binnacle', 'BinnacleController');
 });
+Route::ApiResource('personal','PersonalController');
 Route::get('list-backup', 'BackupController@getBackup');
 Route::post('restore', 'BackupController@restore');
 

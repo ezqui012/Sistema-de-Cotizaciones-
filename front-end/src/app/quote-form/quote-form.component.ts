@@ -11,6 +11,7 @@ import { ItemRequest } from '../Model/expense-item';
 import { QuoteDetailService } from '../services/quote-detail.service';
 import { QuotationService } from '../services/quotation.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { BinnacleService } from '../services/binnacle.service';
 
 @Component({
   selector: 'app-quote-form',
@@ -66,7 +67,8 @@ export class QuoteFormComponent implements OnInit {
     private route: ActivatedRoute,
     private serviceQuote: QuoteDetailService,
     private serviceQ: QuotationService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private serbiceB: BinnacleService
   ) {
     this.titlePage.setTitle('Formulario de cotización - QUOT-UMSS');
     this.spinnerName = 'sp3';
@@ -130,6 +132,12 @@ export class QuoteFormComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
+          let binData = {
+            table_name: 'quote_detail',
+            action: 'Creación',
+            new_data: JSON.stringify(this.registerForm.value)
+          };
+          this.serbiceB.storeBinnacle(binData).subscribe();
           if(this.files.length > 0){
             this.registerAttachment(res.id);
           }else{

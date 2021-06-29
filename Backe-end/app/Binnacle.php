@@ -4,21 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ExpensiveItem extends Model
+class Binnacle extends Model
 {
-    protected $table = 'expense_item';
+    protected $table = 'binnacle';
 
     public $updated_at = null;
     public $created_at = null;
 
     protected $fillable = [
-        'id_item',
-        'name_item',
-        'type_item',
-        'unit_item',
-        'unit_cost',
-        'description_item',
-        'subtype_item'
+        'id_binnacle',
+        'table_name',
+        'action',
+        'date',
+        'new_data',
+        'old_data'
     ];
 
     protected $hidden = [

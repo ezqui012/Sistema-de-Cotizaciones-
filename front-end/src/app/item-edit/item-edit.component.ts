@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { ItemsService } from '../services/items.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { BinnacleService } from '../services/binnacle.service';
 
 @Component({
   selector: 'app-item-edit',
@@ -20,6 +21,9 @@ export class ItemEditComponent implements OnInit {
   options: string[] = ['Sin tipo'];
   filteredOptions: Observable<string[]> | undefined;
 
+  optionsS: string[] = ['Sin tipo'];
+  filteredOptionsS: Observable<string[]> | undefined;
+
   typeUnit: string[] = ['Sin unidad'];
   filteredUnit: Observable<string[]> | undefined;
 
@@ -29,6 +33,8 @@ export class ItemEditComponent implements OnInit {
   spinnerType: string | any;
   spinnerName: string | any;
 
+  oldData: any;
+
   private patternDecimal = /^[0-9]+(\.?[0-9]+)?$/;
 
   itemRegisterForm = this.fb.group({
@@ -36,7 +42,8 @@ export class ItemEditComponent implements OnInit {
     type_item: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     unit_item: ['', [Validators.required, Validators.maxLength(10)]],
     unit_cost: ['', [Validators.required, Validators.min(1), Validators.pattern(this.patternDecimal)]],
-    description_item: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]]
+    description_item: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
+    subtype_item: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]]
   });
 
   constructor(
@@ -46,7 +53,8 @@ export class ItemEditComponent implements OnInit {
     private titlePage: Title,
     private service: ItemsService,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private serbiceB: BinnacleService
   ) {
     this.titlePage.setTitle('Editar Item - QUOT-UMSS');
     this.spinnerName = 'sp3';
@@ -101,11 +109,14 @@ export class ItemEditComponent implements OnInit {
   loadInfoItem(){
     this.service.getInfoItem(this.route.snapshot.params.id).subscribe(
       (data) => {
+        this.oldData = JSON.stringify(data);
         this.itemRegisterForm.controls['name_item'].setValue(data.name_item);
         this.itemRegisterForm.controls['type_item'].setValue(data.type_item);
         this.itemRegisterForm.controls['unit_item'].setValue(data.unit_item);
         this.itemRegisterForm.controls['unit_cost'].setValue(data.unit_cost);
         this.itemRegisterForm.controls['description_item'].setValue(data.description_item);
+        this.itemRegisterForm.controls['subtype_item'].setValue(data.subtype_item);
+        this.getSubType();
         this.spinner.hide(this.spinnerName);
       },
       (error) => {
@@ -168,6 +179,13 @@ export class ItemEditComponent implements OnInit {
     this.service.updateItem(this.route.snapshot.params.id, this.itemRegisterForm.value).subscribe(
       (data) => {
         if(data.res){
+          let binData = {
+            table_name: 'expense_item',
+            action: 'Edición',
+            new_data: JSON.stringify(this.itemRegisterForm.value),
+            old_data: this.oldData
+          };
+          this.serbiceB.storeBinnacle(binData).subscribe();
           this.spinner.hide(this.spinnerName);
           this.navigateTo('/item-list');
           this.toastr.success('Los cambios fueron realizados con éxito');
@@ -192,6 +210,34 @@ export class ItemEditComponent implements OnInit {
     }else if(field === 'description_item'){
       return 'Descripción';
     }
+  }
+
+  getSubType(){
+    this.optionsS = [];
+    if(this.itemRegisterForm.get('type_item')?.value === ''){
+      return;
+    }
+    this.service.getSubTypesItems(this.itemRegisterForm.get('type_item')?.value).subscribe(
+      (data) => {
+        let i:number = 0;
+        for(let value of data){
+          this.optionsS[i] = value.subtype_item;
+          i++;
+        }
+        this.filteredOptionsS = this.itemRegisterForm.controls['subtype_item'].valueChanges.pipe(
+          startWith(''),
+          map(value => this._filterSubType(value))
+        );
+      },
+      (error) => {
+        //this.toastr.error(`ERROR: ${error} Recargue la pagina`);
+      }
+    );
+  }
+
+  private _filterSubType(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.optionsS.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
 }

@@ -6,6 +6,7 @@ import { ResponseRegister } from '../Model/faculty';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { NgxSpinnerService } from "ngx-spinner";
+import { BinnacleService } from '../services/binnacle.service';
 
 @Component({
   selector: 'app-school-create',
@@ -40,7 +41,8 @@ export class SchoolCreateComponent implements OnInit {
     private service: FacultyService,
     public toastr: ToastrService,
     private titlePage: Title,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private serbiceB: BinnacleService
   ) {
     this.titlePage.setTitle('Registro de facultades - QUOT-UMSS');
     this.spinnerName = 'sp3';
@@ -94,9 +96,8 @@ export class SchoolCreateComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
-          this.toastr.success('Facultad registrada con éxito');
-          this.facultyRegisterForm.reset();
-          this.spinner.hide(this.spinnerName);
+          //
+          this.binnacle();
         }else{
           this.toastr.warning('Ocurrio un error intente de nuevo');
           this.spinner.hide(this.spinnerName);
@@ -106,6 +107,28 @@ export class SchoolCreateComponent implements OnInit {
         console.log(error.message);
         this.spinner.hide(this.spinnerName);
         this.toastr.error('El nombre de la facultad ya se encuentra registrado');
+      }
+    );
+  }
+
+  binnacle(){
+    let binData = {
+      table_name: 'faculties',
+      action: 'Creación',
+      new_data: JSON.stringify(this.facultyRegisterForm.value)
+    }
+    this.serbiceB.storeBinnacle(binData).subscribe(
+      (data) => {
+        if(data.res){
+          this.toastr.success('Facultad registrada con éxito');
+          this.facultyRegisterForm.reset();
+          this.spinner.hide(this.spinnerName);
+        }
+      },
+      (error) => {
+        this.facultyRegisterForm.reset();
+        this.spinner.hide(this.spinnerName);
+        this.toastr.error(`ERROR: ${error}`);
       }
     );
   }

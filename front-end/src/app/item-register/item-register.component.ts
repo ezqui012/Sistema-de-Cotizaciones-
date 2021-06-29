@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { ItemsService } from '../services/items.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { BinnacleService } from '../services/binnacle.service';
 
 @Component({
   selector: 'app-item-register',
@@ -19,8 +20,11 @@ export class ItemRegisterComponent implements OnInit {
 
   options: string[] = ['Sin tipo'];
   filteredOptions: Observable<string[]> | undefined;
+  optionsS: string[] = ['Sin tipo'];
+  filteredOptionsS: Observable<string[]> | undefined;
 
   typeUnit: string[] = ['Sin unidad'];
+
   filteredUnit: Observable<string[]> | undefined;
 
   indexType: number = 0;
@@ -36,7 +40,8 @@ export class ItemRegisterComponent implements OnInit {
     type_item: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     unit_item: ['', [Validators.required, Validators.maxLength(10)]],
     unit_cost: ['', [Validators.required, Validators.min(1), Validators.pattern(this.patternDecimal)]],
-    description_item: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]]
+    description_item: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
+    subtype_item: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]]
   });
 
   constructor(
@@ -45,7 +50,8 @@ export class ItemRegisterComponent implements OnInit {
     public toastr: ToastrService,
     private titlePage: Title,
     private service: ItemsService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private serbiceB: BinnacleService
   ) {
     this.titlePage.setTitle('Registro de Items - QUOT-UMSS');
     this.spinnerName = 'sp3';
@@ -147,6 +153,12 @@ export class ItemRegisterComponent implements OnInit {
     this.service.insertItem(this.itemRegisterForm.value).subscribe(
       (data) => {
         if(data.res){
+          let binData = {
+          table_name: 'expense_item',
+          action: 'Creación',
+          new_data: JSON.stringify(this.itemRegisterForm.value)
+          };
+          this.serbiceB.storeBinnacle(binData).subscribe();
           this.toastr.success('El registro del ítem se realizo con éxito');
           this.loadTypeItems();
           this.loadUnitItems();
@@ -184,6 +196,34 @@ export class ItemRegisterComponent implements OnInit {
     }else if(field === 'description_item'){
       return 'Descripción';
     }
+  }
+
+  getSubType(){
+    this.optionsS = [];
+    if(this.itemRegisterForm.get('type_item')?.value === ''){
+      return;
+    }
+    this.service.getSubTypesItems(this.itemRegisterForm.get('type_item')?.value).subscribe(
+      (data) => {
+        let i:number = 0;
+        for(let value of data){
+          this.optionsS[i] = value.subtype_item;
+          i++;
+        }
+        this.filteredOptionsS = this.itemRegisterForm.controls['subtype_item'].valueChanges.pipe(
+          startWith(''),
+          map(value => this._filterSubType(value))
+        );
+      },
+      (error) => {
+        //this.toastr.error(`ERROR: ${error} Recargue la pagina`);
+      }
+    );
+  }
+
+  private _filterSubType(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.optionsS.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
 }

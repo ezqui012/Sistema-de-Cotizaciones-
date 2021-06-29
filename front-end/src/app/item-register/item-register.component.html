@@ -38,6 +38,13 @@
               {{ getErrorMessage('unit_item') }}
             </mat-error>
           </mat-form-field>
+          <mat-form-field class="date-info">
+            <mat-label>Descripción</mat-label>
+            <input matInput placeholder="Ingrese la descripción del item" formControlName="description_item">
+            <mat-error *ngIf="isValid('description_item')">
+              {{ getErrorMessage('description_item') }}
+            </mat-error>
+          </mat-form-field>
         </div>
         <div class="formTwoCol2">
           <mat-form-field class="date-info">
@@ -46,6 +53,7 @@
               matInput
               placeholder="Ingrese el tipo de item"
               formControlName="type_item"
+              (blur)="getSubType()"
               [matAutocomplete]="typeitem"
             >
             <mat-autocomplete autoActiveFirstOption #typeitem="matAutocomplete" >
@@ -58,6 +66,23 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field class="date-info">
+          <mat-label>Sub Tipo</mat-label>
+            <input type="text"
+              matInput
+              placeholder="Ingrese el sub tipo de item"
+              formControlName="subtype_item"
+              [matAutocomplete]="subtypeitem"
+            >
+            <mat-autocomplete autoActiveFirstOption #subtypeitem="matAutocomplete" >
+              <mat-option *ngFor="let option of filteredOptionsS | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="isValid('subtype_item')">
+              {{ getErrorMessage('subtype_item') }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="date-info">
             <mat-label>Precio</mat-label>
             <input type="text" matInput placeholder="Ingrese el precio unitario" formControlName="unit_cost">
             <mat-error *ngIf="isValid('unit_cost')">
@@ -67,13 +92,13 @@
         </div>
       </div>
       <div class="contentAdress">
-        <mat-form-field class="date-info-full-width">
+        <!-- <mat-form-field class="date-info-full-width">
           <mat-label>Descripción</mat-label>
           <input matInput placeholder="Ingrese la descripción del item" formControlName="description_item">
           <mat-error *ngIf="isValid('description_item')">
             {{ getErrorMessage('description_item') }}
           </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
       </div>
       <br>
       <br>
