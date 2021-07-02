@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PersonalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::post('login', 'UserController@login');
 
@@ -24,8 +25,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('logout', 'UserController@logout');
     Route::ApiResource('faculties', 'FacultyController');
     Route::ApiResource('permit', 'PermitController');
-    Route::ApiResource('personal','PersonalController');
     Route::ApiResource('unit', 'UnitController');
+    Route::ApiResource('personal','PersonalController');
     Route::ApiResource('assignedPermit', 'AssignedPermitController');
     Route::get('unitDropdown','UnitController@getUnit');
     Route::get('rolDropdown', 'RolController@getRol');
@@ -40,7 +41,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::ApiResource('quote', 'QuoteController');
     Route::get('list-personal/{id}', 'UserController@getListPersonalQuote');
     Route::get('user/{id}', 'UserController@getUserById');
-
     Route::delete('processQuoteDelete/{id}', 'QuoteController@deleteProcessQuote');
     Route::put('updatePassword/{id}', 'UserController@updatePassword');
     Route::get('processQuote/{id}', 'QuoteController@getProcessQuote');
@@ -105,6 +105,10 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('budget-listH/{id}', 'HistoryAmountController@budgetHistory');
 
     Route::get('get-subtype-item/{type}', 'ExpenseItemController@getSubtype');
-
+    Route::get('list-backup', 'BackupController@getBackup');
     Route::apiResource('binnacle', 'BinnacleController');
 });
+
+
+Route::post('restore', 'BackupController@restore');
+

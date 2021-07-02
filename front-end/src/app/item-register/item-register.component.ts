@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { ItemsService } from '../services/items.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { BinnacleService } from '../services/binnacle.service';
 
 @Component({
   selector: 'app-item-register',
@@ -49,7 +50,8 @@ export class ItemRegisterComponent implements OnInit {
     public toastr: ToastrService,
     private titlePage: Title,
     private service: ItemsService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private serbiceB: BinnacleService
   ) {
     this.titlePage.setTitle('Registro de Items - QUOT-UMSS');
     this.spinnerName = 'sp3';
@@ -151,6 +153,12 @@ export class ItemRegisterComponent implements OnInit {
     this.service.insertItem(this.itemRegisterForm.value).subscribe(
       (data) => {
         if(data.res){
+          let binData = {
+          table_name: 'expense_item',
+          action: 'Creación',
+          new_data: JSON.stringify(this.itemRegisterForm.value)
+          };
+          this.serbiceB.storeBinnacle(binData).subscribe();
           this.toastr.success('El registro del ítem se realizo con éxito');
           this.loadTypeItems();
           this.loadUnitItems();

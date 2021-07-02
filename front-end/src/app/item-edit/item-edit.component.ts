@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { ItemsService } from '../services/items.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { BinnacleService } from '../services/binnacle.service';
 
 @Component({
   selector: 'app-item-edit',
@@ -32,6 +33,8 @@ export class ItemEditComponent implements OnInit {
   spinnerType: string | any;
   spinnerName: string | any;
 
+  oldData: any;
+
   private patternDecimal = /^[0-9]+(\.?[0-9]+)?$/;
 
   itemRegisterForm = this.fb.group({
@@ -50,7 +53,8 @@ export class ItemEditComponent implements OnInit {
     private titlePage: Title,
     private service: ItemsService,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private serbiceB: BinnacleService
   ) {
     this.titlePage.setTitle('Editar Item - QUOT-UMSS');
     this.spinnerName = 'sp3';
@@ -105,6 +109,7 @@ export class ItemEditComponent implements OnInit {
   loadInfoItem(){
     this.service.getInfoItem(this.route.snapshot.params.id).subscribe(
       (data) => {
+        this.oldData = JSON.stringify(data);
         this.itemRegisterForm.controls['name_item'].setValue(data.name_item);
         this.itemRegisterForm.controls['type_item'].setValue(data.type_item);
         this.itemRegisterForm.controls['unit_item'].setValue(data.unit_item);
@@ -174,6 +179,13 @@ export class ItemEditComponent implements OnInit {
     this.service.updateItem(this.route.snapshot.params.id, this.itemRegisterForm.value).subscribe(
       (data) => {
         if(data.res){
+          let binData = {
+            table_name: 'expense_item',
+            action: 'Edición',
+            new_data: JSON.stringify(this.itemRegisterForm.value),
+            old_data: this.oldData
+          };
+          this.serbiceB.storeBinnacle(binData).subscribe();
           this.spinner.hide(this.spinnerName);
           this.navigateTo('/item-list');
           this.toastr.success('Los cambios fueron realizados con éxito');

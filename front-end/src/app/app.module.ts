@@ -69,8 +69,11 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { FilterPipe } from './pipes/filter.pipe';
 
 import { NgxSpinnerModule } from "ngx-spinner";
+import { BackupComponent } from './backup/backup.component';
+import { BinnaclePipe } from './pipes/binnacle.pipe';
 import { ListBudgetComponent } from './list-budget/list-budget.component';
 import { ListBinnacleComponent } from './list-binnacle/list-binnacle.component';
+
 
 @NgModule({
   declarations: [
@@ -120,8 +123,10 @@ import { ListBinnacleComponent } from './list-binnacle/list-binnacle.component';
     ItemRegisterComponent,
     ItemEditComponent,
     FilterPipe,
+    BackupComponent,
+    BinnaclePipe,
     ListBudgetComponent,
-    ListBinnacleComponent
+    ListBinnacleComponent,
   ],
   imports: [
     BrowserModule,
