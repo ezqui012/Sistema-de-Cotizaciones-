@@ -43,7 +43,7 @@ class BackupDatabase extends Command
         $username = config('database.connections.mysql.username');
         $password = config('database.connections.mysql.password');
         $database = config('database.connections.mysql.database');
-        exec("mysqldump -h {$host} -u {$username} -p{$password} {$database} --ignore-table=bdcoti.backups". "  > " . "G:/Proyectocotizacion/Backe-end/storage/app/backups/".$filename);
+        exec("mysqldump -h {$host} -u {$username} {$database} --ignore-table=bdcoti.backups". "  > " . "G:/Proyectocotizacion/Backe-end/storage/app/backups/".$filename);
         DB::table('backups')->insert([
             'name_backup'=> 'Backup'.$now->format('Y-m-d'),
             'path'=> 'G:/Proyectocotizacion/Backe-end/storage/app/backups/'.$filename,
