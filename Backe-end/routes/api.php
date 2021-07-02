@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::ApiResource('faculties', 'FacultyController');
     Route::ApiResource('permit', 'PermitController');
     Route::ApiResource('unit', 'UnitController');
+    Route::ApiResource('personal','PersonalController');
     Route::ApiResource('assignedPermit', 'AssignedPermitController');
     Route::get('unitDropdown','UnitController@getUnit');
     Route::get('rolDropdown', 'RolController@getRol');
@@ -104,10 +105,10 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('budget-listH/{id}', 'HistoryAmountController@budgetHistory');
 
     Route::get('get-subtype-item/{type}', 'ExpenseItemController@getSubtype');
-
+    Route::get('list-backup', 'BackupController@getBackup');
     Route::apiResource('binnacle', 'BinnacleController');
 });
-Route::ApiResource('personal','PersonalController');
-Route::get('list-backup', 'BackupController@getBackup');
+
+
 Route::post('restore', 'BackupController@restore');
 

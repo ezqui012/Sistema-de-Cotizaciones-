@@ -25,7 +25,7 @@ export class ListBinnacleComponent implements OnInit {
 
   spinnerType: string | any;
   spinnerName: string | any;
-
+  searchBinacle!:any;
   constructor(
     private modal: NgbModal,
     private service: BinnacleService,

@@ -74,6 +74,7 @@ import { BinnaclePipe } from './pipes/binnacle.pipe';
 import { ListBudgetComponent } from './list-budget/list-budget.component';
 import { ListBinnacleComponent } from './list-binnacle/list-binnacle.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -125,7 +126,7 @@ import { ListBinnacleComponent } from './list-binnacle/list-binnacle.component';
     BackupComponent,
     BinnaclePipe,
     ListBudgetComponent,
-    ListBinnacleComponent
+    ListBinnacleComponent,
   ],
   imports: [
     BrowserModule,
