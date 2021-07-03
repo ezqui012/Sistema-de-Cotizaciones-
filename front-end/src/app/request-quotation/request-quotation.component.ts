@@ -165,11 +165,11 @@ export class RequestQuotationComponent implements OnInit {
   getErrorMessageRequest() {
     let message;
     if (this.requestForm.get('business_name')?.errors?.required) {
-      message = 'El campo Razón social es obligatorio';
+      message = 'El campo Solicitud es obligatorio';
     } else if (this.requestForm.get('business_name')?.hasError('minlength')) {
-      message = 'El campo Razón social requiere como mínimo 10 caracteres';
+      message = 'El campo Solicitud requiere como mínimo 10 caracteres';
     } else if (this.requestForm.get('business_name')?.hasError('mmaxlength')) {
-      message = 'El campo Razón social requiere como máximo 100 caracteres';
+      message = 'El campo Solicitud requiere como máximo 100 caracteres';
     }
     return message;
   }
@@ -221,7 +221,7 @@ export class RequestQuotationComponent implements OnInit {
       }
 
     }else{
-      this.toastr.error("El campo de Razón Social es incorrecto");
+      this.toastr.error("El campo de Solicitud es incorrecto");
     }
   }
 

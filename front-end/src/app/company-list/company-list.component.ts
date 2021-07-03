@@ -23,7 +23,7 @@ export class CompanyListComponent implements OnInit {
   spinnerType: string | any;
   spinnerName: string | any;
   pageActual: number =1;
-  numItem:number = 2;
+  numItem:number = 8;
 
   constructor(
     private router:Router,

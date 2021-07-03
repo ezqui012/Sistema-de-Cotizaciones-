@@ -13,14 +13,14 @@
   <div class="titleQoute" [formGroup]="requestForm">
 
     <mat-form-field class="date-info">
-      <mat-label>Razón social</mat-label>
-      <input matInput placeholder="Ingrese Razón social" formControlName="business_name">
+      <mat-label>Solicitud</mat-label>
+      <input matInput placeholder="Ingrese titulo de Solicitud" formControlName="business_name">
       <mat-error *ngIf="isValidRequestForm()">
         {{ getErrorMessageRequest() }}
       </mat-error>
     </mat-form-field>
     <div class="contentBtnSave">
-      <button type="button" class="btn btnPlus" ngbPopover="Guardar cambio de Razón social" (click)="updateNemaRequest()">
+      <button type="button" class="btn btnPlus" ngbPopover="Guardar cambio titulo solicitud" (click)="updateNemaRequest()">
         <img src="../../assets/icon-quote/save.png" alt="" width="25" height="25">
       </button>
     </div>

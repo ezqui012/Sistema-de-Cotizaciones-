@@ -111,7 +111,7 @@ export class RequestQuotationEditComponent implements OnInit {
         res = data;
         if(res.res){
           //console.log("seguardo los cambios con exito")
-          this.toastr.success("La Razón social se modificó con éxito")
+          this.toastr.success("El titulo Solicitud se modificó con éxito")
 
         }else{
           console.log("error al actualizar el estado intente de nuevo")
@@ -216,11 +216,11 @@ export class RequestQuotationEditComponent implements OnInit {
   getErrorMessageRequest() {
     let message;
     if (this.requestForm.get('business_name')?.errors?.required) {
-      message = 'El campo Razón social es obligatorio';
+      message = 'El campo Solicitud social es obligatorio';
     } else if (this.requestForm.get('business_name')?.hasError('minlength')) {
-      message = 'El campo Razón social requiere como mínimo 10 caracteres';
+      message = 'El campo Solicitud social requiere como mínimo 10 caracteres';
     } else if (this.requestForm.get('business_name')?.hasError('mmaxlength')) {
-      message = 'El campo Razón social requiere como máximo 100 caracteres';
+      message = 'El campo Solicitud social requiere como máximo 100 caracteres';
     }
     return message;
   }
@@ -276,7 +276,7 @@ export class RequestQuotationEditComponent implements OnInit {
       }
 
     }else{
-      this.toastr.error("El campo de Razón Social es incorrecto");
+      this.toastr.error("El campo de Solicitud es incorrecto");
     }
   }
 
