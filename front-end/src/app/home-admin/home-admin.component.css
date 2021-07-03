@@ -3,15 +3,19 @@ body{
   background-color: #f0f0f8;
 }
 .bodyOption{
-  padding: 20px;
+  /* padding: 20px; */
   display:block;
   text-align: center;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .contentOption{
   width: 100%;
   display: flex;
   flex: 1;
+  padding-right: 5%;
+  padding-left: 5%;
 }
 
 .username{
@@ -21,15 +25,17 @@ body{
   color: #1C2331;
   padding: 40px;
 
+
 }
 .option{
-  margin: 2%;
+  margin: 1%;
   list-style: none;
   font-size: 1rem;
   padding: 5px;
   flex: 1;
   cursor: pointer;
-
+  margin-right: 4%;
+  margin-left: 4%;
 }
 .optBtn{
   width: 100%;
