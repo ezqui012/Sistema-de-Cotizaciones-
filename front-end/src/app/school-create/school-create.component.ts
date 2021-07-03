@@ -121,7 +121,6 @@ export class SchoolCreateComponent implements OnInit {
       (data) => {
         if(data.res){
           this.toastr.success('Facultad registrada con éxito');
-          //this.facultyRegisterForm.reset();
           this.spinner.hide(this.spinnerName);
           this.navigateTo('/school-list');
         }
