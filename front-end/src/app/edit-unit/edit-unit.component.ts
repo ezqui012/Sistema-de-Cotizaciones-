@@ -49,7 +49,7 @@ export class EditUnitComponent implements OnInit {
     private titlePage: Title,
     private serbiceB: BinnacleService
     ) {
-      this.titlePage.setTitle('Registro de unidades - QUOT-UMSS');
+      this.titlePage.setTitle('Edición de unidades - QUOT-UMSS');
       this.spinnerName = 'sp3';
       this.spinnerType = 'ball-spin-clockwise';
     }
@@ -201,7 +201,7 @@ export class EditUnitComponent implements OnInit {
     } else if(field === 'type'){
       return 'Tipo de unidad'
     }else if(field === 'amount'){
-      return 'Monto';
+      return 'Presupuesto';
     }
   }
   navigateTo(path: String){

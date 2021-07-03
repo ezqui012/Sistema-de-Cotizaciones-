@@ -51,8 +51,8 @@
       <br>
 
       <mat-form-field class="mount-full-width" *ngIf="showAmount">
-        <mat-label>Monto</mat-label>
-        <input matInput placeholder="Ingrese monto" type="number" formControlName="amount" (keypress)="onKeyPress()">
+        <mat-label>Presupuesto</mat-label>
+        <input matInput placeholder="Ingrese presupuesto" type="number" formControlName="amount" (keypress)="onKeyPress()">
         <mat-error *ngIf="isValid('amount')">
           {{ getErrorMessage('amount') }}
         </mat-error>
