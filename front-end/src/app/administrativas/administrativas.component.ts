@@ -26,7 +26,8 @@ export class AdministrativasComponent implements OnInit {
   gastoUnit: Array<ListUnit> = []
   administrativoUnit: Array<ListUnit> = []
   pos = 0;
-
+  pageActual: number =1;
+  numItem:number = 8;
 
   constructor(private modal: NgbModal,
     private router: Router, private servicio: ListService,
