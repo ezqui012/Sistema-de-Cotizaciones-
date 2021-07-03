@@ -26,7 +26,8 @@ export class RolesListComponent implements OnInit {
   description_role: FormControl = new FormControl('')
   roles: Array<Roles> = [];
   permits: Array<PermitOfRole> = [];
-
+  pageActual: number =1;
+  numItem:number = 8;
 
   pos = 0;
   constructor(
@@ -61,6 +62,10 @@ export class RolesListComponent implements OnInit {
     this._assignedPermitService.allPermitOfRole(idRole).subscribe((permit) => {
       return this.permits = permit
     })
+  }
+
+  absoluteIndex(indexOnPage: number): number {
+    return this.numItem * (this.pageActual - 1) + indexOnPage;
   }
 
   navigateTo(path: String) {

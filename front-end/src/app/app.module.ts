@@ -61,6 +61,7 @@ import { ItemEditComponent } from './item-edit/item-edit.component';
 import { PdfMakeWrapper } from 'pdfmake-wrapper';
 //import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 // Set the fonts to use
 PdfMakeWrapper.setFonts(pdfFonts);
@@ -129,6 +130,7 @@ import { ListBinnacleComponent } from './list-binnacle/list-binnacle.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    NgxPaginationModule,
     HttpClientModule,
     NgxSpinnerModule,
     ToastrModule.forRoot({

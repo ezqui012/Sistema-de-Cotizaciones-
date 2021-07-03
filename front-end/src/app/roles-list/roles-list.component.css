@@ -72,16 +72,29 @@ color: white;
 .headTable{
   background-color: #003b72;
   color: white;
-  display: none;
+  /* display: none; */
 }
 
 .newBodyTable{
-  color:#0000 ;
+  color:#003b72 ;
   background-color: #fafafa;
-  overflow-y: auto;
-  padding-left: 0.4%;
-  padding-right: 0.4%;
-  height: 420px;
+  height: 480px;
+}
+.contentPagination{
+  text-align: right !important;
+  width: 100%;
+  padding-top: 5px;
+}
+.btnAction {
+  align-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 1px;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
 }
 .newHeadTable{
   background-color: #003b72;
@@ -98,22 +111,7 @@ color: white;
   width: 79%;
 }
 
-.btnAction {
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  padding: 2px;
-  margin-left: 3%;
-  margin-right: 3%;
 
-  justify-content: center;
-  /* text-align: center; */
-
-  /* border:1px solid #007095; */
-  border-radius: 5px;
-  cursor: pointer;
-  /* background-color:#dedede; */
-}
 .btnAction:hover {
   background-color: #ffffff !important;
 }

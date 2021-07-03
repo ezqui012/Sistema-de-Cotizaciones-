@@ -49,33 +49,33 @@
 
   <!--Tabla-->
   <div class="containerTable">
-    <div class="newHeadTable">
+    <!-- <div class="newHeadTable">
       <div class="numHead"><b>Nº</b></div>
       <div class="nomHead"><b>Nombre</b></div>
       <div class="accHead"><b>Acciones</b></div>
-    </div>
+    </div> -->
     <div class="newBodyTable">
       <table class="table table-hover">
         <thead class="headTable">
           <tr id="titleHead" class="row-table">
             <th scope="col">Nº</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Acciones</th>
+            <th scope="col" style="text-align: center !important;" >Acciones</th>
           </tr>
         </thead>
 
         <tbody class="bodyTable">
-          <tr class="row-table" *ngFor="let role of roles; let i = index">
-            <th scope="row">{{i+1}}</th>
+          <tr class="row-table" *ngFor="let role of roles | paginate: { itemsPerPage: numItem, currentPage: pageActual } ; let i = index;">
+            <th scope="row">{{(( numItem * (pageActual - 1) + i)+1)}}</th>
             <td>{{role.name_role}}</td>
 
             <td>
-              <div class="row justify-content-end" style="padding-right: 20%;">
+              <div class="row justify-content-center">
                 <button type="button" class="btn btnAction" ngbPopover="Editar" (click)="navigateToEdit('/roles-edit', role.id_role)">
-                  <img src="../../assets/icon-quote/pencil.png" alt="" width="30" height="30" />
+                  <img src="../../assets/icon-quote/pencil.png" alt="" width="22" height="22" />
                 </button>
-                <button id="verRol" type="button" class="btn btnAction" ngbPopover="Ver detalle" (click)="openModal(content,i, role.id_role)">
-                  <img src="../../assets/icon-quote/file-text.png" alt="" width="30" height="30" />
+                <button id="verRol" type="button" class="btn btnAction" ngbPopover="Ver detalle" (click)="openModal(content,( numItem * (pageActual - 1) + i), role.id_role)">
+                  <img src="../../assets/icon-quote/file-text.png" alt="" width="22" height="22" />
                 </button>
               </div>
             </td>
@@ -83,6 +83,9 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="contentPagination">
+      <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
     </div>
 
   </div>
