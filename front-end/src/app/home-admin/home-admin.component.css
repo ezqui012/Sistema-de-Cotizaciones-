@@ -15,12 +15,18 @@ body{
 }
 
 .username{
-
-  padding-left: 30px;
+  margin-top: 40px;
+  padding-left: 40px;
   font-size: 1.5rem;
   color: #1C2331;
-  padding: 40px;
-
+  /*padding: 40px;*/
+}
+.usernameRol{
+  padding-left: 40px;
+  font-size: 1.5rem;
+  color: #1C2331;
+  /*padding: 40px;*/
+  margin-top: 20px;
 }
 .option{
   margin: 2%;
