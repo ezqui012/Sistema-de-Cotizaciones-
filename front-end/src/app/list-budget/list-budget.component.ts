@@ -24,6 +24,8 @@ export class ListBudgetComponent implements OnInit {
   listbudgetH: any;
 
   nameUnit: any;
+  pageActual: number =1;
+  numItem:number = 8;
 
   showAssigned: boolean = false;
 

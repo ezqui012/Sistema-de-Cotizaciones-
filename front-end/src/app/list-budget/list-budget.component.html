@@ -65,48 +65,51 @@
 
   <!--Tabla-->
   <div class="containerTable">
-    <div class="newHeadTable">
+    <!-- <div class="newHeadTable">
       <div class="numHead"><b>Nº</b></div>
       <div class="nomHead"><b>Unidad</b></div>
       <div class="rugHead"><b>Facultad</b></div>
       <div class="telHead"><b>Gestion</b></div>
       <div class="budgedHead"><b>Monto</b></div>
       <th scope="accHead">Acciones</th>
-    </div>
+    </div> -->
     <div class="newBodyTable">
       <table class="table table-hover">
         <thead class="headTable">
           <tr>
             <th scope="col">Nº</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Acciones</th>
+            <th scope="col">Unidad</th>
+            <th scope="col">Facultad</th>
+            <th scope="col">Gestión</th>
+            <th scope="col">Monto</th>
+            <th scope="col" style="text-align: center !important;">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="row-request" *ngFor="let budget of listbudget; let i = index">
-            <th style="padding-top: 20px" scope="row">{{i+1}}</th>
-            <td style="padding-top: 20px; width: 30%; padding-left: 5%">
+          <tr class="row-request" *ngFor="let budget of listbudget | paginate: { itemsPerPage: numItem, currentPage: pageActual }; let i = index">
+            <th scope="row">{{(( numItem * (pageActual - 1) + i)+1)}}</th>
+            <td >
               {{budget.name_unit}}
             </td>
-            <td style="padding-top: 20px; width: 30%">
+            <td>
               {{budget.name_faculty}}
             </td>
-            <td style="padding-top: 20px; width: 10%">
+            <td>
               {{budget.management}}
             </td>
-            <td style="padding-top: 20px; width: 10%">
+            <td>
               {{budget.amount}}
             </td>
 
-            <td style="width: 20%">
-              <div class="row justify-content-end" style="padding-right: 20%">
+            <td>
+              <div class="row justify-content-center">
 
                 <button type="button" class="btn btnAction" ngbPopover="Historial">
-                  <img src="../../assets/img-budget/historial-monto.svg" alt="" width="30" height="30" (click)="openModalH(contentH, budget.id_unit, budget.name_unit)" />
+                  <img src="../../assets/img-budget/historial-monto.svg" alt="" width="22" height="22" (click)="openModalH(contentH, budget.id_unit, budget.name_unit)" />
                 </button>
 
                 <button type="button" class="btn btnAction" ngbPopover="Asignar monto" *ngIf="showAssigned" (click)="openModal(contentA, budget.id_unit)">
-                  <img src="../../assets/img-budget/register-amount1.svg" alt="" width="30" height="30" />
+                  <img src="../../assets/img-budget/register-amount1.svg" alt="" width="22" height="22" />
                 </button>
               </div>
             </td>
@@ -114,7 +117,9 @@
         </tbody>
       </table>
     </div>
-
+    <div class="contentPagination">
+      <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    </div>
   </div>
 
 </div>

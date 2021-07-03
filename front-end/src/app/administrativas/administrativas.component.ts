@@ -82,6 +82,7 @@ export class AdministrativasComponent implements OnInit {
 
   showtable(show: boolean) {
     this.show = show;
+
   }
 
 
