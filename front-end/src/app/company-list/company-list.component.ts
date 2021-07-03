@@ -22,6 +22,9 @@ export class CompanyListComponent implements OnInit {
   pos:number = 0;
   spinnerType: string | any;
   spinnerName: string | any;
+  pageActual: number =1;
+  numItem:number = 2;
+
   constructor(
     private router:Router,
     public toastr: ToastrService,

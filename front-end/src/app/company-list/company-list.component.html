@@ -73,45 +73,47 @@
 
   <!--Tabla-->
   <div class="containerTable">
-    <div class="newHeadTable">
+    <!-- <div class="newHeadTable">
       <div class="numHead"><b>Nº</b></div>
       <div class="nomHead"><b>Empresa</b></div>
       <div class="rugHead"><b>Rubro</b></div>
       <div class="telHead"><b>Teléfono</b></div>
       <th scope="accHead">Acciones</th>
-    </div>
+    </div> -->
     <div class="newBodyTable">
       <table class="table table-hover">
         <thead class="headTable">
           <tr>
             <th scope="col">Nº</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Acciones</th>
+            <th scope="col">Empresa</th>
+            <th scope="col">Rubro</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col" style="text-align: center !important;">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="row-request" *ngFor="let company of listCompany; let i = index">
-            <th style="padding-top: 20px" scope="row">{{i+1}}</th>
-            <td style="padding-top: 20px; width: 40%; padding-left: 5%">
+          <tr class="row-request" *ngFor="let company of listCompany | paginate: { itemsPerPage: numItem, currentPage: pageActual }; let i = index">
+            <th  scope="row">{{(( numItem * (pageActual - 1) + i)+1)}}</th>
+            <td >
               {{company.name_enterprise}}
             </td>
-            <td style="padding-top: 20px; width: 30%">
+            <td>
               {{company.sector_enterprise}}
             </td>
-            <td style="padding-top: 20px; width: 10%">
+            <td>
               {{company.phone_enterprise}}
 
             </td>
 
-            <td style="width: 20%">
-              <div class="row justify-content-end" style="padding-right: 20%">
+            <td>
+              <div class="row justify-content-center">
 
                 <button type="button" class="btn btnAction" (click)="navigateToEdit('/company-edit/'+company.id_enterprise)" ngbPopover="Editar">
-                  <img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25" />
+                  <img src="../../assets/icon-quote/pencil.png" alt="" width="22" height="22" />
                 </button>
 
-                <button type="button" class="btn btnAction" (click)="openModal(content, i)" ngbPopover="Ver detalle">
-                  <img src="../../assets/icon-quote/file-text.png" alt="" width="25" height="25" />
+                <button type="button" class="btn btnAction" (click)="openModal(content, ( numItem * (pageActual - 1) + i))" ngbPopover="Ver detalle">
+                  <img src="../../assets/icon-quote/file-text.png" alt="" width="22" height="22" />
                 </button>
               </div>
             </td>
@@ -119,7 +121,9 @@
         </tbody>
       </table>
     </div>
-
+    <div class="contentPagination">
+      <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    </div>
   </div>
 
 </div>
