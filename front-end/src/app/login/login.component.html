@@ -11,7 +11,7 @@
 
           <h1 class="title-login"><b>Iniciar Sesión</b></h1>
           <br>
-          <form class="form-container" [formGroup]="loginForm">
+          <form class="form-container" [formGroup]="loginForm" (ngSubmit)="onLogin()">
             <mat-form-field class="full-width-input separator">
               <mat-label>Correo</mat-label>
               <input matInput placeholder="Ingrese su correo" type="email" formControlName="email" (keypress)="onKeyPress()" required>
@@ -30,7 +30,8 @@
             </mat-form-field>
             <br>
             <br>
-            <button (click)="onLogin()" type="button" class="btn-form">Ingresar</button>
+            <!-- <button (click)="onLogin()" type="button" class="btn-form">Ingresar</button> -->
+            <button type="submit" class="btn-form">Ingresar</button>
           </form>
           <br>
           <p *ngIf="messageFail" class="failed-login">

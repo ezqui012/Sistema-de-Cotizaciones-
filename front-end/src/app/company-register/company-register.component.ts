@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { BinnacleService } from '../services/binnacle.service';
 @Component({
   selector: 'app-company-register',
   templateUrl: './company-register.component.html',
@@ -21,7 +22,8 @@ export class CompanyRegisterComponent implements OnInit {
     private fb: FormBuilder,
     public toastr: ToastrService,
     private titlePage: Title,
-    private companyDataService: CompanyService
+    private companyDataService: CompanyService,
+    private serbiceB: BinnacleService
   ) {
     this.titlePage.setTitle('Registro de Empresas - QUOT-UMSS');
 
@@ -135,6 +137,12 @@ export class CompanyRegisterComponent implements OnInit {
     this.companyDataService.insertData(this.enterpriseForm.value).subscribe(res => {
       this.showToastSuccess();
       this.loadSectors();
+      let binData = {
+        table_name: 'company',
+        action: 'Creación',
+        new_data: JSON.stringify(this.enterpriseForm.value)
+      }
+      this.serbiceB.storeBinnacle(binData).subscribe();
     },
       (error: any) => {
         let message = error;

@@ -9,7 +9,7 @@ import { EnterpriseService } from '../services/enterprise.service';
 import { Enterprise } from '../Model/enterprise';
 import { ItemRequest } from '../Model/expense-item';
 import { QuoteDetailService } from '../services/quote-detail.service';
-
+import { BinnacleService } from '../services/binnacle.service';
 import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
@@ -30,6 +30,8 @@ export class EditDetailQuotationComponent implements OnInit {
   enterprises: Enterprise[] | undefined;
 
   items: ItemRequest[] | any;
+
+  oldData: any;
 
   urlImage: string = 'https://gamery.cl/static/img/not-found-image.jpg';
   imgPrev: boolean = false;
@@ -63,7 +65,8 @@ export class EditDetailQuotationComponent implements OnInit {
     private service: EnterpriseService,
     private route: ActivatedRoute,
     private serviceQuote: QuoteDetailService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private serbiceB: BinnacleService
   ) {
     this.titlePage.setTitle('Editar cotización - QUOT-UMSS');
     this.spinnerName = 'sp3';
@@ -170,6 +173,7 @@ export class EditDetailQuotationComponent implements OnInit {
   showDetailUpdate(){
     this.serviceQuote.showDetailQuote(this.route.snapshot.params.idqd).subscribe(
       (data) => {
+        this.oldData = JSON.stringify(data);
         this.registerForm.controls['id_enterprise'].setValue(data.id_enterprise);
         this.registerForm.controls['id_item'].setValue(data.id_item);
         this.registerForm.controls['quantity'].setValue(data.quantity);
@@ -228,6 +232,13 @@ export class EditDetailQuotationComponent implements OnInit {
     this.serviceQuote.updateDetailQuote(this.route.snapshot.params.idqd, this.registerForm.value).subscribe(
       (data) => {
         if(data.res){
+          let binData = {
+            table_name: 'quote_detail',
+            action: 'Edición',
+            new_data: JSON.stringify(this.registerForm.value),
+            old_data: this.oldData
+          };
+          this.serbiceB.storeBinnacle(binData).subscribe();
           if(this.updateIMG){
             this.updateAttachmentQuot(this.route.snapshot.params.idqd);
           }else if(this.files.length > 0){

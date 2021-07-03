@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
+import { BinnacleService } from '../services/binnacle.service';
 
 @Component({
   selector: 'app-units-register',
@@ -41,7 +42,8 @@ export class UnitsRegisterComponent implements OnInit {
     public toastr: ToastrService,
     private router:Router,
     private titlePage: Title,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private serbiceB: BinnacleService
     ) {
       this.titlePage.setTitle('Registro de unidades - QUOT-UMSS');
       this.spinnerName = 'sp3';
@@ -125,9 +127,15 @@ export class UnitsRegisterComponent implements OnInit {
       (data) => {
         res = data;
         if(res.res){
+          let binData = {
+            table_name: 'units',
+            action: 'Creación',
+            new_data: JSON.stringify(this.registerForm.value)
+          }
+          this.serbiceB.storeBinnacle(binData).subscribe();
           this.spinner.hide(this.spinnerName);
           this.toastr.success('Unidad registrada con éxito');
-          this.clearInput();
+          this.navigateTo('/unit-list')
         }else{
           this.spinner.hide(this.spinnerName);
           this.toastr.warning('Ocurrio un error intente de nuevo');
@@ -149,12 +157,6 @@ export class UnitsRegisterComponent implements OnInit {
     }
   }
 
-  clearInput(){
-    this.registerForm.get('id_faculty')?.reset();
-    this.registerForm.get('name_unit')?.reset();
-    this.registerForm.get('amount')?.reset();
-  }
-
   private translate(field: string):string|void{
     if(field === 'id_faculty'){
       return 'Facultad';
@@ -163,7 +165,7 @@ export class UnitsRegisterComponent implements OnInit {
     } else if(field === 'type'){
       return 'Tipo de unidad'
     }else if(field === 'amount'){
-      return 'Monto';
+      return 'Presupuesto';
     }
   }
   navigateTo(path: String){

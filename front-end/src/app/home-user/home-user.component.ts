@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import {Router} from '@angular/router';
+import { RolesService } from '../services/roles.service';
 
 @Component({
   selector: 'app-home-user',
@@ -11,6 +12,8 @@ import {Router} from '@angular/router';
 export class HomeUserComponent implements OnInit {
 
   nameUser = localStorage.getItem('quot-user') ? localStorage.getItem('quot-user') : '';
+  rolId = Number(localStorage.getItem('quot-umss-p') ? localStorage.getItem('quot-umss-p'): 1);
+  rolUser: any;
 
   showQuote: boolean = false;
   showRequest: boolean = false;
@@ -21,7 +24,8 @@ export class HomeUserComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private titlePage: Title
+    private titlePage: Title,
+    private service: RolesService
   ) {
     this.titlePage.setTitle('Inicio Usuario - QUOT-UMSS');
   }
@@ -29,6 +33,11 @@ export class HomeUserComponent implements OnInit {
   ngOnInit(): void {
     this.permission = JSON.parse("[" + localStorage.getItem('quot-umss-pa') + "]");
     this.hasAccess();
+    this.service.getRoleSelect(this.rolId).subscribe(
+      (data) => {
+        this.rolUser = data.name_role;
+      }
+    );
   }
 
   navigateTo(path: String){

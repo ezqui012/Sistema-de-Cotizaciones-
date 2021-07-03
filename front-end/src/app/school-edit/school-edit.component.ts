@@ -19,7 +19,7 @@ export class SchoolEditComponent implements OnInit {
   private patternName = /^[a-zA-Z-z0-9-zñÑ\u00E0-\u00FC ]*$/;
   private patternNumber = '^[0-9]+';
   private patternEmail = /\S+@\S+\.\S+/;
-  private patternNameDean = /^[a-zA-Z-zñÑ\u00E0-\u00FC ]*$/;
+  private patternNameDean = /^[a-zA-Z-zñÑ\.\u00E0-\u00FC ]*$/;
 
   public dataFaculty: any
 
@@ -143,7 +143,7 @@ export class SchoolEditComponent implements OnInit {
   binnacle(){
     let binData = {
       table_name: 'faculties',
-      action: 'Edicion',
+      action: 'Edición',
       new_data: JSON.stringify(this.facultyRegisterForm.value),
       old_data: JSON.stringify(this.infoOld)
     }

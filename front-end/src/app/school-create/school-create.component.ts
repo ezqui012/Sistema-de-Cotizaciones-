@@ -19,7 +19,7 @@ export class SchoolCreateComponent implements OnInit {
   private patternName = /^[a-zA-Z-z0-9-zñÑ\u00E0-\u00FC ]*$/;
   private patternNumber = '^[0-9]+';
   private patternEmail = /\S+@\S+\.\S+/;
-  private patternNameDean = /^[a-zA-Z-zñÑ\u00E0-\u00FC ]*$/;
+  private patternNameDean = /^[a-zA-Z-zñÑ\.\u00E0-\u00FC ]*$/;
 
   messageFail = false;
   messageRegisterFailed = '';
@@ -121,8 +121,8 @@ export class SchoolCreateComponent implements OnInit {
       (data) => {
         if(data.res){
           this.toastr.success('Facultad registrada con éxito');
-          this.facultyRegisterForm.reset();
           this.spinner.hide(this.spinnerName);
+          this.navigateTo('/school-list');
         }
       },
       (error) => {
