@@ -22,6 +22,9 @@ export class UserListComponent implements OnInit {
   spinnerType: string | any;
   spinnerName: string | any;
   chkAproveSol:boolean = false;
+  pageActual: number =1;
+  numItem:number = 8;
+
   constructor(
     private modal: NgbModal,
     private router: Router,

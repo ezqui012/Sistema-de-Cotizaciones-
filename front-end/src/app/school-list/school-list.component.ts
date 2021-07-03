@@ -23,7 +23,8 @@ export class SchoolListComponent implements OnInit {
 
   spinnerType: string | any;
   spinnerName: string | any;
-
+  pageActual: number =1;
+  numItem:number = 8;
   constructor(
     private modal: NgbModal,
     private router: Router,
