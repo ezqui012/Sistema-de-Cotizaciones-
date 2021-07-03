@@ -26,23 +26,23 @@
                 <!-- <button type="button" class="btn btn-registerDis" *ngIf="!checkStatus(list.status_quotation)" disabled>Registrar</button> -->
                 <button type="button" class="btn btnAction" *ngIf="!checkStatus(list.status_quotation)" disabled
                   ngbPopover="Registrar deshabilitado">
-                  <img src="../../assets/icon-quote/registerDes.png" width="30" height="30" />
+                  <img src="../../assets/icon-quote/registerDes.png" width="25" height="25" />
                 </button>
                 <button type="button" class="btn btnAction" *ngIf="checkStatus(list.status_quotation)"
                   ngbPopover="Registrar" (click)="navigateTo('/quote-form/'+list.id_quotation)">
-                  <img src="../../assets/icon-quote/registerAct.png" width="30" height="30" />
+                  <img src="../../assets/icon-quote/registerAct.png" width="25" height="25" />
                 </button>
                 <button type="button" class="btn btnAction" ngbPopover="Ver detalle"
                   (click)="detailRequest(list.status_quotation, list.business_name, list.id_quotation)">
-                  <img src="../../assets/icon-quote/file-text.png" width="30" height="30" />
+                  <img src="../../assets/icon-quote/file-text.png" width="25" height="25" />
                 </button>
                 <button type="button" class="btn btnAction" *ngIf="checkStatus(list.status_quotation)"
                   ngbPopover="Formulario" (click)="getReportQuoteEmpty(list.id_quotation)">
-                  <img src="../../assets/icon-quote/file-emptyAct.png" width="30" height="30" />
+                  <img src="../../assets/icon-quote/file-emptyAct.png" width="25" height="25" />
                 </button>
                 <button type="button" class="btn btnAction" *ngIf="!checkStatus(list.status_quotation)" disabled
                   ngbPopover="Registrar deshabilitado">
-                  <img src="../../assets/icon-quote/file-emptyDes.png" width="30" height="30" />
+                  <img src="../../assets/icon-quote/file-emptyDes.png" width="25" height="25" />
                 </button>
                 <!-- <button type="button" class="btn btn-register" *ngIf="checkStatus(list.status_quotation)" (click)="navigateTo('/quote-form/'+list.id_quotation)">Registrar</button>
                 <button type="button" class="btn btn-detail" (click)="detailRequest(list.status_quotation, list.business_name, list.id_quotation)">Detalle</button> -->

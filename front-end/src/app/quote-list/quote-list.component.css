@@ -27,7 +27,7 @@ body{
   overflow-y: auto;
   padding-left: 0.4%;
   padding-right: 0.4%;
-  height: 420px;
+  height: 460px;
 }
 .newHeadTable{
   background-color: #003b72;
@@ -47,7 +47,7 @@ body{
 }
 
 .statusHead{
-  width: 28%
+  width: 30%
 }
 
 .btn-detail{
@@ -80,20 +80,15 @@ body{
   color: white;
 }
 .btnAction {
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  padding: 2px;
-  margin-left: 3%;
-  margin-right: 3%;
-
+  align-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 1px;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
   justify-content: center;
-  /* text-align: center; */
-
-  /* border:1px solid #007095; */
   border-radius: 5px;
   cursor: pointer;
-  /* background-color:#dedede; */
 }
 .btnAction:hover {
   background-color: #ffffff !important;

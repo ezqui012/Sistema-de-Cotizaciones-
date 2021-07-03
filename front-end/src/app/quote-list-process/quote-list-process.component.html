@@ -20,7 +20,7 @@
   <!--Tabla-->
 
   <div class="labeldiv">
-    <label class="reason">Razón social: {{ business }}</label>
+    <label class="reason">Solicitud: {{ business }}</label>
     <label class="state">Estado: Proceso</label>
   </div>
   <div class="containerTable">
@@ -60,7 +60,7 @@
             <td class="tdcost">{{quote.unit_cost}}</td>
             <td class="tdcost">{{quote.unit_cost*quote.quantity}}</td>
             <td class="button">
-              <div class="row justify-content-center" style="padding-right: 20%">
+              <div class="row justify-content-center">
                 <button type="button" class="btn btnAction" ngbPopover="Editar"
                   (click)="navigateToEdit('/edit-detail-quotation/' + quoteId + '/' + quote.id_qd)">
                   <img src="../../assets/img-outsite/pencil.png" width="25" height="25" />
