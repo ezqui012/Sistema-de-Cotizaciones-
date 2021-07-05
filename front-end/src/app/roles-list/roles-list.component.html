@@ -40,10 +40,16 @@
 <!--header-->
 <div class="containerBody">
   <div class="containertop">
-    <h1><b>Administrar Roles</b></h1>
-    <div class="btnCreate">
+    <div class="contentTitle">
+      <h1><b>Administrar Roles</b></h1>
+    </div>
+    <div class="btnContentCreate">
       <button type="button" class="btn btn-one" (click)="navigateTo('/roles-create')">Registrar Rol</button>
-
+    </div>
+    <div class="btnContentDis">
+      <button type="button" class="btn btnListDis" (click)="navigateTo('/user-list-disabled')" ngbPopover="Lista de Deshabilitados">
+        <img src="../../assets/img/delete/Lsitx.png" alt="" width="28" height="28" />
+      </button>
     </div>
   </div>
 

@@ -12,6 +12,37 @@ body{
   margin-bottom: 10px;
   color: #003b72;
   font-weight: bolder;
+  width: 100%;
+
+}
+.contentTitle{
+  width:300px;
+  /* background-color: crimson; */
+}
+.btnContentCreate{
+ width: 60%;
+ /* background-color: coral; */
+}
+
+.btnContentDis{
+  width: 20%;
+  text-align: right;
+  /* background-color: aquamarine; */
+}
+.btnListDis{
+  align-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 2px;
+  /* margin-left: 2.5%;
+  margin-right: 2.5%; */
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #003b72;
+}
+.btnListDis:hover {
+  background-color: #2f82ff !important;
 }
 .btn:hover{
 background-color:#2f82ff !important;
@@ -22,7 +53,7 @@ color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
   background-color:#003b72;
   width: 200px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 .btn-ver{
   color: white;
@@ -117,4 +148,5 @@ color: white;
 .btnAction:hover {
   background-color: #ffffff !important;
 }
+
 

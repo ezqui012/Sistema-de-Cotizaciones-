@@ -1,5 +1,5 @@
-<ngx-spinner [name]="spinnerName" [type]="spinnerType"></ngx-spinner>
 <!--Navbar-->
+<ngx-spinner [name]="spinnerName" [type]="spinnerType"></ngx-spinner>
 <app-navbar></app-navbar>
 <!--Modal Roles-->
 <ng-template #content let-modal>
@@ -12,33 +12,45 @@
     </div>
     <div class="modal-body">
       <div class="dateInfo">
-        <h3><b>Facultad:</b></h3>
+        <h3><b>Nombre:</b></h3>
         <div class="dateInfoValue">
-          <h3>{{faculties[pos].name_faculty}}</h3>
+          <h3>{{personalUser[pos].name}}</h3>
         </div>
       </div>
       <div class="dateInfo">
-        <h3><b>Decano:</b></h3>
+        <h3><b>Rol:</b></h3>
         <div class="dateInfoValue">
-          <h3>{{faculties[pos].dean_faculty}}</h3>
+          <h3>{{personalUser[pos].name_role}}</h3>
         </div>
       </div>
       <div class="dateInfo">
-        <h3><b>Email:</b></h3>
+        <h3><b>Unidad:</b></h3>
         <div class="dateInfoValue">
-          <h3>{{faculties[pos].email_faculty}}</h3>
+          <h3>{{personalUser[pos].name_unit}}</h3>
         </div>
       </div>
       <div class="dateInfo">
         <h3><b>Teléfono:</b></h3>
         <div class="dateInfoValue">
-          <h3>{{faculties[pos].phone_faculty}}</h3>
+          <h3>{{personalUser[pos].phone}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>CI:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{personalUser[pos].ci}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>Email:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{personalUser[pos].email}}</h3>
         </div>
       </div>
       <div class="dateInfo">
         <h3><b>Dirección:</b></h3>
         <div class="dateInfoValue">
-          <h3>{{faculties[pos].address_faculty}}</h3>
+          <h3>{{personalUser[pos].address}}</h3>
         </div>
       </div>
 
@@ -52,26 +64,15 @@
 <!--header-->
 <div class="containerBody">
   <div class="containertop">
-    <div class="contentTitle">
-      <h1><b>Administrar Facultades</b></h1>
-    </div>
-    <div class="btnContentCreate">
-      <button type="button" class="btn btn-one" (click)="navigateTo('/school-create')">Registrar Facultad</button>
-    </div>
-    <div class="btnContentDis">
-      <button type="button" class="btn btnListDis" (click)="navigateTo('/user-list-disabled')" ngbPopover="Lista de Deshabilitados">
-        <img src="../../assets/img/delete/Lsitx.png" alt="" width="28" height="28" />
-      </button>
+    <h1><b>Usuarios deshabilitados</b></h1>
+    <div class="btnCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/user-list')">Lista de Personal</button>
+
     </div>
   </div>
 
   <!--Tabla-->
   <div class="containerTable">
-    <!-- <div class="newHeadTable">
-      <div class="numHead"><b>Nº</b></div>
-      <div class="nomHead"><b>Nombre</b></div>
-      <div class="accHead"><b>Acciones</b></div>
-    </div> -->
     <div class="newBodyTable">
       <table class="table table-hover">
         <thead class="headTable">
@@ -82,16 +83,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="row-faculty" *ngFor="let faculty of faculties | paginate: { itemsPerPage: numItem, currentPage: pageActual }; let i = index">
+          <tr class="row-faculty" *ngFor="let user of personalUser | paginate: { itemsPerPage: numItem, currentPage: pageActual } ; let i = index;">
             <th scope="row">{{(( numItem * (pageActual - 1) + i)+1)}}</th>
-            <td>{{faculty.name_faculty}}</td>
+            <td>{{user.name}}</td>
             <td>
               <div class="row justify-content-center">
-                <button type="button" class="btn btnAction" ngbPopover="Editar" (click)="navigateTo('/school-edit/'+faculty.id_faculty)">
-                  <img src="../../assets/icon-quote/pencil.png" alt="" width="22" height="22" />
-                </button>
-                <button id="verRol" type="button" class="btn btnAction" ngbPopover="Ver detalle" (click)="openModal(content, ( numItem * (pageActual - 1) + i))">
+                <button id="verRol" type="button" class="btn btnAction" (click)="openModal(content, ( numItem * (pageActual - 1) + i))" ngbPopover="Ver detalle">
                   <img src="../../assets/icon-quote/file-text.png" alt="" width="22" height="22" />
+                </button>
+                <button type="button" class="btn btnAction" (click)="disabledUser(user.id)" ngbPopover="Reanudar Habilitación">
+                  <img src="../../assets/img/delete/shift.png" alt="" width="22" height="22" />
                 </button>
               </div>
             </td>
@@ -107,3 +108,4 @@
   </div>
 
 </div>
+

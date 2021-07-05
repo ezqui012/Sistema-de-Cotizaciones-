@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::ApiResource('faculties', 'FacultyController');
     Route::ApiResource('permit', 'PermitController');
     Route::ApiResource('personal','PersonalController');
+    Route::get('userList/{statusData}', 'PersonalController@getUsers');
+    Route::put('userStatusUp/{id}/{status}', 'PersonalController@updateStatusUser');
     Route::ApiResource('unit', 'UnitController');
     Route::ApiResource('assignedPermit', 'AssignedPermitController');
     Route::get('unitDropdown','UnitController@getUnit');

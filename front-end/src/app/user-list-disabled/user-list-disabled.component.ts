@@ -1,23 +1,21 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
+import { PersonalUserService } from '../services/PersonalUser.service';
+import {PersonalUser} from '../Model/personalUser'
 import { Title } from '@angular/platform-browser';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from 'ngx-toastr';
 
-import { PersonalUserService } from '../services/PersonalUser.service';
-import {PersonalUser} from '../Model/personalUser'
 @Component({
-  selector: 'app-user-list',
+  selector: 'app-user-list-disabled',
   encapsulation:ViewEncapsulation.Emulated,
   providers: [NgbPopoverConfig],
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css'],
-
+  templateUrl: './user-list-disabled.component.html',
+  styleUrls: ['./user-list-disabled.component.css']
 })
-export class UserListComponent implements OnInit {
+export class UserListDisabledComponent implements OnInit {
 
-  //description_faculty:FormControl = new FormControl('')
   personalUser: Array<PersonalUser>=[]
   pos = 0;
   spinnerType: string | any;
@@ -35,12 +33,12 @@ export class UserListComponent implements OnInit {
     private titlePage: Title,
     private spinner: NgxSpinnerService
   ) {
-    this.titlePage.setTitle('Lista de usuarios - QUOT-UMSS');
+        this.titlePage.setTitle('Lista de usuarios - QUOT-UMSS');
     config.placement = 'left';
     config.triggers = 'hover';
     this.spinnerName = 'sp3';
     this.spinnerType = 'ball-spin-clockwise';
-  }
+   }
 
   ngOnInit(): void {
     this.getPersonalUser();
@@ -54,7 +52,8 @@ export class UserListComponent implements OnInit {
     this.pos = pos;
   }
   getPersonalUser(){
-    this._personalUserService.allPersonal('V').subscribe(
+
+    this._personalUserService.allPersonal('F').subscribe(
       (users)=> {
       this.spinner.hide(this.spinnerName);
       //console.log(users)
@@ -70,7 +69,7 @@ export class UserListComponent implements OnInit {
     );
   }
   disabledUser(id:number){
-    this._personalUserService.updateStatusData(id,'F').subscribe(
+    this._personalUserService.updateStatusData(id,'V').subscribe(
       (data) => {
         //this.spinner.hide(this.spinnerName);
         this.getPersonalUser();
@@ -81,6 +80,5 @@ export class UserListComponent implements OnInit {
       }
     );
   }
-
 
 }

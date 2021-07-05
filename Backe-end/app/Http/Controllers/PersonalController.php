@@ -25,7 +25,28 @@ class PersonalController extends Controller
             WHERE us.id_role = r.id_role
             AND us.id_unit = un.id_unit
             AND us.id_role <> 1
+            AND us.data_status = ?
             ORDER BY us.name');
+
+            return $personals;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
+    public function getUsers($statusData)
+    {
+
+        try{
+            $personals = DB::select('SELECT us.id, us.name, r.name_role, un.name_unit, us.phone, us.ci, us.email, us.address
+            FROM roles r, units un, users us
+            WHERE us.id_role = r.id_role
+            AND us.id_unit = un.id_unit
+            AND us.id_role <> 1
+            AND us.data_status = ?
+            ORDER BY us.name' ,[$statusData]);
 
             return $personals;
         }catch(Exception $ex){
@@ -58,7 +79,24 @@ class PersonalController extends Controller
             ], 404);
         }
     }
+    public function updateStatusUser($id, $status)
+    {
+        try {
 
+            DB::update('UPDATE users
+            SET data_status = ?
+            WHERE id = ?', [$status, $id]);;
+            return response()->json([
+                'res' => true,
+                'message' => 'Update status Request quotation'
+            ], 200);
+        } catch (Exception $ex) {
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
     /**
      * Display the specified resource.
      *

@@ -54,6 +54,10 @@ import { AutListRequestGuard } from './guards/aut-list-request.guard';
 
 import { ListBudgetComponent } from './list-budget/list-budget.component';
 import { ListBinnacleComponent } from './list-binnacle/list-binnacle.component';
+import { UserListDisabledComponent } from './user-list-disabled/user-list-disabled.component';
+import { SchoolListDisabledComponent } from './school-list-disabled/school-list-disabled.component';
+import { RolesListDisabledComponent } from './roles-list-disabled/roles-list-disabled.component';
+import { UnitListDisabledComponent } from './unit-list-disabled/unit-list-disabled.component';
 
 const routes: Routes = [
   {
@@ -64,6 +68,11 @@ const routes: Routes = [
   {
     path: 'roles-list',
     component: RolesListComponent,
+    canActivate: [AuthAdminGuard]
+  },
+  {
+    path: 'roles-list-disabled',
+    component: RolesListDisabledComponent,
     canActivate: [AuthAdminGuard]
   },
   {
@@ -112,6 +121,11 @@ const routes: Routes = [
     canActivate: [AuthAdminGuard]
   },
   {
+    path:'school-list-disabled',
+    component: SchoolListDisabledComponent,
+    canActivate: [AuthAdminGuard]
+  },
+  {
     path:'school-create',
     component: SchoolCreateComponent,
     canActivate: [AuthAdminGuard]
@@ -127,8 +141,18 @@ const routes: Routes = [
     canActivate: [AuthAdminGuard]
   },
   {
+    path:'user-list-disabled',
+    component: UserListDisabledComponent,
+    canActivate: [AuthAdminGuard]
+  },
+  {
     path:'unit-list',
     component: AdministrativasComponent,
+    canActivate: [AuthAdminGuard]
+  },
+  {
+    path:'unit-list-disabled',
+    component: UnitListDisabledComponent,
     canActivate: [AuthAdminGuard]
   },
   {

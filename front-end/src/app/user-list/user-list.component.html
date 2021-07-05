@@ -4,57 +4,57 @@
 <!--Modal Roles-->
 <ng-template #content let-modal>
 
-    <div class="modal-header">
-      <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
-      <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
-        <span aria-hidden="true">&times;</span>
-      </button>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="dateInfo">
+      <h3><b>Nombre:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].name}}</h3>
+      </div>
     </div>
-    <div class="modal-body">
-      <div class="dateInfo">
-        <h3><b>Nombre:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{personalUser[pos].name}}</h3>
-        </div>
+    <div class="dateInfo">
+      <h3><b>Rol:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].name_role}}</h3>
       </div>
-      <div class="dateInfo">
-        <h3><b>Rol:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{personalUser[pos].name_role}}</h3>
-        </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Unidad:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].name_unit}}</h3>
       </div>
-      <div class="dateInfo">
-        <h3><b>Unidad:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{personalUser[pos].name_unit}}</h3>
-        </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Teléfono:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].phone}}</h3>
       </div>
-      <div class="dateInfo">
-        <h3><b>Teléfono:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{personalUser[pos].phone}}</h3>
-        </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>CI:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].ci}}</h3>
       </div>
-      <div class="dateInfo">
-        <h3><b>CI:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{personalUser[pos].ci}}</h3>
-        </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Email:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].email}}</h3>
       </div>
-      <div class="dateInfo">
-        <h3><b>Email:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{personalUser[pos].email}}</h3>
-        </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Dirección:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{personalUser[pos].address}}</h3>
       </div>
-      <div class="dateInfo">
-        <h3><b>Dirección:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{personalUser[pos].address}}</h3>
-        </div>
-      </div>
+    </div>
 
-    </div>
+  </div>
 
 
 
@@ -64,10 +64,16 @@
 <!--header-->
 <div class="containerBody">
   <div class="containertop">
-    <h1><b>Administrar Personal</b></h1>
-    <div class="btnCreate">
+    <div class="contentTitle">
+      <h1><b>Administrar Personal</b></h1>
+    </div>
+    <div class="btnContentCreate">
       <button type="button" class="btn btn-one" (click)="navigateTo('/register-user')">Registrar Personal</button>
-
+    </div>
+    <div class="btnContentDis">
+      <button type="button" class="btn btnListDis" (click)="navigateTo('/user-list-disabled')" ngbPopover="Lista de Deshabilitados">
+        <img src="../../assets/img/delete/Lsitx.png" alt="" width="28" height="28" />
+      </button>
     </div>
   </div>
 
@@ -88,7 +94,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="row-faculty" *ngFor="let user of personalUser | paginate: { itemsPerPage: numItem, currentPage: pageActual } ; let i = index;">
+          <tr class="row-faculty"
+            *ngFor="let user of personalUser | paginate: { itemsPerPage: numItem, currentPage: pageActual } ; let i = index;">
             <th scope="row">{{(( numItem * (pageActual - 1) + i)+1)}}</th>
             <td>{{user.name}}</td>
             <td>
@@ -96,8 +103,13 @@
                 <button type="button" class="btn btnAction" routerLink="/edit-user/{{user.id}}" ngbPopover="Editar">
                   <img src="../../assets/icon-quote/pencil.png" alt="" width="22" height="22" />
                 </button>
-                <button id="verRol" type="button" class="btn btnAction" (click)="openModal(content, ( numItem * (pageActual - 1) + i))" ngbPopover="Ver detalle">
+                <button id="verRol" type="button" class="btn btnAction"
+                  (click)="openModal(content, ( numItem * (pageActual - 1) + i))" ngbPopover="Ver detalle">
                   <img src="../../assets/icon-quote/file-text.png" alt="" width="22" height="22" />
+                </button>
+                <button type="button" class="btn btnAction"
+                  (click)="disabledUser(user.id)" ngbPopover="Deshabilitar">
+                  <img src="../../assets/img/delete/cancel-circle.png" alt="" width="22" height="22" />
                 </button>
               </div>
             </td>
@@ -108,9 +120,9 @@
       </table>
     </div>
     <div class="contentPagination">
-      <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+      <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" nextLabel="Siguiente">
+      </pagination-controls>
     </div>
   </div>
 
 </div>
-

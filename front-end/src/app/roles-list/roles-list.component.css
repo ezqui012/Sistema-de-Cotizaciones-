@@ -12,6 +12,31 @@ body{
   margin-bottom: 10px;
   color: #003b72;
   font-weight: bolder;
+  width: 100%;
+}
+.contentTitle{
+  width:300px;
+}
+.btnContentCreate{
+ width: 60%;
+}
+
+.btnContentDis{
+  width: 20%;
+  text-align: right;
+}
+.btnListDis{
+  align-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 2px;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #003b72;
+}
+.btnListDis:hover {
+  background-color: #2f82ff !important;
 }
 .btn:hover{
 background-color:#2f82ff !important;

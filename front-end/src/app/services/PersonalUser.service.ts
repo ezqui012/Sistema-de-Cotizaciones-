@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Permit, RegisterPermitResponse, Register_Permit } from '../Model/permit';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { RegisterPersonalUserResponse } from '../Model/personalUser';
 
 
 @Injectable({
@@ -14,13 +15,23 @@ export class PersonalUserService {
 
   constructor(private httpClient: HttpClient) { }
 
-allPersonal(): Observable<Permit | any> {
+allPersonal(statusData:string): Observable<Permit | any> {
   let failed: any;
   if (localStorage.getItem('quot-umss-tk')) {
     const httpHeader = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
     });
-    return this.httpClient.get<Permit>(`${environment.URI_API}personal`, { headers: httpHeader });
+    return this.httpClient.get<Permit>(`${environment.URI_API}userList/${statusData}`, { headers: httpHeader });
+  }
+  return failed;
+}
+updateStatusData(id:number, status:string): Observable<RegisterPersonalUserResponse | any>{
+  let failed: any;
+  if(localStorage.getItem('quot-umss-tk')){
+    const httpHeader = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    });
+    return this.httpClient.put<RegisterPersonalUserResponse>(`${environment.URI_API}userStatusUp/${id}/${status}`,{}, {headers: httpHeader});
   }
   return failed;
 }

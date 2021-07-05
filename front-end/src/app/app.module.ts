@@ -72,6 +72,11 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ListBudgetComponent } from './list-budget/list-budget.component';
 import { ListBinnacleComponent } from './list-binnacle/list-binnacle.component';
+import { UserListDisabledComponent } from './user-list-disabled/user-list-disabled.component';
+import { SchoolListDisabledComponent } from './school-list-disabled/school-list-disabled.component';
+import { RolesListDisabledComponent } from './roles-list-disabled/roles-list-disabled.component';
+import { ItemListDisabledComponent } from './item-list-disabled/item-list-disabled.component';
+import { UnitListDisabledComponent } from './unit-list-disabled/unit-list-disabled.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +127,12 @@ import { ListBinnacleComponent } from './list-binnacle/list-binnacle.component';
     ItemEditComponent,
     FilterPipe,
     ListBudgetComponent,
-    ListBinnacleComponent
+    ListBinnacleComponent,
+    UserListDisabledComponent,
+    SchoolListDisabledComponent,
+    RolesListDisabledComponent,
+    ItemListDisabledComponent,
+    UnitListDisabledComponent
   ],
   imports: [
     BrowserModule,
