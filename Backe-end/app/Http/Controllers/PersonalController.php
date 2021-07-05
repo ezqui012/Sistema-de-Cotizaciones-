@@ -88,7 +88,7 @@ class PersonalController extends Controller
             WHERE id = ?', [$status, $id]);;
             return response()->json([
                 'res' => true,
-                'message' => 'Update status Request quotation'
+                'message' => 'Update status data'
             ], 200);
         } catch (Exception $ex) {
             return response()->json([

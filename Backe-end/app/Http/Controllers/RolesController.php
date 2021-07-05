@@ -28,6 +28,19 @@ class RolesController extends Controller
             ], 404);
         }
     }
+    public function getRoles($statusData)
+    {
+        try{
+            $res = Roles::orderBy('name_role')->where('name_role', '<>', 'Admin')->where('data_status', '=', $statusData)->get();
+            return $res;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'error' => $ex,
+                'message' => 'There is been a problem'
+            ], 404);
+        }
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -67,7 +80,24 @@ class RolesController extends Controller
         ], 404);
     }
     }
+    public function updateStatusRole($id, $status)
+    {
+        try {
 
+            DB::update('UPDATE roles
+            SET data_status = ?
+            WHERE id_role = ?', [$status, $id]);;
+            return response()->json([
+                'res' => true,
+                'message' => 'Update status Data'
+            ], 200);
+        } catch (Exception $ex) {
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
     /**
      * Display the specified resource.
      *

@@ -11,6 +11,7 @@ import { AssignedPermitService } from '../services/assignedPermit.service';
 import { PermitOfRole } from '../Model/assignedPermit';
 import { PermitService } from '../services/permit.service';
 import { Title } from '@angular/platform-browser';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-roles-list',
@@ -38,6 +39,7 @@ export class RolesListComponent implements OnInit {
     public _permitService: PermitService,
     public config: NgbPopoverConfig,
     private spinner: NgxSpinnerService,
+    public toastr: ToastrService,
     private titlePage: Title
   ) {
     this.titlePage.setTitle('Lista de roles - QUOT-UMSS');
@@ -53,10 +55,17 @@ export class RolesListComponent implements OnInit {
 
   }
   getRole() {
-    this._roleService.allRoles().subscribe((role) => {
+    this._roleService.allRoles('V').subscribe((role) => {
       this.roles = role
       this.spinner.hide(this.spinnerName);
-    })
+    },
+    (error) => {
+      this.toastr.error(`ERROR: ${error} Regargue la pagina`);
+      this.spinner.hide(this.spinnerName);
+    }
+
+
+    );
   }
   getPermits(idRole:any) {
     this._assignedPermitService.allPermitOfRole(idRole).subscribe((permit) => {
@@ -80,7 +89,20 @@ export class RolesListComponent implements OnInit {
     this.pos = pos;
     this.getPermits(idRole);
   }
+  disabledRol(id:number){
 
+      this._roleService.updateStatusData(id,'F').subscribe(
+        (data) => {
+          //this.spinner.hide(this.spinnerName);
+          this.getRole();
+        },
+        (error) => {
+          this.toastr.error(`ERROR: ${error} Regargue la pagina`);
+          this.spinner.hide(this.spinnerName);
+        }
+      );
+
+  }
 
 
 }

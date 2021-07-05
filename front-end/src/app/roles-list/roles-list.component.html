@@ -5,34 +5,34 @@
 <!--Modal Roles-->
 <ng-template #content let-modal>
 
-    <div class="modal-header">
-      <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
-      <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="dateInfo">
-        <h3><b>Nombre del rol:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{roles[pos].name_role}}</h3>
-        </div>
-      </div>
-      <div class="dateInfo">
-        <h3><b>Descipción:</b></h3>
-        <div class="dateInfoValue">
-          <h3>{{roles[pos].description_role}}</h3>
-        </div>
-      </div>
-      <div class="dateInfo">
-        <h3><b>Permisos:</b></h3>
-        <div class="conentPermiso">
-          <div class="dateInfoValue" *ngFor="let permit of permits">
-            <h3>{{permit.name_permission}}</h3>
-          </div>
-        </div>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="dateInfo">
+      <h3><b>Nombre del rol:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{roles[pos].name_role}}</h3>
       </div>
     </div>
+    <div class="dateInfo">
+      <h3><b>Descipción:</b></h3>
+      <div class="dateInfoValue">
+        <h3>{{roles[pos].description_role}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Permisos:</b></h3>
+      <div class="conentPermiso">
+        <div class="dateInfoValue" *ngFor="let permit of permits">
+          <h3>{{permit.name_permission}}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </ng-template>
 
@@ -47,7 +47,8 @@
       <button type="button" class="btn btn-one" (click)="navigateTo('/roles-create')">Registrar Rol</button>
     </div>
     <div class="btnContentDis">
-      <button type="button" class="btn btnListDis" (click)="navigateTo('/user-list-disabled')" ngbPopover="Lista de Deshabilitados">
+      <button type="button" class="btn btnListDis" (click)="navigateTo('/roles-list-disabled')"
+        ngbPopover="Lista de Deshabilitados">
         <img src="../../assets/img/delete/Lsitx.png" alt="" width="28" height="28" />
       </button>
     </div>
@@ -66,22 +67,28 @@
           <tr id="titleHead" class="row-table">
             <th scope="col">Nº</th>
             <th scope="col">Nombre</th>
-            <th scope="col" style="text-align: center !important;" >Acciones</th>
+            <th scope="col" style="text-align: center !important;">Acciones</th>
           </tr>
         </thead>
 
         <tbody class="bodyTable">
-          <tr class="row-table" *ngFor="let role of roles | paginate: { itemsPerPage: numItem, currentPage: pageActual } ; let i = index;">
+          <tr class="row-table"
+            *ngFor="let role of roles | paginate: { itemsPerPage: numItem, currentPage: pageActual } ; let i = index;">
             <th scope="row">{{(( numItem * (pageActual - 1) + i)+1)}}</th>
             <td>{{role.name_role}}</td>
 
             <td>
               <div class="row justify-content-center">
-                <button type="button" class="btn btnAction" ngbPopover="Editar" (click)="navigateToEdit('/roles-edit', role.id_role)">
+                <button type="button" class="btn btnAction" ngbPopover="Editar"
+                  (click)="navigateToEdit('/roles-edit', role.id_role)">
                   <img src="../../assets/icon-quote/pencil.png" alt="" width="22" height="22" />
                 </button>
-                <button id="verRol" type="button" class="btn btnAction" ngbPopover="Ver detalle" (click)="openModal(content,( numItem * (pageActual - 1) + i), role.id_role)">
+                <button id="verRol" type="button" class="btn btnAction" ngbPopover="Ver detalle"
+                  (click)="openModal(content,( numItem * (pageActual - 1) + i), role.id_role)">
                   <img src="../../assets/icon-quote/file-text.png" alt="" width="22" height="22" />
+                </button>
+                <button type="button" class="btn btnAction" (click)="disabledRol(role.id_role)" ngbPopover="Deshabilitar">
+                  <img src="../../assets/img/delete/cancel-circle.png" alt="" width="22" height="22" />
                 </button>
               </div>
             </td>
@@ -91,7 +98,8 @@
       </table>
     </div>
     <div class="contentPagination">
-      <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+      <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" nextLabel="Siguiente">
+      </pagination-controls>
     </div>
 
   </div>

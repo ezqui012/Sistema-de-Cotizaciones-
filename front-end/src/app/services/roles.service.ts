@@ -20,13 +20,13 @@ export class RolesService {
 //  return this._http.get<Roles[]>(this.URL);
 // }
 
-allRoles(): Observable<Roles | any> {
+allRoles(statusData:string): Observable<Roles | any> {
   let failed: any;
   if (localStorage.getItem('quot-umss-tk')) {
     const httpHeader = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
     });
-    return this.httpClient.get<Roles>(`${environment.URI_API}roles`, { headers: httpHeader });
+    return this.httpClient.get<Roles>(`${environment.URI_API}rolesList/${statusData}`, { headers: httpHeader });
   }
   return failed;
 }
@@ -73,5 +73,14 @@ updateRoleSelect(id:any, role: Register_Role):Observable<RegisterRolesResponse |
   }
   return failed;
 }
-
+updateStatusData(id:number, status:string): Observable<RegisterRolesResponse | any>{
+  let failed: any;
+  if(localStorage.getItem('quot-umss-tk')){
+    const httpHeader = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+    });
+    return this.httpClient.put<RegisterRolesResponse>(`${environment.URI_API}statusDataUp/${id}/${status}`,{}, {headers: httpHeader});
+  }
+  return failed;
+}
 }

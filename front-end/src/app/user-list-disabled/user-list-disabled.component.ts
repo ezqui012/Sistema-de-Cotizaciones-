@@ -33,7 +33,7 @@ export class UserListDisabledComponent implements OnInit {
     private titlePage: Title,
     private spinner: NgxSpinnerService
   ) {
-        this.titlePage.setTitle('Lista de usuarios - QUOT-UMSS');
+        this.titlePage.setTitle('Lista de deshabilitados - QUOT-UMSS');
     config.placement = 'left';
     config.triggers = 'hover';
     this.spinnerName = 'sp3';
