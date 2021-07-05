@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('email','UserController@getEmail');
     Route::post('ci', 'UserController@getCi');
     Route::get('list','UnitController@getUnitList');
+    Route::put('unitStatusUp/{id}/{status}', 'UnitController@updateStatusUnit');
     Route::ApiResource('roles','RolesController');
     Route:: get('rolesList/{statusData}','RolesController@getRoles');
     Route:: put('statusDataUp/{id}/{status}','RolesController@updateStatusRole');

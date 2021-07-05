@@ -1,0 +1,151 @@
+.containerBody{
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 20px;
+}
+body{
+  background-color: #F0F0F8;
+}
+.containertop{
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  color: #003b72;
+  font-weight: bolder;
+  width: 100%;
+}
+/* .contentTitle{
+  width:300px;
+}
+.btnContentCreate{
+ width: 60%;
+}
+
+.btnContentDis{
+  width: 20%;
+  text-align: right;
+} */
+.btnListDis{
+  align-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 2px;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #003b72;
+}
+.btnListDis:hover {
+  background-color: #2f82ff !important;
+}
+.btn:hover{
+background-color:#2f82ff !important;
+color: white;
+}
+.btn-one{
+
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 200px;
+  margin-left: 10px;
+}
+.btn-ver{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color: #1C2331;
+  margin-left: 10px;
+  width: 80px;
+}
+.btn-edit{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 80px;
+}
+
+
+/*estilos Modal*/
+.contentModal{
+  background-color: #F0F0F8 !important;
+}
+.modal-title{
+  color: #003b72 !important;
+ }
+
+.colorModal, .modal-content{
+  color: #003b72;
+  background-color: #F0F0F8;
+}
+.close{
+  color: rgb(7, 7, 7);
+}
+.close:hover{
+  color: #003b72;
+}
+.dateInfo{
+  font-weight: bold;
+  display: flex;
+  color: #003b72 !important;
+}
+.dateInfoValue{
+  font-weight: normal;
+  color: #1C2331;
+  margin-left: 10px;
+}
+
+.headTable{
+  background-color: #1C2331;
+  color: white;
+}
+
+.newBodyTable{
+  color:#003b72 ;
+  background-color: #fafafa;
+  height: 480px;
+}
+.contentPagination{
+  text-align: right !important;
+  width: 100%;
+  padding-top: 5px;
+}
+.btnAction {
+  align-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 1px;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.newHeadTable{
+  background-color: #003b72;
+  color: white;
+  font-size: 1rem;
+  display: flex;
+  padding: 12px;
+  width: 100%;
+}
+.numHead{
+  width: 9%;
+}
+.nomHead{
+  width: 79%;
+}
+
+.numHeadG{
+  width: 7%;
+}
+.nomHeadG{
+  width: 60%;
+}
+.monHeadG{
+  width: 24%;
+}
+
+.btnAction:hover {
+  background-color: #ffffff !important;
+}
+

@@ -16,7 +16,7 @@ class UnitController extends Controller
     public function index(Request $request)
     {
         try{
-            if($request->has('type')){
+            if($request->has('type') ){
                 $unit = Unit::where('type', '=', $request->type)->get();
                 return $unit;
             }else{
@@ -32,7 +32,24 @@ class UnitController extends Controller
             ], 404);
         }
     }
+    public function updateStatusUnit($id, $status)
+    {
+        try {
 
+            DB::update('UPDATE units
+            SET data_status = ?
+            WHERE id_unit = ?', [$status, $id]);;
+            return response()->json([
+                'res' => true,
+                'message' => 'Update status Data'
+            ], 200);
+        } catch (Exception $ex) {
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
     public function getUnitList(Request $request)
     {
         try{
@@ -41,7 +58,9 @@ class UnitController extends Controller
 
                 FROM units u, faculties fa
                 WHERE u.id_faculty = fa.id_faculty
-                AND u.type = ? ORDER BY u.name_unit ASC', [$request->type]);
+                AND u.type = ?
+                AND u.data_status = ?
+                ORDER BY u.name_unit ASC', [$request->type, $request->data_status]);
 
                 return $unit;
 

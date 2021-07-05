@@ -8,11 +8,13 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { ListService } from '../services/list.service';
 import { FormControl } from '@angular/forms';
 import { ListUnit } from '../Model/list';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-administrativas',
   templateUrl: './administrativas.component.html',
   styleUrls: ['./administrativas.component.css'],
+  providers: [NgbPopoverConfig],
   encapsulation: ViewEncapsulation.Emulated
 })
 export class AdministrativasComponent implements OnInit {
@@ -29,12 +31,15 @@ export class AdministrativasComponent implements OnInit {
   pageActual: number =1;
   numItem:number = 8;
 
-  constructor(private modal: NgbModal,
+  constructor(
+    private modal: NgbModal,
     private router: Router, private servicio: ListService,
     public config: NgbPopoverConfig,
     private titlePage: Title,
     private spinner: NgxSpinnerService,
-    public _listService: ListService) {
+    public toastr: ToastrService,
+    public _listService: ListService
+    ) {
     this.titlePage.setTitle('Lista de Unidades - QUOT-UMSS');
     config.placement = 'left';
     config.triggers = 'hover';
@@ -51,7 +56,7 @@ export class AdministrativasComponent implements OnInit {
   }
 
   getList() {
-    this._listService.gastoUnit().subscribe((list) => {
+    this._listService.gastoUnit('V').subscribe((list) => {
 
       this.gastoUnit = list
       this.spinner.hide(this.spinnerName);
@@ -60,7 +65,7 @@ export class AdministrativasComponent implements OnInit {
   }
 
   getListAdministrativa() {
-    this._listService.adminUnit().subscribe((list) => {
+    this._listService.adminUnit('V').subscribe((list) => {
 
       this.administrativoUnit = list
       this.spinner.hide(this.spinnerName);
@@ -85,7 +90,19 @@ export class AdministrativasComponent implements OnInit {
 
   }
 
-
+  updateStatusData(id:number){
+    this._listService.updateStatusData(id,'F').subscribe(
+      (data) => {
+        //this.spinner.hide(this.spinnerName);
+        this.getList();
+        this.getListAdministrativa();
+      },
+      (error) => {
+        this.toastr.error(`ERROR: ${error} Regargue la pagina`);
+        this.spinner.hide(this.spinnerName);
+      }
+    );
+  }
 
 
 
