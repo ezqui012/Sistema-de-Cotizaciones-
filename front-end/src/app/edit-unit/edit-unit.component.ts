@@ -77,7 +77,7 @@ export class EditUnitComponent implements OnInit {
   }
 
   getFaculty(){
-    this.serviceFaculty.allFaculties().subscribe((data) => {
+    this.serviceFaculty.allFaculties('V').subscribe((data) => {
         this.faculties = data;
         this.spinner.hide(this.spinnerName);
       },

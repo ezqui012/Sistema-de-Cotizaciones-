@@ -63,7 +63,7 @@ export class RequestQuotationComponent implements OnInit {
     this.router.navigate([path]);
   }
   getAllItem() {
-    this.serviceRequestQuote.allItem().subscribe((item) => {
+    this.serviceRequestQuote.allItem('V').subscribe((item) => {
       this.items = item;
     });
   }

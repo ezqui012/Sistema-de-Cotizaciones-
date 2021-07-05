@@ -23,6 +23,8 @@ Route::post('login', 'UserController@login');
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('logout', 'UserController@logout');
     Route::ApiResource('faculties', 'FacultyController');
+    Route::get('facultiesList/{statusData}', 'FacultyController@getFaculties');
+    Route::put('facultiesStatusUp/{id}/{status}', 'FacultyController@updateStatusFaculty');
     Route::ApiResource('permit', 'PermitController');
     Route::ApiResource('personal','PersonalController');
     Route::get('userList/{statusData}', 'PersonalController@getUsers');
@@ -64,6 +66,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('request_up/{id}/{request}', 'RequestDetailsController@updateRequestName');
     Route::apiResource('detail-request', 'RequestDetailsController');
     Route::apiResource('expense-item', 'ExpenseItemController');
+    Route::get('itemList/{statusData}', 'ExpenseItemController@getItems');
+    Route::put('itemStatusUp/{id}/{status}', 'ExpenseItemController@updateStatusItem');
+
     Route::get('request','RequestQuotationController@getListRequest');
     //metodos de ddetalle
     Route:: get('itemQuotes/{idQuote}/{idItem}','QuoteController@getItemQuotes');

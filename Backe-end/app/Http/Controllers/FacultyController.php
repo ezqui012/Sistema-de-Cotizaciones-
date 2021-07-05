@@ -25,6 +25,37 @@ class FacultyController extends Controller
             ], 404);
         }
     }
+    public function getFaculties($statusData)
+    {
+        try{
+            $res = Faculty::orderBy('name_faculty')->where('data_status', '=', $statusData)->get();
+            return $res;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'error' => $ex,
+                'message' => 'There is been a problem'
+            ], 404);
+        }
+    }
+    public function updateStatusFaculty($id, $status)
+    {
+        try {
+
+            DB::update('UPDATE faculties
+            SET data_status = ?
+            WHERE id_faculty = ?', [$status, $id]);;
+            return response()->json([
+                'res' => true,
+                'message' => 'Update status Data'
+            ], 200);
+        } catch (Exception $ex) {
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
     public function allListCompany()
     {
         try{

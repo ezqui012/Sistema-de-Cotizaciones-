@@ -53,7 +53,7 @@ export class SchoolListComponent implements OnInit {
     this.pos = pos;
   }
   getFaculty(){
-    this._facultyService.allFaculties().subscribe((faculty)=> {
+    this._facultyService.allFaculties('V').subscribe((faculty)=> {
       this.faculties = faculty;
       this.spinner.hide(this.spinnerName);
     },
@@ -61,5 +61,17 @@ export class SchoolListComponent implements OnInit {
       this.spinner.hide(this.spinnerName);
       this.toastr.error(`ERROR: ${error} Recargue la pagina`);
     })
+  }
+  updateStatusData(id:number){
+    this._facultyService.updateStatusData(id,'F').subscribe(
+      (data) => {
+        //this.spinner.hide(this.spinnerName);
+        this.getFaculty();
+      },
+      (error) => {
+        this.toastr.error(`ERROR: ${error} Regargue la pagina`);
+        this.spinner.hide(this.spinnerName);
+      }
+    );
   }
 }

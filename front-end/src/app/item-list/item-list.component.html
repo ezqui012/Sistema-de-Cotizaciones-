@@ -60,10 +60,10 @@
       <button type="button" class="btn btn-one" (click)="navigateTo('/item-register-form')">Registrar Item</button>
     </div>
     <div class="btnContentDis">
-      <button type="button" class="btn btnListDis" (click)="navigateTo('/user-list-disabled')" ngbPopover="Lista de Deshabilitados">
+      <button type="button" class="btn btnListDis" (click)="navigateTo('/item-list-disabled')" ngbPopover="Lista de Deshabilitados">
         <img src="../../assets/img/delete/Lsitx.png" alt="" width="28" height="28" />
       </button>
-    </div>
+          </div>
   </div>
 
   <!--Tabla-->
@@ -99,9 +99,11 @@
                 <button type="button"  class="btn btnAction" ngbPopover="Editar" (click)="navigateTo('/item-edit/'+item.id_item)" >
                   <img src="../../assets/icon-quote/pencil.png" alt="" width="22" height="22" />
                 </button>
-
                 <button type="button" class="btn btnAction" (click)="openModal(content, ( numItem * (pageActual - 1) + i))" ngbPopover="Ver detalle">
                   <img src="../../assets/icon-quote/file-text.png" alt="" width="22" height="22" />
+                </button>
+                <button type="button"  class="btn btnAction" ngbPopover="Deshabilitar" (click)="updateStatusData(item.id_item)">
+                  <img src="../../assets/img/delete/cancel-circle.png" alt="" width="22" height="22" />
                 </button>
               </div>
             </td>

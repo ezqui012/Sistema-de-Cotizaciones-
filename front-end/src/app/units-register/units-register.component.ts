@@ -56,7 +56,7 @@ export class UnitsRegisterComponent implements OnInit {
   }
 
   getFaculties(){
-    this.service.allFaculties().subscribe(
+    this.service.allFaculties('V').subscribe(
       (data) => {
         this.faculties = data;
         this.spinner.hide(this.spinnerName);

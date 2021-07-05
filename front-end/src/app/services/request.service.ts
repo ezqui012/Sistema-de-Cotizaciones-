@@ -23,13 +23,24 @@ export class RequestQuoteService {
     }
     return failed;
   }
-  allItem(): Observable<DateExpenseItem | any> {
+
+  allItem(statusData:string): Observable<DateExpenseItem | any> {
     let failed: any;
     if (localStorage.getItem('quot-umss-tk')) {
       const httpHeader = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
-      return this.httpClient.get<DateExpenseItem>(`${environment.URI_API}expense-item`, { headers: httpHeader });
+      return this.httpClient.get<DateExpenseItem>(`${environment.URI_API}itemList/${statusData}`, { headers: httpHeader });
+    }
+    return failed;
+  }
+  updateStatusData(id:number, status:string): Observable<DateExpenseItem | any>{
+    let failed: any;
+    if(localStorage.getItem('quot-umss-tk')){
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.put<DateExpenseItem>(`${environment.URI_API}itemStatusUp/${id}/${status}`,{}, {headers: httpHeader});
     }
     return failed;
   }

@@ -8,25 +8,34 @@ import { Faculty, RegisterFacultyData, ResponseRegister } from '../Model/faculty
   providedIn: 'root'
 })
 export class FacultyService {
-  URL = "http://127.0.0.1:8000/api/faculties";
+ // URL = "http://127.0.0.1:8000/api/faculties";
 
   constructor(private httpClient: HttpClient) { }
 
-  allFaculties(): Observable<Faculty | any> {
+  allFaculties(statusData:any): Observable<Faculty | any> {
     let failed: any;
     if (localStorage.getItem('quot-umss-tk')) {
       const httpHeader = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
-      return this.httpClient.get<Faculty>(`${environment.URI_API}faculties`, { headers: httpHeader });
+      return this.httpClient.get<Faculty>(`${environment.URI_API}facultiesList/${statusData}`, { headers: httpHeader });
+    }
+    return failed;
+  }
+  updateStatusData(id:number, status:string): Observable<ResponseRegister | any>{
+    let failed: any;
+    if(localStorage.getItem('quot-umss-tk')){
+      const httpHeader = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
+      });
+      return this.httpClient.put<ResponseRegister>(`${environment.URI_API}facultiesStatusUp/${id}/${status}`,{}, {headers: httpHeader});
     }
     return failed;
   }
 
-
-  getFaculties(): Observable<Faculty> {
+  /*getFaculties(): Observable<Faculty> {
     return this.httpClient.get<Faculty>(this.URL);
-  }
+  }*/
   registerFaculty(faculty: RegisterFacultyData):Observable<ResponseRegister | any>{
     let failed: any;
 

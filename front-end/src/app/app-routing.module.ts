@@ -58,6 +58,7 @@ import { UserListDisabledComponent } from './user-list-disabled/user-list-disabl
 import { SchoolListDisabledComponent } from './school-list-disabled/school-list-disabled.component';
 import { RolesListDisabledComponent } from './roles-list-disabled/roles-list-disabled.component';
 import { UnitListDisabledComponent } from './unit-list-disabled/unit-list-disabled.component';
+import { ItemListDisabledComponent } from './item-list-disabled/item-list-disabled.component';
 
 const routes: Routes = [
   {
@@ -259,6 +260,11 @@ const routes: Routes = [
   {
     path: 'item-list',
     component: ItemListComponent,
+    canActivate: [AuthAdminGuard]
+  },
+  {
+    path: 'item-list-disabled',
+    component: ItemListDisabledComponent,
     canActivate: [AuthAdminGuard]
   },
   {

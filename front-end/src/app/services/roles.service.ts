@@ -13,12 +13,9 @@ import { ResponseRegister } from '../Model/faculty';
   providedIn: 'root'
 })
 export class RolesService {
-  //URL = "http://127.0.0.1:8000/api/roles";
 
   constructor(private httpClient: HttpClient) { }
-// getRole(): Observable<Roles[]>{
-//  return this._http.get<Roles[]>(this.URL);
-// }
+
 
 allRoles(statusData:string): Observable<Roles | any> {
   let failed: any;

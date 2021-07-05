@@ -1,1 +1,100 @@
-<p>school-list-disabled works!</p>
+<ngx-spinner [name]="spinnerName" [type]="spinnerType"></ngx-spinner>
+<!--Navbar-->
+<app-navbar></app-navbar>
+<!--Modal Roles-->
+<ng-template #content let-modal>
+
+    <div class="modal-header">
+      <h1 class="modal-title" id="modal-basic-title"><b>Información</b></h1>
+      <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="dateInfo">
+        <h3><b>Facultad:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{faculties[pos].name_faculty}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>Decano:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{faculties[pos].dean_faculty}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>Email:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{faculties[pos].email_faculty}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>Teléfono:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{faculties[pos].phone_faculty}}</h3>
+        </div>
+      </div>
+      <div class="dateInfo">
+        <h3><b>Dirección:</b></h3>
+        <div class="dateInfoValue">
+          <h3>{{faculties[pos].address_faculty}}</h3>
+        </div>
+      </div>
+
+    </div>
+
+
+
+</ng-template>
+
+
+<!--header-->
+<div class="containerBody">
+  <div class="containertop">
+    <div class="contentTitle">
+      <h1><b>Facultades deshabilitadas</b></h1>
+    </div>
+    <div class="btnContentCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/school-list')">Lista de Facultades</button>
+    </div>
+     </div>
+
+  <!--Tabla-->
+  <div class="containerTable">
+
+    <div class="newBodyTable">
+      <table class="table table-hover">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nombre</th>
+            <th scope="col" style="text-align: center !important;">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-faculty" *ngFor="let faculty of faculties | paginate: { itemsPerPage: numItem, currentPage: pageActual }; let i = index">
+            <th scope="row">{{(( numItem * (pageActual - 1) + i)+1)}}</th>
+            <td>{{faculty.name_faculty}}</td>
+            <td>
+              <div class="row justify-content-center">
+                <button id="verRol" type="button" class="btn btnAction" ngbPopover="Ver detalle" (click)="openModal(content, ( numItem * (pageActual - 1) + i))">
+                  <img src="../../assets/icon-quote/file-text.png" alt="" width="22" height="22" />
+                </button>
+                <button type="button" class="btn btnAction" ngbPopover="Reanudar habilitación" (click)="updateStatusData(faculty.id_faculty)">
+                  <img src="../../assets/img/delete/shift.png" alt="" width="22" height="22" />
+                </button>
+              </div>
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="contentPagination">
+      <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    </div>
+  </div>
+
+</div>

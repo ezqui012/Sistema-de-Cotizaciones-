@@ -24,7 +24,36 @@ class ExpenseItemController extends Controller
             ], 404);
         }
     }
+    public function getItems($statusData)
+    {
+        try{
+            $res = ExpensiveItem::orderBy('name_item')->where('data_status', '=', $statusData)->get();
+            return $res;
+        }catch(Exception $ex){
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
+    public function updateStatusItem($id, $status)
+    {
+        try {
 
+            DB::update('UPDATE expense_item
+            SET data_status = ?
+            WHERE id_item = ?', [$status, $id]);;
+            return response()->json([
+                'res' => true,
+                'message' => 'Update status Data'
+            ], 200);
+        } catch (Exception $ex) {
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }
+    }
     public function store(CreateExpenseItemRequest $request)
     {
         try{

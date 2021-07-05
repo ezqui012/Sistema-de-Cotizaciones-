@@ -56,7 +56,7 @@ export class ItemListComponent implements OnInit {
   }
 
   loadListItems(){
-    this.service.allItem().subscribe(
+    this.service.allItem('V').subscribe(
       (data) => {
         this.itemList = data;
         this.spinner.hide(this.spinnerName);
@@ -67,5 +67,16 @@ export class ItemListComponent implements OnInit {
       }
     );
   }
-
+  updateStatusData(id:number){
+    this.service.updateStatusData(id,'F').subscribe(
+      (data) => {
+        //this.spinner.hide(this.spinnerName);
+        this.loadListItems();
+      },
+      (error) => {
+        this.toastr.error(`ERROR: ${error} Regargue la pagina`);
+        this.spinner.hide(this.spinnerName);
+      }
+    );
+  }
 }

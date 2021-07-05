@@ -59,11 +59,11 @@
       <button type="button" class="btn btn-one" (click)="navigateTo('/school-create')">Registrar Facultad</button>
     </div>
     <div class="btnContentDis">
-      <button type="button" class="btn btnListDis" (click)="navigateTo('/user-list-disabled')" ngbPopover="Lista de Deshabilitados">
+      <button type="button" class="btn btnListDis" (click)="navigateTo('/school-list-disabled')" ngbPopover="Lista de Deshabilitados">
         <img src="../../assets/img/delete/Lsitx.png" alt="" width="28" height="28" />
       </button>
     </div>
-  </div>
+      </div>
 
   <!--Tabla-->
   <div class="containerTable">
@@ -92,6 +92,9 @@
                 </button>
                 <button id="verRol" type="button" class="btn btnAction" ngbPopover="Ver detalle" (click)="openModal(content, ( numItem * (pageActual - 1) + i))">
                   <img src="../../assets/icon-quote/file-text.png" alt="" width="22" height="22" />
+                </button>
+                <button type="button" class="btn btnAction" (click)="updateStatusData(faculty.id_faculty)" ngbPopover="Deshabilitar">
+                  <img src="../../assets/img/delete/cancel-circle.png" alt="" width="22" height="22" />
                 </button>
               </div>
             </td>

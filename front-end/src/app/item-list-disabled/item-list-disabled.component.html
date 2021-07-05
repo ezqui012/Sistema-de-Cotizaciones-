@@ -1,1 +1,112 @@
-<p>item-list-disabled works!</p>
+<ngx-spinner [name]="spinnerName" [type]="spinnerType"></ngx-spinner>
+<!--Barra de navegacion-->
+<app-navbar></app-navbar>
+<!--Modal Roles-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title"><b>Detalle de Item</b></h1>
+    <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="dateInfo">
+      <h3><b>Nombre: </b></h3>
+      <div class="dateInfoValue">
+        <h3>{{itemList[pos].name_item}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Tipo: </b></h3>
+      <div class="dateInfoValue">
+        <h3>{{itemList[pos].type_item}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Sub-Tipo: </b></h3>
+      <div class="dateInfoValue">
+        <h3>{{itemList[pos].subtype_item}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>costo: </b></h3>
+      <div class="dateInfoValue">
+        <h3>{{itemList[pos].unit_cost}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Unidad: </b></h3>
+      <div class="dateInfoValue">
+        <h3>{{itemList[pos].unit_item}}</h3>
+      </div>
+    </div>
+    <div class="dateInfo">
+      <h3><b>Descripción: </b></h3>
+      <div class="dateInfoValue">
+        <h3>{{itemList[pos].description_item}}</h3>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<!--header-->
+<div class="containerBody">
+  <div class="containertop">
+    <div class="contentTitle">
+      <h1><b>Ítems deshabilitados</b></h1>
+    </div>
+    <div class="btnContentCreate">
+      <button type="button" class="btn btn-one" (click)="navigateTo('/item-list')">Lista de Ítems</button>
+    </div>
+  </div>
+
+  <!--Tabla-->
+  <div class="containerTable">
+    <!-- <div class="newHeadTable">
+      <div class="numHead"><b>Nº</b></div>
+      <div class="nomHead"><b>Nombre</b></div>
+      <div class="typeHead"><b>Tipo</b></div>
+      <th scope="accHead">Acciones</th>
+    </div> -->
+    <div class="newBodyTable">
+      <table class="table table-hover">
+        <thead class="headTable">
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Tipo</th>
+            <th scope="col" style="text-align: center !important;">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-request" *ngFor=" let item of itemList | paginate: { itemsPerPage: numItem, currentPage: pageActual }; let i = index">
+            <th scope="row">{{(( numItem * (pageActual - 1) + i)+1)}}</th>
+            <td>
+              {{item.name_item}}
+            </td>
+            <td>
+              {{item.type_item}}
+            </td>
+            <td>
+              <div class="row justify-content-center">
+
+
+                <button type="button" class="btn btnAction" (click)="openModal(content, ( numItem * (pageActual - 1) + i))" ngbPopover="Ver detalle">
+                  <img src="../../assets/icon-quote/file-text.png" alt="" width="22" height="22" />
+                </button>
+                <button type="button"  class="btn btnAction" ngbPopover="Reanudar habilitación" (click)="updateStatusData(item.id_item)">
+                  <img src="../../assets/img/delete/shift.png" alt="" width="22" height="22" />
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="contentPagination">
+      <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    </div>
+  </div>
+
+</div>
