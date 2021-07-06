@@ -87,7 +87,7 @@ export class RequestDetailComponent implements OnInit {
   }
 
   openModalAccept(content: any) {
-    if (this.actualAmount >= this.totalCost) {
+    if (this.actualAmount > 0) {
       this.modal.open(content, { windowClass: "colorModal" });
     } else {
       this.toastr.error('El monto actual de la unidad es menor al solicitado');

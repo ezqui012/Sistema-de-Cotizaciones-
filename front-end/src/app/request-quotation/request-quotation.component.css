@@ -69,16 +69,16 @@ color: white;
 .numHead{
   width: 5%;
 }
-.nomHead{
-  width: 34%;
-
-}
-.dateHead{
-  width: 8%;
+.quatityHead{
+  width: 10%;
 
 }
 .undHead{
-  width: 9%;
+  width: 16%;
+}
+.nomHead{
+  width: 56%;
+
 }
 .uniHead{
   width: 10%;

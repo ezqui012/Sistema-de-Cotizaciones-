@@ -70,11 +70,11 @@
   <div class="containerTable">
     <div class="newHeadTable">
       <div class="numHead"><b>Nº</b></div>
-      <div class="dateHead"><b>Cantidad</b></div>
+      <div class="quatityHead"><b>Cantidad</b></div>
       <div class="undHead"><b>Unidad</b></div>
       <div class="nomHead"><b>Detalle</b></div>
-      <div class="uniHead"><b>Unitario</b></div>
-      <div class="totalHead"><b>Total</b></div>
+      <!-- <div class="uniHead"><b>Unitario</b></div>
+      <div class="totalHead"><b>Total</b></div> -->
       <div class="accHead"><b>Acciones</b></div>
     </div>
     <div class="newBodyTable">
@@ -88,14 +88,14 @@
         </thead>
         <tbody>
           <tr class="row-itemRequest" *ngFor="let itemResquest of listItemsRequestShow; let i=index">
-            <th scope="row" style="padding-top: 20px;">{{i+1}}</th>
-            <td style="padding-top: 20px; padding-left: 5%; width:10%;">{{itemResquest.quantity}}</td>
-            <td style="padding-top: 20px; width:10%;">{{itemResquest.unit_item}}</td>
-            <td style="padding-top: 20px; width:35%;">{{itemResquest.name_item}}</td>
-            <td style="padding-top: 20px; width:10%;">{{itemResquest.unit_cost}}</td>
-            <td style="padding-top: 20px; width:10%;">{{itemResquest.total_cost}}</td>
-            <td style="width:25%;">
-              <div class="row justify-content-end" style="padding-right: 10%;">
+            <th scope="row" style="padding-top: 20px; width:5%">{{i+1}}</th>
+            <td style="padding-top: 20px; width:10%;">{{itemResquest.quantity}}</td>
+            <td style="padding-top: 20px; width:15%;">{{itemResquest.unit_item}}</td>
+            <td style="padding-top: 20px; width:50%;">{{itemResquest.name_item}}</td>
+            <!-- <td style="padding-top: 20px; width:10%;">{{itemResquest.unit_cost}}</td>
+            <td style="padding-top: 20px; width:10%;">{{itemResquest.total_cost}}</td> -->
+            <td style="width:20%;">
+              <div class="row justify-content-center">
                 <button type="button" class="btn btnAction" (click)="editItem(i)" ngbPopover="Editar">
                   <img src="../../assets/icon-quote/pencil.png" alt="" width="25" height="25">
                 </button>

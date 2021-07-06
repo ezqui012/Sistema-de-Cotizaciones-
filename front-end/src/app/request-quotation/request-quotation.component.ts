@@ -95,8 +95,8 @@ export class RequestQuotationComponent implements OnInit {
         itemRequest.quantity = this.registerForm.get('quantity')?.value;
         itemRequest.unit_item = this.items[i].unit_item;
         itemRequest.name_item = this.items[i].name_item;
-        itemRequest.unit_cost = this.items[i].unit_cost;
-        itemRequest.total_cost = this.items[i].unit_cost * itemRequest.quantity;
+       itemRequest.unit_cost = this.items[i].unit_cost;
+       itemRequest.total_cost = this.items[i].unit_cost * itemRequest.quantity;
         itemRequest.index_item = i;
 
         this.listItemsRequest.push(itemRequest);

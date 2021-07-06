@@ -90,7 +90,7 @@ export class ReportComparative {
   ): void {
     const pdf = new PdfMakeWrapper();
     const title = new Txt('REPORTE DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
-    const businessData = new Txt('Razón social: '+business).fontSize(11).alignment('left').end
+    const businessData = new Txt('Solicitud: '+business).fontSize(11).alignment('left').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
     const statusRequestData = new Txt(`Estado: ${statusQ}`).fontSize(11).alignment('left').end

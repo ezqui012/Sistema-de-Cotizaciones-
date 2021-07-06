@@ -90,23 +90,29 @@ color: white;
   width: 100%;
 }
 .numHead{
-  width: 6%;
+  width: 5%;
 }
-.nomHead{
-  width: 36%;
-
-}
-.dateHead{
-  width: 11%;
+.quantityHead{
+  width: 15%;
 
 }
 .undHead{
-  width: 16%;
+  width: 15%;
+}
+.nomHead{
+  width: 65%;
+
 }
 .uniHead{
   width: 15%;
 }
-
+.btn-one{
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.11);
+  background-color:#003b72;
+  width: 200px;
+  margin-left: 20px;
+}
 
 .btn-aceptar{
   color: white;

@@ -73,7 +73,7 @@
       <h1><b>Detalles de Solicitud</b></h1>
     </div>
     <div class="btnCreate">
-      <button type="button" class="btn btn-list-z" (click)="navigateTo('/request-quotation-list')">Lista de solicitudes</button>
+      <button type="button" class="btn btn-one" (click)="navigateTo('/request-quotation-list')">Lista de solicitudes</button>
     </div>
   </div>
 <div class="contentInfo">
@@ -97,11 +97,11 @@
   <div class="containerTable">
     <div class="newHeadTable">
       <div class="numHead"><b>Nº</b></div>
-      <div class="dateHead"><b>Cantidad</b></div>
+      <div class="quantityHead"><b>Cantidad</b></div>
       <div class="undHead"><b>Unidad</b></div>
       <div class="nomHead"><b>Detalle</b></div>
-      <div class="uniHead"><b>Unitario</b></div>
-      <div class="totalHead"><b>Total</b></div>
+      <!-- <div class="uniHead"><b>Unitario</b></div>
+      <div class="totalHead"><b>Total</b></div> -->
     </div>
     <div class="newBodyTable">
       <table class="table table-hover">
@@ -114,12 +114,12 @@
         </thead>
         <tbody>
           <tr class="row-faculty" *ngFor="let list of items ; let i = index">
-            <th style="width: 6%;" scope="row">{{i+1}}</th>
-            <td style="width: 11%;">{{list.quantity}}</td>
+            <th style="width: 5%;" scope="row">{{i+1}}</th>
+            <td style="width: 15%;">{{list.quantity}}</td>
             <td style="width: 15%;">{{list.unit_item}}</td>
-            <td style="width: 35%;">{{list.name_item}}</td>
-            <td style="width: 14%;">{{list.unit_cost}}</td>
-            <td style="width: 17%;">{{list.total_cost}}</td>
+            <td style="width: 65%;">{{list.name_item}}</td>
+            <!-- <td style="width: 14%;">{{list.unit_cost}}</td>
+            <td style="width: 17%;">{{list.total_cost}}</td> -->
           </tr>
         </tbody>
       </table>
@@ -127,13 +127,13 @@
   </div>
   <div class="infoHead">
     <div class="nameRequest">
-      <b>Moto disponible de la Unidad: </b>
+      <b>Presupuesto disponible de la Unidad: </b>
       {{actualAmount}}
     </div>
-    <div class="dateRequest">
+    <!-- <div class="dateRequest">
       <b>TOTAL: </b>
       {{totalCost}}
-    </div>
+    </div> -->
   </div>
   <div class="containerBtn">
     <div>
