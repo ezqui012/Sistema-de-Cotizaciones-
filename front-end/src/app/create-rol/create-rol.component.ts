@@ -93,6 +93,7 @@ export class CreateRolComponent implements OnInit {
       return;
     }
     let res: RegisterRolesResponse;
+    //await this._roleService.registerRoles(this.registerForm.value).toPromise()
     this._roleService.registerRoles(this.registerForm.value).subscribe(
       (data) => {
         res = data;
@@ -101,6 +102,7 @@ export class CreateRolComponent implements OnInit {
           this.addAssignedPermission(res.id);
           this.showToastSuccess();
           this.clearInput();
+          this.navigateTo('/roles-list');
 
 
         } else {
@@ -171,7 +173,7 @@ export class CreateRolComponent implements OnInit {
       this.registerForm.get('checkItemGasto')?.value ||
       this.registerForm.get('checkListSol')?.value);
   }
-  addAssignedPermission(idRol:number) {
+  async addAssignedPermission(idRol:number) {
     if (idRol !== 0) {
 
       var permitArray = new Array();
@@ -180,7 +182,8 @@ export class CreateRolComponent implements OnInit {
         this.permitAssigned.id_permission = permitArray[i];
         this.permitAssigned.id_role = idRol;
         let res: RegisterAssignedPermitResponse;
-        this._assignedPermit.registerAssignedPermit(this.permitAssigned).subscribe(
+        await this._assignedPermit.registerAssignedPermit(this.permitAssigned).toPromise();
+        /*this._assignedPermit.registerAssignedPermit(this.permitAssigned).subscribe(
           (data) => {
             res = data;
             if (res.res) {
@@ -192,7 +195,7 @@ export class CreateRolComponent implements OnInit {
           (error) => {
             console.log(error.message);
           }
-        );
+        );*/
       }
 
       this.permit_id = [];

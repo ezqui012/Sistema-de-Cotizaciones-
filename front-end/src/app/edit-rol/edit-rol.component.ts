@@ -180,10 +180,11 @@ export class EditRolComponent implements OnInit {
       }
     );
   }
-  clearAssignedPermit(idRole:any){
+  async clearAssignedPermit(idRole:any){
     //this._assignedPermit.clearPermitAssigned(idRole);
     let res: RegisterAssignedPermitResponse;
-    this._assignedPermit.deletePermitAssigned(idRole).subscribe(
+    await this._assignedPermit.deletePermitAssigned(idRole).toPromise();
+    /*this._assignedPermit.deletePermitAssigned(idRole).subscribe(
       (data) => {
         res = data;
         if (res.res) {
@@ -195,7 +196,7 @@ export class EditRolComponent implements OnInit {
       (error) => {
         console.log(error.message);
       }
-    );
+    );*/
   }
 //funciones add
   onKeyPress(){
@@ -239,7 +240,7 @@ export class EditRolComponent implements OnInit {
       return 'Descripcion del rol';
     }
   }
-  addAssignedPermission(idRol:number) {
+  async addAssignedPermission(idRol:number) {
     if (idRol !== 0) {
 
       var permitArray = new Array();
@@ -248,7 +249,9 @@ export class EditRolComponent implements OnInit {
         this.permitAssigned.id_permission = permitArray[i];
         this.permitAssigned.id_role = idRol;
         let res: RegisterAssignedPermitResponse;
-        this._assignedPermit.registerAssignedPermit(this.permitAssigned).subscribe(
+        await this._assignedPermit.registerAssignedPermit(this.permitAssigned).toPromise();
+
+        /*this._assignedPermit.registerAssignedPermit(this.permitAssigned).subscribe(
           (data) => {
             res = data;
             if (res.res) {
@@ -260,7 +263,7 @@ export class EditRolComponent implements OnInit {
           (error) => {
             console.log(error.message);
           }
-        );
+        );*/
       }
 
       this.permit_id = [];
@@ -304,13 +307,13 @@ export class EditRolComponent implements OnInit {
       this.registerForm.get('checkListSol')?.value);
   }
 
-  registerPermitAndRole() {
+  async registerPermitAndRole() {
 
     if (this.validCeckbox()) {
       if(this.registerForm.invalid === false){
-        this.clearAssignedPermit(this.id);
+        await this.clearAssignedPermit(this.id);
         this.statusCheckbox(); //aqui actulizamos y asignamos permisos.
-        this.addAssignedPermission(this.id);
+        await this.addAssignedPermission(this.id);
       }else{
       this.messageFail = true;
       this.messageRegisterFailed = 'Existen campos incorrectos';
