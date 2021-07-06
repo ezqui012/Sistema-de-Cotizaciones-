@@ -163,7 +163,7 @@ export class ListQuotesComponent implements OnInit {
   private tableBusinessData(business: string, dateRequest: string): ITable {
     [{}]
     return new Table([
-      [new Txt(`Razón social: ${business}`).fontSize(11).alignment('left').end
+      [new Txt(`Solicitud: ${business}`).fontSize(11).alignment('left').end
         , new Txt(`Fecha: ${dateRequest}`).fontSize(11).alignment('right').end]
     ])
       .widths([380, 110])
@@ -215,7 +215,7 @@ export class ListQuotesComponent implements OnInit {
     const pdf = new PdfMakeWrapper();
     const title = new Txt('CUADRO COMPARATIVO DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
     const titleTable = new Txt('SELECCIÓN DE COTIZACIÓN').bold().fontSize(12).alignment('center').end
-    const businessData = new Txt('Razón social: ' + business).fontSize(11).alignment('left').end
+    const businessData = new Txt('Solicitud: ' + business).fontSize(11).alignment('left').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
     const statusRequestData = new Txt(`Estado de solicitud cotizada: ${statusQ}`).fontSize(11).alignment('left').end
