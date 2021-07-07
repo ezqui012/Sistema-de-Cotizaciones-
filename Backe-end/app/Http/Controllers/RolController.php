@@ -10,6 +10,7 @@ class RolController extends Controller
     public function getRol(){
         $roles = DB::table('roles')->select('id_role','name_role')
                                 ->where('name_role', '<>', 'Admin')
+                                ->where('data_status','=','V')
                                 ->get();
         return $roles;
     }

@@ -17,7 +17,9 @@ class UnitController extends Controller
     {
         try{
             if($request->has('type') ){
-                $unit = Unit::where('type', '=', $request->type)->get();
+                $unit = Unit::where('type', '=', $request->type)
+                ->where('name_unit', '<>', 'Administrador de sistema')
+                ->get();
                 return $unit;
             }else{
                 return response()->json([
@@ -60,6 +62,7 @@ class UnitController extends Controller
                 WHERE u.id_faculty = fa.id_faculty
                 AND u.type = ?
                 AND u.data_status = ?
+                AND u.name_unit<>"Administrador de sistema"
                 ORDER BY u.name_unit ASC', [$request->type, $request->data_status]);
 
                 return $unit;
@@ -111,7 +114,10 @@ class UnitController extends Controller
         }
     }
     public function getUnit(){
-        $unities = DB::table('units')->select('id_unit','name_unit')->where('name_unit', '<>', 'Administrador de sistema')->get();
+        $unities = DB::table('units')->select('id_unit','name_unit')
+        ->where('name_unit', '<>', 'Administrador de sistema')
+        ->where('data_status','=','V')
+        ->get();
         return $unities;
     }
 

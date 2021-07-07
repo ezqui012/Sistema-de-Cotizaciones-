@@ -206,6 +206,7 @@ export class CompanyEditComponent implements OnInit {
         old_data: this.oldData
       }
       this.serbiceB.storeBinnacle(binData).subscribe();;
+      this.navigateTo('/company-list');
     },
     (error: any)=>{
        let message= error;

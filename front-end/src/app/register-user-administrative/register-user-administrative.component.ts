@@ -61,7 +61,6 @@ export class RegisterUserAdministrativeComponent implements OnInit {
 
   getErrorMessageEmail(field: string) {
     let message;
-
     if (this.registerForm.get(field)?.errors?.required) {
       message = `El campo correo es obligatorio`;
     } else if (this.registerForm.get(field)?.hasError('minlength')) {

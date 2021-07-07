@@ -18,7 +18,9 @@ class RolesController extends Controller
     public function index()
     {
         try{
-            $res = Roles::orderBy('name_role')->where('name_role', '<>', 'Admin')->get();
+            $res = Roles::orderBy('name_role')->where('name_role', '<>', 'Admin')
+            ->where('data_status', '=', 'V')
+            ->get();
             return $res;
         }catch(Exception $ex){
             return response()->json([

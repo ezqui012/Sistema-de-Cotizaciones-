@@ -143,6 +143,7 @@ export class CompanyRegisterComponent implements OnInit {
         new_data: JSON.stringify(this.enterpriseForm.value)
       }
       this.serbiceB.storeBinnacle(binData).subscribe();
+      this.navigateTo('/company-list');
     },
       (error: any) => {
         let message = error;
