@@ -64,16 +64,17 @@ class UserController extends Controller
             'res' => true,
             'message' => 'Inserted data succesfull',
         ], 200);
-
     }
     public function getEmail(Request $request){
-
         $email= User::where('email', '=', $request->email)->first();
         return $email;
     }
     public function getCi(Request $request){
         $ci = User::where('ci', '=', $request->ci)->first();
-
+        return $ci;
+    }
+    public function getName(Request $request){
+        $ci = User::where('name', '=', $request->name)->first();
         return $ci;
     }
     public function getUserById($id){

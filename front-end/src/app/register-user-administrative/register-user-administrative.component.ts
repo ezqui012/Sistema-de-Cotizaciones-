@@ -23,6 +23,7 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   roles: Rol []|undefined;
   email: any;
   ci: any;
+  name:any;
   RegisterUser = new Registeruser();
   submitted = false;
   registerForm = this.formBuilder.group({
@@ -50,6 +51,9 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   }
   showToastrErrorCi(){
     this.toastr.error('El ci ya está en uso');
+  }
+  showToastrErrorName(){
+    this.toastr.error('El nombre ya existe');
   }
   showToastSuccess(){
     this.toastr.success('Se registraron los datos con éxito');
@@ -161,25 +165,34 @@ export class RegisterUserAdministrativeComponent implements OnInit {
   getCi(){
     this.RegisteruserService.getCi(this.registerForm.get('ci')?.value).subscribe((res: any) => {
       this.ci = res;
+      this.getName();
+    })
+  }
+  getName(){
+    this.RegisteruserService.getName(this.registerForm.get('name')?.value).subscribe((res: any) => {
+     // console.log(res);
+      this.name = res;
       this.compare();
     })
   }
 
-  splitData(){
-
-  }
   compare(){
     if(this.email===null){
       console.log(this.ci+'ci');
-      if(this.ci===null){
+      if(this.name===null){
+        if(this.ci==null){
           this.RegisteruserService.insertData(this.registerForm.value).subscribe(res => {
-          this.showToastSuccess();
-          this.registerForm.reset();
-        });
-      }else{
-        this.showToastrErrorCi();
+            this.showToastSuccess();
+            this.registerForm.reset();
+            this.navigateTo('/user-list');
+          });
+        }else{
+          this.showToastrErrorCi();
+        }
       }
-
+      else{
+        this.showToastrErrorName();
+      }
     }else{
       this.showToastrErrorEmail();
     }
@@ -231,25 +244,5 @@ export class RegisterUserAdministrativeComponent implements OnInit {
 
     }
   }
-  // Validar campos solo numeros
-//   onKeyPress(event: any) {
-//     const regexpNumber = /[0-9\+\-\ ]/;
-//     let inputCharacter = String.fromCharCode(event.charCode);
-//     if (event.keyCode != 8 && !regexpNumber.test(inputCharacter)) {
-//       event.preventDefault();
-//     }
-//   }
-
-//   _keyUp(event: any) {
-//     const pattern = /[0-9\+\-\ ]/;
-//     let inputChar = String.fromCharCode(event.charCode);
-
-//     if (!pattern.test(inputChar)) {
-//       // invalid character, prevent input
-//       event.preventDefault();
-//     }
-// }
-
-
 
 }

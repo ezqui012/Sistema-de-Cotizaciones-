@@ -29,6 +29,7 @@ export class EditUserComponent implements OnInit {
   roles: Rol []|undefined;
   email: any;
   ci: any;
+  name:any;
   pass1:any;
   pass2:any;
   upPassword = new UpdatePassword();
@@ -55,9 +56,9 @@ export class EditUserComponent implements OnInit {
     email: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(8), Validators.pattern(/\S+@\S+\.\S+/)]]
 
   });
-  getName(){
-    return this.updateForm.get('name')?.value;
-  }
+  // getName(){
+  //   return this.updateForm.get('name')?.value;
+  // }
 
 
   navigateTo(path: String){
@@ -108,6 +109,10 @@ export class EditUserComponent implements OnInit {
   showToastrErrorCi(){
     this.toastr.error('El ci ya está en uso');
   }
+  showToastrErrorName(){
+    this.toastr.error('El nombre ya está en uso');
+  }
+
   showToastSuccess(){
     this.toastr.success('Se guardaron los cambios con éxito');
   }
@@ -210,11 +215,8 @@ export class EditUserComponent implements OnInit {
     })
   }
   updateDataUser(){
-
-    console.log(this.updateForm.get('id_role')?.value)
     this.updateForm.controls['address'].setValue(this.updateForm.get('address')?.value.trim())
     this.updateForm.controls['name'].setValue(this.updateForm.get('name')?.value.trim())
-
     this.updateForm.controls['email'].setValue(this.updateForm.get('email')?.value.trim())
 
     if(this.updateForm.invalid){
@@ -222,7 +224,7 @@ export class EditUserComponent implements OnInit {
     }
     this.updateService.updateData(this.id, this.updateForm.value).subscribe(res=>{
       this.showToastSuccess();
-
+      this.navigateTo('/user-list');
       },
       (error: any)=>{
          let message= error;
@@ -234,53 +236,20 @@ export class EditUserComponent implements OnInit {
   }
   repitData(message: any){
     try {
-      if(message.error.errors.email[0]){
+      if(message.error.errors.hasOwnProperty('email')){
         this.toastr.error(message.error.errors.email[0]);
       }
-      if(message.error.errors.ci[0]){
+      if(message.error.errors.hasOwnProperty('ci')){
         this.toastr.error(message.error.errors.ci[0]);
       }
-    } catch (error) {
-      if(message.error.errors.ci[0]){
-          this.toastr.error(message.error.errors.ci[0]);
-        }
-    }
-  }
-  insertData() {
-    this.getEmail();
-  }
-  //load Unit DropDown
-  getEmail(){
-    this.RegisteruserService.getEmail(this.updateForm.get('email')?.value).subscribe((res: any) => {
-    this.email = res;
-    this.getCi();
-    });
-
-  }
-  getCi(){
-    this.RegisteruserService.getCi(this.updateForm.get('ci')?.value).subscribe((res: any) => {
-      this.ci = res;
-      this.compare();
-    })
-
-  }
-  compare(){
-    if(this.email===null){
-      console.log(this.ci+'ci');
-      if(this.ci===null){
-          console.log(this.id +'ids');
-          console.log(this.RegisterUser);
-          this.updateService.updateData(this.id, this.RegisterUser).subscribe(res=>{
-            this.showToastSuccess();
-          })
-      }else{
-        this.showToastrErrorCi();
+      if(message.error.errors.hasOwnProperty('name')){
+        this.toastr.error(message.error.errors.name[0]);
       }
-    }else{
-      this.showToastrErrorEmail();
-    }
+    } catch (error) {
 
+    }
   }
+
   getUnits(){
     this.unitService.getUnits().subscribe((unit) => {
 
@@ -384,7 +353,5 @@ export class EditUserComponent implements OnInit {
 
 
 
-
-
-
 }
+

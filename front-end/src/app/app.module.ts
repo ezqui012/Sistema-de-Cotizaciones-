@@ -77,6 +77,8 @@ import { SchoolListDisabledComponent } from './school-list-disabled/school-list-
 import { RolesListDisabledComponent } from './roles-list-disabled/roles-list-disabled.component';
 import { ItemListDisabledComponent } from './item-list-disabled/item-list-disabled.component';
 import { UnitListDisabledComponent } from './unit-list-disabled/unit-list-disabled.component';
+import { BinnaclePipe } from './pipes/binnacle.pipe';
+import { BackupComponent } from './backup/backup.component';
 
 @NgModule({
   declarations: [
@@ -132,7 +134,9 @@ import { UnitListDisabledComponent } from './unit-list-disabled/unit-list-disabl
     SchoolListDisabledComponent,
     RolesListDisabledComponent,
     ItemListDisabledComponent,
-    UnitListDisabledComponent
+    UnitListDisabledComponent,
+    BinnaclePipe,
+    BackupComponent
   ],
   imports: [
     BrowserModule,

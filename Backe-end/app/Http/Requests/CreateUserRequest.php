@@ -26,7 +26,7 @@ class CreateUserRequest extends FormRequest
         return [
             'id_rol'=>'required',
             'id_unit'=>'required',
-            'name'=>'required|min:15|max:500|unique:users,name',
+            'name'=>'required|min:15|max:500|unique:users,name'. $this->route('id')->id,
             'phone' => 'required|min:7|max:8',
             'ci' => 'required|min:7|max:9',
             'address'=>'required|min:30|max:100',
@@ -35,4 +35,13 @@ class CreateUserRequest extends FormRequest
             //
         ];
     }
+    public function messages()
+    {
+        return [
+            'ci.unique'=> 'El ci que pretende ingresar encuentra en uso',
+            'email.unique'=> 'El correo que pretende ingresar se encuentra en uso',
+            'name.unique'=> 'El nombre que pretende ingresar ya existe'
+        ];
+    }
 }
+

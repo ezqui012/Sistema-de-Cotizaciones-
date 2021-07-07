@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('facultiesStatusUp/{id}/{status}', 'FacultyController@updateStatusFaculty');
     Route::ApiResource('permit', 'PermitController');
     Route::ApiResource('personal','PersonalController');
+    Route::put('updateUser/{id}', 'UserController@updateUser');
+    Route::post('name', 'UserController@getName');
     Route::get('userList/{statusData}', 'PersonalController@getUsers');
     Route::put('userStatusUp/{id}/{status}', 'PersonalController@updateStatusUser');
     Route::ApiResource('unit', 'UnitController');
@@ -115,6 +117,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('budget-listH/{id}', 'HistoryAmountController@budgetHistory');
 
     Route::get('get-subtype-item/{type}', 'ExpenseItemController@getSubtype');
-
+    Route::get('list-backup', 'BackupController@getBackup');
+    Route::post('restore', 'BackupController@restore');
     Route::apiResource('binnacle', 'BinnacleController');
 });

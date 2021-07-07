@@ -27,7 +27,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'id_role'=>'required',
             'id_unit'=>'required',
-            'name'=>'required|min:15|max:500',
+            'name'=>'required|min:15|max:100|unique:users,name,'. $this->route('id')->id,
             'phone' => 'required|min:7|max:8',
             'ci' => 'required|min:7|max:9|unique:users,ci,'. $this->route('id')->id,
             'address'=>'required|min:30|max:100',
@@ -39,7 +39,8 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'ci.unique'=> 'El ci que pretende ingresar encuentra en uso',
-            'email.unique'=> 'El correo que pretende ingresar se encuentra en uso'
+            'email.unique'=> 'El correo que pretende ingresar se encuentra en uso',
+            'name.unique'=> 'El nombre que pretende ingresar ya existe'
         ];
     }
 }

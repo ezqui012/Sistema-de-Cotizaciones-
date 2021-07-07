@@ -34,6 +34,10 @@
     <h1><b>Bitacoras</b></h1>
   </div>
   <!--Tabla de lista bitacoras realizadas-->
+  <div>
+    <input type="text" class="form-control justify-content-rigth" name="searchBinacle" placeholder="Buscar..." [(ngModel)]="searchBinacle" />
+
+  </div>
   <div class="conteinerTable">
     <div class="newHeadTable">
       <div class="numHeadC"><b>Nº</b></div>
@@ -53,7 +57,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="rowQoute" *ngFor=" let binnacle of listBinnacle; let i = index">
+          <tr class="rowQoute" *ngFor=" let binnacle of listBinnacle | binnacle:searchBinacle; let i = index">
             <th scope="row" style="padding-top: 20px">{{i+1}}</th>
             <td style="width: 35%; padding-left:0; padding-top: 20px;">{{binnacle.table_name}}</td>
             <td style="width: 25%; padding-top: 20px">{{binnacle.action}}</td>
