@@ -13,13 +13,13 @@ export class RequestQuoteService {
 
 
   constructor(private httpClient: HttpClient) { }
-  allRequestQuote(): Observable<RequestList | any> {
+  allRequestQuote(idF: any, idU:any): Observable<RequestList | any> {
     let failed: any;
     if (localStorage.getItem('quot-umss-tk')) {
       const httpHeader = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
-      return this.httpClient.get<RequestList>(`${environment.URI_API}request`, { headers: httpHeader });
+      return this.httpClient.get<RequestList>(`${environment.URI_API}request/${idF}/${idU}`, { headers: httpHeader });
     }
     return failed;
   }
