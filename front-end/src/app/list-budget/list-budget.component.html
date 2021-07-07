@@ -15,7 +15,7 @@
     <div class="dateInfo" >
       <h3><b>Gestion: </b>{{ info.management }}</h3>
       <div class="dateInfoValue">
-        <h3><b>Monto: </b> {{ info.amount }}</h3>
+        <h3><b>Presupuesto: </b> {{ info.amount }}</h3>
       </div>
     </div>
   </div>
@@ -33,8 +33,8 @@
     <div class="modal-body">
       <div class="contentMotive">
         <mat-form-field class="form-camp-full-width">
-          <mat-label>Monto</mat-label>
-          <input matInput placeholder="Ingrese el monto" formControlName="amount">
+          <mat-label>Presupuesto</mat-label>
+          <input matInput placeholder="Ingrese el presupuesto" formControlName="amount">
           <mat-error *ngIf="isValidForm()">
             {{ getErrorMessage() }}
           </mat-error>
@@ -58,7 +58,7 @@
     <h1><b>Asignacion de Presupuesto</b></h1>
     <mat-radio-group aria-label="Tipo de unidad" class="imput-check">
       <mat-radio-button value="1" (click)="actualListBudget()" checked>Gestion actual</mat-radio-button>
-      <mat-radio-button class="radioB1" value="2" (click)="assignedAmountList()">Asignar Monto</mat-radio-button>
+      <mat-radio-button class="radioB1" value="2" (click)="assignedAmountList()">Asignar Presupuesto</mat-radio-button>
       <mat-radio-button class="radioB1" value="3" (click)="historyBudget()" >Historial</mat-radio-button>
     </mat-radio-group>
   </div>
@@ -81,7 +81,7 @@
             <th scope="col">Unidad</th>
             <th scope="col">Facultad</th>
             <th scope="col">Gestión</th>
-            <th scope="col">Monto</th>
+            <th scope="col">Presupuesto</th>
             <th scope="col" style="text-align: center !important;">Acciones</th>
           </tr>
         </thead>
@@ -108,7 +108,7 @@
                   <img src="../../assets/img-budget/historial-monto.svg" alt="" width="22" height="22" (click)="openModalH(contentH, budget.id_unit, budget.name_unit)" />
                 </button>
 
-                <button type="button" class="btn btnAction" ngbPopover="Asignar monto" *ngIf="showAssigned" (click)="openModal(contentA, budget.id_unit)">
+                <button type="button" class="btn btnAction" ngbPopover="Asignar presupuesto" *ngIf="showAssigned" (click)="openModal(contentA, budget.id_unit)">
                   <img src="../../assets/img-budget/register-amount1.svg" alt="" width="22" height="22" />
                 </button>
               </div>

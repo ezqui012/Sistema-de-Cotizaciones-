@@ -41,7 +41,6 @@ export class ItemEditComponent implements OnInit {
     name_item: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(75)]],
     type_item: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     unit_item: ['', [Validators.required, Validators.maxLength(10)]],
-    unit_cost: ['', [Validators.required, Validators.min(1), Validators.pattern(this.patternDecimal)]],
     description_item: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
     subtype_item: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]]
   });
@@ -113,7 +112,6 @@ export class ItemEditComponent implements OnInit {
         this.itemRegisterForm.controls['name_item'].setValue(data.name_item);
         this.itemRegisterForm.controls['type_item'].setValue(data.type_item);
         this.itemRegisterForm.controls['unit_item'].setValue(data.unit_item);
-        this.itemRegisterForm.controls['unit_cost'].setValue(data.unit_cost);
         this.itemRegisterForm.controls['description_item'].setValue(data.description_item);
         this.itemRegisterForm.controls['subtype_item'].setValue(data.subtype_item);
         this.getSubType();

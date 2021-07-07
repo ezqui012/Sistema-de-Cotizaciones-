@@ -19,7 +19,6 @@ export class RegisterItemModel{
   name_item: any;
   type_item: any;
   unit_item: any;
-  unit_cost: any;
   description_item: any;
   subtype_item: any;
 }
