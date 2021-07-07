@@ -71,18 +71,18 @@ color: white;
   width: 100%;
 }
 .numHead{
-  width: 6%;
+  width: 9%;
+}
+.dateHead{
+  width: 16%;
+
+}
+.undHead{
+  width: 23%;
 }
 .nomHead{
   width: 36%;
 
-}
-.dateHead{
-  width: 11%;
-
-}
-.undHead{
-  width: 16%;
 }
 .uniHead{
   width: 15%;
@@ -216,6 +216,7 @@ color: white;
   background-color: #003b72;
   color: #ffffff;
   margin-left: 7px;
+  width:200px;
 }
 
 .title-opt{
