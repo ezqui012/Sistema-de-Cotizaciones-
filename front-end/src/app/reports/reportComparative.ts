@@ -123,7 +123,7 @@ export class ReportComparative {
     pdf.add(infoRequest);
     pdf.add(personalData);
     pdf.add(statusRequestData);
-    pdf.create().open();
+    pdf.create().print();
   }
 
 

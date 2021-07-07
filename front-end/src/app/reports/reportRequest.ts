@@ -62,7 +62,7 @@ export class ReportRequest {
     pdf.add(infoRequest);
     pdf.add(userRequestData);
     pdf.add(statusRequestData);
-    pdf.create().open();
+    pdf.create().print();
   }
 
 
@@ -153,7 +153,7 @@ export class ReportRequest {
     pdf.add(personalData);
     pdf.add(statusRequestData);
     pdf.add(userAceptedData);
-    pdf.create().open();
+    pdf.create().print();
   }
 
 
@@ -191,7 +191,7 @@ export class ReportRequest {
   ): void {
     const pdf = new PdfMakeWrapper();
     const title = new Txt('SOLICITUD DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
-    const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
+    //const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
     const statusRequestData = new Txt(`Estado de solicitud: Rechazado`).fontSize(11).alignment('left').end
@@ -214,7 +214,7 @@ export class ReportRequest {
     pdf.add(titleList);
     pdf.add(this.crateTable(items));
     pdf.add(pdf.ln(1))
-    pdf.add(totalData);
+    //pdf.add(totalData);
     pdf.add(pdf.ln(1));
 
     pdf.add(infoRequest);
@@ -222,7 +222,7 @@ export class ReportRequest {
     pdf.add(statusRequestData);
     pdf.add(userRejectedData);
     pdf.add(reasonDate);
-    pdf.create().open();
+    pdf.create().print();
   }
 
 
@@ -238,7 +238,7 @@ export class ReportRequest {
   ): void {
     const pdf = new PdfMakeWrapper();
     const title = new Txt('SOLICITUD DE COTIZACIÓN').bold().fontSize(14).alignment('center').end
-    const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
+    //const totalData = new Txt(`TOTAL: ${totalCost}`).bold().fontSize(11).alignment('right').end
     const titleList = new Txt(`Lista de Items:`).bold().fontSize(11).alignment('left').end
     const infoRequest = new Txt(`Información:`).bold().fontSize(11).alignment('left').end
     const statusRequestData = new Txt(`Estado de solicitud: Cotización`).fontSize(11).alignment('left').end
@@ -259,14 +259,14 @@ export class ReportRequest {
     pdf.add(titleList);
     pdf.add(this.crateTable(items));
     pdf.add(pdf.ln(1))
-    pdf.add(totalData);
+    //pdf.add(totalData);
     pdf.add(pdf.ln(1));
 
     pdf.add(infoRequest);
     pdf.add(userRequestData);
     pdf.add(statusRequestData);
     pdf.add(personalData);
-    pdf.create().open();
+    pdf.create().print();
   }
 
 

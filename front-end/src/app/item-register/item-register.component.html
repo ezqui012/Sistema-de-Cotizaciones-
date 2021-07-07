@@ -38,13 +38,13 @@
               {{ getErrorMessage('unit_item') }}
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="date-info">
+          <!-- <mat-form-field class="date-info">
             <mat-label>Descripción</mat-label>
             <input matInput placeholder="Ingrese la descripción del item" formControlName="description_item">
             <mat-error *ngIf="isValid('description_item')">
               {{ getErrorMessage('description_item') }}
             </mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
         </div>
         <div class="formTwoCol2">
           <mat-form-field class="date-info">
@@ -82,23 +82,17 @@
               {{ getErrorMessage('subtype_item') }}
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="date-info">
-            <mat-label>Precio</mat-label>
-            <input type="text" matInput placeholder="Ingrese el precio unitario" formControlName="unit_cost">
-            <mat-error *ngIf="isValid('unit_cost')">
-              {{ getErrorMessage('unit_cost') }}
-            </mat-error>
-          </mat-form-field>
+
         </div>
       </div>
       <div class="contentAdress">
-        <!-- <mat-form-field class="date-info-full-width">
+        <mat-form-field class="date-info-full-width">
           <mat-label>Descripción</mat-label>
           <input matInput placeholder="Ingrese la descripción del item" formControlName="description_item">
           <mat-error *ngIf="isValid('description_item')">
             {{ getErrorMessage('description_item') }}
           </mat-error>
-        </mat-form-field> -->
+        </mat-form-field>
       </div>
       <br>
       <br>

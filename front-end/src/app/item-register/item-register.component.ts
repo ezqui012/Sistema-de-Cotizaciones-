@@ -39,7 +39,6 @@ export class ItemRegisterComponent implements OnInit {
     name_item: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(75)]],
     type_item: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     unit_item: ['', [Validators.required, Validators.maxLength(10)]],
-    unit_cost: ['', [Validators.required, Validators.min(1), Validators.pattern(this.patternDecimal)]],
     description_item: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
     subtype_item: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]]
   });
@@ -160,9 +159,10 @@ export class ItemRegisterComponent implements OnInit {
           };
           this.serbiceB.storeBinnacle(binData).subscribe();
           this.toastr.success('El registro del ítem se realizo con éxito');
-          this.loadTypeItems();
+          this.navigateTo('/item-list');
+          /*this.loadTypeItems();
           this.loadUnitItems();
-          this.clearInputs();
+          this.clearInputs();*/
         }
       },
       (error) => {

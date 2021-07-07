@@ -135,18 +135,18 @@ export class ListBudgetComponent implements OnInit {
   getErrorMessage() {
     let message;
     if (this.assignedForm.get('amount')?.errors?.required) {
-      message = 'El campo monto es de caracter obligatorio';
+      message = 'El campo Presupuesto es de caracter obligatorio';
     }else if(this.assignedForm.get('amount')?.hasError('pattern')){
-      message = 'El campo Monto solo acepta caracteres numéricos';
+      message = 'El campo Presupuesto solo acepta caracteres numéricos';
     }else if(this.assignedForm.get('amount')?.hasError('min')){
-      message = 'El campo Monto solo acepta valores mayores a 0';
+      message = 'El campo Presupuesto solo acepta valores mayores a 0';
     }
     return message;
   }
 
   updateAmount(){
     if(this.assignedForm.invalid){
-      this.toastr.error('El campo Monto es incorrecto');
+      this.toastr.error('El campo Presupuesto es incorrecto');
       return;
     }
     this.spinner.show(this.spinnerName);
@@ -154,7 +154,7 @@ export class ListBudgetComponent implements OnInit {
       (data) => {
         if(data.res){
           this.spinner.hide(this.spinnerName);
-          this.toastr.success('Se asigno el monto a la unidad');
+          this.toastr.success('Se asigno el Presupuesto a la unidad');
           this.modal.dismissAll();
           this.assignedAmountList();
         }

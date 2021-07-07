@@ -7,7 +7,20 @@ body {
   padding-top: 20px;
 }
 .containerTop {
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: 0px;
   color: #003b72;
+  font-weight: bolder;
+
+}
+.contentFilter {
+  display: block;
+  text-align: right;
+  margin-top: 0;
+  margin-right: 0;
+  align-items: flex-end;
+  justify-content:right
 }
 
 .btn-choose {
