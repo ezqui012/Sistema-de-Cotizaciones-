@@ -22,6 +22,8 @@ export class RequestQuotationListComponent implements OnInit {
   spinnerName: string | any;
   request_quotation: Array<RequestList> = []
   status: String = ''
+  idF = localStorage.getItem('quot-umss-f');
+  idU = localStorage.getItem('quot-umss-u');
   statusRequest: any = {
     process: 'Proceso',
     rejected: 'Rechazado',
@@ -55,7 +57,9 @@ export class RequestQuotationListComponent implements OnInit {
     this.router.navigate([path]);
   }
   getListRequestQuote() {
-    this.serviceRequestQuote.allRequestQuote().subscribe((date) => {
+    //let idF = localStorage.getItem('quot-umss-f');
+    //let idU = localStorage.getItem('quot-umss-u');
+    this.serviceRequestQuote.allRequestQuote(this.idF, this.idU).subscribe((date) => {
       this.request_quotation = date
       this.spinner.hide(this.spinnerName);
 

@@ -70,7 +70,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('itemList/{statusData}', 'ExpenseItemController@getItems');
     Route::put('itemStatusUp/{id}/{status}', 'ExpenseItemController@updateStatusItem');
 
-    Route::get('request','RequestQuotationController@getListRequest');
+    Route::get('request/{idF}/{idU}','RequestQuotationController@getListRequest');
     //metodos de ddetalle
     Route:: get('itemQuotes/{idQuote}/{idItem}','QuoteController@getItemQuotes');
     Route:: put('updateStatusQ/{id}/{status}','QuoteController@updateStatusQuote'); //mi api
