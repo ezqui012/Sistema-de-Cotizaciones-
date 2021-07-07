@@ -11,7 +11,7 @@ use Exception;
 class UserController extends Controller
 {
     public function login(Request $request){
-        $user = User::where('email', '=', $request->email)->first();
+        $user = User::where('email', '=', $request->email)->where('data_status', '=', 'V')->first();
         if(!is_null($user) && Hash::check($request->password, $user->password)){
 
             $token = $user->createToken('Cotizacion')->accessToken;
