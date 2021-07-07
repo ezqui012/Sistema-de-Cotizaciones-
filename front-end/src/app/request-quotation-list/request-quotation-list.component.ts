@@ -57,12 +57,9 @@ export class RequestQuotationListComponent implements OnInit {
     this.router.navigate([path]);
   }
   getListRequestQuote() {
-    //let idF = localStorage.getItem('quot-umss-f');
-    //let idU = localStorage.getItem('quot-umss-u');
     this.serviceRequestQuote.allRequestQuote(this.idF, this.idU).subscribe((date) => {
       this.request_quotation = date
       this.spinner.hide(this.spinnerName);
-
     })
   }
 

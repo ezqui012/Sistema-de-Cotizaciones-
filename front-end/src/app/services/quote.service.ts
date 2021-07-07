@@ -13,13 +13,13 @@ import { ExpenseItems } from '../Model/expenseItem';
 export class QuoteService {
 
   constructor(private httpClient: HttpClient) { }
-  getQuoteFinish(): Observable<QuoteList | any>{
+  getQuoteFinish(idF: any, idU:any): Observable<QuoteList | any>{
     let failed: any;
     if(localStorage.getItem('quot-umss-tk')){
       const httpHeader = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('quot-umss-tk')}`
       });
-      return this.httpClient.get<QuoteList>(`${environment.URI_API}quote`, {headers: httpHeader});
+      return this.httpClient.get<QuoteList>(`${environment.URI_API}listComparative/${idF}/${idU}`, {headers: httpHeader});
     }
     return failed;
   }

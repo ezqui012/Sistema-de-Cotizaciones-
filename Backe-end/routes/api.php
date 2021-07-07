@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route:: get('roleId/{id}','RolesController@getRoleSelect');
     Route:: get('quoteItem/{id}','QuoteController@getItem');
     Route::ApiResource('quote', 'QuoteController');
+    Route::get('listComparative/{idF}/{idU}', 'QuoteController@getList');
     Route::get('list-personal/{id}', 'UserController@getListPersonalQuote');
     Route::get('user/{id}', 'UserController@getUserById');
 
