@@ -84,7 +84,7 @@ export class ReportQuotes {
     pdf.add(infoRequest);
     pdf.add(personalData);
     pdf.add(statusRequestData);
-    pdf.create().open();
+    pdf.create().print();
   }
   private tableBusinessData(): ITable {
     [{}]
@@ -150,7 +150,7 @@ export class ReportQuotes {
     pdf.add(pdf.ln(2));
     pdf.add(titleList);
     pdf.add(this.crateTableE(items));
-    pdf.create().open();
+    pdf.create().print();
   }
 
 

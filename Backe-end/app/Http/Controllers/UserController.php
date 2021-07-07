@@ -116,6 +116,7 @@ class UserController extends Controller
                     ->select('users.id', 'users.name')
                     ->where('assigned_permissions.id_permission', '=', 1)
                     ->where('faculties.id_faculty', '=', $id)
+                    ->where('users.data_status', '=', 'V')
                     ->get();
             return $res;
         }catch(Exception $ex){

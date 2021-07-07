@@ -259,7 +259,7 @@ export class ListQuotesComponent implements OnInit {
       pdf.add(userRejectedData)
       pdf.add(reasonRejectedData)
     }
-    pdf.create().open();
+    pdf.create().print();
 
   }
 
