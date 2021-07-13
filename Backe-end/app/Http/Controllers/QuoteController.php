@@ -17,7 +17,7 @@ class QuoteController extends Controller
      */
     public function index()
     {
-        try {
+        /*try {
             $statusP = 'Proceso';
             $quotes = DB::select('SELECT q.id_quotation, rq.id_request, rq.business_name, us.name, q.status_quotation
             FROM quotation q, request_quotation rq, users us
@@ -25,6 +25,32 @@ class QuoteController extends Controller
             AND q.id_request = rq.id_request
             AND q.status_quotation <> ?
             ORDER BY us.name',[$statusP]);
+
+            return $quotes;
+        } catch (Exception $ex) {
+            return response()->json([
+                'res' => false,
+                'message' => $ex
+            ], 404);
+        }*/
+    }
+
+    public function getList($idF, $idU)
+    {
+        try {
+            $statusP = 'Proceso';
+            $quotes = DB::select('SELECT q.id_quotation, rq.id_request, rq.business_name, us.name, q.status_quotation
+            FROM quotation q, request_quotation rq, users us
+            WHERE q.id = us.id
+            AND q.id_request = rq.id_request
+            AND q.status_quotation <> ?
+            AND us.name NOT IN (
+                SELECT usr.name
+                FROM users usr, units un, faculties f
+                WHERE usr.id_unit = un.id_unit AND un.id_faculty = f.id_faculty
+                 AND un.id_unit<>? AND f.id_faculty<>?
+            )
+            ORDER BY us.name',[$statusP, $idU, $idF]);
 
             return $quotes;
         } catch (Exception $ex) {

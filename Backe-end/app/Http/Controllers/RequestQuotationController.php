@@ -95,15 +95,20 @@ class RequestQuotationController extends Controller
             ], 404);
         }
     }
-    public function getListRequest()
+    public function getListRequest($idF, $idU)
     {
         try{
 
             $personals = DB::select('SELECT rq.id_request, rq.business_name, u.name, rq.status, rq.date
             FROM request_quotation rq, users u
             WHERE rq.id = u.id
-            ORDER BY rq.date DESC');
-
+            AND u.name NOT IN (
+                SELECT us.name
+                FROM users us, units un, faculties f
+                WHERE us.id_unit = un.id_unit AND un.id_faculty = f.id_faculty
+                 AND un.id_unit<>? AND f.id_faculty<>?
+            )
+            ORDER BY rq.date DESC', [$idU, $idF]);
             return $personals;
         }catch(Exception $ex){
             return response()->json([

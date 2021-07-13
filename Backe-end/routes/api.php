@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route:: get('roleId/{id}','RolesController@getRoleSelect');
     Route:: get('quoteItem/{id}','QuoteController@getItem');
     Route::ApiResource('quote', 'QuoteController');
+    Route::get('listComparative/{idF}/{idU}', 'QuoteController@getList');
     Route::get('list-personal/{id}', 'UserController@getListPersonalQuote');
     Route::get('user/{id}', 'UserController@getUserById');
 
@@ -72,7 +73,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('itemList/{statusData}', 'ExpenseItemController@getItems');
     Route::put('itemStatusUp/{id}/{status}', 'ExpenseItemController@updateStatusItem');
 
-    Route::get('request','RequestQuotationController@getListRequest');
+    Route::get('request/{idF}/{idU}','RequestQuotationController@getListRequest');
     //metodos de ddetalle
     Route:: get('itemQuotes/{idQuote}/{idItem}','QuoteController@getItemQuotes');
     Route:: put('updateStatusQ/{id}/{status}','QuoteController@updateStatusQuote'); //mi api

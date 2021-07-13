@@ -51,6 +51,8 @@ export class ListQuotesComponent implements OnInit {
   totalCost: any;
   listaItemsQuote: Array<ItemQuotes> | any;
   listaItemsQuoteSelected: Array<ItemQuotes> | any;
+  idF = localStorage.getItem('quot-umss-f');
+  idU = localStorage.getItem('quot-umss-u');
   statusQuote: any = {
     rejected: 'Rechazado',
     accepted: 'Aceptado',
@@ -95,7 +97,7 @@ export class ListQuotesComponent implements OnInit {
     );
   }
   getQoutesFinish() {
-    this.serviceQuote.getQuoteFinish().subscribe((quote) => {
+    this.serviceQuote.getQuoteFinish(this.idF, this.idU).subscribe((quote) => {
       this.quotes = quote
       this.spinner.hide(this.spinnerName);
     })
