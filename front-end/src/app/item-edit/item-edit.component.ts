@@ -108,7 +108,9 @@ export class ItemEditComponent implements OnInit {
   loadInfoItem(){
     this.service.getInfoItem(this.route.snapshot.params.id).subscribe(
       (data) => {
-        this.oldData = JSON.stringify(data);
+        let resD = data;
+        delete resD['unit_cost'];
+        this.oldData = JSON.stringify(resD);
         this.itemRegisterForm.controls['name_item'].setValue(data.name_item);
         this.itemRegisterForm.controls['type_item'].setValue(data.type_item);
         this.itemRegisterForm.controls['unit_item'].setValue(data.unit_item);

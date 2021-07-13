@@ -68,7 +68,7 @@ background-color: rgb(102, 137, 252);
 }
 
 /*Responsive*/
-@media(max-width:950px){
+/*@media(max-width:950px){
   .link{
     width: 100%;
     padding-top: 22px;
@@ -85,9 +85,9 @@ background-color: rgb(102, 137, 252);
     margin-left: 0;
   }
 
-}
+}*/
 
-@media(max-width:782px){
+@media(max-width:1170px){
   .contentLink{
     display: none;
   }
