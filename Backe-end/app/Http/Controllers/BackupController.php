@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Exception;
-use Illuminate\Support\Facades\Log;
+
 
 class BackupController extends Controller
 {
@@ -26,8 +26,7 @@ try{
     // $username = config('DB_USERNAME');
     // $password = config('DB_PASSWORD');
     // $database = config('DB_DATABASE');
-    exec("mysql -h {$host} -u {$username} {$database} < {$request->routePath}");
-
+    exec("mysql -h {$host} -u {$username} -p {$password} {$database} < {$request->routePath}");
    // ("mysql -h {$host} -u {$username} {$database}". " < " . "$request->routePath")
     return response()->json([
             'res' => true,
