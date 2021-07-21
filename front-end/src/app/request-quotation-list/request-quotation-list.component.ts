@@ -85,7 +85,7 @@ export class RequestQuotationListComponent implements OnInit {
 
   verifyUser(id:any, name:any){
    if(name !== localStorage.getItem('quot-user')){
-      this.toastr.error('No cuentas con permisos para editar esta solocitud');
+      this.toastr.info('No cuentas con permisos para editar esta solocitud');
       return;
    }
      this.navigateToPage('request-quotation-edit',id);
