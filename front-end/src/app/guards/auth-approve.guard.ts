@@ -23,7 +23,7 @@ export class AuthApproveGuard implements CanActivate {
         return true;
       }else{
         //this.router.navigate(['/home-user']);
-        this.toastr.info('Usted no cuenta con permisos para aceptar o rechazar solicitudes');
+        this.toastr.info('Usted no cuenta con permiso para aceptar solicitudes');
         return false;
       }
   }

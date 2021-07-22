@@ -231,17 +231,20 @@ const routes: Routes = [
   {
     path: 'info-request-rejected/:id',
     component: RequestDetailRejectedComponent,
-    canActivate: [AuthRequestGuard]
+    canActivate: [AuthApproveGuard]
+    //canActivate: [AuthRequestGuard]
   },
   {
     path: 'info-request-quote/:id',
     component: RequestDetailQuoteComponent,
-    canActivate: [AuthRequestGuard]
+    canActivate: [AuthApproveGuard]
+    //canActivate: [AuthRequestGuard]
   },
   {
     path: 'info-request-approved/:id',
     component: RequestDetailApprovedComponent,
-    canActivate: [AuthRequestGuard]
+    canActivate: [AuthApproveGuard]
+    //canActivate: [AuthRequestGuard]
   },
   {
     path: 'company-register',
