@@ -146,12 +146,13 @@ export class ComparativeQuotesComponent implements OnInit {
       }
     }
   }
-  registerQuoteAccepted(){
+  async registerQuoteAccepted(){
     if(this.items.length === this.itemsSelect.length && this.items.length !== 0){
       if(this.actualAmount >= this.totalCost){
         //elimiar
         this.spinner.show(this.spinnerName);
-        this.clearItemQuoteAccepted();
+        //this.clearItemQuoteAccepted();
+        await this.serviceQuote.deleteItmesQuoteAccepted(this.id).toPromise();
         for(let i=0; i<this.itemsSelect.length; i++){
           this.registerSelectItem(this.itemsSelect[i].id_qd);
         }
@@ -289,16 +290,18 @@ export class ComparativeQuotesComponent implements OnInit {
     }
     return message;
   }
-  registerRejectedForm(){
+  async registerRejectedForm(){
     if(this.rejectedForm.invalid){
       return;
     }
     this.spinner.show(this.spinnerName);
+    await this.serviceQuote.deleteItmesQuoteAccepted(this.id).toPromise();
     this.service.registerRejected(this.rejectedForm.value).subscribe(
       (data) => {
         if(data.res){
           //this.changeStatus("Rechazado", "La solicitud a sido rechazada");
-          this.clearItemQuoteAccepted();
+          //this.clearItemQuoteAccepted();
+
           this.updateStateRejected();
           this.modifyActualAmountRejected();
           this.modal.dismissAll();
